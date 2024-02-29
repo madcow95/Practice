@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD6BFB5F2B90505B00238B2D /* WorkOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB5E2B90505B00238B2D /* WorkOut.swift */; };
+		CD6BFB612B90507100238B2D /* WorkOutDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB602B90507100238B2D /* WorkOutDetail.swift */; };
+		CD6BFB632B90509600238B2D /* WorkOutRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB622B90509600238B2D /* WorkOutRecord.swift */; };
+		CD6BFB652B9050D500238B2D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB642B9050D500238B2D /* HomeViewModel.swift */; };
+		CD6BFB672B90545000238B2D /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB662B90545000238B2D /* RecordViewController.swift */; };
 		CDF0ADE52B8E12BF00C8690D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF0ADE42B8E12BF00C8690D /* AppDelegate.swift */; };
 		CDF0ADE72B8E12BF00C8690D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF0ADE62B8E12BF00C8690D /* SceneDelegate.swift */; };
 		CDF0ADE92B8E12BF00C8690D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF0ADE82B8E12BF00C8690D /* HomeViewController.swift */; };
@@ -17,6 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD6BFB5E2B90505B00238B2D /* WorkOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOut.swift; sourceTree = "<group>"; };
+		CD6BFB602B90507100238B2D /* WorkOutDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutDetail.swift; sourceTree = "<group>"; };
+		CD6BFB622B90509600238B2D /* WorkOutRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutRecord.swift; sourceTree = "<group>"; };
+		CD6BFB642B9050D500238B2D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		CD6BFB662B90545000238B2D /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		CDF0ADE12B8E12BF00C8690D /* muscleMemory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = muscleMemory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF0ADE42B8E12BF00C8690D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDF0ADE62B8E12BF00C8690D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +84,9 @@
 		CDF0ADF82B8E1BF800C8690D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CD6BFB5E2B90505B00238B2D /* WorkOut.swift */,
+				CD6BFB602B90507100238B2D /* WorkOutDetail.swift */,
+				CD6BFB622B90509600238B2D /* WorkOutRecord.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -81,6 +94,7 @@
 		CDF0ADF92B8E1C0000C8690D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CD6BFB642B9050D500238B2D /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -90,6 +104,7 @@
 			children = (
 				CDF0ADFB2B8E1CF800C8690D /* Cell */,
 				CDF0ADE82B8E12BF00C8690D /* HomeViewController.swift */,
+				CD6BFB662B90545000238B2D /* RecordViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -176,6 +191,11 @@
 				CDF0ADFD2B8E1D0B00C8690D /* CalendarTableCell.swift in Sources */,
 				CDF0ADE92B8E12BF00C8690D /* HomeViewController.swift in Sources */,
 				CDF0ADE52B8E12BF00C8690D /* AppDelegate.swift in Sources */,
+				CD6BFB672B90545000238B2D /* RecordViewController.swift in Sources */,
+				CD6BFB652B9050D500238B2D /* HomeViewModel.swift in Sources */,
+				CD6BFB5F2B90505B00238B2D /* WorkOut.swift in Sources */,
+				CD6BFB612B90507100238B2D /* WorkOutDetail.swift in Sources */,
+				CD6BFB632B90509600238B2D /* WorkOutRecord.swift in Sources */,
 				CDF0ADE72B8E12BF00C8690D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,6 +12,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var calendarTable: UITableView!
     @IBOutlet weak var recordButton: UIButton!
     
+    let viewModel = HomeViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -20,16 +22,19 @@ class HomeViewController: UIViewController {
         calendarTable.delegate = self
         
         recordButton.addTarget(self, action: #selector(moveToRecordPage), for: .touchUpInside)
+//         let allWorkouts = viewModel.getAllWorkOut()
     }
     
     @objc func moveToRecordPage() {
-        
+        // navigationController?.pushViewController(RecordViewController(), animated: true)
+        present(RecordViewController(), animated: true)
     }
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 42
+        return viewModel.getAllWorkOut().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -38,7 +43,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.testLabel.text = "AAA"
+        let allWorkout = viewModel.getAllWorkOut()
+        cell.testLabel.text = allWorkout[indexPath.item].name
         
         return cell
     }
