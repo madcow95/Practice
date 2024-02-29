@@ -57,7 +57,12 @@ class HomeViewModel {
         WorkOutRecord(key: "1", totalKey: "2024-02-06/1/2", date: Date(), set: 4, reps: 11, weight: 120),
         WorkOutRecord(key: "1", totalKey: "2024-02-11/1/3", date: Date(), set: 4, reps: 8, weight: 130),
         WorkOutRecord(key: "1", totalKey: "2024-02-25/1/4", date: Date(), set: 5, reps: 9, weight: 140),
-        WorkOutRecord(key: "1", totalKey: "2024-02-28/2/3", date: Date(), set: 5, reps: 10, weight: 150)
+        WorkOutRecord(key: "1", totalKey: "2024-02-28/2/3", date: Date(), set: 5, reps: 10, weight: 150),
+        WorkOutRecord(key: "1", totalKey: "2024-03-02/1/1", date: Date(), set: 3, reps: 12, weight: 100),
+        WorkOutRecord(key: "1", totalKey: "2024-03-07/1/2", date: Date(), set: 4, reps: 11, weight: 120),
+        WorkOutRecord(key: "1", totalKey: "2024-03-12/1/3", date: Date(), set: 4, reps: 8, weight: 130),
+        WorkOutRecord(key: "1", totalKey: "2024-03-26/1/4", date: Date(), set: 5, reps: 9, weight: 140),
+        WorkOutRecord(key: "1", totalKey: "2024-03-29/2/3", date: Date(), set: 5, reps: 10, weight: 150)
     ]
     
     func getAllWorkOut() -> [WorkOut] {
@@ -80,7 +85,7 @@ class HomeViewModel {
         }
     }
     
-    func getAllTestRecordBy(month: Int) -> [Int] {
+    func getAllTestRecordBy(month: Int) -> [WorkOutRecord] {
         
         return testRecord.filter{record -> Bool in
             let dates = record.totalKey.split(separator: "/")[0]
@@ -88,12 +93,12 @@ class HomeViewModel {
             let months = dateData[1]
             
             return Int(months)! == month
-        }.map{record in
+        }/*.map{record in
             let dates = record.totalKey.split(separator: "/")[0]
             let dateData = dates.split(separator: "-")
             let days = dateData[2]
             
             return Int(days)!
-        }
+        }*/
     }
 }

@@ -42,14 +42,17 @@ class HomeViewController: UIViewController {
 
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.layer.borderWidth = 1
+        collectionView.layer.borderColor = UIColor.black.cgColor
+        collectionView.layer.cornerRadius = 10
         
         recordPageButton.addTarget(self, action: #selector(moveToRecordPage), for: .touchUpInside)
         view.addSubview(recordPageButton)
-        recordPageButton.bottomAnchor.constraint(equalTo: collectionView.topAnchor).isActive = true
+        recordPageButton.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10).isActive = true
         recordPageButton.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor).isActive = true
         
         view.addSubview(currentMonthLabel)
-        currentMonthLabel.bottomAnchor.constraint(equalTo: collectionView.topAnchor).isActive = true
+        currentMonthLabel.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10).isActive = true
         currentMonthLabel.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor).isActive = true
     }
     
@@ -59,14 +62,6 @@ class HomeViewController: UIViewController {
         
         // UIViewController를 사용할 때
         present(RecordViewController(), animated: true)
-        
-        guard let randomWorkout = viewModel.getAllWorkOut().randomElement() else {
-            return
-        }
-        let list = viewModel.getWorkOutDetail(mainWorkout: randomWorkout)
-        for li in list {
-            print(li.name)
-        }
     }
 }
 
@@ -85,10 +80,18 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         }
         
-        let allWorkout = viewModel.getAllTestRecordBy(month: 2)
+        let allWorkoutByMonth = viewModel.getAllTestRecordBy(month: 2)
+        let allWorkout = allWorkoutByMonth.map{record in
+            let dates = record.totalKey.split(separator: "/")[0]
+            let dateData = dates.split(separator: "-")
+            let days = dateData[2]
+            
+            return Int(days)!
+        }
         
         cell.dateLabel.text = "\(indexPath.row + 1)"
         if allWorkout.contains(indexPath.row + 1) {
+//            print(indexPath.row + 1)
             cell.workoutcheckImage.image = UIImage(systemName: "circle.fill")
         }
         
@@ -100,30 +103,12 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         
         return CGSize(width: width, height: width * 2)
     }
-}
-
-/*
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.getAllWorkOut().count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.item)
+        let allWorkoutByMonth = viewModel.getAllWorkOut()
+//
+//        print(allWorkoutByMonth[indexPath.item].totalKey)
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarTableCell", for: indexPath) as? CalendarTableCell else {
-            return UITableViewCell()
-        }
-        
-        let allWorkout = viewModel.getAllWorkOut()
-        cell.testLabel.text = allWorkout[indexPath.item].name
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width / 7
-        return CGSize(width: width, height: width)
     }
 }
-*/
