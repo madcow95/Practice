@@ -101,4 +101,8 @@ class HomeViewModel {
             return Int(days)!
         }*/
     }
+    
+    func getTestRecordBy(date: String) -> [WorkOutRecord] {
+        return testRecord.filter{$0.totalKey.split(separator: "/")[0].contains(date)}
+    }
 }

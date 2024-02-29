@@ -38,12 +38,11 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
 
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.layer.borderWidth = 1
-        collectionView.layer.borderColor = UIColor.black.cgColor
+//        collectionView.layer.borderWidth = 1
+//        collectionView.layer.borderColor = UIColor.black.cgColor
         collectionView.layer.cornerRadius = 10
         
         recordPageButton.addTarget(self, action: #selector(moveToRecordPage), for: .touchUpInside)
@@ -91,7 +90,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         
         cell.dateLabel.text = "\(indexPath.row + 1)"
         if allWorkout.contains(indexPath.row + 1) {
-//            print(indexPath.row + 1)
             cell.workoutcheckImage.image = UIImage(systemName: "circle.fill")
         }
         
@@ -101,13 +99,24 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width / 7
         
-        return CGSize(width: width, height: width * 2)
+        return CGSize(width: width, height: width * 1.5)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item)
-        let allWorkoutByMonth = viewModel.getAllWorkOut()
-//
+        
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: currentDate)
+        let currentMonth = currentMonthLabel.text!.split(separator: "월")[0]
+        let month: String = currentMonth.count == 1 ? "0\(currentMonth)" : "\(currentMonth)"
+        let selectedDay = "\(indexPath.item + 1)"
+        
+        let selectDate = "\(currentYear)-\(month)-\(selectedDay.count == 1 ? "0\(selectedDay)" : selectedDay)"
+        let selectedWorkout = viewModel.getTestRecordBy(date: selectDate)
+        if(selectedWorkout.count > 0) {
+            print(selectedWorkout)
+        }
+
 //        print(allWorkoutByMonth[indexPath.item].totalKey)
         
     }
