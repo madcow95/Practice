@@ -52,6 +52,14 @@ class HomeViewModel {
         WorkOutDetail(key: 6, subKey: 4, name: "어깨 운동 2")
     ]
     
+    private let testRecord: [WorkOutRecord] = [
+        WorkOutRecord(key: "1", totalKey: "2024-03-01/1/1", date: Date(), set: 3, reps: 12, weight: 100),
+        WorkOutRecord(key: "1", totalKey: "2024-03-06/1/2", date: Date(), set: 4, reps: 11, weight: 120),
+        WorkOutRecord(key: "1", totalKey: "2024-03-11/1/3", date: Date(), set: 4, reps: 8, weight: 130),
+        WorkOutRecord(key: "1", totalKey: "2024-03-25/1/4", date: Date(), set: 5, reps: 9, weight: 140),
+        WorkOutRecord(key: "1", totalKey: "2024-03-28/2/3", date: Date(), set: 5, reps: 10, weight: 150)
+    ]
+    
     func getAllWorkOut() -> [WorkOut] {
         return workOuts
     }
@@ -60,5 +68,32 @@ class HomeViewModel {
         let key = mainWorkout.key
         
         return workOutDetails.filter{$0.key == key}
+    }
+    
+    func getDaysBy(month: Int) -> Int {
+        if [1, 3, 5, 7, 8, 10, 12].contains(month) {
+            return 31
+        } else if [4, 6, 9, 11].contains(month) {
+            return 30
+        } else {
+            return 28
+        }
+    }
+    
+    func getAllTestRecordBy(month: Int) -> [Int] {
+        
+        return testRecord.filter{record -> Bool in
+            let dates = record.totalKey.split(separator: "/")[0]
+            let dateData = dates.split(separator: "-")
+            let months = dateData[1]
+            
+            return Int(months)! == month
+        }.map{record in
+            let dates = record.totalKey.split(separator: "/")[0]
+            let dateData = dates.split(separator: "-")
+            let days = dateData[2]
+            
+            return Int(days)!
+        }
     }
 }

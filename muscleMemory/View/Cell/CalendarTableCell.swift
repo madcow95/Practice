@@ -7,11 +7,9 @@
 
 import UIKit
 
-class CalendarTableCell: UITableViewCell {
+class CalendarTableCell: UICollectionViewCell {
     
-    @IBOutlet weak var testLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var workoutcheckImage: UIImageView!
     
-    override class func awakeFromNib() {
-        super.awakeFromNib()
-    }
 }

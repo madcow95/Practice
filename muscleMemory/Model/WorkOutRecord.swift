@@ -8,7 +8,7 @@
 import Foundation
 
 struct WorkOutRecord {
-    let key: UUID
+    let key: String
     let totalKey: String
     let date: Date
     let set: Int
