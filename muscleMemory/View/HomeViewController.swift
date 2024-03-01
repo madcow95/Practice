@@ -23,12 +23,30 @@ class HomeViewController: UIViewController {
         return btn
     }()
     
+    let leftButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setImage(UIImage(systemName: "arrowtriangle.left.fill"), for: .normal)
+        btn.tintColor = .black
+        
+        return btn
+    }()
+    
     let currentMonthLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         
         return label
+    }()
+    
+    let rightButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
+        btn.tintColor = .black
+        
+        return btn
     }()
     
     override func viewDidLoad() {
@@ -42,10 +60,19 @@ class HomeViewController: UIViewController {
         recordPageButton.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10).isActive = true
         recordPageButton.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor).isActive = true
         
+        view.addSubview(leftButton)
+        leftButton.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor).isActive = true
+//        leftButton.trailingAnchor.constraint(equalTo: currentMonthLabel.leadingAnchor, constant: -5).isActive = true
+        leftButton.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10).isActive = true
+        
         currentMonthLabel.text = "\(viewModel.getCurrentDate()["month"]!)월"
         view.addSubview(currentMonthLabel)
-        currentMonthLabel.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10).isActive = true
-        currentMonthLabel.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor).isActive = true
+        currentMonthLabel.bottomAnchor.constraint(equalTo: leftButton.bottomAnchor).isActive = true
+        currentMonthLabel.leadingAnchor.constraint(equalTo: leftButton.trailingAnchor, constant: 5).isActive = true
+        
+        view.addSubview(rightButton)
+        rightButton.leadingAnchor.constraint(equalTo: currentMonthLabel.trailingAnchor, constant: 5).isActive = true
+        rightButton.bottomAnchor.constraint(equalTo: currentMonthLabel.bottomAnchor).isActive = true
     }
     
     @objc func moveToRecordPage() {
