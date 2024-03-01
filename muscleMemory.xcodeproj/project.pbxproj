@@ -13,6 +13,7 @@
 		CD6BFB652B9050D500238B2D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB642B9050D500238B2D /* HomeViewModel.swift */; };
 		CD6BFB672B90545000238B2D /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB662B90545000238B2D /* RecordViewController.swift */; };
 		CD6BFB692B91FBA300238B2D /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB682B91FBA300238B2D /* RecordDetailViewController.swift */; };
+		CD6BFB6D2B921B9300238B2D /* RecordView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6BFB6C2B921B9300238B2D /* RecordView.storyboard */; };
 		CDF0ADE52B8E12BF00C8690D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF0ADE42B8E12BF00C8690D /* AppDelegate.swift */; };
 		CDF0ADE72B8E12BF00C8690D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF0ADE62B8E12BF00C8690D /* SceneDelegate.swift */; };
 		CDF0ADE92B8E12BF00C8690D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF0ADE82B8E12BF00C8690D /* HomeViewController.swift */; };
@@ -29,6 +30,7 @@
 		CD6BFB642B9050D500238B2D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		CD6BFB662B90545000238B2D /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		CD6BFB682B91FBA300238B2D /* RecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
+		CD6BFB6C2B921B9300238B2D /* RecordView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RecordView.storyboard; sourceTree = "<group>"; };
 		CDF0ADE12B8E12BF00C8690D /* muscleMemory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = muscleMemory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF0ADE42B8E12BF00C8690D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDF0ADE62B8E12BF00C8690D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				CDF0ADE42B8E12BF00C8690D /* AppDelegate.swift */,
 				CDF0ADE62B8E12BF00C8690D /* SceneDelegate.swift */,
 				CDF0ADEA2B8E12BF00C8690D /* Main.storyboard */,
+				CD6BFB6C2B921B9300238B2D /* RecordView.storyboard */,
 				CDF0ADED2B8E12C000C8690D /* Assets.xcassets */,
 				CDF0ADEF2B8E12C000C8690D /* LaunchScreen.storyboard */,
 				CDF0ADF22B8E12C000C8690D /* Info.plist */,
@@ -180,6 +183,7 @@
 			files = (
 				CDF0ADF12B8E12C000C8690D /* LaunchScreen.storyboard in Resources */,
 				CDF0ADEE2B8E12C000C8690D /* Assets.xcassets in Resources */,
+				CD6BFB6D2B921B9300238B2D /* RecordView.storyboard in Resources */,
 				CDF0ADEC2B8E12BF00C8690D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

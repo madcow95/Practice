@@ -101,8 +101,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         
         let currentDate = viewModel.getCurrentDate()
         let currentYear = currentDate["year"]!
-        let currentMonth = currentDate["month"]!
-        let month: String = currentMonth.count == 1 ? "0\(currentMonth)" : "\(currentMonth)"
+        let currentMonth = currentMonthLabel.text!.split(separator: "월")[0]
+        let month = currentMonth.count == 1 ? "0\(currentMonth)" : "\(currentMonth)"
+        
         let selectedDay = "\(indexPath.item + 1)"
         let selectDate = "\(currentYear)-\(month)-\(selectedDay.count == 1 ? "0\(selectedDay)" : selectedDay)"
         
