@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         collectionView.delegate = self
         collectionView.dataSource = self
 //        collectionView.layer.borderWidth = 1
@@ -79,7 +79,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return UICollectionViewCell()
         }
         
-        let allWorkoutByMonth = viewModel.getAllTestRecordBy(month: 2)
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let currentMonth = calendar.component(.month, from: currentDate)
+        
+        let allWorkoutByMonth = viewModel.getAllTestRecordBy(month: currentMonth)
         let allWorkout = allWorkoutByMonth.map{record in
             let dates = record.totalKey.split(separator: "/")[0]
             let dateData = dates.split(separator: "-")
@@ -115,9 +119,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         let selectedWorkout = viewModel.getTestRecordBy(date: selectDate)
         if(selectedWorkout.count > 0) {
             print(selectedWorkout)
+            present(RecordDetailViewController(), animated: true)
         }
-
-//        print(allWorkoutByMonth[indexPath.item].totalKey)
-        
     }
 }
