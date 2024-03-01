@@ -9,6 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    let viewModel = HomeViewModel()
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     let recordPageButton: UIButton = {
@@ -26,30 +28,21 @@ class HomeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         
-        let currentDate = Date()
-        let calendar = Calendar.current
-        let currentMonth = calendar.component(.month, from: currentDate)
-        label.text = "\(currentMonth)월"
-        
         return label
     }()
-    
-    let viewModel = HomeViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.delegate = self
         collectionView.dataSource = self
-//        collectionView.layer.borderWidth = 1
-//        collectionView.layer.borderColor = UIColor.black.cgColor
-        collectionView.layer.cornerRadius = 10
         
         recordPageButton.addTarget(self, action: #selector(moveToRecordPage), for: .touchUpInside)
         view.addSubview(recordPageButton)
         recordPageButton.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10).isActive = true
         recordPageButton.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor).isActive = true
         
+        currentMonthLabel.text = "\(viewModel.getCurrentDate()["month"]!)월"
         view.addSubview(currentMonthLabel)
         currentMonthLabel.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10).isActive = true
         currentMonthLabel.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor).isActive = true
@@ -67,11 +60,9 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        let currentDate = Date()
-        let calendar = Calendar.current
-        let currentMonth = calendar.component(.month, from: currentDate)
+        let currentDate = viewModel.getCurrentDate()
 
-        return viewModel.getDaysBy(month: currentMonth)
+        return viewModel.getDaysBy(month: Int(currentDate["month"]!)!)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -108,14 +99,13 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let currentDate = Date()
-        let calendar = Calendar.current
-        let currentYear = calendar.component(.year, from: currentDate)
-        let currentMonth = currentMonthLabel.text!.split(separator: "월")[0]
+        let currentDate = viewModel.getCurrentDate()
+        let currentYear = currentDate["year"]!
+        let currentMonth = currentDate["month"]!
         let month: String = currentMonth.count == 1 ? "0\(currentMonth)" : "\(currentMonth)"
         let selectedDay = "\(indexPath.item + 1)"
-        
         let selectDate = "\(currentYear)-\(month)-\(selectedDay.count == 1 ? "0\(selectedDay)" : selectedDay)"
+        
         let selectedWorkout = viewModel.getTestRecordBy(date: selectDate)
         if(selectedWorkout.count > 0) {
             print(selectedWorkout)

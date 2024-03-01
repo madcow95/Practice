@@ -111,4 +111,14 @@ class HomeViewModel {
     func getTestRecordBy(date: String) -> [WorkOutRecord] {
         return testRecord.filter{$0.totalKey.split(separator: "/")[0].contains(date)}
     }
+    
+    func getCurrentDate() -> [String: String] {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: currentDate)
+        let currentMonth = calendar.component(.month, from: currentDate)
+        let currentDay = calendar.component(.day, from: currentDate)
+        
+        return ["year": "\(currentYear)", "month": "\(currentMonth)", "day": "\(currentDay)"]
+    }
 }
