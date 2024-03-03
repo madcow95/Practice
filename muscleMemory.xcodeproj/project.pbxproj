@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CD382DFA2B949DD700771235 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD382DF92B949DD700771235 /* RecordViewModel.swift */; };
+		CD382DFD2B94BA6000771235 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD382DFC2B94BA6000771235 /* CustomTextField.swift */; };
+		CD382DFF2B94BDAE00771235 /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD382DFE2B94BDAE00771235 /* RecordDetailViewModel.swift */; };
 		CD6BFB5F2B90505B00238B2D /* WorkOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB5E2B90505B00238B2D /* WorkOut.swift */; };
 		CD6BFB612B90507100238B2D /* WorkOutDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB602B90507100238B2D /* WorkOutDetail.swift */; };
 		CD6BFB632B90509600238B2D /* WorkOutRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB622B90509600238B2D /* WorkOutRecord.swift */; };
@@ -25,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		CD382DF92B949DD700771235 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
+		CD382DFC2B94BA6000771235 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		CD382DFE2B94BDAE00771235 /* RecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewModel.swift; sourceTree = "<group>"; };
 		CD6BFB5E2B90505B00238B2D /* WorkOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOut.swift; sourceTree = "<group>"; };
 		CD6BFB602B90507100238B2D /* WorkOutDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutDetail.swift; sourceTree = "<group>"; };
 		CD6BFB622B90509600238B2D /* WorkOutRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutRecord.swift; sourceTree = "<group>"; };
@@ -53,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD382DFB2B94BA5500771235 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				CD382DFC2B94BA6000771235 /* CustomTextField.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		CDF0ADD82B8E12BF00C8690D = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +84,7 @@
 		CDF0ADE32B8E12BF00C8690D /* muscleMemory */ = {
 			isa = PBXGroup;
 			children = (
+				CD382DFB2B94BA5500771235 /* Util */,
 				CDF0ADFA2B8E1C0500C8690D /* View */,
 				CDF0ADF92B8E1C0000C8690D /* ViewModel */,
 				CDF0ADF82B8E1BF800C8690D /* Model */,
@@ -100,6 +113,7 @@
 			children = (
 				CD6BFB642B9050D500238B2D /* HomeViewModel.swift */,
 				CD382DF92B949DD700771235 /* RecordViewModel.swift */,
+				CD382DFE2B94BDAE00771235 /* RecordDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -195,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF0ADFD2B8E1D0B00C8690D /* CalendarTableCell.swift in Sources */,
+				CD382DFF2B94BDAE00771235 /* RecordDetailViewModel.swift in Sources */,
 				CDF0ADE92B8E12BF00C8690D /* HomeViewController.swift in Sources */,
 				CD6BFB692B91FBA300238B2D /* RecordDetailViewController.swift in Sources */,
 				CDF0ADE52B8E12BF00C8690D /* AppDelegate.swift in Sources */,
@@ -202,6 +217,7 @@
 				CD6BFB652B9050D500238B2D /* HomeViewModel.swift in Sources */,
 				CD6BFB5F2B90505B00238B2D /* WorkOut.swift in Sources */,
 				CD382DFA2B949DD700771235 /* RecordViewModel.swift in Sources */,
+				CD382DFD2B94BA6000771235 /* CustomTextField.swift in Sources */,
 				CD6BFB612B90507100238B2D /* WorkOutDetail.swift in Sources */,
 				CD6BFB632B90509600238B2D /* WorkOutRecord.swift in Sources */,
 				CDF0ADE72B8E12BF00C8690D /* SceneDelegate.swift in Sources */,

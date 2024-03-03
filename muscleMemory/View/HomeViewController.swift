@@ -11,8 +11,10 @@ class HomeViewController: UIViewController {
     
     let viewModel = HomeViewModel()
     
+    // 달력 형식을 표시할 collectionView
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // 기록하기 페이지로 이동할 Button
     let recordPageButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -23,6 +25,7 @@ class HomeViewController: UIViewController {
         return btn
     }()
     
+    // 이전 월로 이동하는 Button
     let leftButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -32,6 +35,7 @@ class HomeViewController: UIViewController {
         return btn
     }()
     
+    // 현재 월을 나타내는 Label
     let currentMonthLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -40,6 +44,7 @@ class HomeViewController: UIViewController {
         return label
     }()
     
+    // 다음 월로 이동하는 Button
     let rightButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -52,41 +57,46 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // collectionView의 데이터를 표시?
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        // 기록하기 페이지 Button에 대한 정보
         recordPageButton.addTarget(self, action: #selector(moveToRecordPage), for: .touchUpInside)
         view.addSubview(recordPageButton)
         recordPageButton.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10).isActive = true
         recordPageButton.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor).isActive = true
         
+        // 이전 월로 이동하기 Button에 대한 정보
         view.addSubview(leftButton)
         leftButton.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor).isActive = true
 //        leftButton.trailingAnchor.constraint(equalTo: currentMonthLabel.leadingAnchor, constant: -5).isActive = true
         leftButton.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10).isActive = true
         
+        // 현재 월을 나타내는 Label에 대한 정보
         currentMonthLabel.text = "\(viewModel.getCurrentDate()["month"]!)월"
         view.addSubview(currentMonthLabel)
         currentMonthLabel.bottomAnchor.constraint(equalTo: leftButton.bottomAnchor).isActive = true
         currentMonthLabel.leadingAnchor.constraint(equalTo: leftButton.trailingAnchor, constant: 5).isActive = true
         
+        // 다음 월로 이동하기 Button에 대한 정보
         view.addSubview(rightButton)
         rightButton.leadingAnchor.constraint(equalTo: currentMonthLabel.trailingAnchor, constant: 5).isActive = true
         rightButton.bottomAnchor.constraint(equalTo: currentMonthLabel.bottomAnchor).isActive = true
     }
     
     @objc func moveToRecordPage() {
-        // UINavigationController를 사용할 때
+        // UINavigationController으로 페이지 이동할 때
         // navigationController?.pushViewController(RecordViewController(), animated: true)
         
-        // UIViewController를 사용할 때
+        // UIViewController으로 페이지 이동할 때
         present(RecordViewController(), animated: true)
     }
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+        // dictionary형식 ["year": "YYYY", "month": "mm", "day": "dd"]으로 return됨
         let currentDate = viewModel.getCurrentDate()
 
         return viewModel.getDaysBy(month: Int(currentDate["month"]!)!)

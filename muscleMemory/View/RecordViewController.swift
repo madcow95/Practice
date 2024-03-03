@@ -28,20 +28,16 @@ class RecordViewController: UIViewController {
         return picker
     }()
     
-    private let firstTextField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "   First"
-        tf.layer.borderWidth = 1
-        tf.layer.cornerRadius = 10
+    private let firstTextField: CustomTextField = {
+        let tf = CustomTextField()
+        tf.placeholder = "First"
         
         return tf
     }()
     
-    private let secondTextField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "   Second"
-        tf.layer.borderWidth = 1
-        tf.layer.cornerRadius = 10
+    private let secondTextField: CustomTextField = {
+        let tf = CustomTextField()
+        tf.placeholder = "Second"
         
         return tf
     }()
@@ -80,16 +76,17 @@ class RecordViewController: UIViewController {
         view.addSubview(hStack)
         hStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         hStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        hStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        hStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
         
         firstPicker.delegate = self
         firstPicker.dataSource = self
         secondPicker.delegate = self
         secondPicker.dataSource = self
         
-        let firstSetTF = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(setToFirstTextField))
         let buttonSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let cancelBtn = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(cancelToolbarButton))
+        
+        let firstSetTF = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(setToFirstTextField))
         firstStackToolBar.setItems([cancelBtn, buttonSpace, firstSetTF], animated: true)
         firstStackToolBar.isUserInteractionEnabled = true
         firstTextField.inputView = firstPicker
@@ -104,7 +101,9 @@ class RecordViewController: UIViewController {
     
     @objc func setToFirstTextField() {
         
-        firstTextField.text = "  \(firstWorkout.name)"
+        firstTextField.text = firstWorkout.name
+        secondTextField.text = ""
+        secondPicker.selectRow(0, inComponent: 0, animated: false)
         firstTextField.resignFirstResponder()
         
         let workoutList = viewModel.getSecondWOrkoutRecordBy(workout: firstWorkout)
@@ -116,7 +115,7 @@ class RecordViewController: UIViewController {
     @objc func setToSecondTextField() {
         
         if let secondTF = secondWorkout {
-            secondTextField.text = "  \(secondTF.name)"
+            secondTextField.text = secondTF.name
         }
         secondTextField.resignFirstResponder()
     }
