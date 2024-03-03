@@ -10,7 +10,11 @@ import UIKit
 class RecordViewModel {
     private let recordVM = HomeViewModel()
     
-    func getFirstWorkoutNames() -> [String] {
-        return recordVM.getAllWorkOut().map { $0.name }
+    func getFirstWorkoutNames() -> [WorkOut] {
+        return recordVM.getAllWorkOut()
+    }
+    
+    func getSecondWOrkoutRecordBy(workout: WorkOut) -> [WorkOutDetail] {
+        return recordVM.getWorkOutDetail(mainWorkout: workout)
     }
 }

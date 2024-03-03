@@ -11,4 +11,5 @@ struct WorkOutDetail {
     let key: Int
     let subKey: Int
     let name: String
+    
 }

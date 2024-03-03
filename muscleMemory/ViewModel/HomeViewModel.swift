@@ -100,13 +100,7 @@ class HomeViewModel {
             let months = dateData[1]
             
             return Int(months)! == month
-        }/*.map{record in
-            let dates = record.totalKey.split(separator: "/")[0]
-            let dateData = dates.split(separator: "-")
-            let days = dateData[2]
-            
-            return Int(days)!
-        }*/
+        }
     }
     
     func getTestRecordBy(date: String) -> [WorkOutRecord] {

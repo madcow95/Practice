@@ -11,8 +11,10 @@ class RecordViewController: UIViewController {
     
     let viewModel = RecordViewModel()
     
-    var workoutName: [String] = RecordViewModel().getFirstWorkoutNames()
-    var workoutDetail: [String] = ["대분류를 먼저 선택해주세요."]
+    var workoutName: [WorkOut] = RecordViewModel().getFirstWorkoutNames().sorted{$0.key < $1.key}
+    var workoutDetail: [WorkOutDetail] = []
+    var firstWorkout = WorkOut(key: 1, name: "하체")
+    var secondWorkout: WorkOutDetail? = nil
     
     private let firstPicker: UIPickerView = {
         let picker = UIPickerView()
@@ -55,7 +57,14 @@ class RecordViewController: UIViewController {
         return stack
     }()
     
-    private let stackToolBar: UIToolbar = {
+    private let firstStackToolBar: UIToolbar = {
+        let tb = UIToolbar()
+        tb.sizeToFit()
+        
+        return tb
+    }()
+    
+    private let secondStackToolBar: UIToolbar = {
         let tb = UIToolbar()
         tb.sizeToFit()
         
@@ -78,24 +87,42 @@ class RecordViewController: UIViewController {
         secondPicker.delegate = self
         secondPicker.dataSource = self
         
-        let setFirstTF = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(setToFirstTextField))
+        let firstSetTF = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(setToFirstTextField))
         let buttonSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let cancelBtn = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(cancelToolbarButton))
-        stackToolBar.setItems([cancelBtn, buttonSpace, setFirstTF], animated: true)
-        stackToolBar.isUserInteractionEnabled = true
-        
+        firstStackToolBar.setItems([cancelBtn, buttonSpace, firstSetTF], animated: true)
+        firstStackToolBar.isUserInteractionEnabled = true
         firstTextField.inputView = firstPicker
+        firstTextField.inputAccessoryView = firstStackToolBar
+        
+        let secondSetTF = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(setToSecondTextField))
+        secondStackToolBar.setItems([cancelBtn, buttonSpace, secondSetTF], animated: true)
+        secondStackToolBar.isUserInteractionEnabled = true
         secondTextField.inputView = secondPicker
-        firstTextField.inputAccessoryView = stackToolBar
-        secondTextField.inputAccessoryView = stackToolBar
+        secondTextField.inputAccessoryView = secondStackToolBar
     }
     
     @objc func setToFirstTextField() {
-        print("done!")
+        
+        firstTextField.text = "  \(firstWorkout.name)"
+        firstTextField.resignFirstResponder()
+        
+        let workoutList = viewModel.getSecondWOrkoutRecordBy(workout: firstWorkout)
+        if workoutList.count > 0 {
+            workoutDetail = workoutList
+        }
+    }
+    
+    @objc func setToSecondTextField() {
+        
+        if let secondTF = secondWorkout {
+            secondTextField.text = "  \(secondTF.name)"
+        }
+        secondTextField.resignFirstResponder()
     }
     
     @objc func cancelToolbarButton() {
-        print("cancel!")
+        secondTextField.resignFirstResponder()
     }
 }
 
@@ -116,20 +143,18 @@ extension RecordViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         if pickerView == firstPicker {
-            return workoutName[row] // 첫 번째 UIPickerView의 각 행에 대한 텍스트 반환
+            return workoutName[row].name // 첫 번째 UIPickerView의 각 행에 대한 텍스트 반환
         } else {
-            return workoutDetail[row] // 두 번째 UIPickerView의 각 행에 대한 텍스트 반환
+            return workoutDetail[row].name // 두 번째 UIPickerView의 각 행에 대한 텍스트 반환
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if pickerView == firstPicker {
-            let selectedOption = workoutName[row] // 선택된 옵션 가져오기
-            print(selectedOption)
+            firstWorkout = workoutName[row] // 선택된 옵션 가져오기
         } else {
-            let selectedOption = workoutDetail[row] // 선택된 옵션 가져오기
-            print(selectedOption)
+            secondWorkout = workoutDetail[row] // 선택된 옵션 가져오기
         }
     }
 }

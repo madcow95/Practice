@@ -136,7 +136,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         
         let selectedWorkout = viewModel.getTestRecordBy(date: selectDate)
         if(selectedWorkout.count > 0) {
-            print(selectedWorkout)
             present(RecordDetailViewController(), animated: true)
         }
     }
