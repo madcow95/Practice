@@ -9,15 +9,13 @@ import UIKit
 
 class RecordViewController: UIViewController {
     
-    let data1 = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"]
-    let data2 = ["Option 11", "Option 22", "Option 33", "Option 44", "Option 55"]
+    let viewModel = RecordViewModel()
     
-    @IBOutlet weak var firstWorkout: UITextField!
-    @IBOutlet weak var secondWorkout: UITextField!
+    var workoutName: [String] = RecordViewModel().getFirstWorkoutNames()
+    var workoutDetail: [String] = ["대분류를 먼저 선택해주세요."]
     
     private let firstPicker: UIPickerView = {
         let picker = UIPickerView()
-        
         
         return picker
     }()
@@ -28,20 +26,76 @@ class RecordViewController: UIViewController {
         return picker
     }()
     
+    private let firstTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "   First"
+        tf.layer.borderWidth = 1
+        tf.layer.cornerRadius = 10
+        
+        return tf
+    }()
+    
+    private let secondTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "   Second"
+        tf.layer.borderWidth = 1
+        tf.layer.cornerRadius = 10
+        
+        return tf
+    }()
+    
+    private let hStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.distribution = .fillEqually
+        stack.spacing = 20
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stack
+    }()
+    
+    private let stackToolBar: UIToolbar = {
+        let tb = UIToolbar()
+        tb.sizeToFit()
+        
+        return tb
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+        
+        hStack.addArrangedSubview(firstTextField)
+        hStack.addArrangedSubview(secondTextField)
+        view.addSubview(hStack)
+        hStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        hStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        hStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
         
         firstPicker.delegate = self
         firstPicker.dataSource = self
-        
         secondPicker.delegate = self
         secondPicker.dataSource = self
         
-        firstWorkout.tintColor = .clear
-        secondWorkout.tintColor = .clear
+        let setFirstTF = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(setToFirstTextField))
+        let buttonSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let cancelBtn = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(cancelToolbarButton))
+        stackToolBar.setItems([cancelBtn, buttonSpace, setFirstTF], animated: true)
+        stackToolBar.isUserInteractionEnabled = true
         
-        firstWorkout.inputView = firstPicker
-        secondWorkout.inputView = secondPicker
+        firstTextField.inputView = firstPicker
+        secondTextField.inputView = secondPicker
+        firstTextField.inputAccessoryView = stackToolBar
+        secondTextField.inputAccessoryView = stackToolBar
+    }
+    
+    @objc func setToFirstTextField() {
+        print("done!")
+    }
+    
+    @objc func cancelToolbarButton() {
+        print("cancel!")
     }
 }
 
@@ -51,27 +105,30 @@ extension RecordViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
         if pickerView == firstPicker {
-            return data1.count // 첫 번째 UIPickerView의 데이터 수 반환
+            return workoutName.count // 첫 번째 UIPickerView의 데이터 수 반환
         } else {
-            return data2.count // 두 번째 UIPickerView의 데이터 수 반환
+            return workoutDetail.count // 두 번째 UIPickerView의 데이터 수 반환
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
         if pickerView == firstPicker {
-            return data1[row] // 첫 번째 UIPickerView의 각 행에 대한 텍스트 반환
+            return workoutName[row] // 첫 번째 UIPickerView의 각 행에 대한 텍스트 반환
         } else {
-            return data2[row] // 두 번째 UIPickerView의 각 행에 대한 텍스트 반환
+            return workoutDetail[row] // 두 번째 UIPickerView의 각 행에 대한 텍스트 반환
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
         if pickerView == firstPicker {
-            let selectedOption = data1[row] // 선택된 옵션 가져오기
+            let selectedOption = workoutName[row] // 선택된 옵션 가져오기
             print(selectedOption)
         } else {
-            let selectedOption = data2[row] // 선택된 옵션 가져오기
+            let selectedOption = workoutDetail[row] // 선택된 옵션 가져오기
             print(selectedOption)
         }
     }

@@ -8,24 +8,25 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Record View Controller-->
+        <!--View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController restorationIdentifier="RecordViewController" storyboardIdentifier="RecordViewController" id="Y6W-OH-hqX" customClass="RecordViewController" customModule="muscleMemory" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="kUk-de-LO3">
-                                <rect key="frame" x="20" y="159" width="353" height="34"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" id="kUk-de-LO3">
+                                <rect key="frame" x="76" y="362" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="대분류" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pag-UY-aGd">
-                                        <rect key="frame" x="0.0" y="0.0" width="166.66666666666666" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="110" height="128"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="중분류" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qMh-iw-aD2">
-                                        <rect key="frame" x="186.66666666666663" y="0.0" width="166.33333333333337" height="34"/>
+                                        <rect key="frame" x="130" y="0.0" width="110" height="128"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -34,16 +35,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="kUk-de-LO3" secondAttribute="trailing" constant="20" id="Wet-sG-PGd"/>
-                            <constraint firstItem="kUk-de-LO3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="khv-1T-Glp"/>
-                            <constraint firstItem="kUk-de-LO3" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="100" id="pKW-hL-wcQ"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="firstWorkout" destination="pag-UY-aGd" id="El0-Ck-rTt"/>
-                        <outlet property="secondWorkout" destination="qMh-iw-aD2" id="dVq-Ib-AQN"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
