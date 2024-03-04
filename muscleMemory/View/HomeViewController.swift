@@ -166,17 +166,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let currentDate = viewModel.getCurrentDate()
-        let currentYear = currentDate["year"]!
-        let currentMonth = currentMonthLabel.text!.split(separator: "월")[0]
+        let currentMonth = "\(selectedMonth)"
         let month = currentMonth.count == 1 ? "0\(currentMonth)" : "\(currentMonth)"
         
         let selectedDay = "\(indexPath.item + 1)"
-        let selectDate = "\(currentYear)-\(month)-\(selectedDay.count == 1 ? "0\(selectedDay)" : selectedDay)"
+        let selectDate = "\(selectedYear)-\(month)-\(selectedDay.count == 1 ? "0\(selectedDay)" : selectedDay)"
         
         let selectedWorkout = viewModel.getTestRecordBy(date: selectDate)
         if(selectedWorkout.count > 0) {
-            present(RecordDetailViewController(), animated: true)
+            present(RecordListViewController(), animated: true)
         }
     }
 }
