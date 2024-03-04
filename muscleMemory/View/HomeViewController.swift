@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout/*, currentMonthChange*/ {
+class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     let viewModel = HomeViewModel()
     
@@ -55,17 +55,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         return btn
     }()
     
-    var selectedMonth = 0 /*{
-        didSet {
-            customDelegate?.currentMonthChanged(newMonth: selectedMonth)
-        }
-    }
-    var customDelegate: currentMonthChange?
-    */
+    var selectedYear = 0
+    var selectedMonth = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        selectedMonth = Int(viewModel.getCurrentDate()["month"]!)!
+        let currentDate = viewModel.getCurrentDate()
+        selectedMonth = Int(currentDate["month"]!)!
+        selectedYear = Int(currentDate["year"]!)!
         
         // collectionView의 데이터를 표시?
         collectionView.delegate = self
@@ -85,12 +83,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         leftButton.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10).isActive = true
         
         // 현재 월을 나타내는 Label에 대한 정보
-        currentMonthLabel.text = "\(selectedMonth)월"
+        currentMonthLabel.text = "\(selectedYear)년 \(selectedMonth)월"
         view.addSubview(currentMonthLabel)
         currentMonthLabel.bottomAnchor.constraint(equalTo: leftButton.bottomAnchor).isActive = true
         currentMonthLabel.leadingAnchor.constraint(equalTo: leftButton.trailingAnchor, constant: 5).isActive = true
         
         // 다음 월로 이동하기 Button에 대한 정보
+        rightButton.addTarget(self, action: #selector(nextMonth), for: .touchUpInside)
         view.addSubview(rightButton)
         rightButton.leadingAnchor.constraint(equalTo: currentMonthLabel.trailingAnchor, constant: 5).isActive = true
         rightButton.bottomAnchor.constraint(equalTo: currentMonthLabel.bottomAnchor).isActive = true
@@ -108,15 +107,26 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         if selectedMonth > 1 {
             selectedMonth -= 1
-            currentMonthLabel.text = "\(selectedMonth)월"
-            collectionView.reloadData()
+        } else {
+            selectedYear -= 1
+            selectedMonth = 12
         }
+        currentMonthLabel.text = "\(selectedYear)년 \(selectedMonth)월"
+        collectionView.reloadData()
     }
-    /*
-    func currentMonthChanged(newMonth: Int) {
-        <#code#>
+    
+    @objc func nextMonth() {
+        
+        if selectedMonth < 12 {
+            selectedMonth += 1
+        } else {
+            selectedYear += 1
+            selectedMonth = 1
+        }
+        currentMonthLabel.text = "\(selectedYear)년 \(selectedMonth)월"
+        collectionView.reloadData()
     }
-    */
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // dictionary형식 ["year": "YYYY", "month": "mm", "day": "dd"]으로 return됨
         // let currentDate = viewModel.getCurrentDate()
@@ -129,7 +139,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             return UICollectionViewCell()
         }
         
-        let allWorkoutByMonth = viewModel.getAllTestRecordBy(month: selectedMonth)
+        let allWorkoutByMonth = viewModel.getAllTestRecordBy(year: selectedYear, month: selectedMonth)
         let allWorkout = allWorkoutByMonth.map{record in
             let dates = record.totalKey.split(separator: "/")[0]
             let dateData = dates.split(separator: "-")
@@ -137,11 +147,12 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             
             return Int(days)!
         }
-//        print(allWorkout)
+
         cell.dateLabel.text = "\(indexPath.row + 1)"
         if allWorkout.count > 0 && allWorkout.contains(indexPath.row + 1) {
-            print("check!!")
             cell.workoutcheckImage.image = UIImage(systemName: "circle.fill")
+        } else {
+            cell.workoutcheckImage.image = nil
         }
         
         return cell

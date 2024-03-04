@@ -92,14 +92,15 @@ class HomeViewModel {
         }
     }
     
-    func getAllTestRecordBy(month: Int) -> [WorkOutRecord] {
+    func getAllTestRecordBy(year: Int, month: Int) -> [WorkOutRecord] {
         
         return testRecord.filter{record -> Bool in
             let dates = record.totalKey.split(separator: "/")[0]
             let dateData = dates.split(separator: "-")
+            let years = dateData[0]
             let months = dateData[1]
             
-            return Int(months)! == month
+            return Int(years)! == year && Int(months)! == month
         }
     }
     
