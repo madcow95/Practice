@@ -174,7 +174,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         let selectedWorkout = viewModel.getTestRecordBy(date: selectDate)
         if(selectedWorkout.count > 0) {
-//            present(RecordListViewController(), animated: true)
+            present(RecordListViewController(), animated: true)
         }
     }
 }
