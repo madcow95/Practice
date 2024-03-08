@@ -78,7 +78,13 @@ extension RecordListViewController: UITableViewDataSource, UITableViewDelegate {
         
         guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordDetailViewController") as? RecordDetailViewController else { return }
         
-        // vc.recordNameTextField.text = "TEST"
+        let workout = selectedRecordList[indexPath.item]
+        let recordInfo = viewModel.getRecordName(record: workout)
+        
+        vc.recordName = recordInfo["nameDetail"]!
+        vc.set = "\(workout.set)"
+        vc.weight = "\(workout.weight)"
+        vc.reps = "\(workout.reps)"
         
         self.present(vc, animated: true)
     }
