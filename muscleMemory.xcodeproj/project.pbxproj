@@ -18,6 +18,7 @@
 		CD6BFB672B90545000238B2D /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB662B90545000238B2D /* RecordViewController.swift */; };
 		CD934AAB2B9B191900CDDC10 /* CustomProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD934AAA2B9B191900CDDC10 /* CustomProtocol.swift */; };
 		CD934AAD2B9B264E00CDDC10 /* RecordListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD934AAC2B9B264E00CDDC10 /* RecordListViewModel.swift */; };
+		CD934AAF2B9B3C0900CDDC10 /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD934AAE2B9B3C0900CDDC10 /* RecordDetailViewController.swift */; };
 		CDF0ADE52B8E12BF00C8690D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF0ADE42B8E12BF00C8690D /* AppDelegate.swift */; };
 		CDF0ADE72B8E12BF00C8690D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF0ADE62B8E12BF00C8690D /* SceneDelegate.swift */; };
 		CDF0ADE92B8E12BF00C8690D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF0ADE82B8E12BF00C8690D /* HomeViewController.swift */; };
@@ -39,6 +40,7 @@
 		CD6BFB662B90545000238B2D /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		CD934AAA2B9B191900CDDC10 /* CustomProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProtocol.swift; sourceTree = "<group>"; };
 		CD934AAC2B9B264E00CDDC10 /* RecordListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListViewModel.swift; sourceTree = "<group>"; };
+		CD934AAE2B9B3C0900CDDC10 /* RecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
 		CDF0ADE12B8E12BF00C8690D /* muscleMemory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = muscleMemory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF0ADE42B8E12BF00C8690D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDF0ADE62B8E12BF00C8690D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				CDF0ADE82B8E12BF00C8690D /* HomeViewController.swift */,
 				CD6BFB662B90545000238B2D /* RecordViewController.swift */,
 				CD44D5432B99F5C300545FF5 /* RecordListViewController.swift */,
+				CD934AAE2B9B3C0900CDDC10 /* RecordDetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				CD6BFB5F2B90505B00238B2D /* WorkOut.swift in Sources */,
 				CD382DFA2B949DD700771235 /* RecordViewModel.swift in Sources */,
 				CD21AFF82B99F9F6002F8396 /* RecordListViewCell.swift in Sources */,
+				CD934AAF2B9B3C0900CDDC10 /* RecordDetailViewController.swift in Sources */,
 				CD934AAB2B9B191900CDDC10 /* CustomProtocol.swift in Sources */,
 				CD44D5442B99F5C300545FF5 /* RecordListViewController.swift in Sources */,
 				CD934AAD2B9B264E00CDDC10 /* RecordListViewModel.swift in Sources */,

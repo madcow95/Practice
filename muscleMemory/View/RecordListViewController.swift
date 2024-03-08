@@ -45,8 +45,8 @@ class RecordListViewController: UIViewController {
         recordTitle.text = recordInfo["date"]
         
         view.addSubview(dateLabel)
-        dateLabel.leadingAnchor.constraint(equalTo: recordTitle.trailingAnchor, constant: 20).isActive = true
         dateLabel.bottomAnchor.constraint(equalTo: recordListTable.topAnchor, constant: -10).isActive = true
+        dateLabel.leadingAnchor.constraint(equalTo: recordTitle.trailingAnchor, constant: 20).isActive = true
         dateLabel.text = recordInfo["name"]
     }
     
@@ -75,6 +75,11 @@ extension RecordListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(selectedRecordList[indexPath.item])
+        
+        guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordDetailViewController") as? RecordDetailViewController else { return }
+        
+        // vc.recordNameTextField.text = "TEST"
+        
+        self.present(vc, animated: true)
     }
 }
