@@ -86,7 +86,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jpT-bu-jqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2069.4656488549617" y="-329.57746478873241"/>
+            <point key="canvasLocation" x="2108" y="-330"/>
         </scene>
         <!--Record List View Controller-->
         <scene sceneID="RIe-LP-G3O">
@@ -95,9 +95,54 @@
                     <view key="view" contentMode="scaleToFill" id="au4-ZS-yuV">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="llF-Hv-gNM">
+                                <rect key="frame" x="20" y="209" width="353" height="509"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RecordListViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecordListViewCell" id="qf5-ZW-1hv" customClass="RecordListViewCell" customModule="muscleMemory" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="353" height="44.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qf5-ZW-1hv" id="xTG-DJ-qCi">
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="44.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBT-id-DaR">
+                                                    <rect key="frame" x="155.66666666666666" y="12" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="WBT-id-DaR" firstAttribute="centerY" secondItem="xTG-DJ-qCi" secondAttribute="centerY" id="20C-tI-5oa"/>
+                                                <constraint firstItem="WBT-id-DaR" firstAttribute="centerX" secondItem="xTG-DJ-qCi" secondAttribute="centerX" id="aAE-JC-6XV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="firstLabel" destination="WBT-id-DaR" id="LBj-mL-GrG"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ZMX-J5-Yuw" id="n84-nu-0xn"/>
+                                    <outlet property="delegate" destination="ZMX-J5-Yuw" id="XWt-zy-ebu"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="cSo-56-RXq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="llF-Hv-gNM" firstAttribute="top" secondItem="cSo-56-RXq" secondAttribute="top" constant="150" id="JpL-xD-jpV"/>
+                            <constraint firstItem="cSo-56-RXq" firstAttribute="bottom" secondItem="llF-Hv-gNM" secondAttribute="bottom" constant="100" id="O4D-XX-72n"/>
+                            <constraint firstItem="cSo-56-RXq" firstAttribute="trailing" secondItem="llF-Hv-gNM" secondAttribute="trailing" constant="20" id="dc8-nb-PQA"/>
+                            <constraint firstItem="llF-Hv-gNM" firstAttribute="leading" secondItem="cSo-56-RXq" secondAttribute="leading" constant="20" id="zoy-On-dQl"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="aZf-rv-cMA"/>
+                    <connections>
+                        <outlet property="recordListTable" destination="llF-Hv-gNM" id="0mC-e2-NXO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TjG-B7-tQN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
