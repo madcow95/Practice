@@ -9,7 +9,11 @@ import UIKit
 
 class RecordListViewCell: UITableViewCell {
     
-    @IBOutlet weak var firstLabel: UILabel!
+    @IBOutlet weak var recordNameLabel: UILabel!
+    @IBOutlet weak var setLabel: UILabel!
+    @IBOutlet weak var weightLabel: UILabel!
+    @IBOutlet weak var repsLabel: UILabel!
+    
     /*
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

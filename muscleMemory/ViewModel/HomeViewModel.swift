@@ -117,4 +117,12 @@ class HomeViewModel {
         
         return ["year": "\(currentYear)", "month": "\(currentMonth)", "day": "\(currentDay)"]
     }
+    
+    func getWorkoutNameBy(key: String) -> [WorkOut] {
+        return workOuts.filter{"\($0.key)" == key}
+    }
+    
+    func getWorkoutDetailNameBy(key: String, subKey: String) -> [WorkOutDetail] {
+        return workOutDetails.filter{"\($0.key)" == key && "\($0.subKey)" == subKey}
+    }
 }

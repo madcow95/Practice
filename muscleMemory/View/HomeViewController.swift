@@ -174,7 +174,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         let selectedWorkout = viewModel.getTestRecordBy(date: selectDate)
         if(selectedWorkout.count > 0) {
-            present(RecordListViewController(), animated: true)
+            guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordListViewController") as? RecordListViewController else { return }
+
+            vc.selectedRecordList = selectedWorkout
+            present(vc, animated: true)
+            
         }
     }
 }
