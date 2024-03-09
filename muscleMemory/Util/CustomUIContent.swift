@@ -64,7 +64,6 @@ class SetEnterStack: CustomHorizontalStack {
         
         let setLabel = UILabel()
         setLabel.text = "1세트"
-        setLabel.tag = 0
         
         let countTF = CustomTextField()
         let weightTF = CustomTextField()
@@ -73,13 +72,11 @@ class SetEnterStack: CustomHorizontalStack {
         plusButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
         plusButton.tintColor = .white
         plusButton.backgroundColor = .blue
-        plusButton.tag = 1
         
         let minusButton = CustomButton()
         minusButton.setImage(UIImage(systemName: "minus.circle"), for: .normal)
         minusButton.tintColor = .black
         minusButton.backgroundColor = .white
-        minusButton.tag = 2
         
         self.addArrangedSubview(setLabel)
         self.addArrangedSubview(countTF)

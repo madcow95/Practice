@@ -91,7 +91,7 @@ class RecordViewController: UIViewController {
         secondTextField.inputAccessoryView = secondStackToolBar
         
         let customStack = SetEnterStack()
-        configureStackViews(customStack: customStack, standardView: textFieldHorizontalStack, btnTag: 1)
+        configureStackViews(customStack: customStack, standardView: textFieldHorizontalStack)
     }
     
     @objc func setToFirstTextField() {
@@ -119,7 +119,7 @@ class RecordViewController: UIViewController {
         secondTextField.resignFirstResponder()
     }
     
-    func configureStackViews(customStack: SetEnterStack, standardView: UIView, btnTag: Int) {
+    func configureStackViews(customStack: SetEnterStack, standardView: UIView) {
         view.addSubview(customStack)
         customStack.topAnchor.constraint(equalTo: standardView.bottomAnchor, constant: 20).isActive = true
         customStack.leadingAnchor.constraint(equalTo: standardView.leadingAnchor).isActive = true
@@ -127,18 +127,24 @@ class RecordViewController: UIViewController {
         customStack.tag = stackViews.count
         stackViews.append(customStack)
         
-        let plusBtn = customStack.viewWithTag(btnTag) as! UIButton
-        // let minusBtn = customStack.viewWithTag(2) as! CustomButton
+        let plusBtn = customStack.arrangedSubviews[3] as! UIButton
         plusBtn.addTarget(self, action: #selector(addStackViews), for: .touchUpInside)
-        
     }
     
     @objc func addStackViews() {
-        print("HELLO")
         let customStack = SetEnterStack()
-        let plusBtn = customStack.viewWithTag(1)!
-        plusBtn.tag = stackViews.count + 3
-        configureStackViews(customStack: customStack, standardView: stackViews[stackViews.count - 1], btnTag: stackViews.count + 3)
+        
+        let label = customStack.arrangedSubviews[0] as! UILabel
+        let plusBtn = customStack.arrangedSubviews[3] as! UIButton
+        
+        label.text = "\(stackViews.count + 1)세트"
+        let standardView = stackViews[stackViews.count - 1]
+        let beforePlusBtn = standardView.arrangedSubviews[3] as! UIButton
+        beforePlusBtn.backgroundColor = .lightGray
+        beforePlusBtn.isEnabled = false
+        // standardView.arrangedSubviews[3].isHidden = true
+        
+        configureStackViews(customStack: customStack, standardView: standardView)
     }
 }
 
