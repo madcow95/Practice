@@ -67,6 +67,9 @@ class HomeViewModel {
         WorkOutRecord(key: "1", totalKey: "2024-03-02/1/4", date: Date(), set: 5, reps: 12, weight: 140),
         WorkOutRecord(key: "1", totalKey: "2024-03-07/1/2", date: Date(), set: 4, reps: 11, weight: 120),
         WorkOutRecord(key: "1", totalKey: "2024-03-12/1/3", date: Date(), set: 4, reps: 8, weight: 130),
+        WorkOutRecord(key: "1", totalKey: "2024-03-20/1/3", date: Date(), set: 4, reps: 8, weight: 130),
+        WorkOutRecord(key: "1", totalKey: "2024-03-20/1/4", date: Date(), set: 4, reps: 8, weight: 130),
+        WorkOutRecord(key: "1", totalKey: "2024-03-24/1/3", date: Date(), set: 4, reps: 8, weight: 130),
         WorkOutRecord(key: "1", totalKey: "2024-03-26/1/4", date: Date(), set: 5, reps: 9, weight: 140),
         WorkOutRecord(key: "1", totalKey: "2024-03-29/2/3", date: Date(), set: 5, reps: 10, weight: 150)
     ]

@@ -16,6 +16,8 @@ class RecordViewController: UIViewController {
     var firstWorkout = WorkOut(key: 1, name: "하체")
     var secondWorkout: WorkOutDetail? = nil
     
+    var stackViews: [SetEnterStack] = []
+    
     private let firstPicker: UIPickerView = {
         let picker = UIPickerView()
         
@@ -42,17 +44,6 @@ class RecordViewController: UIViewController {
         return tf
     }()
     
-    private let hStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.alignment = .center
-        stack.distribution = .fillEqually
-        stack.spacing = 20
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stack
-    }()
-    
     private let firstStackToolBar: UIToolbar = {
         let tb = UIToolbar()
         tb.sizeToFit()
@@ -71,12 +62,13 @@ class RecordViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        hStack.addArrangedSubview(firstTextField)
-        hStack.addArrangedSubview(secondTextField)
-        view.addSubview(hStack)
-        hStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        hStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        hStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
+        let textFieldHorizontalStack = CustomHorizontalStack()
+        textFieldHorizontalStack.addArrangedSubview(firstTextField)
+        textFieldHorizontalStack.addArrangedSubview(secondTextField)
+        view.addSubview(textFieldHorizontalStack)
+        textFieldHorizontalStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        textFieldHorizontalStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        textFieldHorizontalStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
         
         firstPicker.delegate = self
         firstPicker.dataSource = self
@@ -97,6 +89,9 @@ class RecordViewController: UIViewController {
         secondStackToolBar.isUserInteractionEnabled = true
         secondTextField.inputView = secondPicker
         secondTextField.inputAccessoryView = secondStackToolBar
+        
+        let customStack = SetEnterStack()
+        configureStackViews(customStack: customStack, standardView: textFieldHorizontalStack, btnTag: 1)
     }
     
     @objc func setToFirstTextField() {
@@ -122,6 +117,28 @@ class RecordViewController: UIViewController {
     
     @objc func cancelToolbarButton() {
         secondTextField.resignFirstResponder()
+    }
+    
+    func configureStackViews(customStack: SetEnterStack, standardView: UIView, btnTag: Int) {
+        view.addSubview(customStack)
+        customStack.topAnchor.constraint(equalTo: standardView.bottomAnchor, constant: 20).isActive = true
+        customStack.leadingAnchor.constraint(equalTo: standardView.leadingAnchor).isActive = true
+        customStack.trailingAnchor.constraint(equalTo: standardView.trailingAnchor).isActive = true
+        customStack.tag = stackViews.count
+        stackViews.append(customStack)
+        
+        let plusBtn = customStack.viewWithTag(btnTag) as! UIButton
+        // let minusBtn = customStack.viewWithTag(2) as! CustomButton
+        plusBtn.addTarget(self, action: #selector(addStackViews), for: .touchUpInside)
+        
+    }
+    
+    @objc func addStackViews() {
+        print("HELLO")
+        let customStack = SetEnterStack()
+        let plusBtn = customStack.viewWithTag(1)!
+        plusBtn.tag = stackViews.count + 3
+        configureStackViews(customStack: customStack, standardView: stackViews[stackViews.count - 1], btnTag: stackViews.count + 3)
     }
 }
 

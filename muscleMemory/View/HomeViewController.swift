@@ -105,6 +105,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     @objc func beforeMonth() {
         
+        // TODO: ViewModel에서 처리하도록 수정
         if selectedMonth > 1 {
             selectedMonth -= 1
         } else {
@@ -117,6 +118,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     @objc func nextMonth() {
         
+        // TODO: ViewModel에서 처리하도록 수정
         if selectedMonth < 12 {
             selectedMonth += 1
         } else {
@@ -140,6 +142,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         
         let allWorkoutByMonth = viewModel.getAllTestRecordBy(year: selectedYear, month: selectedMonth)
+        // TODO: ViewModel에서 처리하도록 수정
         let allWorkout = allWorkoutByMonth.map{record in
             let dates = record.totalKey.split(separator: "/")[0]
             let dateData = dates.split(separator: "-")

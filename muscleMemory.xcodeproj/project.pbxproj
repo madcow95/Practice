@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		CD21AFF82B99F9F6002F8396 /* RecordListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21AFF72B99F9F6002F8396 /* RecordListViewCell.swift */; };
 		CD382DFA2B949DD700771235 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD382DF92B949DD700771235 /* RecordViewModel.swift */; };
-		CD382DFD2B94BA6000771235 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD382DFC2B94BA6000771235 /* CustomTextField.swift */; };
+		CD382DFD2B94BA6000771235 /* CustomUIContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD382DFC2B94BA6000771235 /* CustomUIContent.swift */; };
 		CD44D5442B99F5C300545FF5 /* RecordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44D5432B99F5C300545FF5 /* RecordListViewController.swift */; };
 		CD6BFB5F2B90505B00238B2D /* WorkOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB5E2B90505B00238B2D /* WorkOut.swift */; };
 		CD6BFB612B90507100238B2D /* WorkOutDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB602B90507100238B2D /* WorkOutDetail.swift */; };
@@ -31,7 +31,7 @@
 /* Begin PBXFileReference section */
 		CD21AFF72B99F9F6002F8396 /* RecordListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListViewCell.swift; sourceTree = "<group>"; };
 		CD382DF92B949DD700771235 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
-		CD382DFC2B94BA6000771235 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		CD382DFC2B94BA6000771235 /* CustomUIContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIContent.swift; sourceTree = "<group>"; };
 		CD44D5432B99F5C300545FF5 /* RecordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListViewController.swift; sourceTree = "<group>"; };
 		CD6BFB5E2B90505B00238B2D /* WorkOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOut.swift; sourceTree = "<group>"; };
 		CD6BFB602B90507100238B2D /* WorkOutDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutDetail.swift; sourceTree = "<group>"; };
@@ -66,7 +66,7 @@
 		CD382DFB2B94BA5500771235 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				CD382DFC2B94BA6000771235 /* CustomTextField.swift */,
+				CD382DFC2B94BA6000771235 /* CustomUIContent.swift */,
 				CD934AAA2B9B191900CDDC10 /* CustomProtocol.swift */,
 			);
 			path = Util;
@@ -229,7 +229,7 @@
 				CD934AAB2B9B191900CDDC10 /* CustomProtocol.swift in Sources */,
 				CD44D5442B99F5C300545FF5 /* RecordListViewController.swift in Sources */,
 				CD934AAD2B9B264E00CDDC10 /* RecordListViewModel.swift in Sources */,
-				CD382DFD2B94BA6000771235 /* CustomTextField.swift in Sources */,
+				CD382DFD2B94BA6000771235 /* CustomUIContent.swift in Sources */,
 				CD6BFB612B90507100238B2D /* WorkOutDetail.swift in Sources */,
 				CD6BFB632B90509600238B2D /* WorkOutRecord.swift in Sources */,
 				CDF0ADE72B8E12BF00C8690D /* SceneDelegate.swift in Sources */,
