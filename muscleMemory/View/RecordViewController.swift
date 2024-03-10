@@ -58,17 +58,31 @@ class RecordViewController: UIViewController {
         return tb
     }()
     
+    private let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        
+        return sv
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        view.addSubview(scrollView)
+        scrollView.contentSize = view.frame.size
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
         let textFieldHorizontalStack = CustomHorizontalStack()
         textFieldHorizontalStack.addArrangedSubview(firstTextField)
         textFieldHorizontalStack.addArrangedSubview(secondTextField)
-        view.addSubview(textFieldHorizontalStack)
-        textFieldHorizontalStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        textFieldHorizontalStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        textFieldHorizontalStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
+        scrollView.addSubview(textFieldHorizontalStack)
+        textFieldHorizontalStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20).isActive = true
+        textFieldHorizontalStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20).isActive = true
+        textFieldHorizontalStack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 200).isActive = true
         
         firstPicker.delegate = self
         firstPicker.dataSource = self
@@ -120,7 +134,7 @@ class RecordViewController: UIViewController {
     }
     
     func configureStackViews(customStack: SetEnterStack, standardView: UIView) {
-        view.addSubview(customStack)
+        scrollView.addSubview(customStack)
         customStack.topAnchor.constraint(equalTo: standardView.bottomAnchor, constant: 20).isActive = true
         customStack.leadingAnchor.constraint(equalTo: standardView.leadingAnchor).isActive = true
         customStack.trailingAnchor.constraint(equalTo: standardView.trailingAnchor).isActive = true
@@ -135,7 +149,7 @@ class RecordViewController: UIViewController {
         let customStack = SetEnterStack()
         
         let label = customStack.arrangedSubviews[0] as! UILabel
-        let plusBtn = customStack.arrangedSubviews[3] as! UIButton
+        // let plusBtn = customStack.arrangedSubviews[3] as! UIButton
         
         label.text = "\(stackViews.count + 1)세트"
         let standardView = stackViews[stackViews.count - 1]
