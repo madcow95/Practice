@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecordViewModel {
+class WorkoutRecordViewModel {
     private let recordVM = HomeViewModel()
     
     func getFirstWorkoutNames() -> [WorkOut] {

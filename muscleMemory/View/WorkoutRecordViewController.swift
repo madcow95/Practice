@@ -9,9 +9,9 @@ import UIKit
 
 class WorkoutRecordViewController: UIViewController {
     
-    let viewModel = RecordViewModel()
+    let viewModel = WorkoutRecordViewModel()
     
-    var workoutName: [WorkOut] = RecordViewModel().getFirstWorkoutNames().sorted{$0.key < $1.key}
+    var workoutName: [WorkOut] = WorkoutRecordViewModel().getFirstWorkoutNames().sorted{$0.key < $1.key}
     var workoutDetail: [WorkOutDetail] = []
     var firstWorkout = WorkOut(key: 1, name: "하체")
     var secondWorkout: WorkOutDetail? = nil
@@ -77,7 +77,7 @@ class WorkoutRecordViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        contentScrollView.contentSize = self.view.frame.size
+        // contentScrollView.contentSize = self.view.frame.size
         self.view.addSubview(contentScrollView)
         contentScrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         contentScrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
@@ -160,7 +160,7 @@ class WorkoutRecordViewController: UIViewController {
         customStack.tag = stackViews.count
         stackViews.append(customStack)
         
-        contentView.heightAnchor.constraint(equalToConstant: view.frame.height + CGFloat(50 * stackViews.count)).isActive = true
+        // contentView.heightAnchor.constraint(equalToConstant: view.frame.height + CGFloat(50 * stackViews.count)).isActive = true
         view.reloadInputViews()
         let plusBtn = customStack.arrangedSubviews[3] as! UIButton
         plusBtn.addTarget(self, action: #selector(addStackViews), for: .touchUpInside)
