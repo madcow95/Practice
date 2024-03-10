@@ -100,7 +100,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         // navigationController?.pushViewController(RecordViewController(), animated: true)
         
         // UIViewController으로 페이지 이동할 때
-        present(RecordViewController(), animated: true)
+        // present(RecordViewController(), animated: true)
+        guard let vc = self.storyboard?.instantiateViewController(identifier: "WorkoutRecordViewController") as? WorkoutRecordViewController else { return }
+        present(vc, animated: true)
     }
     
     @objc func beforeMonth() {
