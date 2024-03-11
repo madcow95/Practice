@@ -11,11 +11,10 @@ class WorkoutRecordViewController: UIViewController {
     
     let viewModel = WorkoutRecordViewModel()
     
-    var workoutName: [WorkOut] = WorkoutRecordViewModel().getFirstWorkoutNames().sorted{$0.key < $1.key}
-    var workoutDetail: [WorkOutDetail] = []
-    var firstWorkout = WorkOut(key: 1, name: "하체")
+    var firstWorkoutList: [WorkOut] = []
+    var secondWorkoutList: [WorkOutDetail] = []
+    var firstWorkout: WorkOut?
     var secondWorkout: WorkOutDetail? = nil
-    
     var stackViews: [SetEnterStack] = []
     
     private let contentScrollView: UIScrollView = {
@@ -72,105 +71,153 @@ class WorkoutRecordViewController: UIViewController {
         return tb
     }()
     
+    private let textFieldHStack: CustomHorizontalStack = {
+        let stack = CustomHorizontalStack()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stack
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         
-        // contentScrollView.contentSize = self.view.frame.size
+        setScrollComponents()
+        setContentComponents()
+        setUIComponents()
+        setPickerComponents()
+        setTextFields()
+        setToolbars()
+        setWorkouts()
+        setStackViews(stack: SetEnterStack(), standard: textFieldHStack)
+        // contentView.heightAnchor.constraint(equalToConstant: 1200.0).isActive = true
+    }
+    
+    func setScrollComponents() {
         self.view.addSubview(contentScrollView)
         contentScrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         contentScrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         contentScrollView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         contentScrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        
+    }
+    
+    func setContentComponents() {
         contentScrollView.addSubview(contentView)
         contentView.leadingAnchor.constraint(equalTo: contentScrollView.leadingAnchor).isActive = true
         contentView.trailingAnchor.constraint(equalTo: contentScrollView.trailingAnchor).isActive = true
         contentView.topAnchor.constraint(equalTo: contentScrollView.topAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: contentScrollView.bottomAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: contentScrollView.widthAnchor).isActive = true
-        contentView.heightAnchor.constraint(equalToConstant: view.frame.height*10).isActive = true
+    }
+    
+    func setUIComponents() {
+        textFieldHStack.addArrangedSubview(firstTextField)
+        textFieldHStack.addArrangedSubview(secondTextField)
+        contentView.addSubview(textFieldHStack)
         
-        let textFieldHorizontalStack = CustomHorizontalStack()
-        textFieldHorizontalStack.addArrangedSubview(firstTextField)
-        textFieldHorizontalStack.addArrangedSubview(secondTextField)
-        contentView.addSubview(textFieldHorizontalStack)
-        textFieldHorizontalStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-        textFieldHorizontalStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        textFieldHorizontalStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 100).isActive = true
-        view.bringSubviewToFront(contentView)
-        
+        textFieldHStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 100).isActive = true
+        textFieldHStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+        textFieldHStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+    }
+    
+    func setPickerComponents() {
         firstPicker.delegate = self
         firstPicker.dataSource = self
         secondPicker.delegate = self
         secondPicker.dataSource = self
+    }
+    
+    func setTextFields() {
+        firstTextField.inputView = firstPicker
+        firstTextField.inputAccessoryView = firstStackToolBar
         
+        secondTextField.inputView = secondPicker
+        secondTextField.inputAccessoryView = secondStackToolBar
+    }
+    
+    func setToolbars() {
         let buttonSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let cancelBtn = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(cancelToolbarButton))
         
-        let firstSetTF = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(setToFirstTextField))
+        let firstSetTF = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(setFirstTextField))
         firstStackToolBar.setItems([cancelBtn, buttonSpace, firstSetTF], animated: true)
         firstStackToolBar.isUserInteractionEnabled = true
         firstTextField.inputView = firstPicker
         firstTextField.inputAccessoryView = firstStackToolBar
         
-        let secondSetTF = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(setToSecondTextField))
+        let secondSetTF = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(setSecondTextField))
         secondStackToolBar.setItems([cancelBtn, buttonSpace, secondSetTF], animated: true)
         secondStackToolBar.isUserInteractionEnabled = true
         secondTextField.inputView = secondPicker
         secondTextField.inputAccessoryView = secondStackToolBar
-        
-        let customStack = SetEnterStack()
-        configureStackViews(customStack: customStack, standardView: textFieldHorizontalStack)
-        
     }
     
-    @objc func setToFirstTextField() {
+    func setWorkouts() {
+        firstWorkoutList = viewModel.getFirstWorkoutNames().sorted{$0.key < $1.key}
+        firstWorkout = firstWorkoutList.first
+    }
+    
+    func setStackViews(stack: SetEnterStack, standard: UIView) {
+        stack.tag = stackViews.count
+        stackViews.append(stack)
         
-        firstTextField.text = firstWorkout.name
+        contentView.addSubview(stack)
+        stack.topAnchor.constraint(equalTo: standard.bottomAnchor, constant: 20).isActive = true
+        stack.leadingAnchor.constraint(equalTo: standard.leadingAnchor).isActive = true
+        stack.trailingAnchor.constraint(equalTo: standard.trailingAnchor).isActive = true
+        // configureContentHeight()
+        
+        let plusBtn = stack.arrangedSubviews[3] as! UIButton
+        plusBtn.addTarget(self, action: #selector(addStackViews), for: .touchUpInside)
+    }
+    
+    func configureContentHeight() {
+//        UIView.animate(withDuration: 0.3) {
+//            self.contentView.frame.size.height = CGFloat(400 * self.stackViews.count)
+//        }
+        /*
+        var totalHeight: CGFloat = 0
+        for content in contentView.subviews {
+            totalHeight += content.frame.height
+        }
+        */
+        // print(totalHeight)
+        // contentView.frame.size.height = CGFloat(400 * self.stackViews.count)
+        // contentScrollView.contentSize = CGSize(width: contentScrollView.bounds.width, height: CGFloat(400 * self.stackViews.count))
+    }
+    
+    @objc func setFirstTextField() {
+        guard let firstWork = firstWorkout else { return }
+        firstTextField.text = firstWork.name
+        
         secondTextField.text = ""
         secondPicker.selectRow(0, inComponent: 0, animated: false)
         firstTextField.resignFirstResponder()
         
-        let workoutList = viewModel.getSecondWOrkoutRecordBy(workout: firstWorkout)
+        let workoutList = viewModel.getSecondWOrkoutRecordBy(workout: firstWork)
         if workoutList.count > 0 {
-            workoutDetail = workoutList
+            secondWorkoutList = workoutList.sorted{ $0.key < $1.key }
+            secondWorkout = secondWorkoutList.first
         }
     }
     
-    @objc func setToSecondTextField() {
-        
-        if let secondTF = secondWorkout {
-            secondTextField.text = secondTF.name
+    @objc func setSecondTextField() {
+        if firstWorkout != nil {
+            guard let secondWork = secondWorkout else { return }
+            secondTextField.text = secondWork.name
+            // keyboard 숨김 기능
+            secondTextField.resignFirstResponder()
         }
-        // keyboard 숨김 기능
-        secondTextField.resignFirstResponder()
     }
     
     @objc func cancelToolbarButton() {
         secondTextField.resignFirstResponder()
     }
     
-    func configureStackViews(customStack: SetEnterStack, standardView: UIView) {
-        contentView.addSubview(customStack)
-        customStack.topAnchor.constraint(equalTo: standardView.bottomAnchor, constant: 20).isActive = true
-        customStack.leadingAnchor.constraint(equalTo: standardView.leadingAnchor).isActive = true
-        customStack.trailingAnchor.constraint(equalTo: standardView.trailingAnchor).isActive = true
-        customStack.tag = stackViews.count
-        stackViews.append(customStack)
-        
-        // contentView.heightAnchor.constraint(equalToConstant: view.frame.height + CGFloat(50 * stackViews.count)).isActive = true
-        view.reloadInputViews()
-        let plusBtn = customStack.arrangedSubviews[3] as! UIButton
-        plusBtn.addTarget(self, action: #selector(addStackViews), for: .touchUpInside)
-    }
-    
     @objc func addStackViews() {
         let customStack = SetEnterStack()
-        
         let label = customStack.arrangedSubviews[0] as! UILabel
-        // let plusBtn = customStack.arrangedSubviews[3] as! UIButton
         
         label.text = "\(stackViews.count + 1)세트"
         let standardView = stackViews[stackViews.count - 1]
@@ -179,7 +226,7 @@ class WorkoutRecordViewController: UIViewController {
         beforePlusBtn.isEnabled = false
         // standardView.arrangedSubviews[3].isHidden = true
         
-        configureStackViews(customStack: customStack, standardView: standardView)
+        setStackViews(stack: customStack, standard: standardView)
     }
 }
 
@@ -191,27 +238,27 @@ extension WorkoutRecordViewController: UIPickerViewDelegate, UIPickerViewDataSou
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
         if pickerView == firstPicker {
-            return workoutName.count // 첫 번째 UIPickerView의 데이터 수 반환
+            return firstWorkoutList.count // 첫 번째 UIPickerView의 데이터 수 반환
         } else {
-            return workoutDetail.count // 두 번째 UIPickerView의 데이터 수 반환
+            return secondWorkoutList.count // 두 번째 UIPickerView의 데이터 수 반환
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         if pickerView == firstPicker {
-            return workoutName[row].name // 첫 번째 UIPickerView의 각 행에 대한 텍스트 반환
+            return firstWorkoutList[row].name // 첫 번째 UIPickerView의 각 행에 대한 텍스트 반환
         } else {
-            return workoutDetail[row].name // 두 번째 UIPickerView의 각 행에 대한 텍스트 반환
+            return secondWorkoutList[row].name // 두 번째 UIPickerView의 각 행에 대한 텍스트 반환
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if pickerView == firstPicker {
-            firstWorkout = workoutName[row] // 선택된 옵션 가져오기
+            firstWorkout = firstWorkoutList[row] // 선택된 옵션 가져오기
         } else {
-            secondWorkout = workoutDetail[row] // 선택된 옵션 가져오기
+            secondWorkout = secondWorkoutList[row] // 선택된 옵션 가져오기
         }
     }
 }

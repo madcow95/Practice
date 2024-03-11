@@ -35,6 +35,7 @@ class CustomButton: UIButton {
         self.layer.cornerRadius = 10
         self.widthAnchor.constraint(equalToConstant: 50).isActive = true
         self.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.isUserInteractionEnabled = true
     }
     
     required init?(coder: NSCoder) {
