@@ -48,9 +48,9 @@ class CustomHorizontalStack: UIStackView {
         super.init(frame: frame)
         
         self.axis = .horizontal
-        self.alignment = .center
+        self.alignment = .fill
         self.distribution = .fillEqually
-        self.spacing = 10
+        self.spacing = 20
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -59,7 +59,7 @@ class CustomHorizontalStack: UIStackView {
     }
 }
 
-class SetEnterStack: CustomHorizontalStack {
+class SetRecordHorizontalStack: CustomHorizontalStack {
     override init(frame: CGRect) {
         super.init(frame: frame)
         

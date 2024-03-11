@@ -10,6 +10,7 @@
 		CD21AFF82B99F9F6002F8396 /* RecordListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21AFF72B99F9F6002F8396 /* RecordListViewCell.swift */; };
 		CD2B8AC22B9DB8700080A4CA /* WorkoutRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2B8AC12B9DB8700080A4CA /* WorkoutRecordViewController.swift */; };
 		CD2B8AC42B9DD0110080A4CA /* WorkoutRecordViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2B8AC32B9DD0110080A4CA /* WorkoutRecordViewCell.swift */; };
+		CD2B8AC62B9F32B20080A4CA /* testRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2B8AC52B9F32B20080A4CA /* testRecord.swift */; };
 		CD382DFA2B949DD700771235 /* WorkoutRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD382DF92B949DD700771235 /* WorkoutRecordViewModel.swift */; };
 		CD382DFD2B94BA6000771235 /* CustomUIContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD382DFC2B94BA6000771235 /* CustomUIContent.swift */; };
 		CD44D5442B99F5C300545FF5 /* RecordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44D5432B99F5C300545FF5 /* RecordListViewController.swift */; };
@@ -33,6 +34,7 @@
 		CD21AFF72B99F9F6002F8396 /* RecordListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListViewCell.swift; sourceTree = "<group>"; };
 		CD2B8AC12B9DB8700080A4CA /* WorkoutRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRecordViewController.swift; sourceTree = "<group>"; };
 		CD2B8AC32B9DD0110080A4CA /* WorkoutRecordViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRecordViewCell.swift; sourceTree = "<group>"; };
+		CD2B8AC52B9F32B20080A4CA /* testRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testRecord.swift; sourceTree = "<group>"; };
 		CD382DF92B949DD700771235 /* WorkoutRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRecordViewModel.swift; sourceTree = "<group>"; };
 		CD382DFC2B94BA6000771235 /* CustomUIContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIContent.swift; sourceTree = "<group>"; };
 		CD44D5432B99F5C300545FF5 /* RecordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				CD44D5432B99F5C300545FF5 /* RecordListViewController.swift */,
 				CD934AAE2B9B3C0900CDDC10 /* RecordDetailViewController.swift */,
 				CD2B8AC12B9DB8700080A4CA /* WorkoutRecordViewController.swift */,
+				CD2B8AC52B9F32B20080A4CA /* testRecord.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				CD934AAF2B9B3C0900CDDC10 /* RecordDetailViewController.swift in Sources */,
 				CD934AAB2B9B191900CDDC10 /* CustomProtocol.swift in Sources */,
 				CD44D5442B99F5C300545FF5 /* RecordListViewController.swift in Sources */,
+				CD2B8AC62B9F32B20080A4CA /* testRecord.swift in Sources */,
 				CD934AAD2B9B264E00CDDC10 /* RecordListViewModel.swift in Sources */,
 				CD382DFD2B94BA6000771235 /* CustomUIContent.swift in Sources */,
 				CD6BFB612B90507100238B2D /* WorkOutDetail.swift in Sources */,

@@ -15,7 +15,7 @@ class WorkoutRecordViewController: UIViewController {
     var secondWorkoutList: [WorkOutDetail] = []
     var firstWorkout: WorkOut?
     var secondWorkout: WorkOutDetail? = nil
-    var stackViews: [SetEnterStack] = []
+    var stackViews: [SetRecordHorizontalStack] = []
     
     private let contentScrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -73,7 +73,6 @@ class WorkoutRecordViewController: UIViewController {
     
     private let textFieldHStack: CustomHorizontalStack = {
         let stack = CustomHorizontalStack()
-        stack.translatesAutoresizingMaskIntoConstraints = false
         
         return stack
     }()
@@ -90,8 +89,7 @@ class WorkoutRecordViewController: UIViewController {
         setTextFields()
         setToolbars()
         setWorkouts()
-        setStackViews(stack: SetEnterStack(), standard: textFieldHStack)
-        // contentView.heightAnchor.constraint(equalToConstant: 1200.0).isActive = true
+        setStackViews(stack: SetRecordHorizontalStack(), standard: textFieldHStack)
     }
     
     func setScrollComponents() {
@@ -100,6 +98,7 @@ class WorkoutRecordViewController: UIViewController {
         contentScrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         contentScrollView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         contentScrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        contentScrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
     }
     
     func setContentComponents() {
@@ -107,8 +106,9 @@ class WorkoutRecordViewController: UIViewController {
         contentView.leadingAnchor.constraint(equalTo: contentScrollView.leadingAnchor).isActive = true
         contentView.trailingAnchor.constraint(equalTo: contentScrollView.trailingAnchor).isActive = true
         contentView.topAnchor.constraint(equalTo: contentScrollView.topAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: contentScrollView.bottomAnchor).isActive = true
+        // contentView.bottomAnchor.constraint(equalTo: contentScrollView.bottomAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: contentScrollView.widthAnchor).isActive = true
+        contentView.heightAnchor.constraint(equalTo: contentScrollView.heightAnchor).isActive = true
     }
     
     func setUIComponents() {
@@ -158,7 +158,7 @@ class WorkoutRecordViewController: UIViewController {
         firstWorkout = firstWorkoutList.first
     }
     
-    func setStackViews(stack: SetEnterStack, standard: UIView) {
+    func setStackViews(stack: SetRecordHorizontalStack, standard: UIView) {
         stack.tag = stackViews.count
         stackViews.append(stack)
         
@@ -166,25 +166,10 @@ class WorkoutRecordViewController: UIViewController {
         stack.topAnchor.constraint(equalTo: standard.bottomAnchor, constant: 20).isActive = true
         stack.leadingAnchor.constraint(equalTo: standard.leadingAnchor).isActive = true
         stack.trailingAnchor.constraint(equalTo: standard.trailingAnchor).isActive = true
-        // configureContentHeight()
+        stack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
         let plusBtn = stack.arrangedSubviews[3] as! UIButton
         plusBtn.addTarget(self, action: #selector(addStackViews), for: .touchUpInside)
-    }
-    
-    func configureContentHeight() {
-//        UIView.animate(withDuration: 0.3) {
-//            self.contentView.frame.size.height = CGFloat(400 * self.stackViews.count)
-//        }
-        /*
-        var totalHeight: CGFloat = 0
-        for content in contentView.subviews {
-            totalHeight += content.frame.height
-        }
-        */
-        // print(totalHeight)
-        // contentView.frame.size.height = CGFloat(400 * self.stackViews.count)
-        // contentScrollView.contentSize = CGSize(width: contentScrollView.bounds.width, height: CGFloat(400 * self.stackViews.count))
     }
     
     @objc func setFirstTextField() {
@@ -216,7 +201,7 @@ class WorkoutRecordViewController: UIViewController {
     }
     
     @objc func addStackViews() {
-        let customStack = SetEnterStack()
+        let customStack = SetRecordHorizontalStack()
         let label = customStack.arrangedSubviews[0] as! UILabel
         
         label.text = "\(stackViews.count + 1)세트"
