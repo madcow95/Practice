@@ -82,6 +82,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         // leftButton.trailingAnchor.constraint(equalTo: currentMonthLabel.leadingAnchor, constant: -5).isActive = true
         leftButton.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -10).isActive = true
         
+        
         // 현재 월을 나타내는 Label에 대한 정보
         currentMonthLabel.text = "\(selectedYear)년 \(selectedMonth)월"
         view.addSubview(currentMonthLabel)
