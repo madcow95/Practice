@@ -50,7 +50,7 @@ class CustomHorizontalStack: UIStackView {
         self.axis = .horizontal
         self.alignment = .fill
         self.distribution = .fillEqually
-        self.spacing = 20
+        // self.spacing = 20
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     

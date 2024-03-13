@@ -16,6 +16,7 @@ class WorkoutRecordViewController: UIViewController {
     var firstWorkout: WorkOut?
     var secondWorkout: WorkOutDetail? = nil
     var stackViews: [SetRecordHorizontalStack] = []
+    var isStackViewCountMax = false
     
     private let contentScrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -160,16 +161,17 @@ class WorkoutRecordViewController: UIViewController {
     
     func setStackViews(stack: SetRecordHorizontalStack, standard: UIView) {
         stack.tag = stackViews.count
-        stackViews.append(stack)
-        
-        contentView.addSubview(stack)
-        stack.topAnchor.constraint(equalTo: standard.bottomAnchor, constant: 20).isActive = true
-        stack.leadingAnchor.constraint(equalTo: standard.leadingAnchor).isActive = true
-        stack.trailingAnchor.constraint(equalTo: standard.trailingAnchor).isActive = true
-        stack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        
-        let plusBtn = stack.arrangedSubviews[3] as! UIButton
-        plusBtn.addTarget(self, action: #selector(addStackViews), for: .touchUpInside)
+        isStackViewCountMax = stackViews.count == 7
+        if !isStackViewCountMax {
+            stackViews.append(stack)
+            contentView.addSubview(stack)
+            stack.topAnchor.constraint(equalTo: standard.bottomAnchor, constant: 20).isActive = true
+            stack.leadingAnchor.constraint(equalTo: standard.leadingAnchor).isActive = true
+            stack.trailingAnchor.constraint(equalTo: standard.trailingAnchor).isActive = true
+            
+            let plusBtn = stack.arrangedSubviews[3] as! UIButton
+            plusBtn.addTarget(self, action: #selector(addStackViews), for: .touchUpInside)
+        }
     }
     
     @objc func setFirstTextField() {
@@ -201,17 +203,19 @@ class WorkoutRecordViewController: UIViewController {
     }
     
     @objc func addStackViews() {
-        let customStack = SetRecordHorizontalStack()
-        let label = customStack.arrangedSubviews[0] as! UILabel
-        
-        label.text = "\(stackViews.count + 1)세트"
-        let standardView = stackViews[stackViews.count - 1]
-        let beforePlusBtn = standardView.arrangedSubviews[3] as! UIButton
-        beforePlusBtn.backgroundColor = .lightGray
-        beforePlusBtn.isEnabled = false
-        // standardView.arrangedSubviews[3].isHidden = true
-        
-        setStackViews(stack: customStack, standard: standardView)
+        if !isStackViewCountMax {
+            let customStack = SetRecordHorizontalStack()
+            let label = customStack.arrangedSubviews[0] as! UILabel
+            
+            label.text = "\(stackViews.count + 1)세트"
+            let standardView = stackViews[stackViews.count - 1]
+            let beforePlusBtn = standardView.arrangedSubviews[3] as! UIButton
+            beforePlusBtn.backgroundColor = .lightGray
+            beforePlusBtn.isEnabled = false
+            // standardView.arrangedSubviews[3].isHidden = true
+            
+            setStackViews(stack: customStack, standard: standardView)
+        }
     }
 }
 
