@@ -90,3 +90,24 @@ class SetRecordHorizontalStack: CustomHorizontalStack {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+class SaveButtonHorizonStack: CustomHorizontalStack {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        let cancelButton = CustomButton()
+        cancelButton.backgroundColor = .lightGray
+        cancelButton.setTitle("취소", for: .normal)
+        
+        let saveButton = CustomButton()
+        saveButton.backgroundColor = .systemBlue
+        saveButton.setTitle("저장", for: .normal)
+        
+        self.addArrangedSubview(cancelButton)
+        self.addArrangedSubview(saveButton)
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

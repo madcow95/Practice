@@ -17,6 +17,7 @@ class WorkoutRecordViewController: UIViewController {
     var secondWorkout: WorkOutDetail? = nil
     var stackViews: [SetRecordHorizontalStack] = []
     
+    // MARK: - Scroll View Deprecated 2024-03-14
     private let contentScrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.translatesAutoresizingMaskIntoConstraints = false
@@ -82,14 +83,15 @@ class WorkoutRecordViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        setScrollComponents()
+        // setScrollComponents()
         setContentComponents()
         setUIComponents()
+        setCancelSaveButtonComponents()
         setPickerComponents()
-        setTextFields()
-        setToolbars()
-        setWorkouts()
-        setStackViews(stack: SetRecordHorizontalStack(), standard: textFieldHStack)
+        setTextFieldsComponents()
+        setToolbarsComponents()
+        setWorkoutsComponents()
+        setStackViewComponents(stack: SetRecordHorizontalStack(), standard: textFieldHStack)
     }
     
     func setScrollComponents() {
@@ -102,13 +104,13 @@ class WorkoutRecordViewController: UIViewController {
     }
     
     func setContentComponents() {
-        contentScrollView.addSubview(contentView)
-        contentView.leadingAnchor.constraint(equalTo: contentScrollView.leadingAnchor).isActive = true
-        contentView.trailingAnchor.constraint(equalTo: contentScrollView.trailingAnchor).isActive = true
-        contentView.topAnchor.constraint(equalTo: contentScrollView.topAnchor).isActive = true
+        view.addSubview(contentView)
+        contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         // contentView.bottomAnchor.constraint(equalTo: contentScrollView.bottomAnchor).isActive = true
-        contentView.widthAnchor.constraint(equalTo: contentScrollView.widthAnchor).isActive = true
-        contentView.heightAnchor.constraint(equalTo: contentScrollView.heightAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        contentView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
     }
     
     func setUIComponents() {
@@ -121,6 +123,28 @@ class WorkoutRecordViewController: UIViewController {
         textFieldHStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
     }
     
+    func setCancelSaveButtonComponents() {
+        let buttonStack = SaveButtonHorizonStack()
+        contentView.addSubview(buttonStack)
+        buttonStack.leadingAnchor.constraint(equalTo: firstTextField.leadingAnchor).isActive = true
+        buttonStack.trailingAnchor.constraint(equalTo: secondTextField.trailingAnchor).isActive = true
+        buttonStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
+        
+        let cancelButton = buttonStack.arrangedSubviews[0] as! CustomButton
+        let saveButton = buttonStack.arrangedSubviews[1] as! CustomButton
+        
+        cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
+    }
+    
+    @objc func cancelAction() {
+        dismiss(animated: true)
+    }
+    
+    @objc func saveAction() {
+        print("SAVE COMPLETE!")
+    }
+    
     func setPickerComponents() {
         firstPicker.delegate = self
         firstPicker.dataSource = self
@@ -128,7 +152,7 @@ class WorkoutRecordViewController: UIViewController {
         secondPicker.dataSource = self
     }
     
-    func setTextFields() {
+    func setTextFieldsComponents() {
         firstTextField.inputView = firstPicker
         firstTextField.inputAccessoryView = firstStackToolBar
         
@@ -136,32 +160,33 @@ class WorkoutRecordViewController: UIViewController {
         secondTextField.inputAccessoryView = secondStackToolBar
     }
     
-    func setToolbars() {
+    func setToolbarsComponents() {
         let buttonSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let cancelBtn = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(cancelToolbarButton))
         
+        let firstCancelBtn = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(firstCancelToolbarButton))
         let firstSetTF = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(setFirstTextField))
-        firstStackToolBar.setItems([cancelBtn, buttonSpace, firstSetTF], animated: true)
+        firstStackToolBar.setItems([firstCancelBtn, buttonSpace, firstSetTF], animated: true)
         firstStackToolBar.isUserInteractionEnabled = true
         firstTextField.inputView = firstPicker
         firstTextField.inputAccessoryView = firstStackToolBar
         
+        let secondCancelBtn = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(secondCancelToolbarButton))
         let secondSetTF = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(setSecondTextField))
-        secondStackToolBar.setItems([cancelBtn, buttonSpace, secondSetTF], animated: true)
+        secondStackToolBar.setItems([secondCancelBtn, buttonSpace, secondSetTF], animated: true)
         secondStackToolBar.isUserInteractionEnabled = true
         secondTextField.inputView = secondPicker
         secondTextField.inputAccessoryView = secondStackToolBar
     }
     
-    func setWorkouts() {
+    func setWorkoutsComponents() {
         firstWorkoutList = viewModel.getFirstWorkoutNames().sorted{$0.key < $1.key}
         firstWorkout = firstWorkoutList.first
     }
     
-    func setStackViews(stack: SetRecordHorizontalStack, standard: UIView) {
+    func setStackViewComponents(stack: SetRecordHorizontalStack, standard: UIView) {
         stack.tag = stackViews.count
         stackViews.append(stack)
-        if stackViews.count <= 7 {
+        if stackViews.count <= 6 {
             contentView.addSubview(stack)
             stack.topAnchor.constraint(equalTo: standard.bottomAnchor, constant: 20).isActive = true
             stack.leadingAnchor.constraint(equalTo: standard.leadingAnchor).isActive = true
@@ -170,7 +195,7 @@ class WorkoutRecordViewController: UIViewController {
             let plusBtn = stack.arrangedSubviews[3] as! UIButton
             plusBtn.addTarget(self, action: #selector(addStackViews), for: .touchUpInside)
 
-            if stackViews.count == 7 {
+            if stackViews.count == 6 {
                 plusBtn.backgroundColor = .lightGray
                 plusBtn.isEnabled = false
             }
@@ -207,22 +232,24 @@ class WorkoutRecordViewController: UIViewController {
         }
     }
     
-    @objc func cancelToolbarButton() {
+    @objc func firstCancelToolbarButton() {
+        firstTextField.resignFirstResponder()
+    }
+    
+    @objc func secondCancelToolbarButton() {
         secondTextField.resignFirstResponder()
     }
     
     @objc func addStackViews() {
-        if stackViews.count != 7 {
-            let customStack = SetRecordHorizontalStack()
-            let label = customStack.arrangedSubviews[0] as! UILabel
-            
-            label.text = "\(stackViews.count + 1)세트"
-            let beforeStack = stackViews[stackViews.count - 1]
-            disableBeforeButton(stack: beforeStack)
-            // standardView.arrangedSubviews[3].isHidden = true
-            
-            setStackViews(stack: customStack, standard: beforeStack)
-        }
+        let customStack = SetRecordHorizontalStack()
+        let label = customStack.arrangedSubviews[0] as! UILabel
+        
+        label.text = "\(stackViews.count + 1)세트"
+        let beforeStack = stackViews[stackViews.count - 1]
+        disableBeforeButton(stack: beforeStack)
+        // standardView.arrangedSubviews[3].isHidden = true
+        
+        setStackViewComponents(stack: customStack, standard: beforeStack)
     }
 }
 
