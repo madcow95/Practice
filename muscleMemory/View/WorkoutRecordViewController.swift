@@ -161,9 +161,9 @@ class WorkoutRecordViewController: UIViewController {
     
     func setStackViews(stack: SetRecordHorizontalStack, standard: UIView) {
         stack.tag = stackViews.count
-        isStackViewCountMax = stackViews.count == 7
+        isStackViewCountMax = stackViews.count == 6
+        stackViews.append(stack)
         if !isStackViewCountMax {
-            stackViews.append(stack)
             contentView.addSubview(stack)
             stack.topAnchor.constraint(equalTo: standard.bottomAnchor, constant: 20).isActive = true
             stack.leadingAnchor.constraint(equalTo: standard.leadingAnchor).isActive = true
@@ -171,7 +171,16 @@ class WorkoutRecordViewController: UIViewController {
             
             let plusBtn = stack.arrangedSubviews[3] as! UIButton
             plusBtn.addTarget(self, action: #selector(addStackViews), for: .touchUpInside)
+        } else {
+            disableBeforeButton()
         }
+    }
+    
+    func disableBeforeButton() {
+        let standardView = stackViews[stackViews.count - 1]
+        let beforePlusBtn = standardView.arrangedSubviews[3] as! UIButton
+        beforePlusBtn.backgroundColor = .lightGray
+        beforePlusBtn.isEnabled = false
     }
     
     @objc func setFirstTextField() {
@@ -208,13 +217,10 @@ class WorkoutRecordViewController: UIViewController {
             let label = customStack.arrangedSubviews[0] as! UILabel
             
             label.text = "\(stackViews.count + 1)세트"
-            let standardView = stackViews[stackViews.count - 1]
-            let beforePlusBtn = standardView.arrangedSubviews[3] as! UIButton
-            beforePlusBtn.backgroundColor = .lightGray
-            beforePlusBtn.isEnabled = false
+            disableBeforeButton()
             // standardView.arrangedSubviews[3].isHidden = true
             
-            setStackViews(stack: customStack, standard: standardView)
+            setStackViews(stack: customStack, standard: stackViews[stackViews.count - 1])
         }
     }
 }

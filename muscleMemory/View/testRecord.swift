@@ -16,6 +16,7 @@ class testRecord: UIViewController {
     @IBOutlet weak var content: UIView!
     @IBOutlet weak var firstStackView: UIStackView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var buttonView: UIView!
     
     let firstPicker = UIPickerView()
     let secondPicker = UIPickerView()
