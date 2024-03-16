@@ -84,14 +84,14 @@ class WorkoutRecordViewController: UIViewController {
         view.backgroundColor = .white
         
         // setScrollComponents()
-        setContentComponents()
-        setUIComponents()
-        setCancelSaveButtonComponents()
-        setPickerComponents()
-        setTextFieldsComponents()
-        setToolbarsComponents()
-        setWorkoutsComponents()
-        setStackViewComponents(stack: SetRecordHorizontalStack(), standard: textFieldHStack)
+        setContentComponents() // Content View 화면에 배치
+        setUIComponents() // Text Field 화면에 배치
+        setCancelSaveButtonComponents() // 취소, 저장 버튼 목록 화면에 배치
+        setPickerComponents() // UIPickerView delegate, dataSource 설정
+        setTextFieldsComponents() // UIPickerView Text Field에 배치
+        setToolbarsComponents() // UIPickerView에 취소, 저장 버튼 Tool Bar 배치
+        setWorkoutsComponents() // Workout 초기값 배치
+        setStackViewComponents(stack: SetRecordHorizontalStack(), standard: textFieldHStack) // 세트 입력 가능한 Stack View 화면에 배치
     }
     
     func setScrollComponents() {
@@ -186,6 +186,7 @@ class WorkoutRecordViewController: UIViewController {
     func setStackViewComponents(stack: SetRecordHorizontalStack, standard: UIView) {
         stack.tag = stackViews.count
         stackViews.append(stack)
+        // MARK: - 아직 Scroll View에 대한 이해가 낮아 무한으로 추가하는게 아닌 6개로 제한함 -> 공부 후 수정해야해 ㅠㅠ
         if stackViews.count <= 6 {
             contentView.addSubview(stack)
             stack.topAnchor.constraint(equalTo: standard.bottomAnchor, constant: 20).isActive = true
@@ -202,6 +203,7 @@ class WorkoutRecordViewController: UIViewController {
         }
     }
     
+    // MARK: 세트를 입력하는 Stack을 추가할 때 이전 Stack의 버튼을 비활성화 -> 중간에 끼워 넣는 방식으로 해도 될거같긴 한데..?
     func disableBeforeButton(stack: SetRecordHorizontalStack) {
         let beforePlusBtn = stack.arrangedSubviews[3] as! UIButton
         beforePlusBtn.backgroundColor = .lightGray
