@@ -28,4 +28,19 @@ class WorkoutRecordViewModel {
         
         print(appDelegate)
     }
+    
+    func saveWorkoutRecord(stack: [SetRecordHorizontalStack]) {
+        print(stack.count)
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        if let entity = NSEntityDescription.entity(forEntityName: "Workout", in: context) {
+            print(entity)
+//            let user = NSManagedObject(entity: entity, insertInto: context)
+//            user.setValue(name, forKeyPath: "name")
+//            do {
+//                try context.save()
+//            } catch let error as NSError {
+//                print("Could not save. \(error), \(error.userInfo)")
+//            }
+        }
+    }
 }

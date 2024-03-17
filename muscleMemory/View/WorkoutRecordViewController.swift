@@ -142,8 +142,7 @@ class WorkoutRecordViewController: UIViewController {
     }
     
     @objc func saveAction() {
-        viewModel.getAllWorkoutData()
-        print("SAVE COMPLETE!")
+        viewModel.saveWorkoutRecord(stack: stackViews)
     }
     
     func setPickerComponents() {
