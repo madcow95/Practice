@@ -142,6 +142,7 @@ class WorkoutRecordViewController: UIViewController {
     }
     
     @objc func saveAction() {
+        viewModel.getAllWorkoutData()
         print("SAVE COMPLETE!")
     }
     
