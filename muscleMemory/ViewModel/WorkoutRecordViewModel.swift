@@ -33,8 +33,8 @@ class WorkoutRecordViewModel {
         print(stack.count)
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         if let entity = NSEntityDescription.entity(forEntityName: "Workout", in: context) {
-            print(entity)
-//            let user = NSManagedObject(entity: entity, insertInto: context)
+            // let workout = NSManagedObject(entity: entity, insertInto: context)
+            
 //            user.setValue(name, forKeyPath: "name")
 //            do {
 //                try context.save()
