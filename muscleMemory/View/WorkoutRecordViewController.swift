@@ -179,7 +179,8 @@ class WorkoutRecordViewController: UIViewController {
     }
     
     func setWorkoutsComponents() {
-        firstWorkoutList = viewModel.getFirstWorkoutNames().sorted{$0.key < $1.key}
+//        firstWorkoutList = viewModel.getFirstWorkoutNames().sorted{$0.key < $1.key}
+        firstWorkoutList = viewModel.getAllWorkoutData().sorted{$0.key < $1.key}
         firstWorkout = firstWorkoutList.first
     }
     

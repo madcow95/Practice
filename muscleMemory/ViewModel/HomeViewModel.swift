@@ -5,13 +5,13 @@
 //  Created by MadCow on 2024/2/29.
 //
 
-import Foundation
-
+import UIKit
+import CoreData
 
 class HomeViewModel {
     
     // DB에 저장되어야 할 내용들
-    private var workOuts: [WorkOut] = [
+    var workOuts: [WorkOut] = [
         WorkOut(key: 1, name: "하체"),
         WorkOut(key: 2, name: "가슴"),
         WorkOut(key: 3, name: "등"),
