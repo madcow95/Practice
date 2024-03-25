@@ -13,10 +13,6 @@ class WorkoutRecordViewModel {
     var managedObjectContext: NSManagedObjectContext!
     let workout = Workout()
     
-    func getFirstWorkoutNames() -> [WorkOut] {
-        return recordVM.getAllWorkOut()
-    }
-    
     func getSecondWOrkoutRecordBy(workout: WorkOut) -> [WorkOutDetail] {
         return recordVM.getWorkOutDetail(mainWorkout: workout)
     }

@@ -52,6 +52,46 @@ class HomeViewModel {
         WorkOutDetail(key: 6, subKey: 4, name: "어깨 운동 2")
     ]
     
+    let workoutRecords: [String: [WorkOutRecord2]] = [
+        "2024-02-01": [
+            WorkOutRecord2(key: "1", subKey: "1", set: 1, reps: 10, weight: 100),
+            WorkOutRecord2(key: "1", subKey: "1", set: 2, reps: 8, weight: 105),
+            WorkOutRecord2(key: "1", subKey: "1", set: 3, reps: 6, weight: 110),
+            WorkOutRecord2(key: "1", subKey: "1", set: 4, reps: 4, weight: 115),
+            WorkOutRecord2(key: "1", subKey: "1", set: 5, reps: 8, weight: 100),
+            WorkOutRecord2(key: "1", subKey: "2", set: 1, reps: 10, weight: 80),
+            WorkOutRecord2(key: "1", subKey: "2", set: 2, reps: 8, weight: 85),
+            WorkOutRecord2(key: "1", subKey: "2", set: 3, reps: 6, weight: 90),
+            WorkOutRecord2(key: "1", subKey: "2", set: 4, reps: 4, weight: 95),
+            WorkOutRecord2(key: "1", subKey: "2", set: 5, reps: 8, weight: 80)
+        ],
+        "2024-02-06": [
+            WorkOutRecord2(key: "2", subKey: "1", set: 1, reps: 10, weight: 50),
+            WorkOutRecord2(key: "2", subKey: "1", set: 2, reps: 8, weight: 55),
+            WorkOutRecord2(key: "2", subKey: "1", set: 3, reps: 6, weight: 60),
+            WorkOutRecord2(key: "2", subKey: "1", set: 4, reps: 4, weight: 65),
+            WorkOutRecord2(key: "2", subKey: "1", set: 5, reps: 8, weight: 40),
+            WorkOutRecord2(key: "2", subKey: "2", set: 1, reps: 10, weight: 40),
+            WorkOutRecord2(key: "2", subKey: "2", set: 2, reps: 8, weight: 40),
+            WorkOutRecord2(key: "2", subKey: "2", set: 3, reps: 6, weight: 40),
+            WorkOutRecord2(key: "2", subKey: "2", set: 4, reps: 4, weight: 40),
+            WorkOutRecord2(key: "2", subKey: "2", set: 5, reps: 8, weight: 40)
+        ],
+        "2024-02-13": [
+            WorkOutRecord2(key: "3", subKey: "2", set: 1, reps: 10, weight: 50),
+            WorkOutRecord2(key: "3", subKey: "2", set: 2, reps: 8, weight: 55),
+            WorkOutRecord2(key: "3", subKey: "2", set: 3, reps: 6, weight: 60),
+            WorkOutRecord2(key: "3", subKey: "2", set: 4, reps: 4, weight: 65),
+            WorkOutRecord2(key: "3", subKey: "2", set: 5, reps: 8, weight: 40),
+            WorkOutRecord2(key: "3", subKey: "3", set: 1, reps: 10, weight: 40),
+            WorkOutRecord2(key: "3", subKey: "3", set: 2, reps: 8, weight: 40),
+            WorkOutRecord2(key: "3", subKey: "3", set: 3, reps: 6, weight: 40),
+            WorkOutRecord2(key: "3", subKey: "3", set: 4, reps: 4, weight: 40),
+            WorkOutRecord2(key: "3", subKey: "3", set: 5, reps: 8, weight: 40)
+        ]
+    ]
+    
+    // WorkOutRecord의 totalKey를 dictionary로 만들어서 저장? 할까?
     private let testRecord: [WorkOutRecord] = [
         WorkOutRecord(key: "1", totalKey: "2024-02-01/1/1", date: Date(), set: 3, reps: 12, weight: 100),
         WorkOutRecord(key: "1", totalKey: "2024-02-01/1/1", date: Date(), set: 3, reps: 12, weight: 110),
@@ -74,10 +114,6 @@ class HomeViewModel {
         WorkOutRecord(key: "1", totalKey: "2024-03-29/2/3", date: Date(), set: 5, reps: 10, weight: 150)
     ]
     
-    func getAllWorkOut() -> [WorkOut] {
-        return workOuts
-    }
-    
     func getWorkOutDetail(mainWorkout: WorkOut) -> [WorkOutDetail] {
         let key = mainWorkout.key
         
@@ -96,6 +132,16 @@ class HomeViewModel {
     }
     
     func getAllTestRecordBy(year: Int, month: Int) -> [WorkOutRecord] {
+        
+        let test = workoutRecords.filter{ record -> Bool in
+            let date = record.key.split(separator: "-")
+            let years = date[0]
+            let months = date[1]
+            
+            return Int(years)! == year && Int(months)! == month
+        }
+        
+        print(test)
         
         return testRecord.filter{record -> Bool in
             let dates = record.totalKey.split(separator: "/")[0]
