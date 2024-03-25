@@ -24,16 +24,9 @@ class WorkoutRecordViewModel {
         do {
             let workOut = try context.fetch(fetchRequest) as! [NSManagedObject]
             if workOut.count > 0 {
-//                for work in workOut {
-//                    context.delete(work)
-//                    let key = work.value(forKey: "key") as! Int
-//                    let name = work.value(forKey: "name") as! String
-//                    print("key: \(key), Name: \(name)")
-//                }
-//                try context.save()
                 return workOut.map{ WorkOut(key: $0.value(forKey: "key") as! Int, name: $0.value(forKey: "name") as! String) }
             } else {
-                recordVM.workOuts.forEach{ work in
+                recordVM.tempData.workOuts.forEach{ work in
                     if let entity = NSEntityDescription.entity(forEntityName: "Workout", in: context) {
                         let newWorkout = NSManagedObject(entity: entity, insertInto: context)
                         newWorkout.setValue(work.key, forKey: "key")

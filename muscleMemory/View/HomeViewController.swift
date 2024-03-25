@@ -10,6 +10,9 @@ import UIKit
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     let viewModel = HomeViewModel()
+    var selectedYear = 0
+    var selectedMonth = 0
+    var allRecordsDay: [Int] = []
     
     // 달력 형식을 표시할 collectionView
     @IBOutlet weak var collectionView: UICollectionView!
@@ -55,20 +58,32 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         return btn
     }()
     
-    var selectedYear = 0
-    var selectedMonth = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let currentDate = viewModel.getCurrentDate()
-        selectedMonth = Int(currentDate["month"]!)!
-        selectedYear = Int(currentDate["year"]!)!
-        
+        loadRecordDay() // 현재 연, 월에 운동한 날짜 가져오기
+        configureCurrentDate() // 현재 날짜를 표시하는 Label에 값 입력
+        configureCollectionView() // UICollectionView delegate, dataSource 표시
+        configureUI() // UILabel, UIButton등 화면에 배치
+    }
+    
+    func loadRecordDay() {
+        allRecordsDay = viewModel.getAllRecordsBySelected(year: selectedYear, month: selectedMonth)
+    }
+    
+    func configureCurrentDate() {
+        selectedYear = viewModel.getCurrentYear()
+        selectedMonth = viewModel.getCurrentMonth()
+    }
+    
+    func configureCollectionView() {
         // collectionView의 데이터를 표시?
         collectionView.delegate = self
         collectionView.dataSource = self
-        
+    }
+    
+    func configureUI() {
         // 기록하기 페이지 Button에 대한 정보
         recordPageButton.addTarget(self, action: #selector(moveToRecordPage), for: .touchUpInside)
         view.addSubview(recordPageButton)
@@ -106,7 +121,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     @objc func beforeMonth() {
-        
         // MARK: TODO. ViewModel에서 처리하도록 수정
         if selectedMonth > 1 {
             selectedMonth -= 1
@@ -119,7 +133,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     @objc func nextMonth() {
-        
         // MARK: TODO. ViewModel에서 처리하도록 수정
         if selectedMonth < 12 {
             selectedMonth += 1
@@ -132,33 +145,20 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // dictionary형식 ["year": "YYYY", "month": "mm", "day": "dd"]으로 return됨
-        // let currentDate = viewModel.getCurrentDate()
-
-        return viewModel.getDaysBy(month: selectedMonth)
+        // collectionView.reloadData()할 때 연, 월이 바뀌기 때문에 다시 load
+        loadRecordDay()
+        // UIViewCell의 갯수
+        return viewModel.getDaysBy(year: selectedYear, month: selectedMonth)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarTableCell", for: indexPath) as? CalendarTableCell else {
             return UICollectionViewCell()
         }
-        
-        let allWorkoutByMonth = viewModel.getAllTestRecordBy(year: selectedYear, month: selectedMonth)
-        // MARK: TODO. ViewModel에서 처리하도록 수정
-        let allWorkout = allWorkoutByMonth.map{record in
-            let dates = record.totalKey.split(separator: "/")[0]
-            let dateData = dates.split(separator: "-")
-            let days = dateData[2]
-            
-            return Int(days)!
-        }
 
         cell.dateLabel.text = "\(indexPath.row + 1)"
-        if allWorkout.count > 0 && allWorkout.contains(indexPath.row + 1) {
-            cell.workoutcheckImage.image = UIImage(systemName: "circle.fill")
-        } else {
-            cell.workoutcheckImage.image = nil
-        }
+        // 운동한 날의 유무에 따라 이미지 표시
+        cell.workoutcheckImage.image = allRecordsDay.contains(indexPath.row + 1) ? UIImage(systemName: "circle.fill") : nil
         
         return cell
     }
@@ -169,19 +169,40 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         return CGSize(width: width, height: width * 1.5)
     }
     
+    // UIViewCell을 선택했을 때 Event -> 여기서는 present로 화면을 띄우는 기능
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let selectedYear = "\(selectedYear)"
+        var selectedMonth = "\(selectedMonth)"
+        if selectedMonth.count == 1 {
+            selectedMonth = "0\(selectedMonth)"
+        }
+        var selectedDay = "\(indexPath.item + 1)"
+        if selectedDay.count == 1 {
+            selectedDay = "0\(selectedDay)"
+        }
+        
+        let selectedDate = "\(selectedYear)-\(selectedMonth)-\(selectedDay)"
+        let selectedWorkout = viewModel.getSelectedWorkoutBy(date: selectedDate)
+        
+//        guard let workOuts = selectedWorkout else {
+//            return
+//        }
+        
+        // MARK: - TODO: 리팩토링
         let currentMonth = "\(selectedMonth)"
         let month = currentMonth.count == 1 ? "0\(currentMonth)" : "\(currentMonth)"
         
-        let selectedDay = "\(indexPath.item + 1)"
         let selectDate = "\(selectedYear)-\(month)-\(selectedDay.count == 1 ? "0\(selectedDay)" : selectedDay)"
         
-        let selectedWorkout = viewModel.getTestRecordBy(date: selectDate)
-        if(selectedWorkout.count > 0) {
+        let selectedWorkout2 = viewModel.getTestRecordBy(date: selectDate)
+        guard let workOuts = selectedWorkout else {
+            return
+        }
+        if(selectedWorkout2.count > 0) {
             guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordListViewController") as? RecordListViewController else { return }
 
-            vc.selectedRecordList = selectedWorkout
+            vc.selectedRecordList = selectedWorkout2
             present(vc, animated: true)
             
         }
