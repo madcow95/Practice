@@ -9,6 +9,7 @@ import UIKit
 
 class RecordListViewCell: UITableViewCell {
     
+    @IBOutlet weak var workoutNameLabel: UILabel!
     @IBOutlet weak var recordNameLabel: UILabel!
     @IBOutlet weak var setLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!

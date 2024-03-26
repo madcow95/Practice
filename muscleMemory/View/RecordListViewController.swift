@@ -13,14 +13,8 @@ class RecordListViewController: UIViewController {
     let viewModel = RecordListViewModel()
     
     @IBOutlet weak var recordListTable: UITableView!
-    private let recordTitle: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
     
-    private let dateLabel: UILabel = {
+    let dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -31,23 +25,21 @@ class RecordListViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        
-        let recordInfo = viewModel.getRecordName(record: selectedRecordList[0])
-        
+        configureTable()
+        configureLabel()
+    }
+    
+    func configureTable() {
         recordListTable.delegate = self
         recordListTable.dataSource = self
         recordListTable.layer.borderWidth = 1.0
         recordListTable.layer.cornerRadius = 10
-        
-        view.addSubview(recordTitle)
-        recordTitle.bottomAnchor.constraint(equalTo: recordListTable.topAnchor, constant: -10).isActive = true
-        recordTitle.leadingAnchor.constraint(equalTo: recordListTable.leadingAnchor).isActive = true
-        recordTitle.text = recordInfo["date"]
-        
+    }
+    
+    func configureLabel() {
         view.addSubview(dateLabel)
         dateLabel.bottomAnchor.constraint(equalTo: recordListTable.topAnchor, constant: -10).isActive = true
-        dateLabel.leadingAnchor.constraint(equalTo: recordTitle.trailingAnchor, constant: 20).isActive = true
-        dateLabel.text = recordInfo["name"]
+        dateLabel.leadingAnchor.constraint(equalTo: recordListTable.leadingAnchor, constant: 20).isActive = true
     }
     
 }
@@ -65,8 +57,17 @@ extension RecordListViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let workout = selectedRecordList[indexPath.item]
-        let recordInfo = viewModel.getRecordName(record: workout)
-        cell.recordNameLabel.text = recordInfo["nameDetail"]
+        
+        guard let workoutName = viewModel.getWorkoutNameBy(key: workout.key) else {
+            return UITableViewCell()
+        }
+        
+        guard let workoutDetailname = viewModel.getWorkoutDetailNameBy(key: workout.key, subKey: workout.subKey) else {
+            return UITableViewCell()
+        }
+        
+        cell.workoutNameLabel.text = workoutName
+        cell.recordNameLabel.text = workoutDetailname
         cell.setLabel.text = "\(workout.set)세트"
         cell.weightLabel.text = "\(workout.weight)kg"
         cell.repsLabel.text = "\(workout.reps)회"
@@ -79,9 +80,11 @@ extension RecordListViewController: UITableViewDataSource, UITableViewDelegate {
         guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordDetailViewController") as? RecordDetailViewController else { return }
         
         let workout = selectedRecordList[indexPath.item]
-        let recordInfo = viewModel.getRecordName(record: workout)
-        
-        vc.recordName = recordInfo["nameDetail"]!
+
+        guard let workoutDetailname = viewModel.getWorkoutDetailNameBy(key: workout.key, subKey: workout.subKey) else {
+            return
+        }
+        vc.recordName = workoutDetailname
         vc.set = "\(workout.set)"
         vc.weight = "\(workout.weight)"
         vc.reps = "\(workout.reps)"

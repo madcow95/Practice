@@ -14,45 +14,45 @@ class HomeViewModel {
     let currentDate = Date()
     let calendar = Calendar.current
     
-    let workoutRecords: [String: [WorkOutRecord2]] = [
-        "2024-02-01": [
-            WorkOutRecord2(key: "1", subKey: "1", set: 1, reps: 10, weight: 100),
-            WorkOutRecord2(key: "1", subKey: "1", set: 2, reps: 8, weight: 105),
-            WorkOutRecord2(key: "1", subKey: "1", set: 3, reps: 6, weight: 110),
-            WorkOutRecord2(key: "1", subKey: "1", set: 4, reps: 4, weight: 115),
-            WorkOutRecord2(key: "1", subKey: "1", set: 5, reps: 8, weight: 100),
-            WorkOutRecord2(key: "1", subKey: "2", set: 1, reps: 10, weight: 80),
-            WorkOutRecord2(key: "1", subKey: "2", set: 2, reps: 8, weight: 85),
-            WorkOutRecord2(key: "1", subKey: "2", set: 3, reps: 6, weight: 90),
-            WorkOutRecord2(key: "1", subKey: "2", set: 4, reps: 4, weight: 95),
-            WorkOutRecord2(key: "1", subKey: "2", set: 5, reps: 8, weight: 80)
+    let workoutRecords: [String: [WorkOutRecord]] = [
+        "2024-03-01": [
+            WorkOutRecord(key: "1", subKey: "1", set: 1, reps: 10, weight: 100),
+            WorkOutRecord(key: "1", subKey: "1", set: 2, reps: 8, weight: 105),
+            WorkOutRecord(key: "1", subKey: "1", set: 3, reps: 6, weight: 110),
+            WorkOutRecord(key: "1", subKey: "1", set: 4, reps: 4, weight: 115),
+            WorkOutRecord(key: "1", subKey: "1", set: 5, reps: 8, weight: 100),
+            WorkOutRecord(key: "1", subKey: "2", set: 1, reps: 10, weight: 80),
+            WorkOutRecord(key: "1", subKey: "2", set: 2, reps: 8, weight: 85),
+            WorkOutRecord(key: "1", subKey: "2", set: 3, reps: 6, weight: 90),
+            WorkOutRecord(key: "1", subKey: "2", set: 4, reps: 4, weight: 95),
+            WorkOutRecord(key: "1", subKey: "2", set: 5, reps: 8, weight: 80)
         ],
-        "2024-02-06": [
-            WorkOutRecord2(key: "2", subKey: "1", set: 1, reps: 10, weight: 50),
-            WorkOutRecord2(key: "2", subKey: "1", set: 2, reps: 8, weight: 55),
-            WorkOutRecord2(key: "2", subKey: "1", set: 3, reps: 6, weight: 60),
-            WorkOutRecord2(key: "2", subKey: "1", set: 4, reps: 4, weight: 65),
-            WorkOutRecord2(key: "2", subKey: "1", set: 5, reps: 8, weight: 40),
-            WorkOutRecord2(key: "2", subKey: "2", set: 1, reps: 10, weight: 40),
-            WorkOutRecord2(key: "2", subKey: "2", set: 2, reps: 8, weight: 40),
-            WorkOutRecord2(key: "2", subKey: "2", set: 3, reps: 6, weight: 40),
-            WorkOutRecord2(key: "2", subKey: "2", set: 4, reps: 4, weight: 40),
-            WorkOutRecord2(key: "2", subKey: "2", set: 5, reps: 8, weight: 40)
+        "2024-03-06": [
+            WorkOutRecord(key: "2", subKey: "1", set: 1, reps: 10, weight: 50),
+            WorkOutRecord(key: "2", subKey: "1", set: 2, reps: 8, weight: 55),
+            WorkOutRecord(key: "2", subKey: "1", set: 3, reps: 6, weight: 60),
+            WorkOutRecord(key: "2", subKey: "1", set: 4, reps: 4, weight: 65),
+            WorkOutRecord(key: "2", subKey: "1", set: 5, reps: 8, weight: 40),
+            WorkOutRecord(key: "2", subKey: "2", set: 1, reps: 10, weight: 40),
+            WorkOutRecord(key: "2", subKey: "2", set: 2, reps: 8, weight: 40),
+            WorkOutRecord(key: "2", subKey: "2", set: 3, reps: 6, weight: 40),
+            WorkOutRecord(key: "2", subKey: "2", set: 4, reps: 4, weight: 40),
+            WorkOutRecord(key: "2", subKey: "2", set: 5, reps: 8, weight: 40)
         ],
-        "2024-02-13": [
-            WorkOutRecord2(key: "3", subKey: "2", set: 1, reps: 10, weight: 50),
-            WorkOutRecord2(key: "3", subKey: "2", set: 2, reps: 8, weight: 55),
-            WorkOutRecord2(key: "3", subKey: "2", set: 3, reps: 6, weight: 60),
-            WorkOutRecord2(key: "3", subKey: "2", set: 4, reps: 4, weight: 65),
-            WorkOutRecord2(key: "3", subKey: "2", set: 5, reps: 8, weight: 40),
-            WorkOutRecord2(key: "3", subKey: "3", set: 1, reps: 10, weight: 40),
-            WorkOutRecord2(key: "3", subKey: "3", set: 2, reps: 8, weight: 40),
-            WorkOutRecord2(key: "3", subKey: "3", set: 3, reps: 6, weight: 40),
-            WorkOutRecord2(key: "3", subKey: "3", set: 4, reps: 4, weight: 40),
-            WorkOutRecord2(key: "3", subKey: "3", set: 5, reps: 8, weight: 40)
+        "2024-03-13": [
+            WorkOutRecord(key: "3", subKey: "2", set: 1, reps: 10, weight: 50),
+            WorkOutRecord(key: "3", subKey: "2", set: 2, reps: 8, weight: 55),
+            WorkOutRecord(key: "3", subKey: "2", set: 3, reps: 6, weight: 60),
+            WorkOutRecord(key: "3", subKey: "2", set: 4, reps: 4, weight: 65),
+            WorkOutRecord(key: "3", subKey: "2", set: 5, reps: 8, weight: 40),
+            WorkOutRecord(key: "4", subKey: "3", set: 1, reps: 10, weight: 40),
+            WorkOutRecord(key: "4", subKey: "3", set: 2, reps: 8, weight: 40),
+            WorkOutRecord(key: "4", subKey: "3", set: 3, reps: 6, weight: 40),
+            WorkOutRecord(key: "4", subKey: "3", set: 4, reps: 4, weight: 40),
+            WorkOutRecord(key: "4", subKey: "3", set: 5, reps: 8, weight: 40)
         ]
     ]
-    
+    /*
     // WorkOutRecord의 totalKey를 dictionary로 만들어서 저장? 할까?
     private let testRecord: [WorkOutRecord] = [
         WorkOutRecord(key: "1", totalKey: "2024-02-01/1/1", date: Date(), set: 3, reps: 12, weight: 100),
@@ -75,6 +75,7 @@ class HomeViewModel {
         WorkOutRecord(key: "1", totalKey: "2024-03-26/1/4", date: Date(), set: 5, reps: 9, weight: 140),
         WorkOutRecord(key: "1", totalKey: "2024-03-29/2/3", date: Date(), set: 5, reps: 10, weight: 150)
     ]
+    */
     
     func getWorkOutDetail(mainWorkout: WorkOut) -> [WorkOutDetail] {
         let key = mainWorkout.key
@@ -121,11 +122,7 @@ class HomeViewModel {
         return records
     }
     
-    func getTestRecordBy(date: String) -> [WorkOutRecord] {
-        return testRecord.filter{$0.totalKey.split(separator: "/")[0].contains(date)}
-    }
-    
-    func getSelectedWorkoutBy(date: String) -> [WorkOutRecord2]? {
+    func getSelectedWorkoutBy(date: String) -> [WorkOutRecord]? {
         return workoutRecords[date]
     }
     

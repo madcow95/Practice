@@ -9,15 +9,6 @@ import Foundation
 
 struct WorkOutRecord {
     let key: String
-    let totalKey: String
-    let date: Date
-    let set: Int
-    let reps: Int
-    let weight: Int
-}
-
-struct WorkOutRecord2 {
-    let key: String
     let subKey: String
     let set: Int
     let reps: Int

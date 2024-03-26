@@ -185,26 +185,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let selectedDate = "\(selectedYear)-\(selectedMonth)-\(selectedDay)"
         let selectedWorkout = viewModel.getSelectedWorkoutBy(date: selectedDate)
         
-//        guard let workOuts = selectedWorkout else {
-//            return
-//        }
-        
-        // MARK: - TODO: 리팩토링
-        let currentMonth = "\(selectedMonth)"
-        let month = currentMonth.count == 1 ? "0\(currentMonth)" : "\(currentMonth)"
-        
-        let selectDate = "\(selectedYear)-\(month)-\(selectedDay.count == 1 ? "0\(selectedDay)" : selectedDay)"
-        
-        let selectedWorkout2 = viewModel.getTestRecordBy(date: selectDate)
         guard let workOuts = selectedWorkout else {
             return
         }
-        if(selectedWorkout2.count > 0) {
-            guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordListViewController") as? RecordListViewController else { return }
+        
+        guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordListViewController") as? RecordListViewController else { return }
 
-            vc.selectedRecordList = selectedWorkout2
-            present(vc, animated: true)
-            
-        }
+        vc.selectedRecordList = workOuts
+        vc.dateLabel.text = "\(selectedDate)일 운동"
+        
+        present(vc, animated: true)
+
     }
 }
