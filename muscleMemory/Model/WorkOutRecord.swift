@@ -14,11 +14,3 @@ struct WorkOutRecord {
     let reps: Int
     let weight: Int
 }
-
-struct WorkoutRecordKey {
-    let year: String
-    let month: String
-    let day: String
-    let workoutKey: String
-    let workoutSubKey: String
-}

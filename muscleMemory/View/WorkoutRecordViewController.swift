@@ -17,6 +17,9 @@ class WorkoutRecordViewController: UIViewController {
     var secondWorkout: WorkOutDetail? = nil
     var stackViews: [SetRecordHorizontalStack] = []
     
+    var firstWorkoutKey: String = "1"
+    var secondWorkoutKey: String = "1"
+    
     // MARK: - Scroll View Deprecated 2024-03-14
     private let contentScrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -142,7 +145,7 @@ class WorkoutRecordViewController: UIViewController {
     }
     
     @objc func saveAction() {
-        viewModel.saveWorkoutRecord(stack: stackViews)
+        viewModel.saveWorkoutRecord(key: firstWorkoutKey, subKey: secondWorkoutKey, stackViews: stackViews)
     }
     
     func setPickerComponents() {
@@ -214,13 +217,18 @@ class WorkoutRecordViewController: UIViewController {
         guard let firstWork = firstWorkout else { return }
         firstTextField.text = firstWork.name
         
+        // 대분류 선택 후 소분류 초기화
         secondTextField.text = ""
+        // 소분류 초기값 설정
         secondPicker.selectRow(0, inComponent: 0, animated: false)
+        // UIPickerView 사라지게 하기
         firstTextField.resignFirstResponder()
         
+        // 대분류에 선택된 값에 대한 소분류 불러오기
+        // MARK: - TODO: 대분류에 선택된 값에 따라 소분류 목록 db에서 가져오기
         let workoutList = viewModel.getSecondWOrkoutRecordBy(workout: firstWork)
         if workoutList.count > 0 {
-            secondWorkoutList = workoutList.sorted{ $0.key < $1.key }
+            secondWorkoutList = workoutList
             secondWorkout = secondWorkoutList.first
         }
     }
@@ -279,11 +287,12 @@ extension WorkoutRecordViewController: UIPickerViewDelegate, UIPickerViewDataSou
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         if pickerView == firstPicker {
             firstWorkout = firstWorkoutList[row] // 선택된 옵션 가져오기
+            firstWorkoutKey = "\(row + 1)"
         } else {
             secondWorkout = secondWorkoutList[row] // 선택된 옵션 가져오기
+            secondWorkoutKey = "\(row + 1)"
         }
     }
 }

@@ -66,8 +66,11 @@ class SetRecordHorizontalStack: CustomHorizontalStack {
         let setLabel = UILabel()
         setLabel.text = "1세트"
         
-        let countTF = CustomTextField()
+        let repsTF = CustomTextField()
         let weightTF = CustomTextField()
+        
+        repsTF.tag = 1
+        weightTF.tag = 2
         
         let plusButton = CustomButton()
         plusButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
@@ -80,7 +83,7 @@ class SetRecordHorizontalStack: CustomHorizontalStack {
         minusButton.backgroundColor = .white
         
         self.addArrangedSubview(setLabel)
-        self.addArrangedSubview(countTF)
+        self.addArrangedSubview(repsTF)
         self.addArrangedSubview(weightTF)
         self.addArrangedSubview(plusButton)
         self.addArrangedSubview(minusButton)

@@ -80,7 +80,7 @@ class HomeViewModel {
     func getWorkOutDetail(mainWorkout: WorkOut) -> [WorkOutDetail] {
         let key = mainWorkout.key
         
-        return tempData.workOutDetails.filter{$0.key == key}
+        return tempData.workOutDetails.filter{$0.key == key}.sorted{ $0.key < $1.key }
     }
     
     func getDaysBy(year: Int, month: Int) -> Int {
