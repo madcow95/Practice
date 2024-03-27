@@ -12,6 +12,9 @@
 		CD2B8AC42B9DD0110080A4CA /* WorkoutRecordViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2B8AC32B9DD0110080A4CA /* WorkoutRecordViewCell.swift */; };
 		CD382DFA2B949DD700771235 /* WorkoutRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD382DF92B949DD700771235 /* WorkoutRecordViewModel.swift */; };
 		CD382DFD2B94BA6000771235 /* CustomUIContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD382DFC2B94BA6000771235 /* CustomUIContent.swift */; };
+		CD41885B2BB45B48008A9751 /* RecordHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD41885A2BB45B48008A9751 /* RecordHomeView.swift */; };
+		CD41885D2BB45B61008A9751 /* RecordHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD41885C2BB45B61008A9751 /* RecordHomeViewModel.swift */; };
+		CD4188602BB45B8C008A9751 /* RecordHomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD41885F2BB45B8C008A9751 /* RecordHomeViewCell.swift */; };
 		CD43104C2BA71BE0006EA1F9 /* WorkoutModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD43104A2BA71BE0006EA1F9 /* WorkoutModel.xcdatamodeld */; };
 		CD44D5442B99F5C300545FF5 /* RecordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD44D5432B99F5C300545FF5 /* RecordListViewController.swift */; };
 		CD6BFB5F2B90505B00238B2D /* WorkOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB5E2B90505B00238B2D /* WorkOut.swift */; };
@@ -37,6 +40,9 @@
 		CD2B8AC32B9DD0110080A4CA /* WorkoutRecordViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRecordViewCell.swift; sourceTree = "<group>"; };
 		CD382DF92B949DD700771235 /* WorkoutRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRecordViewModel.swift; sourceTree = "<group>"; };
 		CD382DFC2B94BA6000771235 /* CustomUIContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIContent.swift; sourceTree = "<group>"; };
+		CD41885A2BB45B48008A9751 /* RecordHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHomeView.swift; sourceTree = "<group>"; };
+		CD41885C2BB45B61008A9751 /* RecordHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHomeViewModel.swift; sourceTree = "<group>"; };
+		CD41885F2BB45B8C008A9751 /* RecordHomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHomeViewCell.swift; sourceTree = "<group>"; };
 		CD43104B2BA71BE0006EA1F9 /* WorkoutModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WorkoutModel.xcdatamodel; sourceTree = "<group>"; };
 		CD44D5432B99F5C300545FF5 /* RecordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListViewController.swift; sourceTree = "<group>"; };
 		CD6BFB5E2B90505B00238B2D /* WorkOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOut.swift; sourceTree = "<group>"; };
@@ -72,17 +78,73 @@
 		CD382DFB2B94BA5500771235 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				CD4188572BB45AA7008A9751 /* old */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		CD4188552BB45A8C008A9751 /* old */ = {
+			isa = PBXGroup;
+			children = (
+				CDF0ADFB2B8E1CF800C8690D /* Cell */,
+				CDF0ADE82B8E12BF00C8690D /* HomeViewController.swift */,
+				CD44D5432B99F5C300545FF5 /* RecordListViewController.swift */,
+				CD934AAE2B9B3C0900CDDC10 /* RecordDetailViewController.swift */,
+				CD2B8AC12B9DB8700080A4CA /* WorkoutRecordViewController.swift */,
+			);
+			path = old;
+			sourceTree = "<group>";
+		};
+		CD4188562BB45A9B008A9751 /* old */ = {
+			isa = PBXGroup;
+			children = (
+				CD6BFB642B9050D500238B2D /* HomeViewModel.swift */,
+				CD382DF92B949DD700771235 /* WorkoutRecordViewModel.swift */,
+				CD934AAC2B9B264E00CDDC10 /* RecordListViewModel.swift */,
+			);
+			path = old;
+			sourceTree = "<group>";
+		};
+		CD4188572BB45AA7008A9751 /* old */ = {
+			isa = PBXGroup;
+			children = (
 				CD382DFC2B94BA6000771235 /* CustomUIContent.swift */,
 				CDE5F2CD2BB30131008879CA /* CommonUtil.swift */,
 			);
-			path = Util;
+			path = old;
+			sourceTree = "<group>";
+		};
+		CD4188582BB45AB0008A9751 /* old */ = {
+			isa = PBXGroup;
+			children = (
+				CD43104A2BA71BE0006EA1F9 /* WorkoutModel.xcdatamodeld */,
+				CD8951462BB19D180081768D /* TempDatas.swift */,
+			);
+			path = old;
+			sourceTree = "<group>";
+		};
+		CD4188592BB45ABA008A9751 /* old */ = {
+			isa = PBXGroup;
+			children = (
+				CD6BFB5E2B90505B00238B2D /* WorkOut.swift */,
+				CD6BFB602B90507100238B2D /* WorkOutDetail.swift */,
+				CD6BFB622B90509600238B2D /* WorkOutRecord.swift */,
+			);
+			path = old;
+			sourceTree = "<group>";
+		};
+		CD41885E2BB45B7A008A9751 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				CD41885F2BB45B8C008A9751 /* RecordHomeViewCell.swift */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 		CD4310492BA71BCF006EA1F9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				CD43104A2BA71BE0006EA1F9 /* WorkoutModel.xcdatamodeld */,
-				CD8951462BB19D180081768D /* TempDatas.swift */,
+				CD4188582BB45AB0008A9751 /* old */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -124,9 +186,7 @@
 		CDF0ADF82B8E1BF800C8690D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CD6BFB5E2B90505B00238B2D /* WorkOut.swift */,
-				CD6BFB602B90507100238B2D /* WorkOutDetail.swift */,
-				CD6BFB622B90509600238B2D /* WorkOutRecord.swift */,
+				CD4188592BB45ABA008A9751 /* old */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -134,9 +194,8 @@
 		CDF0ADF92B8E1C0000C8690D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				CD6BFB642B9050D500238B2D /* HomeViewModel.swift */,
-				CD382DF92B949DD700771235 /* WorkoutRecordViewModel.swift */,
-				CD934AAC2B9B264E00CDDC10 /* RecordListViewModel.swift */,
+				CD4188562BB45A9B008A9751 /* old */,
+				CD41885C2BB45B61008A9751 /* RecordHomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -144,11 +203,9 @@
 		CDF0ADFA2B8E1C0500C8690D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CDF0ADFB2B8E1CF800C8690D /* Cell */,
-				CDF0ADE82B8E12BF00C8690D /* HomeViewController.swift */,
-				CD44D5432B99F5C300545FF5 /* RecordListViewController.swift */,
-				CD934AAE2B9B3C0900CDDC10 /* RecordDetailViewController.swift */,
-				CD2B8AC12B9DB8700080A4CA /* WorkoutRecordViewController.swift */,
+				CD4188552BB45A8C008A9751 /* old */,
+				CD41885E2BB45B7A008A9751 /* cell */,
+				CD41885A2BB45B48008A9751 /* RecordHomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -240,6 +297,7 @@
 				CDF0ADE92B8E12BF00C8690D /* HomeViewController.swift in Sources */,
 				CDF0ADE52B8E12BF00C8690D /* AppDelegate.swift in Sources */,
 				CD6BFB652B9050D500238B2D /* HomeViewModel.swift in Sources */,
+				CD41885D2BB45B61008A9751 /* RecordHomeViewModel.swift in Sources */,
 				CD6BFB5F2B90505B00238B2D /* WorkOut.swift in Sources */,
 				CD382DFA2B949DD700771235 /* WorkoutRecordViewModel.swift in Sources */,
 				CD2B8AC42B9DD0110080A4CA /* WorkoutRecordViewCell.swift in Sources */,
@@ -248,6 +306,8 @@
 				CD934AAF2B9B3C0900CDDC10 /* RecordDetailViewController.swift in Sources */,
 				CD44D5442B99F5C300545FF5 /* RecordListViewController.swift in Sources */,
 				CD934AAD2B9B264E00CDDC10 /* RecordListViewModel.swift in Sources */,
+				CD41885B2BB45B48008A9751 /* RecordHomeView.swift in Sources */,
+				CD4188602BB45B8C008A9751 /* RecordHomeViewCell.swift in Sources */,
 				CD382DFD2B94BA6000771235 /* CustomUIContent.swift in Sources */,
 				CD6BFB612B90507100238B2D /* WorkOutDetail.swift in Sources */,
 				CD6BFB632B90509600238B2D /* WorkOutRecord.swift in Sources */,
@@ -483,8 +543,7 @@
 				CD43104B2BA71BE0006EA1F9 /* WorkoutModel.xcdatamodel */,
 			);
 			currentVersion = CD43104B2BA71BE0006EA1F9 /* WorkoutModel.xcdatamodel */;
-			name = WorkoutModel.xcdatamodeld;
-			path = /Users/madcow/Desktop/muscleMemory/muscleMemory/Data/WorkoutModel.xcdatamodeld;
+			path = WorkoutModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

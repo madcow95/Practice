@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ot7-cs-WuM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qLB-bK-nog">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
@@ -86,7 +86,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jpT-bu-jqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2108" y="-330"/>
+            <point key="canvasLocation" x="2065" y="-450"/>
         </scene>
         <!--Record List View Controller-->
         <scene sceneID="RIe-LP-G3O">
@@ -180,7 +180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TjG-B7-tQN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2860" y="-330"/>
+            <point key="canvasLocation" x="2817" y="-450"/>
         </scene>
         <!--Record Detail View Controller-->
         <scene sceneID="SQj-Bs-tPq">
@@ -334,7 +334,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wf3-yb-hzu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3573.5999999999999" y="-325.1231527093596"/>
+            <point key="canvasLocation" x="3530" y="-445"/>
         </scene>
         <!--Test Record-->
         <scene sceneID="1YH-mZ-y6O">
@@ -497,10 +497,92 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dSY-D3-6u9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4301.6000000000004" y="-326.98650674662673"/>
+            <point key="canvasLocation" x="4258" y="-447"/>
+        </scene>
+        <!--Record Home View-->
+        <scene sceneID="Eag-YX-FA2">
+            <objects>
+                <viewController storyboardIdentifier="RecordHomeView" id="qLB-bK-nog" customClass="RecordHomeView" customModule="muscleMemory" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="u0O-aE-O9z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OT7-aQ-NqU">
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mBM-G8-fPY">
+                                    <size key="itemSize" width="375" height="638"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="RecordHomeViewCell" reuseIdentifier="RecordHomeViewCell" id="Nxp-7i-Bj7" customClass="RecordHomeViewCell" customModule="muscleMemory" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="638"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="y3u-Cx-e1v">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="638"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="T55-da-mrm">
+                                                    <rect key="frame" x="167" y="288" width="41.5" height="62.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmD-fA-Ut7">
+                                                            <rect key="frame" x="0.0" y="0.0" width="41.5" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="mbv-R2-cJW">
+                                                            <rect key="frame" x="10.5" y="43" width="20" height="19"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="20" id="bBn-Zj-sDI"/>
+                                                                <constraint firstAttribute="height" constant="20" id="g5R-3B-Zsn"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="mbv-R2-cJW" firstAttribute="centerX" secondItem="T55-da-mrm" secondAttribute="centerX" id="9fr-zv-giG"/>
+                                                        <constraint firstItem="PmD-fA-Ut7" firstAttribute="centerX" secondItem="T55-da-mrm" secondAttribute="centerX" id="Etg-vj-DcP"/>
+                                                        <constraint firstAttribute="bottom" secondItem="mbv-R2-cJW" secondAttribute="bottom" id="RuV-Zw-c6W"/>
+                                                        <constraint firstItem="PmD-fA-Ut7" firstAttribute="top" secondItem="T55-da-mrm" secondAttribute="top" id="wGu-MZ-Ff0"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="T55-da-mrm" firstAttribute="centerX" secondItem="y3u-Cx-e1v" secondAttribute="centerX" id="FK3-mE-fax"/>
+                                                <constraint firstItem="T55-da-mrm" firstAttribute="centerY" secondItem="y3u-Cx-e1v" secondAttribute="centerY" id="owr-OH-xJ0"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="375" height="638"/>
+                                        <connections>
+                                            <outlet property="dayLabel" destination="PmD-fA-Ut7" id="tNG-TM-xBQ"/>
+                                            <outlet property="recordImage" destination="mbv-R2-cJW" id="m1t-TB-5Uc"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="PiY-uo-wxL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OT7-aQ-NqU" firstAttribute="top" secondItem="PiY-uo-wxL" secondAttribute="top" constant="100" id="7f4-r5-WBA"/>
+                            <constraint firstItem="OT7-aQ-NqU" firstAttribute="leading" secondItem="PiY-uo-wxL" secondAttribute="leading" id="ENo-d7-jme"/>
+                            <constraint firstItem="PiY-uo-wxL" firstAttribute="trailing" secondItem="OT7-aQ-NqU" secondAttribute="trailing" id="GEA-Z7-Ioq"/>
+                            <constraint firstItem="PiY-uo-wxL" firstAttribute="bottom" secondItem="OT7-aQ-NqU" secondAttribute="bottom" id="yY1-7x-kfU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="OT7-aQ-NqU" id="w9i-S9-7H6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CF7-GT-f7b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2077.5999999999999" y="308.9955022488756"/>
         </scene>
     </scenes>
     <resources>
+        <image name="circle.fill" catalog="system" width="128" height="123"/>
         <image name="minus.circle" catalog="system" width="128" height="123"/>
         <image name="plus.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
