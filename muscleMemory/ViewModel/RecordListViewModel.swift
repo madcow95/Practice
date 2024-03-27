@@ -30,6 +30,7 @@ class RecordListViewModel {
     }
     
     func getWorkoutDetailNameBy(key: String, subKey: String) -> String? {
+        
         let fetchRequest: NSFetchRequest<WorkoutDetail> = WorkoutDetail.fetchRequest()
         let predicate1 = NSPredicate(format: "key == %@", key)
         let predicate2 = NSPredicate(format: "subKey == %@", subKey)

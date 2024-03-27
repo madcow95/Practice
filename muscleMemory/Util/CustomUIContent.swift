@@ -60,14 +60,30 @@ class CustomHorizontalStack: UIStackView {
 }
 
 class SetRecordHorizontalStack: CustomHorizontalStack {
+    
+    let repsTF = CustomTextField()
+    let weightTF = CustomTextField()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         let setLabel = UILabel()
         setLabel.text = "1세트"
         
-        let repsTF = CustomTextField()
-        let weightTF = CustomTextField()
+        let firstStackToolBar = UIToolbar()
+        firstStackToolBar.sizeToFit()
+        let buttonSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let firstSetTF = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(setFirstTextField))
+        firstStackToolBar.setItems([buttonSpace, buttonSpace, firstSetTF], animated: true)
+        firstStackToolBar.isUserInteractionEnabled = true
+        
+        repsTF.placeholder = "횟수"
+        repsTF.keyboardType = .numberPad
+        weightTF.placeholder = "무게"
+        weightTF.keyboardType = .numberPad
+        
+        repsTF.inputAccessoryView = firstStackToolBar
+        weightTF.inputAccessoryView = firstStackToolBar
         
         repsTF.tag = 1
         weightTF.tag = 2
@@ -91,6 +107,11 @@ class SetRecordHorizontalStack: CustomHorizontalStack {
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func setFirstTextField() {
+        repsTF.resignFirstResponder()
+        weightTF.resignFirstResponder()
     }
 }
 

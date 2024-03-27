@@ -11,8 +11,11 @@ import CoreData
 class HomeViewModel {
     
     let tempData = TempDatas()
+    let commonUtil = CommonUtil()
+    
     let currentDate = Date()
     let calendar = Calendar.current
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     let workoutRecords: [String: [WorkOutRecord]] = [
         "2024-03-01": [
@@ -111,19 +114,35 @@ class HomeViewModel {
     }
     
     func getAllRecordsBySelected(year: Int, month: Int) -> [Int] {
-        let records = workoutRecords.filter{ record -> Bool in
-            let date = record.key.split(separator: "-")
-            let years = date[0]
-            let months = date[1]
-            
-            return Int(years)! == year && Int(months)! == month
-        }.sorted{ $0.key < $1.key }.map{ $0.key.split(separator: "-")[2] }.map{ Int($0)! }
+        let workoutRecords = getData(entity: "WorkoutRecord", year: String(year), month: String(month))
         
-        return records
+        return workoutRecords.map{ Int($0.key.split(separator: "-")[2])! }
     }
     
     func getSelectedWorkoutBy(date: String) -> [WorkOutRecord]? {
-        return workoutRecords[date]
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "WorkoutRecord")
+        let predicate = NSPredicate(format: "date == %@", date)
+        fetchRequest.predicate = predicate
+        
+        var workoutRecords: [WorkOutRecord]?
+        do {
+            let records = try context.fetch(fetchRequest) as! [NSManagedObject]
+            if records.count > 0 {
+                workoutRecords = records.map{ record in
+                    let key = record.value(forKey: "key") as! String
+                    let subKey = record.value(forKey: "subKey") as! String
+                    let set = record.value(forKey: "set") as! Int
+                    let reps = record.value(forKey: "reps") as! Int
+                    let weight = record.value(forKey: "weight") as! Int
+                    return WorkOutRecord(key: key, subKey: subKey, set: set, reps: reps, weight: weight)
+                }
+            }
+        } catch let error as NSError {
+            print("데이터 가져오기 실패: \(error), \(error.userInfo)")
+        }
+        
+        return workoutRecords
     }
     
     func getCurrentYear() -> Int {
@@ -144,5 +163,40 @@ class HomeViewModel {
     
     func getWorkoutDetailNameBy(key: String, subKey: String) -> [WorkOutDetail] {
         return tempData.workOutDetails.filter{"\($0.key)" == key && "\($0.subKey)" == subKey}
+    }
+    
+    func getData(entity: String, year: String, month: String) -> [String: [WorkOutRecord]] {
+        var copiedMonth = month
+        if month.count == 1 {
+            copiedMonth = "0\(month)"
+        }
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        let predicate = NSPredicate(format: "date CONTAINS %@", "\(year)-\(copiedMonth)")
+        fetchRequest.predicate = predicate
+        
+        var records: [String: [WorkOutRecord]] = [:]
+        do {
+            let workOutRecords = try context.fetch(fetchRequest) as! [NSManagedObject]
+            if workOutRecords.count > 0 {
+                workOutRecords.forEach{ record in
+                    let date = record.value(forKey: "date") as! String
+                    let key = record.value(forKey: "key") as! String
+                    let subKey = record.value(forKey: "subKey") as! String
+                    let reps = record.value(forKey: "reps") as! Int
+                    let weight = record.value(forKey: "weight") as! Int
+                    let set = record.value(forKey: "set") as! Int
+                    if records[date] != nil {
+                        records[date]?.append(WorkOutRecord(key: key, subKey: subKey, set: set, reps: reps, weight: weight))
+                    } else {
+                        records[date] = []
+                    }
+                }
+            }
+        } catch let error as NSError {
+            print("데이터 가져오기 실패: \(error), \(error.userInfo)")
+        }
+        
+        return records
     }
 }

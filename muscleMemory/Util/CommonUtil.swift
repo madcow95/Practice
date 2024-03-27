@@ -15,4 +15,9 @@ class CommonUtil {
     func saveData(entity: String) {
         // let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
     }
+    
+    // MARK: - TODO: db에 저장된 값 불러오는 함수 만들거임
+    func getData(entity: String) {
+        
+    }
 }

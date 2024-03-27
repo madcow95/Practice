@@ -10,6 +10,7 @@ import CoreData
 
 class WorkoutRecordViewModel {
     private let homeViewModel = HomeViewModel()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     let workout = Workout()
     
@@ -19,7 +20,6 @@ class WorkoutRecordViewModel {
     
     func getAllWorkoutData() -> [WorkOut] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Workout")
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {
             let workOut = try context.fetch(fetchRequest) as! [NSManagedObject]
             if workOut.count > 0 {
@@ -47,7 +47,6 @@ class WorkoutRecordViewModel {
     }
     
     func saveWorkoutRecord(key: String, subKey: String, stackViews: [SetRecordHorizontalStack]) {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let year = "\(homeViewModel.getCurrentYear())"
         var month = "\(homeViewModel.getCurrentMonth())"
         var day = "\(homeViewModel.getCurrentDay())"
@@ -61,27 +60,27 @@ class WorkoutRecordViewModel {
         
         let workoutDate = "\(year)-\(month)-\(day)"
         
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "WorkoutRecord")
-//        let predicate = NSPredicate(format: "date == %@", workoutDate)
-//        fetchRequest.predicate = predicate
-//        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "WorkoutRecord")
+        let predicate = NSPredicate(format: "date == %@", workoutDate)
+        fetchRequest.predicate = predicate
+
         var workoutRecordList: [String: [WorkOutRecord]] = [workoutDate: []]
-//        
-//        do {
-//            let workoutCheck = try context.fetch(fetchRequest) as! [NSManagedObject]
-//            if workoutCheck.count > 0 {
-//                workoutRecordList[workoutDate] = workoutCheck.map{ workout in
-//                    let key = workout.value(forKey: "key") as! String
-//                    let subKey = workout.value(forKey: "subKey") as! String
-//                    let set = workout.value(forKey: "set") as! Int
-//                    let reps = workout.value(forKey: "reps") as! Int
-//                    let weight = workout.value(forKey: "weight") as! Int
-//                    return WorkOutRecord(key: key, subKey: subKey, set: set, reps: reps, weight: weight)
-//                }
-//            }
-//        } catch let error as NSError {
-//            print("데이터 가져오기 실패: \(error), \(error.userInfo)")
-//        }
+
+        do {
+            let workoutCheck = try context.fetch(fetchRequest) as! [NSManagedObject]
+            if workoutCheck.count > 0 {
+                workoutRecordList[workoutDate] = workoutCheck.map{ workout in
+                    let key = workout.value(forKey: "key") as! String
+                    let subKey = workout.value(forKey: "subKey") as! String
+                    let set = workout.value(forKey: "set") as! Int
+                    let reps = workout.value(forKey: "reps") as! Int
+                    let weight = workout.value(forKey: "weight") as! Int
+                    return WorkOutRecord(key: key, subKey: subKey, set: set, reps: reps, weight: weight)
+                }
+            }
+        } catch let error as NSError {
+            print("데이터 가져오기 실패: \(error), \(error.userInfo)")
+        }
         
         stackViews.enumerated().forEach{ (idx, stack) in
             var reps = 0
@@ -99,6 +98,22 @@ class WorkoutRecordViewModel {
             workoutRecordList[workoutDate]?.append(WorkOutRecord(key: key, subKey: subKey, set: idx + 1, reps: reps, weight: weight))
         }
         
-        print(workoutRecordList)
+        workoutRecordList[workoutDate]?.forEach{ record in
+            if let entity = NSEntityDescription.entity(forEntityName: "WorkoutRecord", in: context) {
+                let newWorkoutRecord = NSManagedObject(entity: entity, insertInto: context)
+                newWorkoutRecord.setValue(workoutDate, forKey: "date")
+                newWorkoutRecord.setValue(record.key, forKey: "key")
+                newWorkoutRecord.setValue(record.subKey, forKey: "subKey")
+                newWorkoutRecord.setValue(record.reps, forKey: "reps")
+                newWorkoutRecord.setValue(record.weight, forKey: "weight")
+                newWorkoutRecord.setValue(record.set, forKey: "set")
+            }
+            
+            do {
+                try context.save()
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
     }
 }
