@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomTextField: UITextField {
+class CustomTextFieldDeprecated: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -26,7 +26,7 @@ class CustomTextField: UITextField {
     }
 }
 
-class CustomButton: UIButton {
+class CustomButtonDeprecated: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -43,7 +43,7 @@ class CustomButton: UIButton {
     }
 }
 
-class CustomHorizontalStack: UIStackView {
+class CustomHorizontalStackDeprecated: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -59,10 +59,10 @@ class CustomHorizontalStack: UIStackView {
     }
 }
 
-class SetRecordHorizontalStack: CustomHorizontalStack {
+class SetRecordHorizontalStackDeprecated: CustomHorizontalStackDeprecated {
     
-    let repsTF = CustomTextField()
-    let weightTF = CustomTextField()
+    let repsTF = CustomTextFieldDeprecated()
+    let weightTF = CustomTextFieldDeprecated()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -88,12 +88,12 @@ class SetRecordHorizontalStack: CustomHorizontalStack {
         repsTF.tag = 1
         weightTF.tag = 2
         
-        let plusButton = CustomButton()
+        let plusButton = CustomButtonDeprecated()
         plusButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
         plusButton.tintColor = .white
         plusButton.backgroundColor = .blue
         
-        let minusButton = CustomButton()
+        let minusButton = CustomButtonDeprecated()
         minusButton.setImage(UIImage(systemName: "minus.circle"), for: .normal)
         minusButton.tintColor = .black
         minusButton.backgroundColor = .white
@@ -115,15 +115,15 @@ class SetRecordHorizontalStack: CustomHorizontalStack {
     }
 }
 
-class SaveButtonHorizonStack: CustomHorizontalStack {
+class SaveButtonHorizonStackDeprecated: CustomHorizontalStackDeprecated {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let cancelButton = CustomButton()
+        let cancelButton = CustomButtonDeprecated()
         cancelButton.backgroundColor = .lightGray
         cancelButton.setTitle("취소", for: .normal)
         
-        let saveButton = CustomButton()
+        let saveButton = CustomButtonDeprecated()
         saveButton.backgroundColor = .systemBlue
         saveButton.setTitle("저장", for: .normal)
         

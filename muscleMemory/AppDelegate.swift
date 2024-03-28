@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "WorkoutModel")
+        let container = NSPersistentContainer(name: "RecordModel")
         container.loadPersistentStores { storeDescription, error in
             if let error = error {
                 fatalError("Unresolved error \(error), \(error.localizedDescription)")

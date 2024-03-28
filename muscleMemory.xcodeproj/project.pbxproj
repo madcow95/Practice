@@ -24,6 +24,11 @@
 		CD8951472BB19D180081768D /* TempDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8951462BB19D180081768D /* TempDatas.swift */; };
 		CD934AAD2B9B264E00CDDC10 /* RecordListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD934AAC2B9B264E00CDDC10 /* RecordListViewModel.swift */; };
 		CD934AAF2B9B3C0900CDDC10 /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD934AAE2B9B3C0900CDDC10 /* RecordDetailViewController.swift */; };
+		CDA110AE2BB59753001777DB /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA110AD2BB59753001777DB /* RecordModel.swift */; };
+		CDA110B12BB598DD001777DB /* RecordModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDA110AF2BB598DD001777DB /* RecordModel.xcdatamodeld */; };
+		CDA110B32BB59D28001777DB /* CustomUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA110B22BB59D28001777DB /* CustomUIElement.swift */; };
+		CDA110B52BB5AF13001777DB /* RecordCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA110B42BB5AF13001777DB /* RecordCreateView.swift */; };
+		CDA110B72BB5AF2A001777DB /* RecordCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA110B62BB5AF2A001777DB /* RecordCreateViewModel.swift */; };
 		CDE5F2CE2BB30131008879CA /* CommonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE5F2CD2BB30131008879CA /* CommonUtil.swift */; };
 		CDF0ADE52B8E12BF00C8690D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF0ADE42B8E12BF00C8690D /* AppDelegate.swift */; };
 		CDF0ADE72B8E12BF00C8690D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF0ADE62B8E12BF00C8690D /* SceneDelegate.swift */; };
@@ -52,6 +57,11 @@
 		CD8951462BB19D180081768D /* TempDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempDatas.swift; sourceTree = "<group>"; };
 		CD934AAC2B9B264E00CDDC10 /* RecordListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListViewModel.swift; sourceTree = "<group>"; };
 		CD934AAE2B9B3C0900CDDC10 /* RecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
+		CDA110AD2BB59753001777DB /* RecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
+		CDA110B02BB598DD001777DB /* Record.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Record.xcdatamodel; sourceTree = "<group>"; };
+		CDA110B22BB59D28001777DB /* CustomUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIElement.swift; sourceTree = "<group>"; };
+		CDA110B42BB5AF13001777DB /* RecordCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateView.swift; sourceTree = "<group>"; };
+		CDA110B62BB5AF2A001777DB /* RecordCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateViewModel.swift; sourceTree = "<group>"; };
 		CDE5F2CD2BB30131008879CA /* CommonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtil.swift; sourceTree = "<group>"; };
 		CDF0ADE12B8E12BF00C8690D /* muscleMemory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = muscleMemory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF0ADE42B8E12BF00C8690D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				CD4188572BB45AA7008A9751 /* old */,
+				CDA110B22BB59D28001777DB /* CustomUIElement.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -145,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				CD4188582BB45AB0008A9751 /* old */,
+				CDA110AF2BB598DD001777DB /* RecordModel.xcdatamodeld */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -187,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				CD4188592BB45ABA008A9751 /* old */,
+				CDA110AD2BB59753001777DB /* RecordModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -196,6 +209,7 @@
 			children = (
 				CD4188562BB45A9B008A9751 /* old */,
 				CD41885C2BB45B61008A9751 /* RecordHomeViewModel.swift */,
+				CDA110B62BB5AF2A001777DB /* RecordCreateViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -206,6 +220,7 @@
 				CD4188552BB45A8C008A9751 /* old */,
 				CD41885E2BB45B7A008A9751 /* cell */,
 				CD41885A2BB45B48008A9751 /* RecordHomeView.swift */,
+				CDA110B42BB5AF13001777DB /* RecordCreateView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -296,11 +311,14 @@
 				CD43104C2BA71BE0006EA1F9 /* WorkoutModel.xcdatamodeld in Sources */,
 				CDF0ADE92B8E12BF00C8690D /* HomeViewController.swift in Sources */,
 				CDF0ADE52B8E12BF00C8690D /* AppDelegate.swift in Sources */,
+				CDA110B32BB59D28001777DB /* CustomUIElement.swift in Sources */,
 				CD6BFB652B9050D500238B2D /* HomeViewModel.swift in Sources */,
 				CD41885D2BB45B61008A9751 /* RecordHomeViewModel.swift in Sources */,
 				CD6BFB5F2B90505B00238B2D /* WorkOut.swift in Sources */,
 				CD382DFA2B949DD700771235 /* WorkoutRecordViewModel.swift in Sources */,
+				CDA110B72BB5AF2A001777DB /* RecordCreateViewModel.swift in Sources */,
 				CD2B8AC42B9DD0110080A4CA /* WorkoutRecordViewCell.swift in Sources */,
+				CDA110B52BB5AF13001777DB /* RecordCreateView.swift in Sources */,
 				CD21AFF82B99F9F6002F8396 /* RecordListViewCell.swift in Sources */,
 				CD2B8AC22B9DB8700080A4CA /* WorkoutRecordViewController.swift in Sources */,
 				CD934AAF2B9B3C0900CDDC10 /* RecordDetailViewController.swift in Sources */,
@@ -309,8 +327,10 @@
 				CD41885B2BB45B48008A9751 /* RecordHomeView.swift in Sources */,
 				CD4188602BB45B8C008A9751 /* RecordHomeViewCell.swift in Sources */,
 				CD382DFD2B94BA6000771235 /* CustomUIContent.swift in Sources */,
+				CDA110B12BB598DD001777DB /* RecordModel.xcdatamodeld in Sources */,
 				CD6BFB612B90507100238B2D /* WorkOutDetail.swift in Sources */,
 				CD6BFB632B90509600238B2D /* WorkOutRecord.swift in Sources */,
+				CDA110AE2BB59753001777DB /* RecordModel.swift in Sources */,
 				CDE5F2CE2BB30131008879CA /* CommonUtil.swift in Sources */,
 				CDF0ADE72B8E12BF00C8690D /* SceneDelegate.swift in Sources */,
 			);
@@ -544,6 +564,16 @@
 			);
 			currentVersion = CD43104B2BA71BE0006EA1F9 /* WorkoutModel.xcdatamodel */;
 			path = WorkoutModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		CDA110AF2BB598DD001777DB /* RecordModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CDA110B02BB598DD001777DB /* Record.xcdatamodel */,
+			);
+			currentVersion = CDA110B02BB598DD001777DB /* Record.xcdatamodel */;
+			path = RecordModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

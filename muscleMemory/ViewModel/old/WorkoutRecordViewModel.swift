@@ -46,7 +46,7 @@ class WorkoutRecordViewModel {
         return []
     }
     
-    func saveWorkoutRecord(key: String, subKey: String, stackViews: [SetRecordHorizontalStack]) {
+    func saveWorkoutRecord(key: String, subKey: String, stackViews: [SetRecordHorizontalStackDeprecated]) {
         let year = "\(homeViewModel.getCurrentYear())"
         var month = "\(homeViewModel.getCurrentMonth())"
         var day = "\(homeViewModel.getCurrentDay())"

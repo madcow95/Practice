@@ -15,7 +15,7 @@ class WorkoutRecordViewController: UIViewController {
     var secondWorkoutList: [WorkOutDetail] = []
     var firstWorkout: WorkOut?
     var secondWorkout: WorkOutDetail? = nil
-    var stackViews: [SetRecordHorizontalStack] = []
+    var stackViews: [SetRecordHorizontalStackDeprecated] = []
     
     var firstWorkoutKey: String = "1"
     var secondWorkoutKey: String = "1"
@@ -47,15 +47,15 @@ class WorkoutRecordViewController: UIViewController {
         return picker
     }()
     
-    private let firstTextField: CustomTextField = {
-        let tf = CustomTextField()
+    private let firstTextField: CustomTextFieldDeprecated = {
+        let tf = CustomTextFieldDeprecated()
         tf.placeholder = "First"
         
         return tf
     }()
     
-    private let secondTextField: CustomTextField = {
-        let tf = CustomTextField()
+    private let secondTextField: CustomTextFieldDeprecated = {
+        let tf = CustomTextFieldDeprecated()
         tf.placeholder = "Second"
         
         return tf
@@ -75,8 +75,8 @@ class WorkoutRecordViewController: UIViewController {
         return tb
     }()
     
-    private let textFieldHStack: CustomHorizontalStack = {
-        let stack = CustomHorizontalStack()
+    private let textFieldHStack: CustomHorizontalStackDeprecated = {
+        let stack = CustomHorizontalStackDeprecated()
         
         return stack
     }()
@@ -94,7 +94,7 @@ class WorkoutRecordViewController: UIViewController {
         setTextFieldsComponents() // UIPickerView Text Field에 배치
         setToolbarsComponents() // UIPickerView에 취소, 저장 버튼 Tool Bar 배치
         setWorkoutsComponents() // Workout 초기값 배치
-        setStackViewComponents(stack: SetRecordHorizontalStack(), standard: textFieldHStack) // 세트 입력 가능한 Stack View 화면에 배치
+        setStackViewComponents(stack: SetRecordHorizontalStackDeprecated(), standard: textFieldHStack) // 세트 입력 가능한 Stack View 화면에 배치
     }
     
     func setScrollComponents() {
@@ -127,14 +127,14 @@ class WorkoutRecordViewController: UIViewController {
     }
     
     func setCancelSaveButtonComponents() {
-        let buttonStack = SaveButtonHorizonStack()
+        let buttonStack = SaveButtonHorizonStackDeprecated()
         contentView.addSubview(buttonStack)
         buttonStack.leadingAnchor.constraint(equalTo: firstTextField.leadingAnchor).isActive = true
         buttonStack.trailingAnchor.constraint(equalTo: secondTextField.trailingAnchor).isActive = true
         buttonStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true
         
-        let cancelButton = buttonStack.arrangedSubviews[0] as! CustomButton
-        let saveButton = buttonStack.arrangedSubviews[1] as! CustomButton
+        let cancelButton = buttonStack.arrangedSubviews[0] as! CustomButtonDeprecated
+        let saveButton = buttonStack.arrangedSubviews[1] as! CustomButtonDeprecated
         
         cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
@@ -186,7 +186,7 @@ class WorkoutRecordViewController: UIViewController {
         firstWorkout = firstWorkoutList.first
     }
     
-    func setStackViewComponents(stack: SetRecordHorizontalStack, standard: UIView) {
+    func setStackViewComponents(stack: SetRecordHorizontalStackDeprecated, standard: UIView) {
         stack.tag = stackViews.count
         stackViews.append(stack)
         // MARK: - 아직 Scroll View에 대한 이해가 낮아 무한으로 추가하는게 아닌 6개로 제한함 -> 공부 후 수정해야해 ㅠㅠ
@@ -207,7 +207,7 @@ class WorkoutRecordViewController: UIViewController {
     }
     
     // MARK: 세트를 입력하는 Stack을 추가할 때 이전 Stack의 버튼을 비활성화 -> 중간에 끼워 넣는 방식으로 해도 될거같긴 한데..?
-    func disableBeforeButton(stack: SetRecordHorizontalStack) {
+    func disableBeforeButton(stack: SetRecordHorizontalStackDeprecated) {
         let beforePlusBtn = stack.arrangedSubviews[3] as! UIButton
         beforePlusBtn.backgroundColor = .lightGray
         beforePlusBtn.isEnabled = false
@@ -251,7 +251,7 @@ class WorkoutRecordViewController: UIViewController {
     }
     
     @objc func addStackViews() {
-        let customStack = SetRecordHorizontalStack()
+        let customStack = SetRecordHorizontalStackDeprecated()
         let label = customStack.arrangedSubviews[0] as! UILabel
         
         label.text = "\(stackViews.count + 1)세트"
