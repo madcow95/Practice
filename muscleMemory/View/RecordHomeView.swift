@@ -11,24 +11,20 @@ class RecordHomeView: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let recordButton = CustomButton()
-    let leftButton: UIButton = {
+    private let recordButton = CustomButton()
+    private let leftButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setImage(UIImage(systemName: "arrowtriangle.left"), for: .normal)
-        btn.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        btn.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        btn.setImage(UIImage(systemName: "arrowtriangle.left.fill"), for: .normal)
         btn.tintColor = .black
         
         return btn
     }()
-    let dateLabel = UILabel()
-    let rightButton: UIButton = {
+    private let dateLabel = UILabel()
+    private let rightButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setImage(UIImage(systemName: "arrowtriangle.right"), for: .normal)
-        btn.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        btn.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        btn.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
         btn.tintColor = .black
         
         return btn
@@ -36,15 +32,15 @@ class RecordHomeView: UIViewController {
     
     let viewModel = RecordHomeViewModel()
     
-    var allRecordsDay: [Int] = []
-    var selectYear: Int = 0
-    var selectMonth: Int = 0
+    private var allRecordsDay: [Int] = []
+    private var selectYear: Int = 0
+    private var selectMonth: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setCollectionView()
-        setComponents()
+        setUIComponents()
         setDate(year: viewModel.getCurrentYear(), month: viewModel.getCurrentMonth())
         setAllRecords()
         setButtonsAction()
@@ -55,7 +51,7 @@ class RecordHomeView: UIViewController {
         collectionView.dataSource = self
     }
     
-    func setComponents() {
+    func setUIComponents() {
         recordButton.setTitle("일기쓰기", for: .normal)
         recordButton.backgroundColor = .systemBlue
         recordButton.addTarget(self, action: #selector(moveToRecordPage), for: .touchUpInside)
@@ -75,12 +71,18 @@ class RecordHomeView: UIViewController {
             // 이전 월로 이동 버튼
             leftButton.leftAnchor.constraint(equalTo: collectionView.leftAnchor),
             leftButton.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -20),
+            leftButton.widthAnchor.constraint(equalToConstant: 25),
+            leftButton.heightAnchor.constraint(equalToConstant: 25),
             
+            // 날짜 표시 Label
             dateLabel.leftAnchor.constraint(equalTo: leftButton.rightAnchor, constant: 10),
-            dateLabel.bottomAnchor.constraint(equalTo: leftButton.bottomAnchor),
+            dateLabel.bottomAnchor.constraint(equalTo: leftButton.bottomAnchor, constant: -2),
             
+            // 다음 월로 이동 버튼
             rightButton.leftAnchor.constraint(equalTo: dateLabel.rightAnchor, constant: 10),
-            rightButton.bottomAnchor.constraint(equalTo: leftButton.bottomAnchor)
+            rightButton.bottomAnchor.constraint(equalTo: leftButton.bottomAnchor),
+            rightButton.widthAnchor.constraint(equalToConstant: 25),
+            rightButton.heightAnchor.constraint(equalToConstant: 25),
         ])
     }
     
@@ -100,7 +102,7 @@ class RecordHomeView: UIViewController {
     }
     
     @objc func moveToRecordPage() {
-        print("touch!")
+        present(RecordCreateView(), animated: true)
     }
     
     @objc func toBeforeMonth() {
@@ -125,7 +127,7 @@ class RecordHomeView: UIViewController {
         reloadViewCollection()
     }
     
-    func reloadViewCollection() {
+    private func reloadViewCollection() {
         setAllRecords()
         collectionView.reloadData()
     }

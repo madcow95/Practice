@@ -10,5 +10,7 @@ import UIKit
 class RecordCreateView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .white
     }
 }
