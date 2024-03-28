@@ -46,8 +46,14 @@ class RecordHomeViewModel {
         return records
     }
     
-    func getTestRecordDay() -> [Int] {
-        return testRecord.map{ Int($0.date.split(separator: "-")[2])! }
+    func getTestRecordDay(year: Int, month: Int) -> [Int] {
+        return testRecord.filter{ record -> Bool in
+            let dateSplit = record.date.split(separator: "-")
+            let recordYear = Int(dateSplit[0])!
+            let recordMonth = Int(dateSplit[1])!
+            
+            return year == recordYear && month == recordMonth
+        }.map{ Int($0.date.split(separator: "-")[2])! }
     }
     
     private let currentDate = Date()

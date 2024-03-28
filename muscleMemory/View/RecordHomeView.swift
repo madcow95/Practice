@@ -91,7 +91,7 @@ class RecordHomeView: UIViewController {
     }
     
     func setAllRecords() {
-        allRecordsDay = viewModel.getTestRecordDay()
+        allRecordsDay = viewModel.getTestRecordDay(year: selectYear, month: selectMonth)
     }
     
     func setButtonsAction() {
@@ -111,6 +111,7 @@ class RecordHomeView: UIViewController {
             selectMonth -= 1
         }
         setDate(year: selectYear, month: selectMonth)
+        reloadViewCollection()
     }
     
     @objc func toNextMonth() {
@@ -121,12 +122,18 @@ class RecordHomeView: UIViewController {
             selectMonth += 1
         }
         setDate(year: selectYear, month: selectMonth)
+        reloadViewCollection()
+    }
+    
+    func reloadViewCollection() {
+        setAllRecords()
+        collectionView.reloadData()
     }
 }
 
 extension RecordHomeView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return viewModel.getDaysBy(year: selectYear, month: selectMonth)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -156,5 +163,6 @@ extension RecordHomeView: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let day = indexPath.item
+        print(day)
     }
 }

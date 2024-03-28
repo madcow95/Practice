@@ -14,8 +14,8 @@ class CustomButton: UIButton {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 10
         
-        self.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        self.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        self.heightAnchor.constraint(equalToConstant: 35).isActive = true
     }
     
     required init?(coder: NSCoder) {
