@@ -89,7 +89,7 @@ class RecordHomeView: UIViewController {
     func setDate(year: Int, month: Int) {
         selectYear = year
         selectMonth = month
-        dateLabel.text = "\(selectYear)년-\(selectMonth)월"
+        dateLabel.text = "\(selectYear)년 \(selectMonth)월"
     }
     
     func setAllRecords() {
@@ -102,8 +102,8 @@ class RecordHomeView: UIViewController {
     }
     
     @objc func moveToRecordPage() {
-        // UIViewController으로 페이지 이동할 때
-         guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordCreateView") as? RecordCreateView else { return }
+        // Storyboard로 생성한 UIViewController으로 페이지 이동할 때
+        guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordCreateView") as? RecordCreateView else { return }
         present(vc, animated: true)
     }
     

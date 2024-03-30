@@ -658,7 +658,7 @@
                                                     <constraint firstItem="gzY-lh-geS" firstAttribute="leading" secondItem="dWn-N5-jH3" secondAttribute="leading" id="nhF-PA-i77"/>
                                                 </constraints>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="hwK-Y7-zzj" userLabel="TextContainer">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hwK-Y7-zzj" userLabel="TextContainer">
                                                 <rect key="frame" x="0.0" y="142" width="335" height="378.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내용" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="692-3V-hud">
@@ -667,9 +667,9 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="test" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zga-qx-6gR">
-                                                        <rect key="frame" x="0.0" y="37.5" width="335" height="341"/>
-                                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zga-qx-6gR">
+                                                        <rect key="frame" x="0.0" y="25.5" width="335" height="353"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -733,6 +733,7 @@
                         <outlet property="feelingTextField" destination="B8F-Tf-8CR" id="Dhs-0B-jdd"/>
                         <outlet property="recordTextView" destination="zga-qx-6gR" id="QfP-fo-1Qi"/>
                         <outlet property="saveButton" destination="ltu-yp-nLP" id="Gku-H1-OOf"/>
+                        <outlet property="titleTextField" destination="wZL-Op-IUX" id="d5N-la-TyT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aZ0-cN-V7v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -748,9 +749,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
