@@ -88,60 +88,9 @@
 		CD382DFB2B94BA5500771235 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				CD4188572BB45AA7008A9751 /* old */,
 				CDA110B22BB59D28001777DB /* CustomUIElement.swift */,
 			);
 			path = Util;
-			sourceTree = "<group>";
-		};
-		CD4188552BB45A8C008A9751 /* old */ = {
-			isa = PBXGroup;
-			children = (
-				CDF0ADFB2B8E1CF800C8690D /* Cell */,
-				CDF0ADE82B8E12BF00C8690D /* HomeViewController.swift */,
-				CD44D5432B99F5C300545FF5 /* RecordListViewController.swift */,
-				CD934AAE2B9B3C0900CDDC10 /* RecordDetailViewController.swift */,
-				CD2B8AC12B9DB8700080A4CA /* WorkoutRecordViewController.swift */,
-			);
-			path = old;
-			sourceTree = "<group>";
-		};
-		CD4188562BB45A9B008A9751 /* old */ = {
-			isa = PBXGroup;
-			children = (
-				CD6BFB642B9050D500238B2D /* HomeViewModel.swift */,
-				CD382DF92B949DD700771235 /* WorkoutRecordViewModel.swift */,
-				CD934AAC2B9B264E00CDDC10 /* RecordListViewModel.swift */,
-			);
-			path = old;
-			sourceTree = "<group>";
-		};
-		CD4188572BB45AA7008A9751 /* old */ = {
-			isa = PBXGroup;
-			children = (
-				CD382DFC2B94BA6000771235 /* CustomUIContent.swift */,
-				CDE5F2CD2BB30131008879CA /* CommonUtil.swift */,
-			);
-			path = old;
-			sourceTree = "<group>";
-		};
-		CD4188582BB45AB0008A9751 /* old */ = {
-			isa = PBXGroup;
-			children = (
-				CD43104A2BA71BE0006EA1F9 /* WorkoutModel.xcdatamodeld */,
-				CD8951462BB19D180081768D /* TempDatas.swift */,
-			);
-			path = old;
-			sourceTree = "<group>";
-		};
-		CD4188592BB45ABA008A9751 /* old */ = {
-			isa = PBXGroup;
-			children = (
-				CD6BFB5E2B90505B00238B2D /* WorkOut.swift */,
-				CD6BFB602B90507100238B2D /* WorkOutDetail.swift */,
-				CD6BFB622B90509600238B2D /* WorkOutRecord.swift */,
-			);
-			path = old;
 			sourceTree = "<group>";
 		};
 		CD41885E2BB45B7A008A9751 /* cell */ = {
@@ -155,10 +104,71 @@
 		CD4310492BA71BCF006EA1F9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				CD4188582BB45AB0008A9751 /* old */,
 				CDA110AF2BB598DD001777DB /* RecordModel.xcdatamodeld */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		CD74219C2BB81CA0001CEFB0 /* old */ = {
+			isa = PBXGroup;
+			children = (
+				CD7421A12BB81CB5001CEFB0 /* ViewModel */,
+				CD7421A02BB81CB1001CEFB0 /* View */,
+				CD74219F2BB81CAD001CEFB0 /* Util */,
+				CD74219E2BB81CA9001CEFB0 /* Data */,
+				CD74219D2BB81CA5001CEFB0 /* Model */,
+			);
+			path = old;
+			sourceTree = "<group>";
+		};
+		CD74219D2BB81CA5001CEFB0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CD6BFB5E2B90505B00238B2D /* WorkOut.swift */,
+				CD6BFB602B90507100238B2D /* WorkOutDetail.swift */,
+				CD6BFB622B90509600238B2D /* WorkOutRecord.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CD74219E2BB81CA9001CEFB0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				CD43104A2BA71BE0006EA1F9 /* WorkoutModel.xcdatamodeld */,
+				CD8951462BB19D180081768D /* TempDatas.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		CD74219F2BB81CAD001CEFB0 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				CD382DFC2B94BA6000771235 /* CustomUIContent.swift */,
+				CDE5F2CD2BB30131008879CA /* CommonUtil.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		CD7421A02BB81CB1001CEFB0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CDF0ADFB2B8E1CF800C8690D /* Cell */,
+				CDF0ADE82B8E12BF00C8690D /* HomeViewController.swift */,
+				CD44D5432B99F5C300545FF5 /* RecordListViewController.swift */,
+				CD934AAE2B9B3C0900CDDC10 /* RecordDetailViewController.swift */,
+				CD2B8AC12B9DB8700080A4CA /* WorkoutRecordViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CD7421A12BB81CB5001CEFB0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CD6BFB642B9050D500238B2D /* HomeViewModel.swift */,
+				CD382DF92B949DD700771235 /* WorkoutRecordViewModel.swift */,
+				CD934AAC2B9B264E00CDDC10 /* RecordListViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		CDF0ADD82B8E12BF00C8690D = {
@@ -180,6 +190,7 @@
 		CDF0ADE32B8E12BF00C8690D /* muscleMemory */ = {
 			isa = PBXGroup;
 			children = (
+				CD74219C2BB81CA0001CEFB0 /* old */,
 				CDF0ADF82B8E1BF800C8690D /* Model */,
 				CD4310492BA71BCF006EA1F9 /* Data */,
 				CD382DFB2B94BA5500771235 /* Util */,
@@ -198,7 +209,6 @@
 		CDF0ADF82B8E1BF800C8690D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CD4188592BB45ABA008A9751 /* old */,
 				CDA110AD2BB59753001777DB /* RecordModel.swift */,
 			);
 			path = Model;
@@ -207,7 +217,6 @@
 		CDF0ADF92B8E1C0000C8690D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				CD4188562BB45A9B008A9751 /* old */,
 				CD41885C2BB45B61008A9751 /* RecordHomeViewModel.swift */,
 				CDA110B62BB5AF2A001777DB /* RecordCreateViewModel.swift */,
 			);
@@ -217,7 +226,6 @@
 		CDF0ADFA2B8E1C0500C8690D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CD4188552BB45A8C008A9751 /* old */,
 				CD41885E2BB45B7A008A9751 /* cell */,
 				CD41885A2BB45B48008A9751 /* RecordHomeView.swift */,
 				CDA110B42BB5AF13001777DB /* RecordCreateView.swift */,

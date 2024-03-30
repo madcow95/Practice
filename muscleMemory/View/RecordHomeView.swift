@@ -102,7 +102,9 @@ class RecordHomeView: UIViewController {
     }
     
     @objc func moveToRecordPage() {
-        present(RecordCreateView(), animated: true)
+        // UIViewController으로 페이지 이동할 때
+         guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordCreateView") as? RecordCreateView else { return }
+        present(vc, animated: true)
     }
     
     @objc func toBeforeMonth() {
