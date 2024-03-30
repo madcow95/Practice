@@ -9,51 +9,38 @@ import UIKit
 import CoreData
 
 class RecordHomeViewModel {
-    
-    let testRecord: [RecordModel] = [
-        RecordModel(date: "2024-03-01", title: "1", content: "1111", feelingImage: nil),
-        RecordModel(date: "2024-03-03", title: "2", content: "2222", feelingImage: nil),
-        RecordModel(date: "2024-03-10", title: "3", content: "3333", feelingImage: nil),
-        RecordModel(date: "2024-03-13", title: "4", content: "4444", feelingImage: nil),
-        RecordModel(date: "2024-03-23", title: "5", content: "5555", feelingImage: nil),
-        RecordModel(date: "2024-03-31", title: "6", content: "6666", feelingImage: nil)
-    ]
-    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    func getAllRecord() -> [String: [RecordModel]] {
+    func getAllRecord(year: Int, month: Int) -> [RecordModel] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Record")
+        let predicate = NSPredicate(format: "date CONTAINS %@", "\(year)-\(month)")
+        fetchRequest.predicate = predicate
         
-        var records: [String: [RecordModel]] = [:]
+        var records: [RecordModel] = []
         do {
             let allRecords = try context.fetch(fetchRequest) as! [NSManagedObject]
             if allRecords.count > 0 {
-                allRecords.forEach{ record in
+                for record in allRecords {
                     let date = record.value(forKey: "date") as! String
-                    guard var loadRecord = records[date] else {
-                        records[date] = []
-                        return
-                    }
                     let title = record.value(forKey: "title") as! String
                     let content = record.value(forKey: "content") as! String
                     let feelingImage = record.value(forKey: "feelingImage") as? String
-                    loadRecord.append(RecordModel(date: date, title: title, content: content, feelingImage: feelingImage))
+                    records.append(RecordModel(date: date, title: title, content: content, feelingImage: feelingImage))
                 }
             }
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
+        
         return records
     }
     
-    func getTestRecordDay(year: Int, month: Int) -> [Int] {
-        return testRecord.filter{ record -> Bool in
+    func getRecordsDay(records: [RecordModel]) -> [Int] {
+        return records.map{ record in
             let dateSplit = record.date.split(separator: "-")
-            let recordYear = Int(dateSplit[0])!
-            let recordMonth = Int(dateSplit[1])!
             
-            return year == recordYear && month == recordMonth
-        }.map{ Int($0.date.split(separator: "-")[2])! }
+            return Int(dateSplit[2])!
+        }
     }
     
     private let currentDate = Date()

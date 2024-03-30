@@ -84,7 +84,7 @@ class RecordCreateView: UIViewController {
     }
     
     @objc func saveRecord() {
-        guard let date = dateTextField.text else { return }
+        let date = "\(homeViewModel.getCurrentYear())-\(homeViewModel.getCurrentMonth())-\(homeViewModel.getCurrentDay())"
         guard let title = titleTextField.text else { return }
         guard let content = recordTextView.text else { return }
         let feeling = feelingTextField.text
@@ -132,16 +132,15 @@ extension RecordCreateView: UIPickerViewDelegate, UIPickerViewDataSource {
         let feelingView = UIView(frame: CGRect(x: 0, y: 0, width: pickerView.bounds.width, height: 50))
         let feeling = feelings[row]
         
-        let label = UILabel(frame: CGRect(x: 100, y: 0, width: 100, height: 40))
-        label.text = feeling.0
+        let feelingLabel = UILabel(frame: CGRect(x: 100, y: 0, width: 100, height: 40))
+        feelingLabel.text = feeling.0
         
-        let imageView = UIImageView(frame: CGRect(x: 220, y: 0, width: 50, height: 50))
-        let imageText = feelings[row].1
-        imageView.image = UIImage(systemName: imageText)
-        imageView.tintColor = .black
+        let feelingImageView = UIImageView(frame: CGRect(x: 220, y: 0, width: 50, height: 50))
+        feelingImageView.image = UIImage(systemName: feelings[row].1)
+        feelingImageView.tintColor = .black
         
-        feelingView.addSubview(label)
-        feelingView.addSubview(imageView)
+        feelingView.addSubview(feelingLabel)
+        feelingView.addSubview(feelingImageView)
         
         return feelingView
     }

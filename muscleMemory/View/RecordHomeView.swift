@@ -32,6 +32,7 @@ class RecordHomeView: UIViewController {
     
     let viewModel = RecordHomeViewModel()
     
+    private var allRecords: [RecordModel] = []
     private var allRecordsDay: [Int] = []
     private var selectYear: Int = 0
     private var selectMonth: Int = 0
@@ -93,7 +94,8 @@ class RecordHomeView: UIViewController {
     }
     
     func setAllRecords() {
-        allRecordsDay = viewModel.getTestRecordDay(year: selectYear, month: selectMonth)
+        allRecords = viewModel.getAllRecord(year: selectYear, month: selectMonth)
+        allRecordsDay = viewModel.getRecordsDay(records: allRecords)
     }
     
     func setButtonsAction() {

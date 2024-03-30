@@ -17,7 +17,20 @@ class RecordCreateViewModel {
     ]
     
     func saveRecord(record: RecordModel) {
-        print(record)
+        if let entity = NSEntityDescription.entity(forEntityName: "Record", in: context) {
+            let recordEntity = NSManagedObject(entity: entity, insertInto: context)
+            recordEntity.setValue(record.date, forKey: "date")
+            recordEntity.setValue(record.title, forKey: "title")
+            recordEntity.setValue(record.content, forKey: "content")
+            recordEntity.setValue(record.feelingImage, forKey: "feelingImage")
+        }
+        
+        do {
+            try context.save()
+            print("save complete!")
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
     
     func getFeelings() -> [(String, String)] {
