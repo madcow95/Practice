@@ -11,5 +11,5 @@ struct RecordModel {
     let date: String
     let title: String
     let content: String
-    let feelingImage: String?
+    let feelingImage: String
 }

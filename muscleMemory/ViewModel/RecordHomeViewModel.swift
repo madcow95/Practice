@@ -24,14 +24,14 @@ class RecordHomeViewModel {
                     let date = record.value(forKey: "date") as! String
                     let title = record.value(forKey: "title") as! String
                     let content = record.value(forKey: "content") as! String
-                    let feelingImage = record.value(forKey: "feelingImage") as? String
+                    let feelingImage = record.value(forKey: "feelingImage") as! String
                     records.append(RecordModel(date: date, title: title, content: content, feelingImage: feelingImage))
                 }
             }
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
-        
+        print(records)
         return records
     }
     

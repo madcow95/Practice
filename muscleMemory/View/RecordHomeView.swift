@@ -168,7 +168,13 @@ extension RecordHomeView: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let day = indexPath.item
-        print(day)
+        
+        guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordDetailView") as? RecordDetailView else { return }
+        let target = "\(selectYear)-\(selectMonth)-\(indexPath.item + 1)"
+        
+        guard let selectedRecord = allRecords.filter({ $0.date == target }).first else { return }
+        vc.selectedRecord = selectedRecord
+        
+        present(vc, animated: true)
     }
 }

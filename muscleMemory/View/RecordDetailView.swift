@@ -1,63 +1,61 @@
 //
-//  RecordCreateView.swift
+//  RecordDetailView.swift
 //  muscleMemory
 //
-//  Created by MadCow on 2024/3/28.
+//  Created by MadCow on 2024/3/30.
 //
 
 import UIKit
 
-class RecordCreateView: UIViewController {
-        
-    private let recordViewModel = RecordCreateViewModel()
-    private let homeViewModel = RecordHomeViewModel()
+class RecordDetailView: UIViewController {
+    
+    private let recordHomeViewModel = RecordHomeViewModel()
+    private let recordCreateViewModel = RecordCreateViewModel()
+    private let recordDetailViewModel = RecordDetailViewModel()
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var feelingTextField: UITextField!
+    @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var recordTextView: UITextView!
+    @IBOutlet weak var editButton: UIButton!
     
     private let feelingPicker = UIPickerView()
     private let feelingPickerToolbar = UIToolbar()
     private var feelingImage = UIImageView()
+    
+    private var editable: Bool = false
     private var feelings: [(String, String)] = []
     private var selectedFeeling: (String, String) = ("", "")
+    var selectedRecord: RecordModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         
-        setCurrentDate()
+        setFeelings()
+        setFeelingTextField()
         setFeelingPicker()
-        setFeelingPickerToolbar()
+        setTexts()
         setButtonAction()
-        setContent()
     }
     
-    func setCurrentDate() {
-        let year = homeViewModel.getCurrentYear()
-        let month = homeViewModel.getCurrentMonth()
-        let day = homeViewModel.getCurrentDay()
+    func setFeelings() {
+        feelings = recordCreateViewModel.getFeelings()
+    }
+    
+    func setFeelingTextField() {
+        contentTextView.layer.cornerRadius = 10
+        contentTextView.layer.borderWidth = 1
         
-        dateTextField.text = "\(year)년 \(month)월 \(day)일"
-    }
-    
-    func setFeelingPicker() {
         feelingPicker.delegate = self
         feelingPicker.dataSource = self
         
         feelingTextField.inputView = feelingPicker
-        
-        feelingImage.tintColor = .black
-        
-        feelings = recordViewModel.getFeelings()
-        selectedFeeling = feelings[0]
     }
     
-    func setFeelingPickerToolbar() {
+    func setFeelingPicker() {
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let cancel = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(cancelSelect))
         let confirm = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(confirmSelect))
@@ -69,32 +67,51 @@ class RecordCreateView: UIViewController {
         feelingTextField.inputAccessoryView = feelingPickerToolbar
     }
     
+    func setTexts() {
+        guard let record = selectedRecord else { return }
+        titleTextField.text = record.title
+        dateTextField.text = record.date
+        let feelingTextString = record.feelingImage.split(separator: "/")
+        let feelingText = String(feelingTextString[0])
+        let feelingImageName = UIImage(systemName: String(feelingTextString[1]))
+        feelingImage.accessibilityIdentifier = String(feelingTextString[1])
+        
+        feelingTextField.text = feelingText
+        feelingTextField.rightView = UIImageView(image: feelingImageName)
+        feelingTextField.rightViewMode = .always
+        contentTextView.text = record.content
+    }
+    
     func setButtonAction() {
-        cancelButton.addTarget(self, action: #selector(cancelRecord), for: .touchUpInside)
-        saveButton.addTarget(self, action: #selector(saveRecord), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
+        editButton.addTarget(self, action: #selector(editAction), for: .touchUpInside)
     }
     
-    func setContent() {
-        recordTextView.layer.cornerRadius = 10
-        recordTextView.layer.borderWidth = 1
-    }
-    
-    @objc func cancelRecord() {
+    @objc func cancelAction() {
         dismiss(animated: true)
     }
     
-    @objc func saveRecord() {
-        let date = "\(homeViewModel.getCurrentYear())-\(homeViewModel.getCurrentMonth())-\(homeViewModel.getCurrentDay())"
-        guard let title = titleTextField.text else { return }
-        guard let content = recordTextView.text else { return }
-        let feeling = feelingTextField.text!
-        let imageName = feelingImage.accessibilityIdentifier!
+    @objc func editAction() {
+        // MARK: - TODO. 저장 func로 빼자
+        if editable {
+            guard let record = selectedRecord else { return }
+            guard let title = titleTextField.text else { return }
+            guard let content = contentTextView.text else { return }
+            let feeling = feelingTextField.text!
+            let imageName = feelingImage.accessibilityIdentifier!
+            recordCreateViewModel.saveRecord(record: RecordModel(date: record.date, title: title, content: content, feelingImage: "\(feeling)/\(imageName)"))
+        }
         
-        recordViewModel.saveRecord(record: RecordModel(date: date, title: title, content: content, feelingImage: "\(feeling)/\(imageName)"))
+        editable.toggle()
+        editButton.setTitle(editable ? "저장" : "편집", for: .normal)
         
-        // MARK: - TODO.
-        // 1. 저장 후 안내 메세지와 함께 dismiss
-        // 2. 제목, 내용 입력 안하면 안내 메세지
+        let backgroundColor: UIColor = editable ? .white : .systemGray5
+        titleTextField.isEnabled = editable
+        titleTextField.backgroundColor = backgroundColor
+        feelingTextField.isEnabled = editable
+        feelingTextField.backgroundColor = backgroundColor
+        contentTextView.isEditable = editable
+        contentTextView.backgroundColor = backgroundColor
     }
     
     @objc func cancelSelect() {
@@ -106,7 +123,6 @@ class RecordCreateView: UIViewController {
         
         feelingImage.image = UIImage(systemName: selectedFeeling.1)
         feelingImage.tintColor = .black
-        feelingImage.accessibilityIdentifier = selectedFeeling.1
         
         feelingTextField.rightView = feelingImage
         feelingTextField.rightViewMode = .always
@@ -115,7 +131,8 @@ class RecordCreateView: UIViewController {
     }
 }
 
-extension RecordCreateView: UIPickerViewDelegate, UIPickerViewDataSource {
+
+extension RecordDetailView: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

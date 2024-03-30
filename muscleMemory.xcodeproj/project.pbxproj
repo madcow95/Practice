@@ -21,6 +21,8 @@
 		CD6BFB612B90507100238B2D /* WorkOutDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB602B90507100238B2D /* WorkOutDetail.swift */; };
 		CD6BFB632B90509600238B2D /* WorkOutRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB622B90509600238B2D /* WorkOutRecord.swift */; };
 		CD6BFB652B9050D500238B2D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6BFB642B9050D500238B2D /* HomeViewModel.swift */; };
+		CD7421A32BB852AD001CEFB0 /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7421A22BB852AD001CEFB0 /* RecordDetailView.swift */; };
+		CD7421A52BB852C6001CEFB0 /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7421A42BB852C6001CEFB0 /* RecordDetailViewModel.swift */; };
 		CD8951472BB19D180081768D /* TempDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8951462BB19D180081768D /* TempDatas.swift */; };
 		CD934AAD2B9B264E00CDDC10 /* RecordListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD934AAC2B9B264E00CDDC10 /* RecordListViewModel.swift */; };
 		CD934AAF2B9B3C0900CDDC10 /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD934AAE2B9B3C0900CDDC10 /* RecordDetailViewController.swift */; };
@@ -54,6 +56,8 @@
 		CD6BFB602B90507100238B2D /* WorkOutDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutDetail.swift; sourceTree = "<group>"; };
 		CD6BFB622B90509600238B2D /* WorkOutRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutRecord.swift; sourceTree = "<group>"; };
 		CD6BFB642B9050D500238B2D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		CD7421A22BB852AD001CEFB0 /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
+		CD7421A42BB852C6001CEFB0 /* RecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewModel.swift; sourceTree = "<group>"; };
 		CD8951462BB19D180081768D /* TempDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempDatas.swift; sourceTree = "<group>"; };
 		CD934AAC2B9B264E00CDDC10 /* RecordListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListViewModel.swift; sourceTree = "<group>"; };
 		CD934AAE2B9B3C0900CDDC10 /* RecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +223,7 @@
 			children = (
 				CD41885C2BB45B61008A9751 /* RecordHomeViewModel.swift */,
 				CDA110B62BB5AF2A001777DB /* RecordCreateViewModel.swift */,
+				CD7421A42BB852C6001CEFB0 /* RecordDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 				CD41885E2BB45B7A008A9751 /* cell */,
 				CD41885A2BB45B48008A9751 /* RecordHomeView.swift */,
 				CDA110B42BB5AF13001777DB /* RecordCreateView.swift */,
+				CD7421A22BB852AD001CEFB0 /* RecordDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -315,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD8951472BB19D180081768D /* TempDatas.swift in Sources */,
+				CD7421A52BB852C6001CEFB0 /* RecordDetailViewModel.swift in Sources */,
 				CDF0ADFD2B8E1D0B00C8690D /* CalendarTableCell.swift in Sources */,
 				CD43104C2BA71BE0006EA1F9 /* WorkoutModel.xcdatamodeld in Sources */,
 				CDF0ADE92B8E12BF00C8690D /* HomeViewController.swift in Sources */,
@@ -328,6 +335,7 @@
 				CD2B8AC42B9DD0110080A4CA /* WorkoutRecordViewCell.swift in Sources */,
 				CDA110B52BB5AF13001777DB /* RecordCreateView.swift in Sources */,
 				CD21AFF82B99F9F6002F8396 /* RecordListViewCell.swift in Sources */,
+				CD7421A32BB852AD001CEFB0 /* RecordDetailView.swift in Sources */,
 				CD2B8AC22B9DB8700080A4CA /* WorkoutRecordViewController.swift in Sources */,
 				CD934AAF2B9B3C0900CDDC10 /* RecordDetailViewController.swift in Sources */,
 				CD44D5442B99F5C300545FF5 /* RecordListViewController.swift in Sources */,
