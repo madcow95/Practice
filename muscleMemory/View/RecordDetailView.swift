@@ -43,6 +43,7 @@ class RecordDetailView: UIViewController {
     
     func setFeelings() {
         feelings = recordCreateViewModel.getFeelings()
+        selectedFeeling = feelings[0]
     }
     
     func setFeelingTextField() {
@@ -70,14 +71,18 @@ class RecordDetailView: UIViewController {
     func setTexts() {
         guard let record = selectedRecord else { return }
         titleTextField.text = record.title
-        dateTextField.text = record.date
+        
+        let date = record.date.split(separator: "-")
+        dateTextField.text = "\(date[0])년 \(date[1])월 \(date[2])일"
+        
         let feelingTextString = record.feelingImage.split(separator: "/")
         let feelingText = String(feelingTextString[0])
-        let feelingImageName = UIImage(systemName: String(feelingTextString[1]))
+        let rightViewImage = UIImageView(image: UIImage(systemName: String(feelingTextString[1])))
+        rightViewImage.tintColor = .black
         feelingImage.accessibilityIdentifier = String(feelingTextString[1])
         
         feelingTextField.text = feelingText
-        feelingTextField.rightView = UIImageView(image: feelingImageName)
+        feelingTextField.rightView = rightViewImage
         feelingTextField.rightViewMode = .always
         contentTextView.text = record.content
     }
@@ -87,6 +92,17 @@ class RecordDetailView: UIViewController {
         editButton.addTarget(self, action: #selector(editAction), for: .touchUpInside)
     }
     
+    func editRecord() {
+        guard let record = selectedRecord else { return }
+        guard let title = titleTextField.text else { return }
+        guard let content = contentTextView.text else { return }
+        let feeling = feelingTextField.text!
+        let imageName = feelingImage.accessibilityIdentifier!
+        recordDetailViewModel.editRecord(record: RecordModel(date: record.date, title: title, content: content, feelingImage: "\(feeling)/\(imageName)"))
+        
+        dismiss(animated: true)
+    }
+    
     @objc func cancelAction() {
         dismiss(animated: true)
     }
@@ -94,12 +110,7 @@ class RecordDetailView: UIViewController {
     @objc func editAction() {
         // MARK: - TODO. 저장 func로 빼자
         if editable {
-            guard let record = selectedRecord else { return }
-            guard let title = titleTextField.text else { return }
-            guard let content = contentTextView.text else { return }
-            let feeling = feelingTextField.text!
-            let imageName = feelingImage.accessibilityIdentifier!
-            recordCreateViewModel.saveRecord(record: RecordModel(date: record.date, title: title, content: content, feelingImage: "\(feeling)/\(imageName)"))
+            editRecord()
         }
         
         editable.toggle()
@@ -122,6 +133,7 @@ class RecordDetailView: UIViewController {
         feelingTextField.text = selectedFeeling.0
         
         feelingImage.image = UIImage(systemName: selectedFeeling.1)
+        feelingImage.accessibilityIdentifier = selectedFeeling.1
         feelingImage.tintColor = .black
         
         feelingTextField.rightView = feelingImage

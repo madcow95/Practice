@@ -31,20 +31,27 @@ class RecordHomeView: UIViewController {
     }()
     
     let viewModel = RecordHomeViewModel()
+    let recordDetailViewModel = RecordDetailViewModel()
     
     private var allRecords: [RecordModel] = []
     private var allRecordsDay: [Int] = []
     private var selectYear: Int = 0
     private var selectMonth: Int = 0
+    var test: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        removeAllRecords()
         setCollectionView()
         setUIComponents()
         setDate(year: viewModel.getCurrentYear(), month: viewModel.getCurrentMonth())
         setAllRecords()
         setButtonsAction()
+    }
+    
+    func removeAllRecords() {
+        viewModel.removeAllRecord()
     }
     
     func setCollectionView() {
@@ -55,7 +62,6 @@ class RecordHomeView: UIViewController {
     func setUIComponents() {
         recordButton.setTitle("일기쓰기", for: .normal)
         recordButton.backgroundColor = .systemBlue
-        recordButton.addTarget(self, action: #selector(moveToRecordPage), for: .touchUpInside)
         
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -99,12 +105,33 @@ class RecordHomeView: UIViewController {
     }
     
     func setButtonsAction() {
+        recordButton.addTarget(self, action: #selector(moveToRecordPage), for: .touchUpInside)
         leftButton.addTarget(self, action: #selector(toBeforeMonth), for: .touchUpInside)
         rightButton.addTarget(self, action: #selector(toNextMonth), for: .touchUpInside)
     }
     
+    func showExistAlert() {
+        let alertController = UIAlertController(title: "알림", message: "오늘 이미 작성한 일기가 있습니다.\n오늘 작성한 일기를 수정할까요?", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        alertController.addAction(cancelAction)
+        
+        let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+            self.openRecordDetailPage(day: nil)
+        }
+        alertController.addAction(confirmAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
     @objc func moveToRecordPage() {
         // Storyboard로 생성한 UIViewController으로 페이지 이동할 때
+        let currentDate: String = "\(viewModel.getCurrentYear())-\(viewModel.getCurrentMonth())-\(viewModel.getCurrentDay())"
+        let todayRecordExist: Bool = viewModel.todayRecordExist(date: currentDate)
+        if todayRecordExist {
+            showExistAlert()
+        }
+        
         guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordCreateView") as? RecordCreateView else { return }
         present(vc, animated: true)
     }
@@ -134,6 +161,16 @@ class RecordHomeView: UIViewController {
     private func reloadViewCollection() {
         setAllRecords()
         collectionView.reloadData()
+    }
+    
+    func openRecordDetailPage(day: Int?) {
+        guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordDetailView") as? RecordDetailView else { return }
+        let target = "\(selectYear)-\(selectMonth)-\(day != nil ? day! : viewModel.getCurrentDay())"
+        
+        guard let selectedRecord = recordDetailViewModel.getRecordBy(date: target) else { return }
+        vc.selectedRecord = selectedRecord
+        
+        present(vc, animated: true)
     }
 }
 
@@ -168,13 +205,6 @@ extension RecordHomeView: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordDetailView") as? RecordDetailView else { return }
-        let target = "\(selectYear)-\(selectMonth)-\(indexPath.item + 1)"
-        
-        guard let selectedRecord = allRecords.filter({ $0.date == target }).first else { return }
-        vc.selectedRecord = selectedRecord
-        
-        present(vc, animated: true)
+        openRecordDetailPage(day: indexPath.item + 1)
     }
 }

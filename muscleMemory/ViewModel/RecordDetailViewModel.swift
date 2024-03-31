@@ -11,25 +11,42 @@ import CoreData
 class RecordDetailViewModel {
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    func getRecordBy(date: String) -> RecordModel? {
+        let fetchRequest: NSFetchRequest<Record> = Record.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "date == %@", date)
+        
+        var returnRecord: RecordModel?
+        do {
+            let records = try context.fetch(fetchRequest)
+            if let record = records.first {
+                let date = record.value(forKey: "date") as! String
+                let title = record.value(forKey: "title") as! String
+                let content = record.value(forKey: "content") as! String
+                let feelingImage = record.value(forKey: "feelingImage") as! String
+                returnRecord = RecordModel(date: date, title: title, content: content, feelingImage: feelingImage)
+            }
+        } catch {
+            print("불러오는 중 에러발생 >> \(error)")
+        }
+        return returnRecord
+    }
     
     func editRecord(record: RecordModel) {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Record")
-        let predicate = NSPredicate(format: "date == %@", record.date)
-        fetchRequest.predicate = predicate
-        
-        if let entity = NSEntityDescription.entity(forEntityName: "Record", in: context) {
-            let recordEntity = NSManagedObject(entity: entity, insertInto: context)
-            recordEntity.setValue(record.date, forKey: "date")
-            recordEntity.setValue(record.title, forKey: "title")
-            recordEntity.setValue(record.content, forKey: "content")
-            recordEntity.setValue(record.feelingImage, forKey: "feelingImage")
-        }
+        let fetchRequest: NSFetchRequest<Record> = Record.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "date CONTAINS %@", record.date)
         
         do {
-            try context.save()
-            print("save complete!")
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+            let records = try context.fetch(fetchRequest)
+            if let editRecord = records.first {
+                editRecord.title = record.title
+                editRecord.content = record.content
+                editRecord.feelingImage = record.feelingImage
+                
+                try context.save()
+                print("edit complete!")
+            }
+        } catch {
+            print("수정 중 에러발생 >> \(error)")
         }
     }
 }

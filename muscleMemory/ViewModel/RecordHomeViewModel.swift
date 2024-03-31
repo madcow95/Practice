@@ -13,8 +13,7 @@ class RecordHomeViewModel {
     
     func getAllRecord(year: Int, month: Int) -> [RecordModel] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Record")
-        let predicate = NSPredicate(format: "date CONTAINS %@", "\(year)-\(month)")
-        fetchRequest.predicate = predicate
+        fetchRequest.predicate = NSPredicate(format: "date CONTAINS %@", "\(year)-\(month)")
         
         var records: [RecordModel] = []
         do {
@@ -81,6 +80,40 @@ class RecordHomeViewModel {
             }
         } else {
             return false
+        }
+    }
+    
+    func todayRecordExist(date: String) -> Bool {
+        let fetchRequest: NSFetchRequest<Record> = Record.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "date == %@", date)
+        
+        var existResult: Bool = false
+        do {
+            let allRecords = try context.fetch(fetchRequest)
+            print(allRecords)
+            if allRecords.count > 0 {
+                existResult = true
+            }
+        } catch {
+            print("불러오는 중 에러 발생 >> \(error)")
+        }
+        
+        return existResult
+    }
+    
+    func removeAllRecord() {
+        let fetchRequest: NSFetchRequest<Record> = Record.fetchRequest()
+        do {
+            // 가져온 데이터를 삭제합니다.
+            let recordsToDelete = try context.fetch(fetchRequest)
+            for record in recordsToDelete {
+                context.delete(record)
+            }
+            
+            // 변경된 내용을 저장합니다.
+            try context.save()
+        } catch {
+            print("Error deleting records: \(error.localizedDescription)")
         }
     }
 }
