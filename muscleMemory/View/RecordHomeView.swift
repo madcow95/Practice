@@ -37,7 +37,6 @@ class RecordHomeView: UIViewController {
     private var allRecordsDay: [Int] = []
     private var selectYear: Int = 0
     private var selectMonth: Int = 0
-    var test: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +49,7 @@ class RecordHomeView: UIViewController {
         setButtonsAction()
     }
     
+    // MARK: - Custom Actions
     func removeAllRecords() {
         viewModel.removeAllRecord()
     }
@@ -124,6 +124,7 @@ class RecordHomeView: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    // MARK: - objc Actrions
     @objc func moveToRecordPage() {
         // Storyboard로 생성한 UIViewController으로 페이지 이동할 때
         let currentDate: String = "\(viewModel.getCurrentYear())-\(viewModel.getCurrentMonth())-\(viewModel.getCurrentDay())"
@@ -190,6 +191,8 @@ extension RecordHomeView: UICollectionViewDelegate, UICollectionViewDataSource, 
         cell.layer.cornerRadius = 10
         
         if allRecordsDay.contains(calendarDay) {
+            // MARK: - TODO.
+            // 1. Image -> 일기 작성할 때 선택한 기분의 이미지로 수정
             cell.recordImage.image = UIImage(systemName: "circle.fill")
         } else {
             cell.recordImage.image = nil

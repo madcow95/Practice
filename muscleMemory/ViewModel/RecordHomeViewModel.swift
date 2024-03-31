@@ -30,7 +30,7 @@ class RecordHomeViewModel {
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
-        print(records)
+        
         return records
     }
     
@@ -90,7 +90,7 @@ class RecordHomeViewModel {
         var existResult: Bool = false
         do {
             let allRecords = try context.fetch(fetchRequest)
-            print(allRecords)
+            
             if allRecords.count > 0 {
                 existResult = true
             }

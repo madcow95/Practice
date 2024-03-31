@@ -108,7 +108,7 @@ class RecordDetailView: UIViewController {
     }
     
     @objc func editAction() {
-        // MARK: - TODO. 저장 func로 빼자
+        // MARK: - TODO. 저장 func로 빼자 ✅
         if editable {
             editRecord()
         }
