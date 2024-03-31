@@ -67,7 +67,7 @@
 		CDA110B42BB5AF13001777DB /* RecordCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateView.swift; sourceTree = "<group>"; };
 		CDA110B62BB5AF2A001777DB /* RecordCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateViewModel.swift; sourceTree = "<group>"; };
 		CDE5F2CD2BB30131008879CA /* CommonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtil.swift; sourceTree = "<group>"; };
-		CDF0ADE12B8E12BF00C8690D /* muscleMemory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = muscleMemory.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDF0ADE12B8E12BF00C8690D /* simpleRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simpleRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF0ADE42B8E12BF00C8690D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDF0ADE62B8E12BF00C8690D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CDF0ADE82B8E12BF00C8690D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 		CDF0ADD82B8E12BF00C8690D = {
 			isa = PBXGroup;
 			children = (
-				CDF0ADE32B8E12BF00C8690D /* muscleMemory */,
+				CDF0ADE32B8E12BF00C8690D /* SimpleRecord */,
 				CDF0ADE22B8E12BF00C8690D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -186,12 +186,12 @@
 		CDF0ADE22B8E12BF00C8690D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CDF0ADE12B8E12BF00C8690D /* muscleMemory.app */,
+				CDF0ADE12B8E12BF00C8690D /* simpleRecord.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CDF0ADE32B8E12BF00C8690D /* muscleMemory */ = {
+		CDF0ADE32B8E12BF00C8690D /* SimpleRecord */ = {
 			isa = PBXGroup;
 			children = (
 				CD74219C2BB81CA0001CEFB0 /* old */,
@@ -207,7 +207,7 @@
 				CDF0ADEF2B8E12C000C8690D /* LaunchScreen.storyboard */,
 				CDF0ADF22B8E12C000C8690D /* Info.plist */,
 			);
-			path = muscleMemory;
+			path = SimpleRecord;
 			sourceTree = "<group>";
 		};
 		CDF0ADF82B8E1BF800C8690D /* Model */ = {
@@ -252,9 +252,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CDF0ADE02B8E12BF00C8690D /* muscleMemory */ = {
+		CDF0ADE02B8E12BF00C8690D /* simpleRecord */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CDF0ADF52B8E12C000C8690D /* Build configuration list for PBXNativeTarget "muscleMemory" */;
+			buildConfigurationList = CDF0ADF52B8E12C000C8690D /* Build configuration list for PBXNativeTarget "simpleRecord" */;
 			buildPhases = (
 				CDF0ADDD2B8E12BF00C8690D /* Sources */,
 				CDF0ADDE2B8E12BF00C8690D /* Frameworks */,
@@ -264,9 +264,9 @@
 			);
 			dependencies = (
 			);
-			name = muscleMemory;
+			name = simpleRecord;
 			productName = muscleMemory;
-			productReference = CDF0ADE12B8E12BF00C8690D /* muscleMemory.app */;
+			productReference = CDF0ADE12B8E12BF00C8690D /* simpleRecord.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -284,7 +284,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CDF0ADDC2B8E12BF00C8690D /* Build configuration list for PBXProject "muscleMemory" */;
+			buildConfigurationList = CDF0ADDC2B8E12BF00C8690D /* Build configuration list for PBXProject "simpleRecord" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -297,7 +297,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CDF0ADE02B8E12BF00C8690D /* muscleMemory */,
+				CDF0ADE02B8E12BF00C8690D /* simpleRecord */,
 			);
 		};
 /* End PBXProject section */
@@ -552,7 +552,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CDF0ADDC2B8E12BF00C8690D /* Build configuration list for PBXProject "muscleMemory" */ = {
+		CDF0ADDC2B8E12BF00C8690D /* Build configuration list for PBXProject "simpleRecord" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CDF0ADF32B8E12C000C8690D /* Debug */,
@@ -561,7 +561,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CDF0ADF52B8E12C000C8690D /* Build configuration list for PBXNativeTarget "muscleMemory" */ = {
+		CDF0ADF52B8E12C000C8690D /* Build configuration list for PBXNativeTarget "simpleRecord" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CDF0ADF62B8E12C000C8690D /* Debug */,
