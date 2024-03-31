@@ -9,15 +9,15 @@ import UIKit
 import CoreData
 
 class RecordHomeViewModel {
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private let fetchRequest: NSFetchRequest<Record> = Record.fetchRequest()
     
     func getAllRecord(year: Int, month: Int) -> [RecordModel] {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Record")
         fetchRequest.predicate = NSPredicate(format: "date CONTAINS %@", "\(year)-\(month)")
         
         var records: [RecordModel] = []
         do {
-            let allRecords = try context.fetch(fetchRequest) as! [NSManagedObject]
+            let allRecords = try context.fetch(fetchRequest)
             if allRecords.count > 0 {
                 for record in allRecords {
                     let date = record.value(forKey: "date") as! String
@@ -28,7 +28,7 @@ class RecordHomeViewModel {
                 }
             }
         } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+            print("Load Records Error >> \(error), \(error.userInfo)")
         }
         
         return records
@@ -84,7 +84,6 @@ class RecordHomeViewModel {
     }
     
     func todayRecordExist(date: String) -> Bool {
-        let fetchRequest: NSFetchRequest<Record> = Record.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "date == %@", date)
         
         var existResult: Bool = false
@@ -102,7 +101,6 @@ class RecordHomeViewModel {
     }
     
     func removeAllRecord() {
-        let fetchRequest: NSFetchRequest<Record> = Record.fetchRequest()
         do {
             // 가져온 데이터를 삭제합니다.
             let recordsToDelete = try context.fetch(fetchRequest)

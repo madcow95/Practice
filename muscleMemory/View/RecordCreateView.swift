@@ -79,7 +79,7 @@ class RecordCreateView: UIViewController {
         recordTextView.layer.borderWidth = 1
     }
     
-    func emptyTextExistAlert(message: String) {
+    func alertBy(message: String) {
         let alertController = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
         
         let confirmAction = UIAlertAction(title: "확인", style: .default)
@@ -98,16 +98,18 @@ class RecordCreateView: UIViewController {
         guard let content = recordTextView.text else { return }
         guard let feeling = feelingTextField.text else { return }
         if title.isEmpty || content.isEmpty || feeling.isEmpty {
-            emptyTextExistAlert(message: "제목, 기분, 내용을 모두 입력해주세요.")
+            alertBy(message: "제목, 기분, 내용을 모두 입력해주세요.")
             return
         }
         let imageName = feelingImage.accessibilityIdentifier!
         
         recordViewModel.saveRecord(record: RecordModel(date: date, title: title, content: content, feelingImage: "\(feeling)/\(imageName)"))
+        
         dismiss(animated: true)
-        // MARK: - TODO. ✅
+        // MARK: - TODO. ❌
         // 1. 저장 후 안내 메세지와 함께 dismiss ✅
-        // 2. 제목, 내용 입력 안하면 안내 메세지 ✅
+        // 2. 제목, 내용 입력 안하면 안내 메세지 ❌
+        // 3. 저장 후 RecordHomeView 새로고침 ❌
     }
     
     @objc func cancelSelect() {

@@ -93,6 +93,8 @@ class RecordDetailView: UIViewController {
     }
     
     func editRecord() {
+        // MARK: TODO. ❌
+        // 1. title, content, feeling을 입력하지 않았을 때 Validation alert
         guard let record = selectedRecord else { return }
         guard let title = titleTextField.text else { return }
         guard let content = contentTextView.text else { return }

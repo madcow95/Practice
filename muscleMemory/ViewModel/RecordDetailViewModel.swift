@@ -10,9 +10,9 @@ import CoreData
 
 class RecordDetailViewModel {
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private let fetchRequest: NSFetchRequest<Record> = Record.fetchRequest()
     
     func getRecordBy(date: String) -> RecordModel? {
-        let fetchRequest: NSFetchRequest<Record> = Record.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "date == %@", date)
         
         var returnRecord: RecordModel?
@@ -32,7 +32,6 @@ class RecordDetailViewModel {
     }
     
     func editRecord(record: RecordModel) {
-        let fetchRequest: NSFetchRequest<Record> = Record.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "date CONTAINS %@", record.date)
         
         do {

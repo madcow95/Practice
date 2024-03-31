@@ -191,7 +191,7 @@ extension RecordHomeView: UICollectionViewDelegate, UICollectionViewDataSource, 
         cell.layer.cornerRadius = 10
         
         if allRecordsDay.contains(calendarDay) {
-            // MARK: - TODO.
+            // MARK: - TODO. ❌
             // 1. Image -> 일기 작성할 때 선택한 기분의 이미지로 수정
             cell.recordImage.image = UIImage(systemName: "circle.fill")
         } else {
