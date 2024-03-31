@@ -1,6 +1,6 @@
 //
 //  RecordModel.swift
-//  muscleMemory
+//  simpleRecord
 //
 //  Created by MadCow on 2024/3/28.
 //

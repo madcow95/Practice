@@ -1,6 +1,6 @@
 //
 //  RecordHomeViewCell.swift
-//  muscleMemory
+//  simpleRecord
 //
 //  Created by MadCow on 2024/3/27.
 //
