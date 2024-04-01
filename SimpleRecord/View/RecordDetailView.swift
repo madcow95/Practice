@@ -30,6 +30,8 @@ class RecordDetailView: UIViewController {
     private var selectedFeeling: (String, String) = ("", "")
     var selectedRecord: RecordModel?
     
+    weak var customDelegate: Reloadable?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -124,6 +126,8 @@ class RecordDetailView: UIViewController {
         }
         
         if !validationCheck { return }
+        
+        customDelegate?.afterSaveOrEditAction()
         editable.toggle()
         editButton.setTitle(editable ? "저장" : "편집", for: .normal)
         

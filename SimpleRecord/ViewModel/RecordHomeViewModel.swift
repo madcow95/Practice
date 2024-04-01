@@ -114,4 +114,8 @@ class RecordHomeViewModel {
             print("Error deleting records: \(error.localizedDescription)")
         }
     }
+    
+    func isExistRecordModelBy(day: Int) -> Bool {
+        return true
+    }
 }

@@ -165,6 +165,7 @@ class RecordHomeView: UIViewController, Reloadable {
         
         guard let selectedRecord = recordDetailViewModel.getRecordBy(date: target) else { return }
         vc.selectedRecord = selectedRecord
+        vc.customDelegate = self
         
         present(vc, animated: true)
     }
@@ -190,9 +191,15 @@ extension RecordHomeView: UICollectionViewDelegate, UICollectionViewDataSource, 
         cell.layer.cornerRadius = 10
         
         if allRecordsDay.contains(calendarDay) {
-            // MARK: - TODO. ❌
-            // 1. Image -> 일기 작성할 때 선택한 기분의 이미지로 수정
-            cell.recordImage.image = UIImage(systemName: "circle.fill")
+            // MARK: - TODO. ✅
+            // 1. Image -> 일기 작성할 때 선택한 기분의 이미지로 수정 ✅
+            
+            guard let selectedRecord = allRecords.filter({ $0.date == "\(selectYear)-\(selectMonth)-\(calendarDay)" }).first else {
+                return UICollectionViewCell()
+            }
+            
+            cell.recordImage.image = UIImage(systemName: String(selectedRecord.feelingImage.split(separator: "/")[1]))
+            cell.recordImage.tintColor = .black
         } else {
             cell.recordImage.image = nil
         }
