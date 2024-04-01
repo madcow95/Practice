@@ -119,7 +119,7 @@ class RecordDetailView: UIViewController {
     }
     
     @objc func editAction() {
-        // MARK: - TODO. 저장 func로 빼자 ✅
+        // MARK: - TODO. 저장 func로 빼자 ✅ -> 24-03-30
         var validationCheck: Bool = true
         if editable {
             validationCheck = editRecordValidation()

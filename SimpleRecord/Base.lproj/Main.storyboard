@@ -12,7 +12,7 @@
         <!--Home-->
         <scene sceneID="JpE-c0-wTQ">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" title="Home" id="Ot7-cs-WuM" customClass="HomeViewController" customModule="muscleMemory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" title="Home" id="Ot7-cs-WuM" customClass="HomeViewController" customModule="simpleRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Oi-ah-w29">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +27,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="CalendarTableCell" reuseIdentifier="CalendarTableCell" id="Vsg-iW-NDW" customClass="CalendarTableCell" customModule="muscleMemory" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="CalendarTableCell" reuseIdentifier="CalendarTableCell" id="Vsg-iW-NDW" customClass="CalendarTableCell" customModule="simpleRecord" customModuleProvider="target">
                                         <rect key="frame" x="-9" y="0.0" width="353" height="468"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="s73-eJ-aXb">
@@ -91,7 +91,7 @@
         <!--Record List View Controller-->
         <scene sceneID="RIe-LP-G3O">
             <objects>
-                <viewController storyboardIdentifier="RecordListViewController" id="ZMX-J5-Yuw" customClass="RecordListViewController" customModule="muscleMemory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecordListViewController" id="ZMX-J5-Yuw" customClass="RecordListViewController" customModule="simpleRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="au4-ZS-yuV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -100,7 +100,7 @@
                                 <rect key="frame" x="20" y="170" width="335" height="397"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RecordListViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecordListViewCell" id="qf5-ZW-1hv" customClass="RecordListViewCell" customModule="muscleMemory" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="RecordListViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecordListViewCell" id="qf5-ZW-1hv" customClass="RecordListViewCell" customModule="simpleRecord" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="335" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qf5-ZW-1hv" id="xTG-DJ-qCi">
@@ -185,7 +185,7 @@
         <!--Record Detail View Controller-->
         <scene sceneID="SQj-Bs-tPq">
             <objects>
-                <viewController storyboardIdentifier="RecordDetailViewController" id="mxm-2o-TSg" customClass="RecordDetailViewController" customModule="muscleMemory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecordDetailViewController" id="mxm-2o-TSg" customClass="RecordDetailViewController" customModule="simpleRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LPR-MC-1qE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -339,7 +339,7 @@
         <!--Test Record-->
         <scene sceneID="1YH-mZ-y6O">
             <objects>
-                <viewController storyboardIdentifier="testRecord" id="E7l-yZ-Z8G" customClass="testRecord" customModule="muscleMemory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="testRecord" id="E7l-yZ-Z8G" customClass="testRecord" customModule="simpleRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mFV-DY-41x">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -502,7 +502,7 @@
         <!--Record Home View-->
         <scene sceneID="Eag-YX-FA2">
             <objects>
-                <viewController storyboardIdentifier="RecordHomeView" id="qLB-bK-nog" customClass="RecordHomeView" customModule="muscleMemory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecordHomeView" id="qLB-bK-nog" customClass="RecordHomeView" customModule="simpleRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="u0O-aE-O9z">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -517,7 +517,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="RecordHomeViewCell" reuseIdentifier="RecordHomeViewCell" id="Nxp-7i-Bj7" customClass="RecordHomeViewCell" customModule="muscleMemory" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="RecordHomeViewCell" reuseIdentifier="RecordHomeViewCell" id="Nxp-7i-Bj7" customClass="RecordHomeViewCell" customModule="simpleRecord" customModuleProvider="target">
                                         <rect key="frame" x="-20" y="0.0" width="375" height="638"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="y3u-Cx-e1v">
@@ -583,7 +583,7 @@
         <!--Record Create View-->
         <scene sceneID="7zt-Fm-4qt">
             <objects>
-                <viewController storyboardIdentifier="RecordCreateView" id="zQf-gV-mDG" customClass="RecordCreateView" customModule="muscleMemory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecordCreateView" id="zQf-gV-mDG" customClass="RecordCreateView" customModule="simpleRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VUi-uD-jzv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -639,7 +639,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B8F-Tf-8CR">
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B8F-Tf-8CR">
                                                                 <rect key="frame" x="81.5" y="0.0" width="253.5" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -743,7 +743,7 @@
         <!--Record Detail View-->
         <scene sceneID="bTm-ym-zNO">
             <objects>
-                <viewController storyboardIdentifier="RecordDetailView" id="xYC-vB-Bz6" customClass="RecordDetailView" customModule="muscleMemory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecordDetailView" id="xYC-vB-Bz6" customClass="RecordDetailView" customModule="simpleRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RN1-Lk-BCr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -913,10 +913,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -192,7 +192,7 @@ extension RecordHomeView: UICollectionViewDelegate, UICollectionViewDataSource, 
         
         if allRecordsDay.contains(calendarDay) {
             // MARK: - TODO. ✅
-            // 1. Image -> 일기 작성할 때 선택한 기분의 이미지로 수정 ✅
+            // 1. Image -> 일기 작성할 때 선택한 기분의 이미지로 수정 ✅ -> 24-04-01
             
             guard let selectedRecord = allRecords.filter({ $0.date == "\(selectYear)-\(selectMonth)-\(calendarDay)" }).first else {
                 return UICollectionViewCell()

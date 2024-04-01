@@ -102,9 +102,9 @@ class RecordCreateView: UIViewController {
         customDelegate?.afterSaveOrEditAction()
         dismiss(animated: true)
         // MARK: - TODO. ✅
-        // 1. 저장 후 안내 메세지와 함께 dismiss ✅
-        // 2. 제목, 내용 입력 안하면 안내 메세지 ✅
-        // 3. 저장 후 RecordHomeView 새로고침 ✅
+        // 1. 저장 후 안내 메세지와 함께 dismiss ✅ -> 24-03-31
+        // 2. 제목, 내용 입력 안하면 안내 메세지 ✅ -> 24-04-01
+        // 3. 저장 후 RecordHomeView 새로고침 ✅ -> 24-04-01
     }
     
     @objc func cancelSelect() {
