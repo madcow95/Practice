@@ -99,12 +99,17 @@ class RecordDetailView: UIViewController {
         // MARK: TODO. ✅
         // 1. title, content, feeling을 입력하지 않았을 때 Validation alert ✅
         guard let record = selectedRecord else { return false }
-        guard let title = titleTextField.text else { return false }
-        guard let content = contentTextView.text else { return false }
-        guard let feeling = feelingTextField.text else { return false }
-        if title.isEmpty || content.isEmpty || feeling.isEmpty {
-            let confirmAction = UIAlertAction(title: "확인", style: .default)
-            commonUtil.showAlertBy(buttonActions: [confirmAction], msg: "제목, 기분, 내용을 모두 입력해주세요.", mainView: self)
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        guard let title = titleTextField.text, !title.isEmpty else {
+            commonUtil.showAlertBy(buttonActions: [confirmAction], msg: "제목을 입력해주세요.", mainView: self)
+            return false
+        }
+        guard let content = contentTextView.text, !content.isEmpty else {
+            commonUtil.showAlertBy(buttonActions: [confirmAction], msg: "내용을 입력해주세요.", mainView: self)
+            return false
+        }
+        guard let feeling = feelingTextField.text, !feeling.isEmpty else {
+            commonUtil.showAlertBy(buttonActions: [confirmAction], msg: "기분을 선택해주세요.", mainView: self)
             return false
         }
         let imageName = feelingImage.accessibilityIdentifier!

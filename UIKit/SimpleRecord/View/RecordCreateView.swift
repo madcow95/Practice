@@ -31,13 +31,16 @@ class RecordCreateView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        
+        setUI()
         setCurrentDate()
+        setButtonAction()
+    }
+    
+    func setUI() {
+        view.backgroundColor = .white
+        setTextViewUI()
         setFeelingPicker()
         setFeelingPickerToolbar()
-        setButtonAction()
-        setContent()
     }
     
     func setCurrentDate() {
@@ -46,6 +49,11 @@ class RecordCreateView: UIViewController {
         let day = homeViewModel.getCurrentDay()
         
         dateTextField.text = "\(year)년 \(month)월 \(day)일"
+    }
+    
+    func setTextViewUI() {
+        recordTextView.layer.cornerRadius = 10
+        recordTextView.layer.borderWidth = 1
     }
     
     func setFeelingPicker() {
@@ -77,23 +85,23 @@ class RecordCreateView: UIViewController {
         saveButton.addTarget(self, action: #selector(saveRecord), for: .touchUpInside)
     }
     
-    func setContent() {
-        recordTextView.layer.cornerRadius = 10
-        recordTextView.layer.borderWidth = 1
-    }
-    
     @objc func cancelRecord() {
         dismiss(animated: true)
     }
     
     @objc func saveRecord() {
         let date = "\(homeViewModel.getCurrentYear())-\(homeViewModel.getCurrentMonth())-\(homeViewModel.getCurrentDay())"
-        guard let title = titleTextField.text else { return }
-        guard let content = recordTextView.text else { return }
-        guard let feeling = feelingTextField.text else { return }
-        if title.isEmpty || content.isEmpty || feeling.isEmpty {
-            let confirmAction = UIAlertAction(title: "확인", style: .default)
-            commonUtil.showAlertBy(buttonActions: [confirmAction], msg: "제목, 기분, 내용을 모두 입력해주세요.", mainView: self)
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        guard let title = titleTextField.text, !title.isEmpty else {
+            commonUtil.showAlertBy(buttonActions: [confirmAction], msg: "제목을 입력해주세요.", mainView: self)
+            return
+        }
+        guard let content = recordTextView.text, !content.isEmpty else {
+            commonUtil.showAlertBy(buttonActions: [confirmAction], msg: "내용을 입력해주세요.", mainView: self)
+            return
+        }
+        guard let feeling = feelingTextField.text, !feeling.isEmpty else {
+            commonUtil.showAlertBy(buttonActions: [confirmAction], msg: "기분을 선택해주세요.", mainView: self)
             return
         }
         let imageName = feelingImage.accessibilityIdentifier!

@@ -117,12 +117,12 @@ class RecordHomeView: UIViewController, Reloadable {
         let currentDate: String = "\(viewModel.getCurrentYear())-\(viewModel.getCurrentMonth())-\(viewModel.getCurrentDay())"
         let todayRecordExist: Bool = viewModel.todayRecordExist(date: currentDate)
         if todayRecordExist {
-            let cancelAction = UIAlertAction(title: "취소", style: .cancel)
-            let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+            let cancelAction: UIAlertAction = UIAlertAction(title: "취소", style: .cancel)
+            let confirmAction: UIAlertAction = UIAlertAction(title: "확인", style: .default) { _ in
                 self.openRecordDetailPage(day: nil)
             }
             commonUtil.showAlertBy(buttonActions: [cancelAction, confirmAction],
-                                   msg: "오늘 이미 작성한 일기가 있습니다.\n오늘 작성한 일기를 수정할까요?",
+                                   msg: "오늘 작성한 일기가 있습니다.\n오늘 작성한 일기를 수정할까요?",
                                    mainView: self)
             return
         }
@@ -139,7 +139,6 @@ class RecordHomeView: UIViewController, Reloadable {
         } else {
             selectMonth -= 1
         }
-        setDate(year: selectYear, month: selectMonth)
         reloadViewCollection()
     }
     
@@ -150,20 +149,23 @@ class RecordHomeView: UIViewController, Reloadable {
         } else {
             selectMonth += 1
         }
-        setDate(year: selectYear, month: selectMonth)
         reloadViewCollection()
     }
     
     private func reloadViewCollection() {
+        setDate(year: selectYear, month: selectMonth)
         setAllRecords()
         collectionView.reloadData()
     }
     
     func openRecordDetailPage(day: Int?) {
         guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordDetailView") as? RecordDetailView else { return }
-        let target = "\(selectYear)-\(selectMonth)-\(day != nil ? day! : viewModel.getCurrentDay())"
+        let target = "\(selectYear)-\(selectMonth)-\(day ?? viewModel.getCurrentDay())"
         
-        guard let selectedRecord = recordDetailViewModel.getRecordBy(date: target) else { return }
+        guard let selectedRecord = recordDetailViewModel.getRecordBy(date: target) else {
+            print("\(target)날짜에서 일기를 불러오던 도중 에러발생")
+            return
+        }
         vc.selectedRecord = selectedRecord
         vc.customDelegate = self
         
