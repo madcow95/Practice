@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecordHomeView: UIViewController {
+class RecordHomeView: UIViewController, Reloadable {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -32,6 +32,7 @@ class RecordHomeView: UIViewController {
     
     let viewModel = RecordHomeViewModel()
     let recordDetailViewModel = RecordDetailViewModel()
+    let commonUtil = CommonUtil()
     
     private var allRecords: [RecordModel] = []
     private var allRecordsDay: [Int] = []
@@ -110,30 +111,24 @@ class RecordHomeView: UIViewController {
         rightButton.addTarget(self, action: #selector(toNextMonth), for: .touchUpInside)
     }
     
-    func showExistAlert() {
-        let alertController = UIAlertController(title: "알림", message: "오늘 이미 작성한 일기가 있습니다.\n오늘 작성한 일기를 수정할까요?", preferredStyle: .alert)
-        
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
-        alertController.addAction(cancelAction)
-        
-        let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
-            self.openRecordDetailPage(day: nil)
-        }
-        alertController.addAction(confirmAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    
     // MARK: - objc Actrions
     @objc func moveToRecordPage() {
         // Storyboard로 생성한 UIViewController으로 페이지 이동할 때
         let currentDate: String = "\(viewModel.getCurrentYear())-\(viewModel.getCurrentMonth())-\(viewModel.getCurrentDay())"
         let todayRecordExist: Bool = viewModel.todayRecordExist(date: currentDate)
         if todayRecordExist {
-            showExistAlert()
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+            let confirmAction = UIAlertAction(title: "확인", style: .default) { _ in
+                self.openRecordDetailPage(day: nil)
+            }
+            commonUtil.showAlertBy(buttonActions: [cancelAction, confirmAction],
+                                   msg: "오늘 이미 작성한 일기가 있습니다.\n오늘 작성한 일기를 수정할까요?",
+                                   mainView: self)
+            return
         }
         
         guard let vc = self.storyboard?.instantiateViewController(identifier: "RecordCreateView") as? RecordCreateView else { return }
+        vc.customDelegate = self
         present(vc, animated: true)
     }
     
@@ -172,6 +167,10 @@ class RecordHomeView: UIViewController {
         vc.selectedRecord = selectedRecord
         
         present(vc, animated: true)
+    }
+    
+    func afterSaveOrEditAction() {
+        reloadViewCollection()
     }
 }
 

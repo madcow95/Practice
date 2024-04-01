@@ -11,6 +11,7 @@ class RecordCreateView: UIViewController {
         
     private let recordViewModel = RecordCreateViewModel()
     private let homeViewModel = RecordHomeViewModel()
+    private let commonUtil = CommonUtil()
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
@@ -24,6 +25,8 @@ class RecordCreateView: UIViewController {
     private var feelingImage = UIImageView()
     private var feelings: [(String, String)] = []
     private var selectedFeeling: (String, String) = ("", "")
+    
+    weak var customDelegate: Reloadable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,15 +82,6 @@ class RecordCreateView: UIViewController {
         recordTextView.layer.borderWidth = 1
     }
     
-    func alertBy(message: String) {
-        let alertController = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
-        
-        let confirmAction = UIAlertAction(title: "확인", style: .default)
-        alertController.addAction(confirmAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    
     @objc func cancelRecord() {
         dismiss(animated: true)
     }
@@ -98,18 +92,19 @@ class RecordCreateView: UIViewController {
         guard let content = recordTextView.text else { return }
         guard let feeling = feelingTextField.text else { return }
         if title.isEmpty || content.isEmpty || feeling.isEmpty {
-            alertBy(message: "제목, 기분, 내용을 모두 입력해주세요.")
+            let confirmAction = UIAlertAction(title: "확인", style: .default)
+            commonUtil.showAlertBy(buttonActions: [confirmAction], msg: "제목, 기분, 내용을 모두 입력해주세요.", mainView: self)
             return
         }
         let imageName = feelingImage.accessibilityIdentifier!
         
         recordViewModel.saveRecord(record: RecordModel(date: date, title: title, content: content, feelingImage: "\(feeling)/\(imageName)"))
-        
+        customDelegate?.afterSaveOrEditAction()
         dismiss(animated: true)
-        // MARK: - TODO. ❌
+        // MARK: - TODO. ✅
         // 1. 저장 후 안내 메세지와 함께 dismiss ✅
-        // 2. 제목, 내용 입력 안하면 안내 메세지 ❌
-        // 3. 저장 후 RecordHomeView 새로고침 ❌
+        // 2. 제목, 내용 입력 안하면 안내 메세지 ✅
+        // 3. 저장 후 RecordHomeView 새로고침 ✅
     }
     
     @objc func cancelSelect() {

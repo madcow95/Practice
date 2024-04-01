@@ -12,6 +12,7 @@ class RecordDetailView: UIViewController {
     private let recordHomeViewModel = RecordHomeViewModel()
     private let recordCreateViewModel = RecordCreateViewModel()
     private let recordDetailViewModel = RecordDetailViewModel()
+    private let commonUtil = CommonUtil()
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
@@ -92,17 +93,23 @@ class RecordDetailView: UIViewController {
         editButton.addTarget(self, action: #selector(editAction), for: .touchUpInside)
     }
     
-    func editRecord() {
-        // MARK: TODO. ❌
-        // 1. title, content, feeling을 입력하지 않았을 때 Validation alert
-        guard let record = selectedRecord else { return }
-        guard let title = titleTextField.text else { return }
-        guard let content = contentTextView.text else { return }
-        let feeling = feelingTextField.text!
+    func editRecordValidation() -> Bool {
+        // MARK: TODO. ✅
+        // 1. title, content, feeling을 입력하지 않았을 때 Validation alert ✅
+        guard let record = selectedRecord else { return false }
+        guard let title = titleTextField.text else { return false }
+        guard let content = contentTextView.text else { return false }
+        guard let feeling = feelingTextField.text else { return false }
+        if title.isEmpty || content.isEmpty || feeling.isEmpty {
+            let confirmAction = UIAlertAction(title: "확인", style: .default)
+            commonUtil.showAlertBy(buttonActions: [confirmAction], msg: "제목, 기분, 내용을 모두 입력해주세요.", mainView: self)
+            return false
+        }
         let imageName = feelingImage.accessibilityIdentifier!
         recordDetailViewModel.editRecord(record: RecordModel(date: record.date, title: title, content: content, feelingImage: "\(feeling)/\(imageName)"))
         
         dismiss(animated: true)
+        return true
     }
     
     @objc func cancelAction() {
@@ -111,10 +118,12 @@ class RecordDetailView: UIViewController {
     
     @objc func editAction() {
         // MARK: - TODO. 저장 func로 빼자 ✅
+        var validationCheck: Bool = true
         if editable {
-            editRecord()
+            validationCheck = editRecordValidation()
         }
         
+        if !validationCheck { return }
         editable.toggle()
         editButton.setTitle(editable ? "저장" : "편집", for: .normal)
         

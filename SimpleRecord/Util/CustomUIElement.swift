@@ -23,3 +23,6 @@ class CustomButton: UIButton {
     }
 }
 
+class CustomAlert: UIAlertController {
+    
+}
