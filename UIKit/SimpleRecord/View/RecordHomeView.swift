@@ -163,7 +163,6 @@ class RecordHomeView: UIViewController, Reloadable {
         let target = "\(selectYear)-\(selectMonth)-\(day ?? viewModel.getCurrentDay())"
         
         guard let selectedRecord = recordDetailViewModel.getRecordBy(date: target) else {
-            print("\(target)날짜에서 일기를 불러오던 도중 에러발생")
             return
         }
         vc.selectedRecord = selectedRecord
