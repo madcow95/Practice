@@ -17,22 +17,30 @@ struct RecordMainView: View {
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 7)
     let width: CGFloat = UIScreen.main.bounds.width / 7
     
+    @State var currentYear: Int = 0
+    @State var currentMonth: Int = 0
+    
+    init() {
+        _currentYear = State(initialValue: recordMainViewModel.getCurrentYear())
+        _currentMonth = State(initialValue: recordMainViewModel.getCurrentMonth())
+    }
+    
     var body: some View {
         
         VStack {
             HStack {
                 HStack {
                     Button(action: {
-                        
+                        decreaseMonth()
                     }, label: {
                         Image(systemName: "arrowtriangle.left.fill")
                             .foregroundStyle(Color.black)
                     })
                     
-                    Text("4월")
+                    Text("\(String(currentYear))년 \(currentMonth)월")
                     
                     Button(action: {
-                        
+                        increaseMonth()
                     }, label: {
                         Image(systemName: "arrowtriangle.right.fill")
                             .foregroundStyle(Color.black)
@@ -76,12 +84,40 @@ struct RecordMainView: View {
                                 .stroke(Color.black, lineWidth: 1)
                         )
                         .onTapGesture {
-                            print(item)
+                            let currentDay = Int(item)!
+                            let currentDate = "\(String(currentYear))-\(currentMonth)-\(currentDay)"
+                            print(currentDate)
                         }
                     }
                 }
                 .padding()
             }
+        }
+    }
+}
+
+extension RecordMainView {
+    func increaseYear() {
+        currentYear += 1
+    }
+    
+    func decreaseYear() {
+        currentYear -= 1
+    }
+    
+    func increaseMonth() {
+        currentMonth += 1
+        if currentMonth > 12 {
+            increaseYear()
+            currentMonth = 1
+        }
+    }
+    
+    func decreaseMonth() {
+        currentMonth -= 1
+        if currentMonth < 1 {
+            decreaseYear()
+            currentMonth = 12
         }
     }
 }
