@@ -11,6 +11,8 @@ import SwiftUI
 
 struct RecordMainView: View {
     
+    private let recordMainViewModel = RecordMainViewModel()
+    
     let data = (1...31).map{ "\($0)" }
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 7)
     let width: CGFloat = UIScreen.main.bounds.width / 7
@@ -19,6 +21,27 @@ struct RecordMainView: View {
         
         VStack {
             HStack {
+                HStack {
+                    Button(action: {
+                        
+                    }, label: {
+                        Image(systemName: "arrowtriangle.left.fill")
+                            .foregroundStyle(Color.black)
+                    })
+                    
+                    Text("4월")
+                    
+                    Button(action: {
+                        
+                    }, label: {
+                        Image(systemName: "arrowtriangle.right.fill")
+                            .foregroundStyle(Color.black)
+                    })
+                }
+                .padding(.horizontal)
+                .padding(.top)
+                
+                
                 Spacer()
                 Button {
                     print("일기 쓰러 가자!")
@@ -47,7 +70,7 @@ struct RecordMainView: View {
                             
                             Spacer()
                         }
-                        .frame(width: width / 1.2, height: CGFloat(width * 2))
+                        .frame(width: width / 1.2, height: CGFloat(width * 1.5))
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color.black, lineWidth: 1)
