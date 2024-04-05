@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD295C512BC02CB4007D56A4 /* RecordCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD295C502BC02CB4007D56A4 /* RecordCreateView.swift */; };
+		CD295C532BC02CBF007D56A4 /* RecordCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD295C522BC02CBF007D56A4 /* RecordCreateViewModel.swift */; };
+		CD295C572BC0386E007D56A4 /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD295C562BC0386E007D56A4 /* RecordDetailView.swift */; };
 		CD4EF2EF2BBD988200925D20 /* simpleRecordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4EF2EE2BBD988200925D20 /* simpleRecordApp.swift */; };
 		CD4EF2F12BBD988200925D20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4EF2F02BBD988200925D20 /* ContentView.swift */; };
 		CD4EF2F32BBD988300925D20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD4EF2F22BBD988300925D20 /* Assets.xcassets */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD295C502BC02CB4007D56A4 /* RecordCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateView.swift; sourceTree = "<group>"; };
+		CD295C522BC02CBF007D56A4 /* RecordCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateViewModel.swift; sourceTree = "<group>"; };
+		CD295C562BC0386E007D56A4 /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
 		CD4EF2EB2BBD988200925D20 /* simpleRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simpleRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD4EF2EE2BBD988200925D20 /* simpleRecordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = simpleRecordApp.swift; sourceTree = "<group>"; };
 		CD4EF2F02BBD988200925D20 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				CDB6A0F12BBE28E900A7A130 /* RecordMainView.swift */,
+				CD295C502BC02CB4007D56A4 /* RecordCreateView.swift */,
+				CD295C562BC0386E007D56A4 /* RecordDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -88,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				CDB6A1342BBEDAAC00A7A130 /* RecordMainViewModel.swift */,
+				CD295C522BC02CBF007D56A4 /* RecordCreateViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -173,7 +182,10 @@
 				CD4EF2F12BBD988200925D20 /* ContentView.swift in Sources */,
 				CDB6A0F22BBE28E900A7A130 /* RecordMainView.swift in Sources */,
 				CDB6A1372BBEDB5A00A7A130 /* RecordModel.swift in Sources */,
+				CD295C532BC02CBF007D56A4 /* RecordCreateViewModel.swift in Sources */,
+				CD295C512BC02CB4007D56A4 /* RecordCreateView.swift in Sources */,
 				CDB6A1352BBEDAAC00A7A130 /* RecordMainViewModel.swift in Sources */,
+				CD295C572BC0386E007D56A4 /* RecordDetailView.swift in Sources */,
 				CD4EF2EF2BBD988200925D20 /* simpleRecordApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

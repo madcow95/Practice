@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct RecordMainView: View {
     
     private let recordMainViewModel = RecordMainViewModel()
@@ -17,12 +15,15 @@ struct RecordMainView: View {
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 7)
     let width: CGFloat = UIScreen.main.bounds.width / 7
     
-    @State var currentYear: Int = 0
-    @State var currentMonth: Int = 0
+    @State var currentYear: Int
+    @State var currentMonth: Int
+    @State var dummyData: [String: RecordModel]
+    @State private var isPresented = false
     
     init() {
         _currentYear = State(initialValue: recordMainViewModel.getCurrentYear())
         _currentMonth = State(initialValue: recordMainViewModel.getCurrentMonth())
+        _dummyData = State(initialValue: recordMainViewModel.getDummyDatas())
     }
     
     var body: some View {
@@ -31,7 +32,9 @@ struct RecordMainView: View {
             HStack {
                 HStack {
                     Button(action: {
-                        decreaseMonth()
+                        let decreaseResult: (Int, Int) = recordMainViewModel.decreaseMonth(year: currentYear, month: currentMonth)
+                        currentYear = decreaseResult.0
+                        currentMonth = decreaseResult.1
                     }, label: {
                         Image(systemName: "arrowtriangle.left.fill")
                             .foregroundStyle(Color.black)
@@ -40,27 +43,38 @@ struct RecordMainView: View {
                     Text("\(String(currentYear))년 \(currentMonth)월")
                     
                     Button(action: {
-                        increaseMonth()
+                        let increaseResult: (Int, Int) = recordMainViewModel.increaseMonth(year: currentYear, month: currentMonth)
+                        currentYear = increaseResult.0
+                        currentMonth = increaseResult.1
                     }, label: {
                         Image(systemName: "arrowtriangle.right.fill")
                             .foregroundStyle(Color.black)
                     })
                 }
                 .padding(.horizontal)
-                .padding(.top)
-                
                 
                 Spacer()
+                
                 Button {
-                    print("일기 쓰러 가자!")
+                    let date: String = "\(currentYear)-\(currentMonth)-\(recordMainViewModel.getCurrentDay())"
+                    guard let _ = dummyData[date] else {
+                        isPresented = true
+                        // MARK: - TODO. 이미 작성된 일기가 있어 수정할래? 알림창 띄움
+                        return
+                    }
+                    isPresented = false
                 } label: {
                     Text("일기쓰기")
                         .padding()
                         .foregroundColor(.white)
                         .fontWeight(.bold)
                 }
+                .frame(height: 40)
                 .background(Capsule().fill(Color.blue))
                 .padding(.horizontal)
+                .sheet(isPresented: $isPresented, content: {
+                    RecordCreateView()
+                })
             }
             .padding(.top)
             
@@ -74,8 +88,13 @@ struct RecordMainView: View {
                             
                             Spacer()
                             
-                            Image(systemName: "sun.max.fill")
-                            
+                            if let dummy = dummyData["\(currentYear)-\(currentMonth)-\(item)"] {
+                                Image(systemName: dummy.feelingImage)
+                                    .frame(width: 30, height: 30)
+                            } else {
+                                Image(systemName: "")
+                                    .frame(width: 30, height: 30)
+                            }
                             Spacer()
                         }
                         .frame(width: width / 1.2, height: CGFloat(width * 1.5))
@@ -92,32 +111,6 @@ struct RecordMainView: View {
                 }
                 .padding()
             }
-        }
-    }
-}
-
-extension RecordMainView {
-    func increaseYear() {
-        currentYear += 1
-    }
-    
-    func decreaseYear() {
-        currentYear -= 1
-    }
-    
-    func increaseMonth() {
-        currentMonth += 1
-        if currentMonth > 12 {
-            increaseYear()
-            currentMonth = 1
-        }
-    }
-    
-    func decreaseMonth() {
-        currentMonth -= 1
-        if currentMonth < 1 {
-            decreaseYear()
-            currentMonth = 12
         }
     }
 }
