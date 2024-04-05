@@ -18,7 +18,8 @@ struct RecordMainView: View {
     @State var currentYear: Int
     @State var currentMonth: Int
     @State var dummyData: [String: RecordModel]
-    @State private var isPresented = false
+    @State private var createViewPresented = false
+    @State private var editViewPresented = false
     
     init() {
         _currentYear = State(initialValue: recordMainViewModel.getCurrentYear())
@@ -58,11 +59,10 @@ struct RecordMainView: View {
                 Button {
                     let date: String = "\(currentYear)-\(currentMonth)-\(recordMainViewModel.getCurrentDay())"
                     guard let _ = dummyData[date] else {
-                        isPresented = true
-                        // MARK: - TODO. 이미 작성된 일기가 있어 수정할래? 알림창 띄움
+                        // MARK: - TODO. 이미 작성된 일기가 있어 수정할래? 알림창 띄움(재사용 가능하게)
                         return
                     }
-                    isPresented = false
+                    createViewPresented.toggle()
                 } label: {
                     Text("일기쓰기")
                         .padding()
@@ -72,7 +72,7 @@ struct RecordMainView: View {
                 .frame(height: 40)
                 .background(Capsule().fill(Color.blue))
                 .padding(.horizontal)
-                .sheet(isPresented: $isPresented, content: {
+                .sheet(isPresented: $createViewPresented, content: {
                     RecordCreateView()
                 })
             }
@@ -103,10 +103,18 @@ struct RecordMainView: View {
                                 .stroke(Color.black, lineWidth: 1)
                         )
                         .onTapGesture {
-                            let currentDay = Int(item)!
-                            let currentDate = "\(String(currentYear))-\(currentMonth)-\(currentDay)"
-                            print(currentDate)
+//                            let currentDay = Int(item)!
+                            let currentDate: String = "\(currentYear)-\(currentMonth)-\(item)"
+                            guard let _ = dummyData[currentDate] else {
+                                // MARK: - TODO. 이미 작성된 일기가 있어 수정할래? 알림창 띄움(재사용 가능하게)
+//                                editViewPresented = false
+                                return
+                            }
+                            editViewPresented.toggle()
                         }
+                        .sheet(isPresented: $editViewPresented, content: {
+                            RecordDetailView()
+                        })
                     }
                 }
                 .padding()
