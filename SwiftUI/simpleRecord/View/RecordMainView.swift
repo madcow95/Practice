@@ -58,11 +58,12 @@ struct RecordMainView: View {
                 
                 Button {
                     let date: String = "\(currentYear)-\(currentMonth)-\(recordMainViewModel.getCurrentDay())"
-                    guard let _ = dummyData[date] else {
-                        // MARK: - TODO. 이미 작성된 일기가 있어 수정할래? 알림창 띄움(재사용 가능하게)
-                        return
-                    }
-                    createViewPresented.toggle()
+                    createViewPresented = dummyData[date] == nil
+//                    guard let _ = dummyData[date] else {
+//                        // MARK: - TODO. 이미 작성된 일기가 있어 수정할래? 알림창 띄움(재사용 가능하게)
+//                        return
+//                    }
+//                    createViewPresented.toggle()
                 } label: {
                     Text("일기쓰기")
                         .padding()

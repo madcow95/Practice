@@ -5,11 +5,12 @@
 //  Created by MadCow on 2024/4/4.
 //
 
-import Foundation
+import SwiftData
 
+@Model
 class RecordModel {
+    @Attribute(.unique) let date: String
     let title: String
-    let date: String
     let feelingImage: String
     let content: String
     

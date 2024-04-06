@@ -13,7 +13,7 @@ class RecordMainViewModel {
         "2024-4-1": RecordModel(title: "제목1", date: "2024-4-1", feelingImage: "sun.max.fill", content: "내용1"),
         "2024-4-3": RecordModel(title: "제목2", date: "2024-4-3", feelingImage: "cloud.sun.fill", content: "내용2"),
         "2024-4-5": RecordModel(title: "제목3", date: "2024-4-5", feelingImage: "cloud.fill", content: "내용3"),
-        "2024-4-6": RecordModel(title: "제목4", date: "2024-4-6", feelingImage: "sun.max.fill", content: "내용4"),
+        "2024-4-7": RecordModel(title: "제목4", date: "2024-4-7", feelingImage: "sun.max.fill", content: "내용4"),
         "2024-4-8": RecordModel(title: "제목5", date: "2024-4-8", feelingImage: "cloud.rain.fill", content: "내용5"),
         "2024-4-12": RecordModel(title: "제목6", date: "2024-4-12", feelingImage: "cloud.fill", content: "내용6"),
         "2024-4-15": RecordModel(title: "제목7", date: "2024-4-15", feelingImage: "cloud.bolt.rain.fill", content: "내용7"),
