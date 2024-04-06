@@ -3,7 +3,7 @@
 //  simpleRecord
 //
 //  Created by MadCow on 2024/4/4.
-//
+/// 오늘은 쉬련다...
 
 import SwiftUI
 
