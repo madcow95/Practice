@@ -9,14 +9,17 @@ import SwiftUI
 
 struct RecordDetailView: View {
     
+//    let viewHandler: (String, String, String, String) -> Void
     @State var title: String = ""
     @State var date: String = ""
     @State var feelingImage: String = ""
     @State var content: String = ""
     @State var saveMode: Bool = false
+    var receivedRecord: RecordModel?
     
     var body: some View {
         let backgroundColor: Color = self.saveMode ? Color.white : Color.gray.opacity(0.3)
+        
         VStack {
             HStack {
                 Text("제목")
@@ -95,6 +98,7 @@ struct RecordDetailView: View {
                 
                 Button(action: {
                     saveMode.toggle()
+                    print(receivedRecord)
                 }, label: {
                     Text(saveMode ? "저장" : "편집")
                 })

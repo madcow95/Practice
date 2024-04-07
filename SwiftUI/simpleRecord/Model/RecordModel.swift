@@ -7,10 +7,9 @@
 
 import SwiftData
 
-@Model
 class RecordModel {
-    @Attribute(.unique) let date: String
     let title: String
+    let date: String
     let feelingImage: String
     let content: String
     

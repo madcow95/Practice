@@ -18,6 +18,7 @@ struct RecordMainView: View {
     @State var currentYear: Int
     @State var currentMonth: Int
     @State var dummyData: [String: RecordModel]
+    @State private var selectedRecord: RecordModel = RecordModel(title: "", date: "", feelingImage: "", content: "")
     @State private var createViewPresented = false
     @State private var editViewPresented = false
     
@@ -106,15 +107,17 @@ struct RecordMainView: View {
                         .onTapGesture {
 //                            let currentDay = Int(item)!
                             let currentDate: String = "\(currentYear)-\(currentMonth)-\(item)"
-                            guard let _ = dummyData[currentDate] else {
+                            guard let record = dummyData[currentDate] else {
                                 // MARK: - TODO. 이미 작성된 일기가 있어 수정할래? 알림창 띄움(재사용 가능하게)
 //                                editViewPresented = false
                                 return
                             }
+                            print(record)
+                            self.selectedRecord = record
                             editViewPresented.toggle()
                         }
                         .sheet(isPresented: $editViewPresented, content: {
-                            RecordDetailView()
+                            RecordDetailView(receivedRecord: self.selectedRecord)
                         })
                     }
                 }
