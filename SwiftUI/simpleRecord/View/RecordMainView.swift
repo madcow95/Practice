@@ -112,12 +112,16 @@ struct RecordMainView: View {
 //                                editViewPresented = false
                                 return
                             }
-                            print(record)
+//                            print(record)
                             self.selectedRecord = record
                             editViewPresented.toggle()
                         }
                         .sheet(isPresented: $editViewPresented, content: {
-                            RecordDetailView(receivedRecord: self.selectedRecord)
+                            RecordDetailView(title: selectedRecord.title,
+                                             date: selectedRecord.date,
+                                             feelingImage: selectedRecord.feelingImage,
+                                             content: selectedRecord.content,
+                                             saveMode: false)
                         })
                     }
                 }

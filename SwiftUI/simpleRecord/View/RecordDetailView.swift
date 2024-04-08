@@ -15,7 +15,7 @@ struct RecordDetailView: View {
     @State var feelingImage: String = ""
     @State var content: String = ""
     @State var saveMode: Bool = false
-    var receivedRecord: RecordModel?
+//    var receivedRecord: RecordModel?
     
     var body: some View {
         let backgroundColor: Color = self.saveMode ? Color.white : Color.gray.opacity(0.3)
@@ -32,7 +32,6 @@ struct RecordDetailView: View {
                     .overlay(RoundedRectangle(cornerRadius: 5)
                                  .stroke(Color.black, lineWidth: 1))
                     .background(backgroundColor)
-//                    .background(Color.white)
                     .disabled(!saveMode)
                     
             }
@@ -62,7 +61,6 @@ struct RecordDetailView: View {
                     .overlay(RoundedRectangle(cornerRadius: 5)
                                 .stroke(Color.black, lineWidth: 1))
                     .background(backgroundColor)
-//                    .background(Color.white)
                     .disabled(!saveMode)
             }
             
@@ -75,9 +73,10 @@ struct RecordDetailView: View {
                 
                 TextEditor(text: $content)
                     .overlay(RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.black, lineWidth: 1))
-                    .padding(.bottom, 20)
+                        .stroke(Color.black, lineWidth: 1)
+                    )
                     .disabled(!saveMode)
+                    .padding(.bottom, 20)
             }
             
             Spacer()
@@ -98,7 +97,7 @@ struct RecordDetailView: View {
                 
                 Button(action: {
                     saveMode.toggle()
-                    print(receivedRecord)
+                    print(title)
                 }, label: {
                     Text(saveMode ? "저장" : "편집")
                 })
