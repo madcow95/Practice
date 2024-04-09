@@ -6,12 +6,13 @@
 //
 
 import SwiftData
+import Combine
 
 class RecordModel {
-    let title: String
-    let date: String
-    let feelingImage: String
-    let content: String
+    var title: String
+    var date: String
+    var feelingImage: String
+    var content: String
     
     init(title: String, date: String, feelingImage: String, content: String) {
         self.title = title

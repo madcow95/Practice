@@ -10,12 +10,12 @@ import SwiftUI
 struct RecordDetailView: View {
     
 //    let viewHandler: (String, String, String, String) -> Void
-    @State var title: String = ""
-    @State var date: String = ""
-    @State var feelingImage: String = ""
-    @State var content: String = ""
+//    @State var title: String = ""
+//    @State var date: String = ""
+//    @State var feelingImage: String = ""
+//    @State var content: String = ""
     @State var saveMode: Bool = false
-//    var receivedRecord: RecordModel?
+    @State var selectedModel: RecordModel
     
     var body: some View {
         let backgroundColor: Color = self.saveMode ? Color.white : Color.gray.opacity(0.3)
@@ -27,7 +27,7 @@ struct RecordDetailView: View {
                 
                 Spacer()
                 
-                TextField("", text: $title)
+                TextField("", text: $selectedModel.title)
                     .frame(height: 30)
                     .overlay(RoundedRectangle(cornerRadius: 5)
                                  .stroke(Color.black, lineWidth: 1))
@@ -42,7 +42,7 @@ struct RecordDetailView: View {
                 
                 Spacer()
                 
-                TextField("", text: $date)
+                TextField("", text: $selectedModel.date)
                     .frame(height: 30)
                     .overlay(RoundedRectangle(cornerRadius: 5)
                                  .stroke(Color.black, lineWidth: 1))
@@ -56,7 +56,7 @@ struct RecordDetailView: View {
                 
                 Spacer()
                 
-                TextField("", text: $feelingImage)
+                TextField("", text: $selectedModel.feelingImage)
                     .frame(height: 30)
                     .overlay(RoundedRectangle(cornerRadius: 5)
                                 .stroke(Color.black, lineWidth: 1))
@@ -71,7 +71,7 @@ struct RecordDetailView: View {
                     Spacer()
                 }
                 
-                TextEditor(text: $content)
+                TextEditor(text: $selectedModel.content)
                     .overlay(RoundedRectangle(cornerRadius: 5)
                         .stroke(Color.black, lineWidth: 1)
                     )
@@ -97,7 +97,7 @@ struct RecordDetailView: View {
                 
                 Button(action: {
                     saveMode.toggle()
-                    print(title)
+                    print(selectedModel.title)
                 }, label: {
                     Text(saveMode ? "저장" : "편집")
                 })
@@ -114,6 +114,6 @@ struct RecordDetailView: View {
     }
 }
 
-#Preview {
-    RecordDetailView()
-}
+//#Preview {
+//    RecordDetailView(selectedModel: RecordModel(title: "", date: "", feelingImage: "", content: ""))
+//}
