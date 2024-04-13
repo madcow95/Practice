@@ -32,6 +32,7 @@ struct RecordMainView: View {
         
         VStack {
             HStack {
+                
                 HStack {
                     Button(action: {
                         let decreaseResult: (Int, Int) = recordMainViewModel.decreaseMonth(year: currentYear, month: currentMonth)
