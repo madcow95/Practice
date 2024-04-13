@@ -3,7 +3,6 @@
 //  simpleRecord
 //
 //  Created by MadCow on 2024/4/4.
-/// 오늘은 쉬련다...
 
 import SwiftUI
 
@@ -106,6 +105,7 @@ struct RecordMainView: View {
                                 .stroke(Color.black, lineWidth: 1)
                         )
                         .onTapGesture {
+                            
                             let currentDate: String = "\(currentYear)-\(currentMonth)-\(item)"
                             guard let record = dummyData[currentDate] else {
                                 // MARK: - TODO. 이미 작성된 일기가 있어 수정할래? 알림창 띄움(재사용 가능하게)
