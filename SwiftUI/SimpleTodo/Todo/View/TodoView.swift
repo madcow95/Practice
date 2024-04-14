@@ -11,7 +11,8 @@ struct TodoView: View {
     
     private let viewModel: TodoViewModel = TodoViewModel()
     
-    let dummy: [String] = ["a", "b", "c", "d", "e", "f", "g"]
+    @State var dummy: [String] = []
+    @State var count: Int = 0
     
     var body: some View {
         NavigationStack {
@@ -22,9 +23,35 @@ struct TodoView: View {
                             TodoDetailView(str: str)
                         }
                     }
+                    .onDelete(perform: { indexSet in
+                        dummy.remove(atOffsets: indexSet)
+                    })
+                }
+                .navigationTitle("List")
+                .toolbar {
+                    ToolbarItem {
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "minus.circle")
+                        }
+                    }
+                    
+                    ToolbarItem {
+                        Button {
+                            addDummy()
+                        } label: {
+                            Image(systemName: "plus.circle")
+                        }
+                    }
                 }
             }
         }
+    }
+    
+    func addDummy() {
+        self.dummy.append("\(count)")
+        count += 1
     }
 }
 
