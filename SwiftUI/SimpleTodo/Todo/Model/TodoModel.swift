@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct TodoModel: Hashable {
+    let uid: UUID = UUID()
+    let date: String
+    let title: String
+    let description: String
+}

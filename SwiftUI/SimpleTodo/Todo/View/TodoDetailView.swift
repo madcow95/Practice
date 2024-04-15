@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TodoDetailView: View {
-    
+        
     @State var str: String = ""
     @State var textFieldIsDisable: Bool = true
     
