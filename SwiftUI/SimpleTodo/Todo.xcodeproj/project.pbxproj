@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD34E67A2BD00790009EFE8E /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD34E6792BD00790009EFE8E /* TestView.swift */; };
+		CD34E67C2BD009BB009EFE8E /* SeparateFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD34E67B2BD009BB009EFE8E /* SeparateFile.swift */; };
 		CD40EE0F2BCAC9D1001AC1AD /* TodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD40EE0E2BCAC9D1001AC1AD /* TodoApp.swift */; };
 		CD40EE112BCAC9D1001AC1AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD40EE102BCAC9D1001AC1AD /* ContentView.swift */; };
 		CD40EE132BCAC9D1001AC1AD /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD40EE122BCAC9D1001AC1AD /* Item.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD34E6792BD00790009EFE8E /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		CD34E67B2BD009BB009EFE8E /* SeparateFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparateFile.swift; sourceTree = "<group>"; };
 		CD40EE0B2BCAC9D1001AC1AD /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD40EE0E2BCAC9D1001AC1AD /* TodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoApp.swift; sourceTree = "<group>"; };
 		CD40EE102BCAC9D1001AC1AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -86,6 +90,8 @@
 			children = (
 				CD40EE1F2BCACA40001AC1AD /* TodoView.swift */,
 				CD40EE272BCACFCD001AC1AD /* TodoDetailView.swift */,
+				CD34E6792BD00790009EFE8E /* TestView.swift */,
+				CD34E67B2BD009BB009EFE8E /* SeparateFile.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -176,10 +182,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD34E67C2BD009BB009EFE8E /* SeparateFile.swift in Sources */,
 				CD40EE112BCAC9D1001AC1AD /* ContentView.swift in Sources */,
 				CD40EE132BCAC9D1001AC1AD /* Item.swift in Sources */,
 				CD40EE202BCACA40001AC1AD /* TodoView.swift in Sources */,
 				CD40EE262BCACE85001AC1AD /* TodoModel.swift in Sources */,
+				CD34E67A2BD00790009EFE8E /* TestView.swift in Sources */,
 				CD40EE282BCACFCD001AC1AD /* TodoDetailView.swift in Sources */,
 				CD40EE232BCACE7A001AC1AD /* TodoViewModel.swift in Sources */,
 				CD40EE0F2BCAC9D1001AC1AD /* TodoApp.swift in Sources */,
