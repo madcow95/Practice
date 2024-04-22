@@ -11,14 +11,10 @@ import SwiftData
 struct MemoAddView: View {
     
     @Environment(\.modelContext) var modelContext
-    var selectedMemo: Memo
     @State private var title: String = ""
-//    @State private var date: String = ""
     
     @Binding var isSheetShowing: Bool
-//    @Binding var memoColor: Color
-    
-//    let colors: [Color]
+    var memoColor: Color
     
     var body: some View {
         VStack {
@@ -32,10 +28,18 @@ struct MemoAddView: View {
                 Spacer()
                 
                 Button {
-//                    selectedMemo.title = title
-//                    selectedMemo.date = Date().currentDateString
                     isSheetShowing = false
-                    modelContext.insert(Memo(title: title, date: Date().currentDateString))
+                    
+                    let uiColor = UIColor(memoColor)
+                    
+                    var red: CGFloat = 0
+                    var green: CGFloat = 0
+                    var blue: CGFloat = 0
+                    var alpha: CGFloat = 0
+                    
+                    uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+                    
+                    modelContext.insert(Memo(title: title, date: Date().currentDateString, color: MemoColor(red: red, green: green, blue: blue, alpha: alpha)))
                 } label: {
                     Text("완료")
                 }
@@ -54,7 +58,7 @@ struct MemoAddView: View {
                     .padding()
                     .frame(height: 50)
                     .foregroundStyle(.white)
-                    .background(.blue)
+                    .background(memoColor)
                     .shadow(radius: 8)
                 }
             }
@@ -65,14 +69,10 @@ struct MemoAddView: View {
             TextField("메모를 입력하세요", text: $title)
                 .padding()
                 .foregroundStyle(.white)
-                .background(.blue)
+                .background(memoColor)
                 .shadow(radius: 3)
             Spacer()
         }
-//        .onAppear(perform: {
-//            title = selectedMemo.title
-//            date = selectedMemo.date
-//        })
         .padding()
     }
 }
