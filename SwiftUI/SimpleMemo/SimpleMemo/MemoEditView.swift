@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomButton: View {
     
-    var buttonName: String
+    @Binding var buttonName: String
     var buttonColor: Color
     var buttonAction: () -> Void
     
@@ -30,14 +30,19 @@ struct MemoEditView: View {
     @State private var title: String = ""
     @State private var date: String = ""
     @State private var editOrSave: String = "Edit"
-    @State private var editMode: Bool = false
+    @State private var cancelButton: String = "Cancel"
+    @State private var editMode: Bool = true
     
     @Binding var selectedMemo: Memo?
     @Binding var memoEditAppear: Bool
     
     var body: some View {
         VStack {
+            Spacer()
+        
             TextField("제목", text: $title)
+                .disabled(editMode)
+                .background(editMode ? Color(UIColor.lightGray) : .white)
             TextField("날짜", text: $date)
                 .disabled(true)
                 .background(Color(UIColor.lightGray))
@@ -47,21 +52,25 @@ struct MemoEditView: View {
             HStack {
                 Spacer()
                 
-                CustomButton(buttonName: "Cancel", buttonColor: .red) {
+                CustomButton(buttonName: $cancelButton, buttonColor: .red) {
                     memoEditAppear = false
                 }
                 
                 Spacer()
                 
-                CustomButton(buttonName: editOrSave, buttonColor: .blue, buttonAction: {
-                    if let selectMemo = selectedMemo {
-                        selectMemo.title = title
-                        selectMemo.date = date
+                CustomButton(buttonName: $editOrSave, buttonColor: .blue, buttonAction: {
+                    editMode.toggle()
+                    if editMode {
+                        if let selectMemo = selectedMemo {
+                            selectMemo.title = title
+                            selectMemo.date = date
+                        }
+                        
+                        memoEditAppear = false
+                    } else {
+                        editOrSave = "Save"
                     }
-                    
-                    memoEditAppear = false
                 })
-                .disabled(title.isEmpty)
                 
                 Spacer()
             }
