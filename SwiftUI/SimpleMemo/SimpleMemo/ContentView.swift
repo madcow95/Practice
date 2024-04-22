@@ -16,12 +16,11 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     
     @State var createMemoIsShowing: Bool = false
-    @State var modifyMemoIsShowing: Bool = false
+    @State var editMemoIsShowing: Bool = false
     @State var selectedMemo: Memo?
     @State var memoColor: Color = .blue
 
     var body: some View {
-        let randomColor = colors.randomElement()!
         NavigationStack {
             List(memos) { memo in
                     HStack {
@@ -37,9 +36,9 @@ struct ContentView: View {
                     .padding()
                     .foregroundStyle(.white)
                     .background(Color(UIColor(red: memo.color.red,
-                                        green: memo.color.green,
-                                        blue: memo.color.blue,
-                                        alpha: memo.color.alpha)))
+                                              green: memo.color.green,
+                                              blue: memo.color.blue,
+                                              alpha: memo.color.alpha)))
                     .shadow(radius: 3)
                     .padding()
                     .contextMenu {
@@ -52,15 +51,15 @@ struct ContentView: View {
                     }
                     .onTapGesture {
                         selectedMemo = memo
-                        modifyMemoIsShowing = true
+                        editMemoIsShowing = true
                     }
             }
             .sheet(isPresented: $createMemoIsShowing, content: {
-                MemoAddView(isSheetShowing: $createMemoIsShowing, memoColor: randomColor)
+                MemoAddView(isSheetShowing: $createMemoIsShowing, memoColor: $memoColor, colors: colors)
                     .modelContainer(for: Memo.self)
             })
-            .sheet(isPresented: $modifyMemoIsShowing, content: {
-                MemoEditView(selectedMemo: $selectedMemo, memoEditAppear: $modifyMemoIsShowing)
+            .sheet(isPresented: $editMemoIsShowing, content: {
+                MemoEditView(selectedMemo: $selectedMemo, memoEditAppear: $editMemoIsShowing)
             })
             .navigationTitle("mememo")
             .toolbar {

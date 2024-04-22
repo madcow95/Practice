@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CustomButton: View {
-    
     @Binding var buttonName: String
     var buttonColor: Color
     var buttonAction: () -> Void
@@ -40,24 +39,27 @@ struct MemoEditView: View {
         VStack {
             Spacer()
         
-            TextField("제목", text: $title)
-                .disabled(editMode)
-                .background(editMode ? Color(UIColor.lightGray) : .white)
-            TextField("날짜", text: $date)
-                .disabled(true)
-                .background(Color(UIColor.lightGray))
+            HStack {
+                Text("날짜: ")
+                TextField("날짜", text: $date)
+                    .disabled(true)
+                    .background(Color(UIColor.lightGray))
+            }
+            HStack {
+                Text("내용: ")
+                TextField("내용", text: $title)
+                    .disabled(editMode)
+                    .background(editMode ? Color(UIColor.lightGray) : .white)
+            }
             
             Spacer()
             
             HStack {
                 Spacer()
-                
                 CustomButton(buttonName: $cancelButton, buttonColor: .red) {
                     memoEditAppear = false
                 }
-                
                 Spacer()
-                
                 CustomButton(buttonName: $editOrSave, buttonColor: .blue, buttonAction: {
                     editMode.toggle()
                     if editMode {
@@ -71,7 +73,6 @@ struct MemoEditView: View {
                         editOrSave = "Save"
                     }
                 })
-                
                 Spacer()
             }
         }

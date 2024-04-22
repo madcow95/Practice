@@ -14,7 +14,9 @@ struct MemoAddView: View {
     @State private var title: String = ""
     
     @Binding var isSheetShowing: Bool
-    var memoColor: Color
+    @Binding var memoColor: Color
+    
+    let colors: [Color]
     
     var body: some View {
         VStack {
@@ -46,20 +48,24 @@ struct MemoAddView: View {
                 .disabled(title.isEmpty)
             }
             
-            HStack {
-                Button {
-                    
-                } label: {
-                    HStack {
-                        Spacer()
-                        Image(systemName: "checkmark.circle")
-                        Spacer()
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(colors, id: \.self) { color in
+                        Button {
+                            memoColor = color
+                        } label: {
+                            HStack {
+                                Spacer()
+                                Image(systemName: "checkmark.circle")
+                                Spacer()
+                            }
+                            .padding()
+                            .frame(height: 50)
+                            .foregroundStyle(.white)
+                            .background(color)
+                            .shadow(radius: 8)
+                        }
                     }
-                    .padding()
-                    .frame(height: 50)
-                    .foregroundStyle(.white)
-                    .background(memoColor)
-                    .shadow(radius: 8)
                 }
             }
             
@@ -71,6 +77,7 @@ struct MemoAddView: View {
                 .foregroundStyle(.white)
                 .background(memoColor)
                 .shadow(radius: 3)
+            
             Spacer()
         }
         .padding()
