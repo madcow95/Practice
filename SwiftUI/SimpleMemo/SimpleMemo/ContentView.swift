@@ -12,7 +12,7 @@ struct ContentView: View {
     
     let colors: [Color] = [.blue, .cyan, .purple, .yellow, .indigo, .gray, .orange, .green, .brown, .mint, .pink]
     
-    @Query(sort: \Memo.date) var memos: [Memo]
+    @Query(sort: \Memo.date, order: .reverse) var memos: [Memo]
     @Environment(\.modelContext) var modelContext
     
     @State var createMemoIsShowing: Bool = false

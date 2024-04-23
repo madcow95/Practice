@@ -56,7 +56,9 @@ struct MemoAddView: View {
                         } label: {
                             HStack {
                                 Spacer()
-                                Image(systemName: "checkmark.circle")
+                                if color == memoColor {                                
+                                    Image(systemName: "checkmark.circle")
+                                }
                                 Spacer()
                             }
                             .padding()

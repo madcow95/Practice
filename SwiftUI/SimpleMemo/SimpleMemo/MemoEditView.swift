@@ -22,6 +22,7 @@ struct CustomButton: View {
         .background(buttonColor)
         .clipShape(Capsule())
     }
+    
 }
 
 struct MemoEditView: View {
