@@ -22,7 +22,8 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            List(memos) { memo in
+            List {
+                ForEach(memos) { memo in
                     HStack {
                         VStack(alignment: .leading) {
                             Text(memo.title)
@@ -53,6 +54,11 @@ struct ContentView: View {
                         selectedMemo = memo
                         editMemoIsShowing = true
                     }
+                }
+                .onDelete { indexSet in
+                    guard let index = indexSet.first else { return }
+                    modelContext.delete(memos[index])
+                }
             }
             .sheet(isPresented: $createMemoIsShowing, content: {
                 MemoAddView(isSheetShowing: $createMemoIsShowing, memoColor: $memoColor, colors: colors)
@@ -69,6 +75,9 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "plus")
                     }
+                }
+                ToolbarItem(placement: .topBarLeading) {
+                    EditButton()
                 }
             }
             .listStyle(.plain)

@@ -62,7 +62,7 @@ struct MemoEditView: View {
                     memoEditAppear = false
                 }
                 Spacer()
-                CustomButton(buttonName: $editOrSave, buttonColor: .blue, buttonAction: {
+                CustomButton(buttonName: $editOrSave, buttonColor: .blue) {
                     editMode.toggle()
                     if editMode {
                         if let selectMemo = selectedMemo {
@@ -74,7 +74,7 @@ struct MemoEditView: View {
                     } else {
                         editOrSave = "Save"
                     }
-                })
+                }
                 Spacer()
             }
         }
