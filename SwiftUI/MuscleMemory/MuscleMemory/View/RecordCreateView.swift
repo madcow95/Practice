@@ -10,6 +10,7 @@ import SwiftUI
 // 현재 스크린의 크기 UIWindow().frame.width
 struct RecordCreateView: View {
     
+    // MARK: TODO - workout 데이터들 SwiftData에 저장
     @State private var checkWorkout: [String: [(String, Bool)]] = [
         "가슴": [
             ("덤벨 플라이", false),
@@ -22,6 +23,10 @@ struct RecordCreateView: View {
             ("바벨 로우", false)
         ]
     ]
+    
+    private var selectedWorkoutExist: Bool {
+        return checkWorkout.flatMap{ $0.value }.filter{ $0.1 == true }.count > 0
+    }
     
     var body: some View {
         NavigationStack {
@@ -37,7 +42,7 @@ struct RecordCreateView: View {
                                     Spacer()
                                     
                                     Button {
-                                        
+                                        print(selectedWorkoutExist)
                                     } label: {
                                         Image(systemName: "plus.circle")
                                             .foregroundStyle(.black)
@@ -65,6 +70,15 @@ struct RecordCreateView: View {
                 }
             }
             .navigationTitle("운동 선택")
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    if selectedWorkoutExist {
+                        Button("추가") {
+                            
+                        }
+                    }
+                }
+            }
         }
         .padding()
     }
