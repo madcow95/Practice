@@ -9,25 +9,34 @@ import SwiftUI
 
 struct RecordCreateView: View {
     
-    @State private var selectedWorkout: String = ""
-    private var mainCategorySelected: Bool {
-        return !self.selectedWorkout.isEmpty
-    }
-    @State private var subCategorySelected: Bool = false
+    @State private var checkWorkout: [(String, Bool)] = [
+        ("덤벨 플라이", false),
+        ("벤치 프레스", false),
+        ("체스트 프레스", false)]
     
     var body: some View {
-        VStack {
-            Picker("선택", selection: $selectedWorkout) {
-                Text("가슴").tag("가슴")
-                Text("등").tag("등")
-                Text("어깨").tag("어깨")
-                Text("하체").tag("하체")
+        NavigationStack {
+            VStack {
+                HStack {
+                    Text("가슴")
+                    Spacer()
+                }
+                Divider()
+                VStack(spacing: 10) {
+                    ForEach(checkWorkout.indices, id: \.self) { index in
+                        let chest = checkWorkout[index]
+                        HStack {
+                            Image(systemName: chest.1 ? "checkmark.circle.fill" : "checkmark.circle")
+                            Text(chest.0)
+                            Spacer()
+                        }
+                        .onTapGesture {
+                            checkWorkout[index].1.toggle()
+                        }
+                    }
+                }
             }
-            .pickerStyle(.segmented)
-            
-            if mainCategorySelected {
-                SubCategoryView()
-            }
+            .navigationTitle("운동 선택")
         }
         .padding()
     }

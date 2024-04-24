@@ -12,6 +12,12 @@ struct SubCategoryView: View {
     
     var body: some View {
         VStack {
+            HStack {
+                Text("운동을 선택해주세요.")
+                    .font(.title)
+                    .bold()
+                Spacer()
+            }
             Picker("선택하세요", selection: $subCategory) {
                 Text("벤치 프레스").tag("벤치프레스")
                 Text("플라이 머신").tag("플라이머신")
