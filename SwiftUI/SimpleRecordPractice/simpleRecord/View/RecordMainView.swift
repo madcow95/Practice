@@ -14,21 +14,14 @@ struct RecordMainView: View {
     let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 7)
     let width: CGFloat = UIScreen.main.bounds.width / 7
     
-    @State var currentYear: Int
-    @State var currentMonth: Int
-    @State var dummyData: [String: RecordModel]
+    @State var currentYear: Int = 0
+    @State var currentMonth: Int = 0
+    @State var dummyData: [String: RecordModel] = [:]
     @State private var selectedRecord: RecordModel?
     @State private var createViewPresented = false
     @State private var editViewPresented = false
     
-    init() {
-        _currentYear = State(initialValue: recordMainViewModel.getCurrentYear())
-        _currentMonth = State(initialValue: recordMainViewModel.getCurrentMonth())
-        _dummyData = State(initialValue: recordMainViewModel.getDummyDatas())
-    }
-    
     var body: some View {
-        
         VStack {
             HStack {
                 
@@ -124,6 +117,11 @@ struct RecordMainView: View {
                 }
                 .padding()
             }
+        }
+        .onAppear {
+            currentYear = recordMainViewModel.getCurrentYear()
+            currentMonth = recordMainViewModel.getCurrentMonth()
+            dummyData = recordMainViewModel.getDummyDatas()
         }
     }
 }
