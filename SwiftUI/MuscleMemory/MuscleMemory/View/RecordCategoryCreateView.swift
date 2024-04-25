@@ -85,6 +85,7 @@ struct RecordCategoryCreateView: View {
                 }
                 .padding()
             }
+            .navigationTitle("운동 추가")
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button {
