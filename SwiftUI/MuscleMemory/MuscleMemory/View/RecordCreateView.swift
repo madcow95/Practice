@@ -21,8 +21,20 @@ struct RecordCreateView: View {
             ("랫 풀 다운", false),
             ("시티드 로우", false),
             ("바벨 로우", false)
+        ],
+        "어깨": [
+            ("숄더 프레스", false),
+            ("밀리터리 프레스", false),
+            ("사이드 레터럴 레이즈", false)
+        ],
+        "하체": [
+            ("스쿼트", false),
+            ("레그 프레스", false),
+            ("레그 익스텐션", false)
         ]
     ]
+    @State private var categoryCreateIsShowing: Bool = false
+    @State private var selectedCategory: String = ""
     
     private var selectedWorkoutExist: Bool {
         return checkWorkout.flatMap{ $0.value }.filter{ $0.1 == true }.count > 0
@@ -42,7 +54,8 @@ struct RecordCreateView: View {
                                     Spacer()
                                     
                                     Button {
-                                        print(selectedWorkoutExist)
+                                        selectedCategory = main.key
+                                        categoryCreateIsShowing = true
                                     } label: {
                                         Image(systemName: "plus.circle")
                                             .foregroundStyle(.black)
@@ -68,6 +81,9 @@ struct RecordCreateView: View {
                         }
                     }
                 }
+                .sheet(isPresented: $categoryCreateIsShowing, content: {
+                    RecordCategoryCreateView(category: $selectedCategory)
+                })
             }
             .navigationTitle("운동 선택")
             .toolbar {

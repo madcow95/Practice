@@ -22,11 +22,7 @@ class TodoModel {
     }
 }
 
-enum Priority: String, Codable, Comparable {
-    static func < (lhs: Priority, rhs: Priority) -> Bool {
-        return lhs.rawValue < rhs.rawValue
-    }
-    
+enum Priority: String, Codable{
     case high = "높음"
     case medium = "중간"
     case low = "낮음"

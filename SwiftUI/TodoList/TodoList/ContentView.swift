@@ -29,9 +29,12 @@ struct ContentView: View {
                         todo.completed ? Text(todo.todoDescription).strikethrough() : Text(todo.todoDescription)
                         
                         Spacer()
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .foregroundStyle(todo.priority == Priority.high ? .red :
-                                             todo.priority == Priority.medium ? .orange : .green)
+                        
+                        if !todo.completed {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundStyle(todo.priority == Priority.high ? .red :
+                                                    todo.priority == Priority.medium ? .orange : .green)
+                        }
                     }
                     .padding()
                     .onTapGesture {
@@ -47,7 +50,12 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Picker("sort", selection: $sort) {
-                        Text("Priority").tag(0)
+                        HStack {
+                            Text("Priority")
+                            Image(systemName: "arrowtriangle.down.fill")
+                                .frame(width: 5, height: 5)
+                        }
+                        .tag(0)
                         Text("Todo").tag(1)
                     }
                     .onChange(of: sort) { _, newValue in

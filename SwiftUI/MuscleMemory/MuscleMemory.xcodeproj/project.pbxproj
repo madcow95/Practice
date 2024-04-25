@@ -12,9 +12,12 @@
 		CD2868852BD941AE0032B151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD2868842BD941AE0032B151 /* Assets.xcassets */; };
 		CD2868882BD941AE0032B151 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD2868872BD941AE0032B151 /* Preview Assets.xcassets */; };
 		CD2868932BD943390032B151 /* CustomExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2868922BD943390032B151 /* CustomExtension.swift */; };
-		CD2868952BD949D70032B151 /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2868942BD949D70032B151 /* RecordModel.swift */; };
+		CD2868952BD949D70032B151 /* MainWorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2868942BD949D70032B151 /* MainWorkoutModel.swift */; };
 		CD2868972BD94BB60032B151 /* RecordCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2868962BD94BB60032B151 /* RecordCreateView.swift */; };
-		CD28689B2BD951060032B151 /* SubCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD28689A2BD951060032B151 /* SubCategoryView.swift */; };
+		CD3669B52BDA8AD2006111C2 /* SubWorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3669B42BDA8AD2006111C2 /* SubWorkoutModel.swift */; };
+		CD3669B72BDA8B4B006111C2 /* RecordCategoryCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3669B62BDA8B4B006111C2 /* RecordCategoryCreateView.swift */; };
+		CD3669B92BDA8CB6006111C2 /* RecordCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3669B82BDA8CB6006111C2 /* RecordCreateViewModel.swift */; };
+		CD3669BB2BDA9A6B006111C2 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3669BA2BDA9A6B006111C2 /* CustomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,9 +27,12 @@
 		CD2868842BD941AE0032B151 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD2868872BD941AE0032B151 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CD2868922BD943390032B151 /* CustomExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExtension.swift; sourceTree = "<group>"; };
-		CD2868942BD949D70032B151 /* RecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
+		CD2868942BD949D70032B151 /* MainWorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWorkoutModel.swift; sourceTree = "<group>"; };
 		CD2868962BD94BB60032B151 /* RecordCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateView.swift; sourceTree = "<group>"; };
-		CD28689A2BD951060032B151 /* SubCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryView.swift; sourceTree = "<group>"; };
+		CD3669B42BDA8AD2006111C2 /* SubWorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubWorkoutModel.swift; sourceTree = "<group>"; };
+		CD3669B62BDA8B4B006111C2 /* RecordCategoryCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCategoryCreateView.swift; sourceTree = "<group>"; };
+		CD3669B82BDA8CB6006111C2 /* RecordCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateViewModel.swift; sourceTree = "<group>"; };
+		CD3669BA2BDA9A6B006111C2 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				CD2868962BD94BB60032B151 /* RecordCreateView.swift */,
-				CD28689A2BD951060032B151 /* SubCategoryView.swift */,
+				CD3669B62BDA8B4B006111C2 /* RecordCategoryCreateView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -91,6 +97,7 @@
 		CD28688F2BD941E50032B151 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CD3669B82BDA8CB6006111C2 /* RecordCreateViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -98,7 +105,8 @@
 		CD2868902BD941E90032B151 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CD2868942BD949D70032B151 /* RecordModel.swift */,
+				CD2868942BD949D70032B151 /* MainWorkoutModel.swift */,
+				CD3669B42BDA8AD2006111C2 /* SubWorkoutModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -107,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				CD2868922BD943390032B151 /* CustomExtension.swift */,
+				CD3669BA2BDA9A6B006111C2 /* CustomView.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -181,10 +190,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD2868952BD949D70032B151 /* RecordModel.swift in Sources */,
-				CD28689B2BD951060032B151 /* SubCategoryView.swift in Sources */,
+				CD3669B52BDA8AD2006111C2 /* SubWorkoutModel.swift in Sources */,
+				CD2868952BD949D70032B151 /* MainWorkoutModel.swift in Sources */,
 				CD2868932BD943390032B151 /* CustomExtension.swift in Sources */,
+				CD3669BB2BDA9A6B006111C2 /* CustomView.swift in Sources */,
+				CD3669B72BDA8B4B006111C2 /* RecordCategoryCreateView.swift in Sources */,
 				CD2868972BD94BB60032B151 /* RecordCreateView.swift in Sources */,
+				CD3669B92BDA8CB6006111C2 /* RecordCreateViewModel.swift in Sources */,
 				CD2868812BD941AE0032B151 /* ContentView.swift in Sources */,
 				CD28687F2BD941AE0032B151 /* MuscleMemoryApp.swift in Sources */,
 			);

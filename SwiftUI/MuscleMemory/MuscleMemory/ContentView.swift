@@ -10,7 +10,7 @@ import SwiftData
 
 struct ContentView: View {
     
-    @Query var records: [RecordModel]
+    @Query var records: [MainWorkoutModel]
     @Environment(\.modelContext) var modelContext
     
     @State private var recordCreateIsShowing: Bool = false
@@ -24,11 +24,10 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationTitle("Health Record")
-            .sheet(isPresented: $recordCreateIsShowing, content: {
+            .navigationDestination(isPresented: $recordCreateIsShowing, destination: {
                 RecordCreateView()
-                    .modelContainer(for: RecordModel.self)
             })
+            .navigationTitle("Health Record")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
