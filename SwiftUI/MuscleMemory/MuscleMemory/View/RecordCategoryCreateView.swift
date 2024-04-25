@@ -44,6 +44,7 @@ struct RecordCategoryCreateView: View {
                     .padding()
                     CustomText {
                         TextField("", text: $weightGroup)
+                            .disabled(true)
                     }
                     
                     HStack {
@@ -63,7 +64,7 @@ struct RecordCategoryCreateView: View {
                                 .foregroundStyle(.white)
                                 .background(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .fill(selectedButton ? Color(UIColor.lightGray) : Color(UIColor.darkGray))
+                                        .fill(selectedButton ? Color(UIColor.darkGray) : Color(UIColor.lightGray).opacity(0.5))
                                 )
                         }
                         Spacer()
@@ -76,7 +77,7 @@ struct RecordCategoryCreateView: View {
                                 .foregroundStyle(.white)
                                 .background(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .fill(selectedButton ? Color(UIColor.darkGray) : Color(UIColor.lightGray))
+                                        .fill(selectedButton ? Color(UIColor.lightGray).opacity(0.5) : Color(UIColor.darkGray))
                                 )
                         }
                         Spacer()
