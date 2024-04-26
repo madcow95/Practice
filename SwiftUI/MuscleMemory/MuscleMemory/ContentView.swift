@@ -28,7 +28,9 @@ struct ContentView: View {
                     HStack {
                         Button {
                             if let nextMonth = Calendar.current.date(byAdding: .month, value: -1, to: date) {
-                                date = nextMonth
+                                withAnimation {
+                                    date = nextMonth
+                                }
                             }
                         } label: {
                             Image(systemName: "arrowtriangle.left.fill")
@@ -44,7 +46,9 @@ struct ContentView: View {
                         
                         Button {
                             if let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: date) {
-                                date = nextMonth
+                                withAnimation {
+                                    date = nextMonth
+                                }
                             }
                         } label: {
                             Image(systemName: "arrowtriangle.right.fill")
@@ -72,7 +76,7 @@ struct ContentView: View {
                                 Button {
                                     // MARK: TODO - SwiftData와 연동 후 선택했을 때 해당 날짜에 운동값 있으면 불러오기
                                     // 날짜 선택하면 선택한 날짜 파란색으로 동그라미 치기
-                                    selectedDate = date
+                                    selectedDate = day
                                 } label: {
                                     Text(day.formatted(.dateTime.day()))
                                         .bold()
@@ -80,7 +84,8 @@ struct ContentView: View {
                                         .background(
                                             Circle()
                                                 .foregroundStyle(
-                                                    Date.now.startOfDay == day.startOfDay ? .red.opacity(0.3) : .white
+                                                    Date.now.startOfDay == day.startOfDay ? .red.opacity(0.3) : 
+                                                        selectedDate == day ? .blue.opacity(0.3) : .white
                                                 )
                                         )
                                 }
