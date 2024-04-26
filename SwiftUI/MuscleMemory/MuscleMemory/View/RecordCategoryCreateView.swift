@@ -24,7 +24,7 @@ struct RecordCategoryCreateView: View {
                     }
                     .padding()
                     CustomText {
-                        Text(category)
+                        TextField("부위", text: $category)
                             .disabled(true)
                     }
                     

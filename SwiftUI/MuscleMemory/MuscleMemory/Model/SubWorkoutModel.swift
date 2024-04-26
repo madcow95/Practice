@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import SwiftData
+//import SwiftData
 
-@Model
+//@Model
 class SubWorkoutModel {
     let id: UUID = UUID()
     let mainCategory: String

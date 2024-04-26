@@ -36,6 +36,11 @@ struct RecordCreateView: View {
     @State private var categoryCreateIsShowing: Bool = false
     @State private var selectedCategory: String = ""
     
+    @Binding var recordCreateIsShowing: Bool
+    @Binding var selectedWorkouts: [Workout]
+    
+    @State var tempSelectedWorkouts: Set<Workout> = []
+    
     private var selectedWorkoutExist: Bool {
         return checkWorkout.flatMap{ $0.value }.filter{ $0.1 == true }.count > 0
     }
@@ -45,6 +50,7 @@ struct RecordCreateView: View {
             ScrollView {
                 VStack {
                     VStack(spacing: 0) {
+                        // Dictionary를 ForEach에서 사용할 때 sorted를 해줘야 한다?
                         ForEach(checkWorkout.sorted{ $0.key < $1.key }, id: \.self.key) { main in
                             VStack(spacing: 0) {
                                 HStack {
@@ -74,6 +80,20 @@ struct RecordCreateView: View {
                                     .padding([.top, .leading])
                                     .onTapGesture {
                                         checkWorkout[main.key]?[index].1.toggle()
+                                        guard let workout = checkWorkout[main.key] else { return }
+                                        if workout[index].1 == true {
+                                            tempSelectedWorkouts.insert(Workout(name: main.key, category: chest.0))
+                                        }
+//                                        if checkWorkout[main.key]?[index].1 == true {
+//                                            if !tempSelectedWorkouts.contains(main.key) {
+//                                                tempSelectedWorkouts.append(main.key)
+//                                            }
+//                                        } else {
+//                                            if tempSelectedWorkouts.contains(main.key) {
+//                                                guard let index = tempSelectedWorkouts.firstIndex(of: main.key) else { return }
+//                                                tempSelectedWorkouts.remove(at: index)
+//                                            }
+//                                        }
                                     }
                                 }
                             }
@@ -90,7 +110,8 @@ struct RecordCreateView: View {
                 ToolbarItem(placement: .bottomBar) {
                     if selectedWorkoutExist {
                         Button("추가") {
-                            
+                            recordCreateIsShowing = false
+                            selectedWorkouts = Array(tempSelectedWorkouts)
                         }
                     }
                 }
@@ -100,6 +121,6 @@ struct RecordCreateView: View {
     }
 }
 
-#Preview {
-    RecordCreateView()
-}
+//#Preview {
+//    RecordCreateView()
+//}

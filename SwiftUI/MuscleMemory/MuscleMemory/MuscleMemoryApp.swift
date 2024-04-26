@@ -6,14 +6,14 @@
 //
 
 import SwiftUI
-import SwiftData
+//import SwiftData
 
 @main
 struct MuscleMemoryApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modelContainer(for: MainWorkoutModel.self)
+//                .modelContainer(for: MainWorkoutModel.self)
         }
     }
 }

@@ -6,17 +6,23 @@
 //
 
 import SwiftUI
-import SwiftData
+//import SwiftData
+
+struct Workout: Hashable {
+    let name: String
+    let category: String
+}
 
 struct ContentView: View {
     
-    @Query var records: [MainWorkoutModel]
-    @Environment(\.modelContext) var modelContext
+//    @Query var records: [MainWorkoutModel]
+//    @Environment(\.modelContext) var modelContext
     
     @State private var recordCreateIsShowing: Bool = false
     @State private var days: [Date] = []
     @State private var date = Date.now
     @State private var selectedDate: Date = Date.now
+    @State private var selectedWorkouts: [Workout] = []
     
     private let daysOfWeek: [String] = ["일", "월", "화", "수", "목", "금", "토"]
     private let columns = Array(repeating: GridItem(.flexible()), count: 7)
@@ -25,12 +31,12 @@ struct ContentView: View {
         NavigationStack {
             ScrollView {
                 VStack {
+                    Divider()
+                    // 날짜 선택 View
                     HStack {
                         Button {
                             if let nextMonth = Calendar.current.date(byAdding: .month, value: -1, to: date) {
-                                withAnimation {
-                                    date = nextMonth
-                                }
+                                date = nextMonth
                             }
                         } label: {
                             Image(systemName: "arrowtriangle.left.fill")
@@ -46,9 +52,7 @@ struct ContentView: View {
                         
                         Button {
                             if let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: date) {
-                                withAnimation {
-                                    date = nextMonth
-                                }
+                                date = nextMonth
                             }
                         } label: {
                             Image(systemName: "arrowtriangle.right.fill")
@@ -58,8 +62,8 @@ struct ContentView: View {
                     }
                     .padding()
                     
+                    // 요일 표시 View
                     HStack {
-                        // MARK: - TODO: 일요일에 빨간색, 토요일에 파란색으로 색칠
                         ForEach(daysOfWeek, id: \.self) { day in
                             Text(day)
                                 .fontWeight(.black)
@@ -68,14 +72,19 @@ struct ContentView: View {
                         }
                     }
                     
+                    // 달력 표시 View
                     LazyVGrid(columns: columns, content: {
+                        // MARK: - TODO: 일요일에 빨간색, 토요일에 파란색으로 색칠
                         ForEach(days, id: \.self) { day in
                             if day.monthInt != date.monthInt {
                                 Text("")
+//                                Text(day.formatted(.dateTime.day()))
+//                                    .foregroundStyle(Color(UIColor.lightGray))
+//                                    .bold()
                             } else {
                                 Button {
-                                    // MARK: TODO - SwiftData와 연동 후 선택했을 때 해당 날짜에 운동값 있으면 불러오기
-                                    // 날짜 선택하면 선택한 날짜 파란색으로 동그라미 치기
+                                    // MARK: TODO - SwiftData와 연동 후 선택했을 때 해당 날짜에 운동값 있으면 불러오기 ❌
+                                    // 날짜 선택하면 선택한 날짜 파란색으로 동그라미 치기 ✅
                                     selectedDate = day
                                 } label: {
                                     Text(day.formatted(.dateTime.day()))
@@ -85,7 +94,7 @@ struct ContentView: View {
                                             Circle()
                                                 .foregroundStyle(
                                                     Date.now.startOfDay == day.startOfDay ? .red.opacity(0.3) : 
-                                                        selectedDate == day ? .blue.opacity(0.3) : .white
+                                                    selectedDate == day ? .blue.opacity(0.3) : .white
                                                 )
                                         )
                                 }
@@ -93,12 +102,46 @@ struct ContentView: View {
                             }
                         }
                     })
-                    Spacer()
+                    Divider()
+                    
+                    // 추가하기 공유하기 버튼 HStack View
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Button {
+                                recordCreateIsShowing = true
+                            } label: {
+                                HStack {
+                                    Image(systemName: "plus")
+                                    Text("추가하기")
+                                }
+                            }
+                            Spacer()
+                            Button {
+                                // 이 버튼은 뺄듯..?
+                            } label: {
+                                HStack {
+                                    Image(systemName: "square.and.arrow.up")
+                                    Text("공유하기")
+                                }
+                            }
+                            Spacer()
+                        }
+                        .padding()
+                        .foregroundStyle(Color(UIColor.lightGray))
+                        .font(.subheadline)
+                        
+                        ForEach(selectedWorkouts, id: \.self) { workout in
+                            HStack {
+                                Text("\(workout.category) (\(workout.name))")
+                            }
+                        }
+                    }
                 }
-                .navigationTitle("Muscle Memoery")
+                .navigationTitle("Muscle Memory")
                 .padding()
                 .navigationDestination(isPresented: $recordCreateIsShowing, destination: {
-                    RecordCreateView()
+                    RecordCreateView(recordCreateIsShowing: $recordCreateIsShowing, selectedWorkouts: $selectedWorkouts)
                 })
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {

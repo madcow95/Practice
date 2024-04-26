@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import SwiftData
+//import SwiftData
 
-@Model
+//@Model
 class MainWorkoutModel {
     let id: UUID = UUID()
     let date: Date
