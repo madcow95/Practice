@@ -12,6 +12,7 @@ struct Workout: Hashable {
     let name: String
     let category: String
 }
+// 센세 뭔가 스유를 공부하면서 느낀게 화면을 만들기에는 진짜 편한거 같은데 이게 코드가 길어지니까 너무 보기가 불편해서 View를 여러개로 쪼개서 관리하는게 좋을까요?
 
 struct ContentView: View {
     
@@ -86,7 +87,6 @@ struct ContentView: View {
                                 Button {
                                     // MARK: TODO - SwiftData와 연동 후 선택했을 때 해당 날짜에 운동값 있으면 불러오기 ❌
                                     // 날짜 선택하면 선택한 날짜 파란색으로 동그라미 치기 ✅
-                                    
                                     selectedDate = day
                                 } label: {
                                     Text(day.formatted(.dateTime.day()))
@@ -96,7 +96,7 @@ struct ContentView: View {
                                             Circle()
                                                 .foregroundStyle(
                                                     Date.now.startOfDay == day.startOfDay ? .red.opacity(0.3) : 
-                                                        selectedDate == day && day.startOfDay <= Date.now.startOfDay ? .blue.opacity(0.3) : .white
+                                                           selectedDate == day && day.startOfDay <= Date.now.startOfDay ? .blue.opacity(0.3) : .white
                                                 )
                                         )
                                 }

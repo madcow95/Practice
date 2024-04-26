@@ -64,7 +64,7 @@ struct RecordCreateView: View {
                                         categoryCreateIsShowing = true
                                     } label: {
                                         Image(systemName: "plus.circle")
-                                            .foregroundStyle(.black)
+                                            .foregroundStyle(.primary)
                                     }
                                 }
                                 .padding(.bottom, 10)

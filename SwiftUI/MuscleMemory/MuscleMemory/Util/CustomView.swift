@@ -14,10 +14,10 @@ struct CustomText<Content: View>: View {
         content
             .frame(width: UIWindow().frame.width / 1.2, height: 20)
             .padding()
-            .background(Color.white)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.black, lineWidth: 1)
+                    .background(Color.white)
             )
     }
 }
