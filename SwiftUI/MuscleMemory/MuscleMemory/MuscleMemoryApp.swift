@@ -12,7 +12,7 @@ import SwiftUI
 struct MuscleMemoryApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            APITestView()
 //                .modelContainer(for: MainWorkoutModel.self)
         }
     }

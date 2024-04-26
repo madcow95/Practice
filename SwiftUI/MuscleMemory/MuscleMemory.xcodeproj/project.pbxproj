@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD01A3952BDBD8FB00064275 /* APITestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD01A3942BDBD8FB00064275 /* APITestView.swift */; };
 		CD28687F2BD941AE0032B151 /* MuscleMemoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD28687E2BD941AE0032B151 /* MuscleMemoryApp.swift */; };
 		CD2868812BD941AE0032B151 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2868802BD941AE0032B151 /* ContentView.swift */; };
 		CD2868852BD941AE0032B151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD2868842BD941AE0032B151 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD01A3942BDBD8FB00064275 /* APITestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITestView.swift; sourceTree = "<group>"; };
 		CD28687B2BD941AE0032B151 /* MuscleMemory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuscleMemory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD28687E2BD941AE0032B151 /* MuscleMemoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleMemoryApp.swift; sourceTree = "<group>"; };
 		CD2868802BD941AE0032B151 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				CD28688E2BD941E10032B151 /* View */,
 				CD28687E2BD941AE0032B151 /* MuscleMemoryApp.swift */,
 				CD2868802BD941AE0032B151 /* ContentView.swift */,
+				CD01A3942BDBD8FB00064275 /* APITestView.swift */,
 				CD2868842BD941AE0032B151 /* Assets.xcassets */,
 				CD2868862BD941AE0032B151 /* Preview Content */,
 			);
@@ -195,6 +198,7 @@
 				CD2868932BD943390032B151 /* CustomExtension.swift in Sources */,
 				CD3669BB2BDA9A6B006111C2 /* CustomView.swift in Sources */,
 				CD3669B72BDA8B4B006111C2 /* RecordCategoryCreateView.swift in Sources */,
+				CD01A3952BDBD8FB00064275 /* APITestView.swift in Sources */,
 				CD2868972BD94BB60032B151 /* RecordCreateView.swift in Sources */,
 				CD3669B92BDA8CB6006111C2 /* RecordCreateViewModel.swift in Sources */,
 				CD2868812BD941AE0032B151 /* ContentView.swift in Sources */,

@@ -78,6 +78,7 @@ struct ContentView: View {
                         ForEach(days, id: \.self) { day in
                             if day.monthInt != date.monthInt {
                                 Text("")
+//                                아래 코드는 이전 월의 날들을 회색으로 표시해주는 Text들
 //                                Text(day.formatted(.dateTime.day()))
 //                                    .foregroundStyle(Color(UIColor.lightGray))
 //                                    .bold()
@@ -85,6 +86,7 @@ struct ContentView: View {
                                 Button {
                                     // MARK: TODO - SwiftData와 연동 후 선택했을 때 해당 날짜에 운동값 있으면 불러오기 ❌
                                     // 날짜 선택하면 선택한 날짜 파란색으로 동그라미 치기 ✅
+                                    
                                     selectedDate = day
                                 } label: {
                                     Text(day.formatted(.dateTime.day()))
@@ -94,7 +96,7 @@ struct ContentView: View {
                                             Circle()
                                                 .foregroundStyle(
                                                     Date.now.startOfDay == day.startOfDay ? .red.opacity(0.3) : 
-                                                    selectedDate == day ? .blue.opacity(0.3) : .white
+                                                        selectedDate == day && day.startOfDay <= Date.now.startOfDay ? .blue.opacity(0.3) : .white
                                                 )
                                         )
                                 }
