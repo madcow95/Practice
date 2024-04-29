@@ -10,6 +10,9 @@ import SwiftUI
 struct RecordCategoryCreateView: View {
     
     @Binding var category: String
+    @Binding var checkWorkout: [String: [(String, Bool)]]
+    @Binding var categoryCreateIsShowing: Bool
+    
     @State private var workoutName: String = ""
     @State private var weightGroup: String = "kg"
     @State private var selectedButton: Bool = true
@@ -90,7 +93,10 @@ struct RecordCategoryCreateView: View {
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button {
-                        
+                        if checkWorkout[category] != nil {
+                            checkWorkout[category]?.append((workoutName, false))
+                        }
+                        categoryCreateIsShowing = false
                     } label: {
                         CustomText {
                             Text("저장")

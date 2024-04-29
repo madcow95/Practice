@@ -102,7 +102,7 @@ struct RecordCreateView: View {
                     }
                 }
                 .sheet(isPresented: $categoryCreateIsShowing, content: {
-                    RecordCategoryCreateView(category: $selectedCategory)
+                    RecordCategoryCreateView(category: $selectedCategory, checkWorkout: $checkWorkout, categoryCreateIsShowing: $categoryCreateIsShowing)
                 })
             }
             .navigationTitle("운동 선택")

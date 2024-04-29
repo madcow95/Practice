@@ -17,7 +17,7 @@ struct APITestView: View {
     @State private var word: String = ""
     @State private var currentMode: Bool = true
     private var currentModeName: String {
-        return currentMode ? "영한" : "한영"
+        return currentMode ? "영 -> 한" : "한 -> 영"
     }
     
     let session = URLSession.shared

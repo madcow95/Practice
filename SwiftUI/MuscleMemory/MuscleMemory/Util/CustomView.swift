@@ -17,7 +17,7 @@ struct CustomText<Content: View>: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.black, lineWidth: 1)
-                    .background(Color.white)
+//                    .background(Color.white)
             )
     }
 }
