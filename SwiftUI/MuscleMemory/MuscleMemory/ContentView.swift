@@ -12,7 +12,6 @@ struct Workout: Hashable {
     let name: String
     let category: String
 }
-// 센세 뭔가 스유를 공부하면서 느낀게 화면을 만들기에는 진짜 편한거 같은데 이게 코드가 길어지니까 너무 보기가 불편해서 View를 여러개로 쪼개서 관리하는게 좋을까요?
 
 struct ContentView: View {
     
