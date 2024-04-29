@@ -6,36 +6,33 @@
 //
 
 import SwiftUI
+import SwiftSoup
 
-struct WordMeaning: Decodable {
-    let partOfSpeech: String
-    let definitions: [Definition]
-}
-
-struct Definition: Decodable {
-    let definition: String
-    let synonyms: [String]
-}
-
-struct WordData: Decodable {
-    let meanings: [WordMeaning]
+enum WordMode {
+    case engKor
+    case korEng
 }
 
 struct APITestView: View {
     @State private var word: String = ""
+    @State private var currentMode: Bool = true
+    private var currentModeName: String {
+        return currentMode ? "영한" : "한영"
+    }
     
     let session = URLSession.shared
     var body: some View {
-        let url = URL(string: "https://api.dictionaryapi.dev/api/v2/entries/en/\(word.lowercased())")!
-        
         VStack {
+            Toggle(isOn: $currentMode, label: {
+                Text(currentModeName)
+            })
             TextField("단어 입력", text: $word)
                 .padding()
                 .clipShape(Capsule())
                 .border(.black, width: 2)
             
             Button {
-                fetchData(url: url)
+                fetchData(mode: currentMode ? "en/ko" : "ko/en", word: word)
             } label: {
                 Text("체크")
                     .frame(maxWidth: .infinity)
@@ -48,7 +45,8 @@ struct APITestView: View {
         .padding()
     }
     
-    func fetchData(url: URL) {
+    func fetchData(mode: String, word: String) {
+        guard let url = URL(string: "https://glosbe.com/\(mode)/\(word.lowercased())") else { return }
         let task = session.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 print("error > \(error)")
@@ -65,17 +63,18 @@ struct APITestView: View {
                 return
             }
             
-            do {
-                let decoder = JSONDecoder()
-                let wordData = try decoder.decode([WordData].self, from: data)
-                let wordResponse = wordData[0].meanings[0].definitions[0].definition
-                
-                print(wordResponse)
-            } catch {
-                print("Error parsing JSON: \(error)")
+            if let html = String(data: data, encoding: .utf8) {
+                do {
+                    let document = try SwiftSoup.parse(html)
+                    let paragraph = try document.select(".align-top.inline.leading-10.text-primary-700").text()
+                    if paragraph.count > 0 {
+                        print("paragraph > \(paragraph.split(separator: " ")[0])")
+                    }
+                } catch {
+                    print("Error parsing HTML: \(error)")
+                }
             }
         }
-        
         task.resume()
     }
 }

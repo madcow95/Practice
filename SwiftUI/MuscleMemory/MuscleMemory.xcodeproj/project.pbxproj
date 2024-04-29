@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CD01A3952BDBD8FB00064275 /* APITestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD01A3942BDBD8FB00064275 /* APITestView.swift */; };
+		CD22CC842BDFAD660076E1C7 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = CD22CC832BDFAD660076E1C7 /* SwiftSoup */; };
 		CD28687F2BD941AE0032B151 /* MuscleMemoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD28687E2BD941AE0032B151 /* MuscleMemoryApp.swift */; };
 		CD2868812BD941AE0032B151 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2868802BD941AE0032B151 /* ContentView.swift */; };
 		CD2868852BD941AE0032B151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD2868842BD941AE0032B151 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD22CC842BDFAD660076E1C7 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +141,9 @@
 			dependencies = (
 			);
 			name = MuscleMemory;
+			packageProductDependencies = (
+				CD22CC832BDFAD660076E1C7 /* SwiftSoup */,
+			);
 			productName = MuscleMemory;
 			productReference = CD28687B2BD941AE0032B151 /* MuscleMemory.app */;
 			productType = "com.apple.product-type.application";
@@ -167,6 +172,9 @@
 				Base,
 			);
 			mainGroup = CD2868722BD941AE0032B151;
+			packageReferences = (
+				CD22CC822BDFAD660076E1C7 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+			);
 			productRefGroup = CD28687C2BD941AE0032B151 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -406,6 +414,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CD22CC822BDFAD660076E1C7 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CD22CC832BDFAD660076E1C7 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD22CC822BDFAD660076E1C7 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CD2868732BD941AE0032B151 /* Project object */;
 }
