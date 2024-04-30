@@ -13,7 +13,7 @@ struct MuscleMemoryApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-//                .modelContainer(for: MainWorkoutModel.self)
+//                .modelContainer(for: WorkoutModelForDisplay.self)
         }
     }
 }

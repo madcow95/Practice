@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//import SwiftData
+import SwiftData
 
 struct Workout: Hashable {
     let name: String
@@ -14,9 +14,6 @@ struct Workout: Hashable {
 }
 
 struct ContentView: View {
-    
-//    @Query var records: [MainWorkoutModel]
-//    @Environment(\.modelContext) var modelContext
     
     @State private var recordCreateIsShowing: Bool = false
     @State private var days: [Date] = []
@@ -143,6 +140,7 @@ struct ContentView: View {
                 .padding()
                 .navigationDestination(isPresented: $recordCreateIsShowing, destination: {
                     RecordCreateView(recordCreateIsShowing: $recordCreateIsShowing, selectedWorkouts: $selectedWorkouts)
+                        .modelContainer(for: [WorkoutModelForDisplay.self, WorkoutSubCategory.self])
                 })
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -155,6 +153,8 @@ struct ContentView: View {
                 }
                 .onAppear {
                     days = date.calendarDisplayDays
+//                    print("mainWorkouts > \(mainWorkouts)")
+                    
                 }
                 .onChange(of: Date()) {
                     days = date.calendarDisplayDays

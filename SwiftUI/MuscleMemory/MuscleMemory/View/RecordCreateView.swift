@@ -6,33 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
 // 현재 스크린의 크기 UIWindow().frame.width
 struct RecordCreateView: View {
     
-    // MARK: TODO - workout 데이터들 SwiftData에 저장
-    @State private var checkWorkout: [String: [(String, Bool)]] = [
-        "가슴": [
-            ("덤벨 플라이", false),
-            ("벤치 프레스", false),
-            ("체스트 프레스", false)
-        ],
-        "등": [
-            ("랫 풀 다운", false),
-            ("시티드 로우", false),
-            ("바벨 로우", false)
-        ],
-        "어깨": [
-            ("숄더 프레스", false),
-            ("밀리터리 프레스", false),
-            ("사이드 레터럴 레이즈", false)
-        ],
-        "하체": [
-            ("스쿼트", false),
-            ("레그 프레스", false),
-            ("레그 익스텐션", false)
-        ]
-    ]
+    @Query var mainWorkouts: [WorkoutModelForDisplay]
+    @Query var subWorkouts: [WorkoutSubCategory]
+    @Environment(\.modelContext) var modelContext
+    
+    // MARK: TODO - workout 데이터들 SwiftData에 저장 ✅
+    @State private var checkWorkout: [String: [(String, Bool)]] = [:]
+    
     @State private var categoryCreateIsShowing: Bool = false
     @State private var selectedCategory: String = ""
     
@@ -84,16 +69,6 @@ struct RecordCreateView: View {
                                         if workout[index].1 == true {
                                             tempSelectedWorkouts.insert(Workout(name: main.key, category: chest.0))
                                         }
-//                                        if checkWorkout[main.key]?[index].1 == true {
-//                                            if !tempSelectedWorkouts.contains(main.key) {
-//                                                tempSelectedWorkouts.append(main.key)
-//                                            }
-//                                        } else {
-//                                            if tempSelectedWorkouts.contains(main.key) {
-//                                                guard let index = tempSelectedWorkouts.firstIndex(of: main.key) else { return }
-//                                                tempSelectedWorkouts.remove(at: index)
-//                                            }
-//                                        }
                                     }
                                 }
                             }
@@ -118,6 +93,20 @@ struct RecordCreateView: View {
             }
         }
         .padding()
+        .onAppear {
+            // MARK: TODO - ViewModel로 옮기기
+            for mainWorkout in mainWorkouts {
+                let key = mainWorkout.mainCategory
+                let subWorkoutNames = subWorkouts.filter{ $0.mainCategory == key }
+                for subWorkoutName in subWorkoutNames {
+                    if checkWorkout[subWorkoutName.mainCategory] == nil {
+                        checkWorkout[subWorkoutName.mainCategory] = [(subWorkoutName.subCategory, false)]
+                    } else {
+                        checkWorkout[subWorkoutName.mainCategory]?.append((subWorkoutName.subCategory, false))
+                    }
+                }
+            }
+        }
     }
 }
 
