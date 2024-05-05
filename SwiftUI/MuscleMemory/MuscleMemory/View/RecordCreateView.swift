@@ -78,6 +78,7 @@ struct RecordCreateView: View {
                 }
                 .sheet(isPresented: $categoryCreateIsShowing, content: {
                     RecordCategoryCreateView(category: $selectedCategory, checkWorkout: $checkWorkout, categoryCreateIsShowing: $categoryCreateIsShowing)
+                        .modelContainer(for: [WorkoutModelForDisplay.self, WorkoutSubCategory.self])
                 })
             }
             .navigationTitle("운동 선택")
@@ -94,6 +95,7 @@ struct RecordCreateView: View {
         }
         .padding()
         .onAppear {
+            print(mainWorkouts)
             // MARK: TODO - ViewModel로 옮기기
             for mainWorkout in mainWorkouts {
                 let key = mainWorkout.mainCategory

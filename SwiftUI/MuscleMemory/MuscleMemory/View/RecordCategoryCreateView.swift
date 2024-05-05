@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct RecordCategoryCreateView: View {
     
@@ -16,6 +17,10 @@ struct RecordCategoryCreateView: View {
     @State private var workoutName: String = ""
     @State private var weightGroup: String = "kg"
     @State private var selectedButton: Bool = true
+    
+    @Query var mainCategory: [WorkoutModelForDisplay]
+    @Query var subCategory: [WorkoutSubCategory]
+    @Environment(\.modelContext) var modelContext
     
     var body: some View {
         NavigationStack {
@@ -94,7 +99,8 @@ struct RecordCategoryCreateView: View {
                 ToolbarItem(placement: .bottomBar) {
                     Button {
                         if checkWorkout[category] != nil {
-                            checkWorkout[category]?.append((workoutName, false))
+//                            checkWorkout[category]?.append((workoutName, false))
+                            modelContext.insert(WorkoutSubCategory(mainCategory: category, subCategory: workoutName))
                         }
                         categoryCreateIsShowing = false
                     } label: {
