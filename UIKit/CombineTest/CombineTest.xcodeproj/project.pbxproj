@@ -13,6 +13,7 @@
 		CD53B78F2BEA7B0100A70B4F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CD53B78E2BEA7B0100A70B4F /* Base */; };
 		CD53B7912BEA7B0200A70B4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD53B7902BEA7B0200A70B4F /* Assets.xcassets */; };
 		CD53B7942BEA7B0200A70B4F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CD53B7932BEA7B0200A70B4F /* Base */; };
+		CDB04DF62BEB36F800A49830 /* ViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB04DF52BEB36F800A49830 /* ViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CD53B7902BEA7B0200A70B4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD53B7932BEA7B0200A70B4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD53B7952BEA7B0200A70B4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDB04DF52BEB36F800A49830 /* ViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				CD53B7902BEA7B0200A70B4F /* Assets.xcassets */,
 				CD53B7922BEA7B0200A70B4F /* LaunchScreen.storyboard */,
 				CD53B7952BEA7B0200A70B4F /* Info.plist */,
+				CDB04DF52BEB36F800A49830 /* ViewCell.swift */,
 			);
 			path = CombineTest;
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDB04DF62BEB36F800A49830 /* ViewCell.swift in Sources */,
 				CD53B78C2BEA7B0100A70B4F /* ViewController.swift in Sources */,
 				CD53B7882BEA7B0100A70B4F /* AppDelegate.swift in Sources */,
 				CD53B78A2BEA7B0100A70B4F /* SceneDelegate.swift in Sources */,
@@ -304,7 +308,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MadCow.CombineTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.madcow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -331,7 +335,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MadCow.CombineTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.madcow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
