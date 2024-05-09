@@ -8,9 +8,13 @@
 import UIKit
 import Combine
 
+// DispatchQueue.main
+// RunLoop.main
+// eraseToAnyPublisher
+
 class ViewController: UIViewController {
     
-    private var videoInfos: [(String, String, String, String)] = []
+    private var videoInfos: [VideoInfoModel] = []
     
     private let searchField: UITextField = {
         let tf = UITextField()
@@ -19,6 +23,17 @@ class ViewController: UIViewController {
         tf.text = "침착맨"
         
         return tf
+    }()
+    
+    private let nextPageButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.layer.borderWidth = 1
+        btn.setTitle("NextPage", for: .normal)
+        btn.backgroundColor = .systemBlue
+        btn.tintColor = .white
+        
+        return btn
     }()
     
     private let searchButton: UIButton = {
@@ -42,15 +57,18 @@ class ViewController: UIViewController {
     
     var cancellables = Set<AnyCancellable>()
     private var page: Int = 1
+    private var isLoading: Bool = false
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(searchField)
         view.addSubview(searchButton)
+        view.addSubview(nextPageButton)
         view.addSubview(tableView)
         
         searchButton.addTarget(self, action: #selector(searchVideo), for: .touchUpInside)
+        nextPageButton.addTarget(self, action: #selector(toAnotherView), for: .touchUpInside)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ViewCell.self, forCellReuseIdentifier: "ViewCell")
@@ -64,10 +82,13 @@ class ViewController: UIViewController {
             searchButton.widthAnchor.constraint(equalToConstant: 100),
             searchButton.heightAnchor.constraint(equalTo: searchButton.heightAnchor),
             
+            nextPageButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            nextPageButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
             tableView.topAnchor.constraint(equalTo: searchButton.bottomAnchor, constant: 5),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: nextPageButton.topAnchor)
         ])
     }
     
@@ -75,28 +96,36 @@ class ViewController: UIViewController {
         guard let searchText = self.searchField.text else { return }
         self.videoInfos = []
         self.page = 1
-        test(searchText: searchText, page: page)
+        startLoadVideos(searchText: searchText)
     }
     
-    func test(searchText: String, page: Int) {
-        loadVideos(text: searchText, page: page).sink { completion in
+    @objc func toAnotherView() {
+        let viewController = AnotherView()
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    func startLoadVideos(searchText: String) {
+        guard !isLoading else { return } // 이미 로딩 중인 경우 추가 요청을 방지
+        isLoading = true // 로딩 시작
+        loadVideos(searchText: searchText).sink { completion in
+            self.isLoading = false
             switch completion {
             case .finished:
                 print("End!")
             case .failure(let error):
                 print("error! > \(error.localizedDescription)")
             }
-        } receiveValue: { videoInfo in
+        } receiveValue: { receivedVideoInfo in
             DispatchQueue.main.async {
-                self.videoInfos += videoInfo
+                self.videoInfos += receivedVideoInfo
                 self.tableView.reloadData()
             }
         }.store(in: &cancellables)
     }
     
-    func loadVideos(text: String, page: Int) -> Future<[(String, String, String, String)], Error> {
+    func loadVideos(searchText: String) -> Future<[VideoInfoModel], Error> {
         return Future { futureResponse in
-            let endpoint = "https://dapi.kakao.com/v2/search/vclip?query=\(text)&&sort=recency&&page=\(page)&&size=10"
+            let endpoint = "https://dapi.kakao.com/v2/search/vclip?query=\(searchText)&&page=\(self.page)&&size=30"
             let apiKey = "e2bbe272dc60ca8f0be0dd419334a2e9"
             var request = URLRequest(url: URL(string: endpoint)!)
             request.httpMethod = "GET"
@@ -116,16 +145,16 @@ class ViewController: UIViewController {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                     if let clips = json["documents"] as? [[String: Any]] {
-                        var responseArr: [(String, String, String, String)] = []
+                        var videoInfoArr: [VideoInfoModel] = []
                         for clip in clips {
                             let title = clip["title"] as! String
                             let url = clip["url"] as! String
                             let thumbnail = clip["thumbnail"] as! String
                             let author = clip["author"] as! String
                             
-                            responseArr.append((title, url, thumbnail, author))
+                            videoInfoArr.append(VideoInfoModel(title: title, url: url, thumbnail: thumbnail, author: author))
                         }
-                        futureResponse(.success(responseArr))
+                        futureResponse(.success(videoInfoArr))
                     }
                 } catch {
                     print("error after task > \(error.localizedDescription)")
@@ -142,10 +171,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ViewCell", for: indexPath) as? ViewCell else { return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ViewCell", for: indexPath) as? ViewCell else { return UITableViewCell()
+        }
         
         let info = videoInfos[indexPath.item]
-        if let imageUrl = URL(string: info.2) {
+        if let imageUrl = URL(string: info.thumbnail) {
             DispatchQueue.global().async {
                 if let imageData = try? Data(contentsOf: imageUrl) {
                     if let image = UIImage(data: imageData) {
@@ -156,7 +186,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 }
             }
         }
-        cell.titleTextField.text = info.0
+        cell.titleTextField.text = info.title
         return cell
     }
     
@@ -165,14 +195,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let url = URL(string: videoInfos[indexPath.item].1) {
+        if let url = URL(string: videoInfos[indexPath.item].url) {
             UIApplication.shared.open(url)
         }
-        
-//        let viewController = VideoPlayView()
-//        viewController.videoUrlString = videoInfos[indexPath.item].1
-//        navigationController?.pushViewController(viewController, animated: true)
-//        present(viewController, animated: true, completion: nil)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -182,7 +207,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         if offsetY > contentHeight - scrollView.frame.height {
             self.page += 1
             guard let searchText = self.searchField.text else { return }
-            test(searchText: searchText, page: page)
+            startLoadVideos(searchText: searchText)
         }
     }
 }
