@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.placeholder = "Search Text"
+        tf.text = "침착맨"
         
         return tf
     }()
@@ -40,6 +41,7 @@ class ViewController: UIViewController {
     }()
     
     var cancellables = Set<AnyCancellable>()
+    private var page: Int = 1
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +73,13 @@ class ViewController: UIViewController {
     
     @objc func searchVideo() {
         guard let searchText = self.searchField.text else { return }
-        loadVideos(text: searchText).sink { completion in
+        self.videoInfos = []
+        self.page = 1
+        test(searchText: searchText, page: page)
+    }
+    
+    func test(searchText: String, page: Int) {
+        loadVideos(text: searchText, page: page).sink { completion in
             switch completion {
             case .finished:
                 print("End!")
@@ -80,16 +88,16 @@ class ViewController: UIViewController {
             }
         } receiveValue: { videoInfo in
             DispatchQueue.main.async {
-                self.videoInfos = videoInfo
+                self.videoInfos += videoInfo
                 self.tableView.reloadData()
             }
         }.store(in: &cancellables)
     }
     
-    func loadVideos(text: String) -> Future<[(String, String, String, String)], Error> {
-        return Future { promise in
-            let endpoint = "https://dapi.kakao.com/v2/search/vclip?query=\(text)&&size=30"
-            let apiKey = "apiKey"
+    func loadVideos(text: String, page: Int) -> Future<[(String, String, String, String)], Error> {
+        return Future { futureResponse in
+            let endpoint = "https://dapi.kakao.com/v2/search/vclip?query=\(text)&&sort=recency&&page=\(page)&&size=10"
+            let apiKey = "e2bbe272dc60ca8f0be0dd419334a2e9"
             var request = URLRequest(url: URL(string: endpoint)!)
             request.httpMethod = "GET"
             request.setValue("KakaoAK \(apiKey)", forHTTPHeaderField: "Authorization")
@@ -117,11 +125,11 @@ class ViewController: UIViewController {
                             
                             responseArr.append((title, url, thumbnail, author))
                         }
-                        promise(.success(responseArr))
+                        futureResponse(.success(responseArr))
                     }
                 } catch {
-                    print("error after do > \(error.localizedDescription)")
-                    promise(.failure(error))
+                    print("error after task > \(error.localizedDescription)")
+                    futureResponse(.failure(error))
                 }
             }.resume()
         }
@@ -159,6 +167,22 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let url = URL(string: videoInfos[indexPath.item].1) {
             UIApplication.shared.open(url)
+        }
+        
+//        let viewController = VideoPlayView()
+//        viewController.videoUrlString = videoInfos[indexPath.item].1
+//        navigationController?.pushViewController(viewController, animated: true)
+//        present(viewController, animated: true, completion: nil)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height {
+            self.page += 1
+            guard let searchText = self.searchField.text else { return }
+            test(searchText: searchText, page: page)
         }
     }
 }
