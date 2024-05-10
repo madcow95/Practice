@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         return table
     }()
     
-    var cancellables = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
     private var page: Int = 1
     private var isLoading: Bool = false
         
@@ -105,63 +105,34 @@ class ViewController: UIViewController {
     }
     
     func startLoadVideos(searchText: String) {
-        guard !isLoading else { return } // 이미 로딩 중인 경우 추가 요청을 방지
-        isLoading = true // 로딩 시작
         loadVideos(searchText: searchText).sink { completion in
-            self.isLoading = false
             switch completion {
             case .finished:
                 print("End!")
             case .failure(let error):
                 print("error! > \(error.localizedDescription)")
             }
-        } receiveValue: { receivedVideoInfo in
+        } receiveValue: { [weak self] receivedVideoInfo in
             DispatchQueue.main.async {
-                self.videoInfos += receivedVideoInfo
-                self.tableView.reloadData()
+                self?.videoInfos += receivedVideoInfo
+                self?.tableView.reloadData()
             }
         }.store(in: &cancellables)
     }
     
-    func loadVideos(searchText: String) -> Future<[VideoInfoModel], Error> {
-        return Future { futureResponse in
-            let endpoint = "https://dapi.kakao.com/v2/search/vclip?query=\(searchText)&&page=\(self.page)&&size=30"
-            let apiKey = "e2bbe272dc60ca8f0be0dd419334a2e9"
-            var request = URLRequest(url: URL(string: endpoint)!)
-            request.httpMethod = "GET"
-            request.setValue("KakaoAK \(apiKey)", forHTTPHeaderField: "Authorization")
-            
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
-                if let error = error {
-                    print("Error: \(error)")
-                    return
-                }
-                
-                guard let data = data else {
-                    print("No data received")
-                    return
-                }
-                
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                    if let clips = json["documents"] as? [[String: Any]] {
-                        var videoInfoArr: [VideoInfoModel] = []
-                        for clip in clips {
-                            let title = clip["title"] as! String
-                            let url = clip["url"] as! String
-                            let thumbnail = clip["thumbnail"] as! String
-                            let author = clip["author"] as! String
-                            
-                            videoInfoArr.append(VideoInfoModel(title: title, url: url, thumbnail: thumbnail, author: author))
-                        }
-                        futureResponse(.success(videoInfoArr))
-                    }
-                } catch {
-                    print("error after task > \(error.localizedDescription)")
-                    futureResponse(.failure(error))
-                }
-            }.resume()
-        }
+    func loadVideos(searchText: String) -> AnyPublisher<[VideoInfoModel], Error> {
+        let endpoint = "https://dapi.kakao.com/v2/search/vclip?query=\(searchText)&&page=\(self.page)&&size=30"
+        let apiKey = "2d848d4c36ef7c694cbee2d4a65f26ca"
+        
+        var request = URLRequest(url: URL(string: endpoint)!)
+        request.httpMethod = "GET"
+        request.setValue("KakaoAK \(apiKey)", forHTTPHeaderField: "Authorization")
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .map{ $0.data }
+            .decode(type: VideoDocument.self, decoder: JSONDecoder())
+            .map{ $0.documents }
+            .eraseToAnyPublisher()
     }
 }
 
@@ -180,7 +151,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 if let imageData = try? Data(contentsOf: imageUrl) {
                     if let image = UIImage(data: imageData) {
                         DispatchQueue.main.async {
-                            cell.testImage.image = image
+                            cell.thumbnailImageView.image = image
                         }
                     }
                 }

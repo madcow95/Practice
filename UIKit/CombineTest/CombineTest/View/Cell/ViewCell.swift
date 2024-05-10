@@ -18,7 +18,7 @@ class ViewCell: UITableViewCell {
         return tf
     }()
     
-    let testImage: UIImageView = {
+    let thumbnailImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         
@@ -28,16 +28,16 @@ class ViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        addSubview(testImage)
+        addSubview(thumbnailImageView)
         addSubview(titleTextField)
         
         NSLayoutConstraint.activate([
-            testImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-            testImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            testImage.widthAnchor.constraint(equalToConstant: 150),
-            testImage.heightAnchor.constraint(equalToConstant: 80),
+            thumbnailImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            thumbnailImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            thumbnailImageView.widthAnchor.constraint(equalToConstant: 150),
+            thumbnailImageView.heightAnchor.constraint(equalToConstant: 80),
             
-            titleTextField.leadingAnchor.constraint(equalTo: testImage.trailingAnchor, constant: 10),
+            titleTextField.leadingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor, constant: 10),
             titleTextField.centerYAnchor.constraint(equalTo: centerYAnchor),
             titleTextField.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])

@@ -75,7 +75,7 @@ class AnotherView: UIViewController {
     
     func apiRequest() -> AnyPublisher<[Contents], Error> {
         let endpoint = "https://dapi.kakao.com/v2/search/web?query=\(searchText)&&page=\(self.page)&&size=30"
-        let apiKey = "e2bbe272dc60ca8f0be0dd419334a2e9"
+        let apiKey = "2d848d4c36ef7c694cbee2d4a65f26ca"
         
         let url: URL = URL(string: endpoint)!
         var request: URLRequest = URLRequest(url: url)

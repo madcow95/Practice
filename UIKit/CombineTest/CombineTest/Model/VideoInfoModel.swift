@@ -7,16 +7,13 @@
 
 import Foundation
 
-class VideoInfoModel {
+struct VideoDocument: Codable {
+    let documents: [VideoInfoModel]
+}
+
+struct VideoInfoModel: Codable {
     let title: String
     let url: String
     let thumbnail: String
     let author: String
-    
-    init(title: String, url: String, thumbnail: String, author: String) {
-        self.title = title
-        self.url = url
-        self.thumbnail = thumbnail
-        self.author = author
-    }
 }
