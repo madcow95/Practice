@@ -61,6 +61,14 @@ struct RecordCreateView: View {
                                         Image(systemName: chest.1 ? "checkmark.circle.fill" : "checkmark.circle")
                                         Text(chest.0)
                                         Spacer()
+                                        Button {
+                                            let selectedSubWortout = subWorkouts.filter{ $0.mainCategory == main.key && $0.subCategory == chest.0 }
+                                            if selectedSubWortout.count > 0 {
+                                                modelContext.delete(selectedSubWortout[0])
+                                            }
+                                        } label: {
+                                            Image(systemName: "minus.circle")
+                                        }
                                     }
                                     .padding([.top, .leading])
                                     .onTapGesture {
@@ -95,7 +103,6 @@ struct RecordCreateView: View {
         }
         .padding()
         .onAppear {
-            print(mainWorkouts)
             // MARK: TODO - ViewModel로 옮기기
             for mainWorkout in mainWorkouts {
                 let key = mainWorkout.mainCategory

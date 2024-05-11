@@ -9,7 +9,7 @@ import Foundation
 //import SwiftData
 
 //@Model
-class SubWorkoutModel {
+struct SubWorkoutModel {
     let id: UUID = UUID()
     let mainCategory: String
     let subCategory: [String]
@@ -17,11 +17,11 @@ class SubWorkoutModel {
     let totalReps: [Int]
     let totalWeights: [Double]
     
-    init(mainCategory: String, subCategory: [String], totalSet: [Int], totalReps: [Int], totalWeights: [Double]) {
-        self.mainCategory = mainCategory
-        self.subCategory = subCategory
-        self.totalSet = totalSet
-        self.totalReps = totalReps
-        self.totalWeights = totalWeights
-    }
+//    init(mainCategory: String, subCategory: [String], totalSet: [Int], totalReps: [Int], totalWeights: [Double]) {
+//        self.mainCategory = mainCategory
+//        self.subCategory = subCategory
+//        self.totalSet = totalSet
+//        self.totalReps = totalReps
+//        self.totalWeights = totalWeights
+//    }
 }

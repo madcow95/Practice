@@ -99,7 +99,7 @@ struct RecordCategoryCreateView: View {
                 ToolbarItem(placement: .bottomBar) {
                     Button {
                         if checkWorkout[category] != nil {
-//                            checkWorkout[category]?.append((workoutName, false))
+                            checkWorkout[category]?.append((workoutName, false))
                             modelContext.insert(WorkoutSubCategory(mainCategory: category, subCategory: workoutName))
                         }
                         categoryCreateIsShowing = false
