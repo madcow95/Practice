@@ -14,7 +14,7 @@ import Combine
 
 class ViewController: UIViewController {
     
-    private var videoInfos: [VideoInfoModel] = []
+    @Published private var videoInfos: [VideoInfoModel] = []
     
     private let searchField: UITextField = {
         let tf = UITextField()
@@ -108,15 +108,16 @@ class ViewController: UIViewController {
         loadVideos(searchText: searchText).sink { completion in
             switch completion {
             case .finished:
+                self.page += 1
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
                 print("End!")
             case .failure(let error):
                 print("error! > \(error.localizedDescription)")
             }
         } receiveValue: { [weak self] receivedVideoInfo in
-            DispatchQueue.main.async {
-                self?.videoInfos += receivedVideoInfo
-                self?.tableView.reloadData()
-            }
+            self?.videoInfos += receivedVideoInfo
         }.store(in: &cancellables)
     }
     
@@ -176,7 +177,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let contentHeight = scrollView.contentSize.height
         
         if offsetY > contentHeight - scrollView.frame.height {
-            self.page += 1
             guard let searchText = self.searchField.text else { return }
             startLoadVideos(searchText: searchText)
         }
