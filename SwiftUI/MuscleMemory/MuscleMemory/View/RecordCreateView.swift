@@ -16,16 +16,15 @@ struct RecordCreateView: View {
     @Environment(\.modelContext) var modelContext
     
     // MARK: TODO - workout 데이터들 SwiftData에 저장 ✅
-    @State private var checkWorkout: [String: [(String, Bool)]] = [:]
-    
+    @State var checkWorkout: [String: [(String, Bool)]] = [:]
     @State private var categoryCreateIsShowing: Bool = false
     @State private var selectedCategory: String = ""
+    @State var tempSelectedWorkouts: Set<Workout> = []
     
     @Binding var recordCreateIsShowing: Bool
     @Binding var selectedWorkouts: [Workout]
     
-    @State var tempSelectedWorkouts: Set<Workout> = []
-    
+    @StateObject var recordCreateViewModel: RecordCreateViewModel
     private var selectedWorkoutExist: Bool {
         return checkWorkout.flatMap{ $0.value }.filter{ $0.1 == true }.count > 0
     }
@@ -36,7 +35,7 @@ struct RecordCreateView: View {
                 VStack {
                     VStack(spacing: 0) {
                         // Dictionary를 ForEach에서 사용할 때 sorted를 해줘야 한다?
-                        ForEach(checkWorkout.sorted{ $0.key < $1.key }, id: \.self.key) { main in
+                        ForEach(recordCreateViewModel.getAllCheckoutData().sorted{ $0.key < $1.key }, id: \.self.key) { main in
                             VStack(spacing: 0) {
                                 HStack {
                                     Text(main.key)
@@ -102,20 +101,20 @@ struct RecordCreateView: View {
             }
         }
         .padding()
-        .onAppear {
-            // MARK: TODO - ViewModel로 옮기기
-            for mainWorkout in mainWorkouts {
-                let key = mainWorkout.mainCategory
-                let subWorkoutNames = subWorkouts.filter{ $0.mainCategory == key }
-                for subWorkoutName in subWorkoutNames {
-                    if checkWorkout[subWorkoutName.mainCategory] == nil {
-                        checkWorkout[subWorkoutName.mainCategory] = [(subWorkoutName.subCategory, false)]
-                    } else {
-                        checkWorkout[subWorkoutName.mainCategory]?.append((subWorkoutName.subCategory, false))
-                    }
-                }
-            }
-        }
+//        .onAppear {
+//            // MARK: TODO - ViewModel로 옮기기
+//            for mainWorkout in mainWorkouts {
+//                let key = mainWorkout.mainCategory
+//                let subWorkoutNames = subWorkouts.filter{ $0.mainCategory == key }
+//                for subWorkoutName in subWorkoutNames {
+//                    if checkWorkout[subWorkoutName.mainCategory] == nil {
+//                        checkWorkout[subWorkoutName.mainCategory] = [(subWorkoutName.subCategory, false)]
+//                    } else {
+//                        checkWorkout[subWorkoutName.mainCategory]?.append((subWorkoutName.subCategory, false))
+//                    }
+//                }
+//            }
+//        }
     }
 }
 
