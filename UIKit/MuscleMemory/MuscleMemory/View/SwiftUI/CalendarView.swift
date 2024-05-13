@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct CalendarView: View {
     
     @State private var days: [Date] = []
     @State private var date = Date.now
     @State private var selectedDate: Date = Date.now
+    @State private var createViewShowing: Bool = false
     
     private let daysOfWeek: [String] = ["일", "월", "화", "수", "목", "금", "토"]
     private let columns = Array(repeating: GridItem(.flexible()), count: 7)
@@ -67,10 +69,10 @@ struct CalendarView: View {
                         ForEach(days, id: \.self) { day in
                             if day.monthInt != date.monthInt {
                                 Text("")
-//                                아래 코드는 이전 월의 날들을 회색으로 표시해주는 Text들
-//                                Text(day.formatted(.dateTime.day()))
-//                                    .foregroundStyle(Color(UIColor.lightGray))
-//                                    .bold()
+                                // 아래 코드는 이전 월의 날들을 회색으로 표시해주는 Text들
+                                // Text(day.formatted(.dateTime.day()))
+                                //    .foregroundStyle(Color(UIColor.lightGray))
+                                //    .bold()
                             } else {
                                 Button {
                                     selectedDate = day
@@ -89,14 +91,14 @@ struct CalendarView: View {
                                 .foregroundStyle(.black)
                             }
                         }
-                    })
-                    
+                    })                    
                     Divider()
                 }
+                .navigationTitle("Title")
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
-                            print("hello")
+                            self.createViewShowing = true
                         } label: {
                             Image(systemName: "plus")
                         }
@@ -108,7 +110,23 @@ struct CalendarView: View {
                 .onChange(of: Date()) {
                     days = date.calendarDisplayDays
                 }
+                .navigationDestination(isPresented: $createViewShowing) {
+                    MuscleMemoryCreateViewWrapper()
+                }
             }
         }
     }
+}
+
+struct MuscleMemoryCreateViewWrapper: UIViewControllerRepresentable {
+    typealias UIViewControllerType = MuscleMemoryCreateView
+    
+    func makeUIViewController(context: Context) -> MuscleMemoryCreateView {
+        return MuscleMemoryCreateView()
+    }
+    
+    func updateUIViewController(_ uiViewController: MuscleMemoryCreateView, context: Context) {
+        // 업데이트가 필요할 경우?
+    }
+    
 }

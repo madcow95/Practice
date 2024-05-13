@@ -26,6 +26,7 @@
 		CD7E5EF62BF2003B008E8DED /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EF52BF2003B008E8DED /* DateExtension.swift */; };
 		CD7E5EF92BF202D4008E8DED /* MuscleMemoryMainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EF82BF202D4008E8DED /* MuscleMemoryMainViewCell.swift */; };
 		CD7E5EFC2BF20830008E8DED /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EFB2BF20830008E8DED /* CalendarView.swift */; };
+		CD7E5EFE2BF25FED008E8DED /* MuscleMemoryCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EFD2BF25FED008E8DED /* MuscleMemoryCreateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		CD7E5EF52BF2003B008E8DED /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		CD7E5EF82BF202D4008E8DED /* MuscleMemoryMainViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleMemoryMainViewCell.swift; sourceTree = "<group>"; };
 		CD7E5EFB2BF20830008E8DED /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		CD7E5EFD2BF25FED008E8DED /* MuscleMemoryCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleMemoryCreateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				CD7E5EDB2BF197C4008E8DED /* ProfileView.swift */,
 				CD7E5EE72BF1E472008E8DED /* LoginView.swift */,
 				CD7E5EEF2BF1FC52008E8DED /* SignView.swift */,
+				CD7E5EFD2BF25FED008E8DED /* MuscleMemoryCreateView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				CD7E5EF62BF2003B008E8DED /* DateExtension.swift in Sources */,
 				CD7E5EF42BF1FC63008E8DED /* LoginModel.swift in Sources */,
 				CD7E5EFC2BF20830008E8DED /* CalendarView.swift in Sources */,
+				CD7E5EFE2BF25FED008E8DED /* MuscleMemoryCreateView.swift in Sources */,
 				CD7E5EBC2BF19209008E8DED /* AppDelegate.swift in Sources */,
 				CD7E5EBE2BF19209008E8DED /* SceneDelegate.swift in Sources */,
 				CD7E5EE82BF1E472008E8DED /* LoginView.swift in Sources */,

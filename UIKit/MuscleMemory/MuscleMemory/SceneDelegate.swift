@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
         
-        let loginView = LoginView()
+        let loginView = MuscleMemoryMainView()
 //        let navigationController = UINavigationController(rootViewController: loginView)
         
         self.window?.rootViewController = loginView
