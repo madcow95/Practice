@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class LoginView: UIViewController {
     
@@ -24,14 +25,19 @@ class LoginView: UIViewController {
         return stack
     }()
     
+    private let loginViewModel = LoginViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
         
         setViewElements()
         setConstraints()
+        setButtonActions()
     }
     
+    // MARK: - UI Components Function
     func setViewElements() {
         let allElements = [idTextField, pwdTextField, signHStack]
         allElements.forEach{ view.addSubview($0) }
@@ -43,8 +49,8 @@ class LoginView: UIViewController {
     func setConstraints() {
         NSLayoutConstraint.activate([
             idTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20),
-            idTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-            idTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            idTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            idTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
             pwdTextField.topAnchor.constraint(equalTo: idTextField.bottomAnchor, constant: 15),
             pwdTextField.leadingAnchor.constraint(equalTo: idTextField.leadingAnchor),
@@ -53,5 +59,21 @@ class LoginView: UIViewController {
             signHStack.topAnchor.constraint(equalTo: pwdTextField.bottomAnchor, constant: 15),
             signHStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+    }
+    
+    func setButtonActions() {
+        loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
+        joinButton.addTarget(self, action: #selector(join), for: .touchUpInside)
+    }
+    
+    // MARK: - Button Action
+    @objc func login() {
+        let navigation = UINavigationController(rootViewController: MuscleMemoryMainView())
+        show(navigation, sender: self)
+    }
+    
+    @objc func join() {
+        let navigation = UINavigationController(rootViewController: SignView())
+        show(navigation, sender: self)
     }
 }

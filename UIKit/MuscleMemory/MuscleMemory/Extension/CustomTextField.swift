@@ -21,7 +21,8 @@ class CustomTextField: UITextField {
         super.init(frame: frame)
     }
     
-    convenience init(placeholderText: String, isSecure: Bool = false) {
+    convenience init(placeholderText: String = "",
+                     isSecure: Bool = false) {
         self.init(frame: .zero)
         self.placeholder = placeholderText
         self.translatesAutoresizingMaskIntoConstraints = false

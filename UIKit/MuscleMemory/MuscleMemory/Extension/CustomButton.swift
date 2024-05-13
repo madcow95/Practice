@@ -12,14 +12,18 @@ class CustomButton: UIButton {
         super.init(frame: frame)
     }
     
-    convenience init(buttonColor: UIColor, buttonName: String) {
+    convenience init(buttonColor: UIColor, 
+                     buttonName: String,
+                     width: CGFloat = 100,
+                     height: CGFloat = 50) {
+        
         self.init(frame: .zero)
         
         self.backgroundColor = buttonColor
         self.setTitle(buttonName, for: .normal)
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        self.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.widthAnchor.constraint(equalToConstant: width).isActive = true
+        self.heightAnchor.constraint(equalToConstant: height).isActive = true
         self.layer.borderWidth = 2
         self.layer.cornerRadius = 10
     }
