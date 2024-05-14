@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CD3D8AD52BF2FF55004956BA /* CustomHLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3D8AD42BF2FF55004956BA /* CustomHLine.swift */; };
+		CD3D8AD72BF356E4004956BA /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3D8AD62BF356E4004956BA /* CalendarViewController.swift */; };
 		CD7E5EBC2BF19209008E8DED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EBB2BF19209008E8DED /* AppDelegate.swift */; };
 		CD7E5EBE2BF19209008E8DED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EBD2BF19209008E8DED /* SceneDelegate.swift */; };
 		CD7E5EC52BF1920A008E8DED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD7E5EC42BF1920A008E8DED /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		CD3D8AD42BF2FF55004956BA /* CustomHLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHLine.swift; sourceTree = "<group>"; };
+		CD3D8AD62BF356E4004956BA /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		CD7E5EB82BF19209008E8DED /* MuscleMemory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuscleMemory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7E5EBB2BF19209008E8DED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD7E5EBD2BF19209008E8DED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				CD7E5EE72BF1E472008E8DED /* LoginView.swift */,
 				CD7E5EEF2BF1FC52008E8DED /* SignView.swift */,
 				CD7E5EFD2BF25FED008E8DED /* MuscleMemoryCreateView.swift */,
+				CD3D8AD62BF356E4004956BA /* CalendarViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD3D8AD72BF356E4004956BA /* CalendarViewController.swift in Sources */,
 				CD7E5EDC2BF197C4008E8DED /* ProfileView.swift in Sources */,
 				CD7E5EF62BF2003B008E8DED /* DateExtension.swift in Sources */,
 				CD7E5EF42BF1FC63008E8DED /* LoginModel.swift in Sources */,
