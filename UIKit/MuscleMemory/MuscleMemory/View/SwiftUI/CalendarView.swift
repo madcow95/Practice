@@ -91,8 +91,8 @@ struct CalendarView: View {
                                 .foregroundStyle(.black)
                             }
                         }
-                    })                    
-                    Divider()
+                    })
+//                    Divider()
                 }
                 .navigationTitle("Title")
                 .toolbar {
@@ -128,5 +128,4 @@ struct MuscleMemoryCreateViewWrapper: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: MuscleMemoryCreateView, context: Context) {
         // 업데이트가 필요할 경우?
     }
-    
 }

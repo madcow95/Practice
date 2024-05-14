@@ -75,10 +75,10 @@ struct ContentView: View {
                         ForEach(days, id: \.self) { day in
                             if day.monthInt != date.monthInt {
                                 Text("")
-//                                아래 코드는 이전 월의 날들을 회색으로 표시해주는 Text들
-//                                Text(day.formatted(.dateTime.day()))
-//                                    .foregroundStyle(Color(UIColor.lightGray))
-//                                    .bold()
+                                //                                아래 코드는 이전 월의 날들을 회색으로 표시해주는 Text들
+                                //                                Text(day.formatted(.dateTime.day()))
+                                //                                    .foregroundStyle(Color(UIColor.lightGray))
+                                //                                    .bold()
                             } else {
                                 Button {
                                     // MARK: TODO - SwiftData와 연동 후 선택했을 때 해당 날짜에 운동값 있으면 불러오기 ❌
@@ -91,8 +91,8 @@ struct ContentView: View {
                                         .background(
                                             Circle()
                                                 .foregroundStyle(
-                                                    Date.now.startOfDay == day.startOfDay ? .red.opacity(0.3) : 
-                                                           selectedDate == day && day.startOfDay <= Date.now.startOfDay ? .blue.opacity(0.3) : .white
+                                                    Date.now.startOfDay == day.startOfDay ? .red.opacity(0.3) :
+                                                        selectedDate == day && day.startOfDay <= Date.now.startOfDay ? .blue.opacity(0.3) : .white
                                                 )
                                         )
                                 }
@@ -136,7 +136,6 @@ struct ContentView: View {
                         }
                     }
                 }
-                .navigationTitle("Muscle Memory")
                 .padding()
                 .navigationDestination(isPresented: $recordCreateIsShowing, destination: {
                     RecordCreateView(recordCreateIsShowing: $recordCreateIsShowing, selectedWorkouts: $selectedWorkouts)
@@ -154,7 +153,7 @@ struct ContentView: View {
                 .onAppear {
                     days = date.calendarDisplayDays
 //                    print("mainWorkouts > \(mainWorkouts)")
-                    
+                    print(columns.count)
                 }
                 .onChange(of: Date()) {
                     days = date.calendarDisplayDays

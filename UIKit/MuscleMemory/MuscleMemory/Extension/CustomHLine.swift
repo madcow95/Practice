@@ -1,0 +1,23 @@
+//
+//  CustomHLine.swift
+//  MuscleMemory
+//
+//  Created by MadCow on 2024/5/14.
+//
+
+import UIKit
+
+class CustomHLine: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

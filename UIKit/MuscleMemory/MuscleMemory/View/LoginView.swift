@@ -68,8 +68,8 @@ class LoginView: UIViewController {
     
     // MARK: - Button Action
     @objc func login() {
-        let navigation = UINavigationController(rootViewController: MuscleMemoryMainView())
-        show(navigation, sender: self)
+//        let navigation = UINavigationController(rootViewController: MuscleMemoryMainView())
+        show(MuscleMemoryMainView(), sender: self)
     }
     
     @objc func join() {
