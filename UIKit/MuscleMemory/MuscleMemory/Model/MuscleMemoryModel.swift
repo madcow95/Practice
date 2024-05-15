@@ -6,8 +6,13 @@
 //
 
 import Foundation
-import SwiftData
+//import SwiftData
 
-class MuscleMemoryModel {
-    
+//@Model
+struct MuscleMemoryModel {
+    let year: Int
+    let month: Int
+    let day: Int
+    let title: String
+    let workoutDescription: String
 }

@@ -16,10 +16,11 @@ class MuscleMemoryHomeView: UIViewController {
         return scroll
     }()
     
-    lazy var dateView: UICalendarView = {
+    lazy var calendarView: UICalendarView = {
         var view = UICalendarView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.wantsDateDecorations = true
+        
         return view
     }()
     
@@ -32,9 +33,14 @@ class MuscleMemoryHomeView: UIViewController {
     
     let hLine = CustomHLine()
 
-    var selectedDate: DateComponents? = nil
-    var dateArr: [DateComponents] = [DateComponents(year: 2024, month: 5, day: 24),
-                                     DateComponents(year: 2024, month: 5, day: 25)]
+    var dummyData: [MuscleMemoryModel] = [
+        MuscleMemoryModel(year: 2024, month: 5, day: 1, title: "Title 1", workoutDescription: "Desc 1"),
+        MuscleMemoryModel(year: 2024, month: 5, day: 5, title: "Title 2", workoutDescription: "Desc 2"),
+        MuscleMemoryModel(year: 2024, month: 5, day: 12, title: "Title 3", workoutDescription: "Desc 3"),
+        MuscleMemoryModel(year: 2024, month: 5, day: 21, title: "Title 4", workoutDescription: "Desc 4"),
+        MuscleMemoryModel(year: 2024, month: 5, day: 24, title: "Title 5", workoutDescription: "Desc 5"),
+        MuscleMemoryModel(year: 2024, month: 5, day: 30, title: "Title 6", workoutDescription: "Desc 6"),
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +59,7 @@ class MuscleMemoryHomeView: UIViewController {
     func applyConstraints() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubview(dateView)
+        contentView.addSubview(calendarView)
         contentView.addSubview(hLine)
         
         NSLayoutConstraint.activate([
@@ -68,24 +74,61 @@ class MuscleMemoryHomeView: UIViewController {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            dateView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            dateView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            dateView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            calendarView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            calendarView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            calendarView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
-            hLine.topAnchor.constraint(equalTo: dateView.bottomAnchor),
+            hLine.topAnchor.constraint(equalTo: calendarView.bottomAnchor),
             hLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            hLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            hLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            hLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
         ])
+        
+        var beforeConstraint: NSLayoutYAxisAnchor = hLine.bottomAnchor
+        dummyData.enumerated().forEach{ (index, workout) in
+            let hStack = UIStackView()
+            hStack.translatesAutoresizingMaskIntoConstraints = false
+            hStack.axis = .horizontal
+            hStack.distribution = .equalSpacing
+            
+            let firstLabel = UILabel()
+            firstLabel.translatesAutoresizingMaskIntoConstraints = false
+            firstLabel.numberOfLines = 1
+            firstLabel.text = workout.title
+            
+            let secondLabel = UILabel()
+            secondLabel.translatesAutoresizingMaskIntoConstraints = false
+            secondLabel.numberOfLines = 1
+            secondLabel.text = workout.workoutDescription
+            
+            let thirdLabel = UILabel()
+            thirdLabel.translatesAutoresizingMaskIntoConstraints = false
+            thirdLabel.numberOfLines = 1
+            thirdLabel.text = "\(workout.year)-\(workout.month)-\(workout.day)"
+            
+            hStack.addArrangedSubview(firstLabel)
+            hStack.addArrangedSubview(secondLabel)
+            hStack.addArrangedSubview(thirdLabel)
+            
+            contentView.addSubview(hStack)
+            
+            hStack.topAnchor.constraint(equalTo: beforeConstraint, constant: 30).isActive = true
+            hStack.leadingAnchor.constraint(equalTo: hLine.leadingAnchor).isActive = true
+            hStack.trailingAnchor.constraint(equalTo: hLine.trailingAnchor).isActive = true
+            
+            if index == dummyData.count - 1 {
+                hStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+            }
+            beforeConstraint = hStack.bottomAnchor
+        }
     }
     
     func setCalendar() {
-        dateView.delegate = self
-        dateView.selectionBehavior = UICalendarSelectionSingleDate(delegate: self)
+        calendarView.delegate = self
+        calendarView.selectionBehavior = UICalendarSelectionSingleDate(delegate: self)
     }
     
     func reloadDateView() {
-        dateView.reloadDecorations(forDateComponents: dateArr, animated: true)
+        calendarView.reloadDecorations(forDateComponents: [], animated: true)
     }
     
     @objc func toRecordCreateView() {
@@ -95,9 +138,10 @@ class MuscleMemoryHomeView: UIViewController {
 
 extension MuscleMemoryHomeView: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {    
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-        if dateArr.filter({ $0.year == dateComponents.year && $0.month == dateComponents.month && $0.day == dateComponents.day }).count > 0 {
+        if dummyData.filter({ $0.year == dateComponents.year && $0.month == dateComponents.month && $0.day == dateComponents.day }).count > 0 {
             return .customView {
                 let image = UIImageView(image: UIImage(systemName: "circle.fill"))
+                image.tintColor = .red
                 
                 return image
             }
