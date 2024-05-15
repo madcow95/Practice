@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-class MuscleMemoryMainView: UIViewController {
+class MuscleMemoryMainViewDeprecate: UIViewController {
     
 //    let hostingController = UIHostingController(rootView: CalendarView())
     private let divider = CustomHLine()
@@ -147,7 +147,7 @@ class MuscleMemoryMainView: UIViewController {
         var beforeHStack = daysNameHStack
         var idx = 0
         for _ in 0..<7 {
-            var daysHStack = UIStackView()
+            let daysHStack = UIStackView()
             daysHStack.axis = .horizontal
             daysHStack.translatesAutoresizingMaskIntoConstraints = false
             daysHStack.alignment = .center

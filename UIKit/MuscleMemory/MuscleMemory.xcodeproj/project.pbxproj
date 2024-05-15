@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		CD3D8AD52BF2FF55004956BA /* CustomHLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3D8AD42BF2FF55004956BA /* CustomHLine.swift */; };
-		CD3D8AD72BF356E4004956BA /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3D8AD62BF356E4004956BA /* CalendarViewController.swift */; };
+		CD3D8AD72BF356E4004956BA /* MuscleMemoryHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3D8AD62BF356E4004956BA /* MuscleMemoryHomeView.swift */; };
 		CD7E5EBC2BF19209008E8DED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EBB2BF19209008E8DED /* AppDelegate.swift */; };
 		CD7E5EBE2BF19209008E8DED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EBD2BF19209008E8DED /* SceneDelegate.swift */; };
 		CD7E5EC52BF1920A008E8DED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD7E5EC42BF1920A008E8DED /* Assets.xcassets */; };
 		CD7E5EC82BF1920A008E8DED /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CD7E5EC72BF1920A008E8DED /* Base */; };
-		CD7E5ED42BF19371008E8DED /* MuscleMemoryMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5ED32BF19371008E8DED /* MuscleMemoryMainView.swift */; };
+		CD7E5ED42BF19371008E8DED /* MuscleMemoryMainViewDeprecate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5ED32BF19371008E8DED /* MuscleMemoryMainViewDeprecate.swift */; };
 		CD7E5ED62BF1945B008E8DED /* MuscleMemoryMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5ED52BF1945B008E8DED /* MuscleMemoryMainViewModel.swift */; };
 		CD7E5ED82BF19478008E8DED /* MuscleMemoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5ED72BF19478008E8DED /* MuscleMemoryModel.swift */; };
 		CD7E5EDC2BF197C4008E8DED /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EDB2BF197C4008E8DED /* ProfileView.swift */; };
@@ -26,21 +26,21 @@
 		CD7E5EF22BF1FC5A008E8DED /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EF12BF1FC5A008E8DED /* LoginViewModel.swift */; };
 		CD7E5EF42BF1FC63008E8DED /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EF32BF1FC63008E8DED /* LoginModel.swift */; };
 		CD7E5EF62BF2003B008E8DED /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EF52BF2003B008E8DED /* DateExtension.swift */; };
-		CD7E5EF92BF202D4008E8DED /* MuscleMemoryMainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EF82BF202D4008E8DED /* MuscleMemoryMainViewCell.swift */; };
+		CD7E5EF92BF202D4008E8DED /* MuscleMemoryMainViewCellDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EF82BF202D4008E8DED /* MuscleMemoryMainViewCellDeprecated.swift */; };
 		CD7E5EFC2BF20830008E8DED /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EFB2BF20830008E8DED /* CalendarView.swift */; };
 		CD7E5EFE2BF25FED008E8DED /* MuscleMemoryCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EFD2BF25FED008E8DED /* MuscleMemoryCreateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CD3D8AD42BF2FF55004956BA /* CustomHLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHLine.swift; sourceTree = "<group>"; };
-		CD3D8AD62BF356E4004956BA /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		CD3D8AD62BF356E4004956BA /* MuscleMemoryHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleMemoryHomeView.swift; sourceTree = "<group>"; };
 		CD7E5EB82BF19209008E8DED /* MuscleMemory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuscleMemory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7E5EBB2BF19209008E8DED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD7E5EBD2BF19209008E8DED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CD7E5EC42BF1920A008E8DED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD7E5EC72BF1920A008E8DED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD7E5EC92BF1920A008E8DED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CD7E5ED32BF19371008E8DED /* MuscleMemoryMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleMemoryMainView.swift; sourceTree = "<group>"; };
+		CD7E5ED32BF19371008E8DED /* MuscleMemoryMainViewDeprecate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleMemoryMainViewDeprecate.swift; sourceTree = "<group>"; };
 		CD7E5ED52BF1945B008E8DED /* MuscleMemoryMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleMemoryMainViewModel.swift; sourceTree = "<group>"; };
 		CD7E5ED72BF19478008E8DED /* MuscleMemoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleMemoryModel.swift; sourceTree = "<group>"; };
 		CD7E5EDB2BF197C4008E8DED /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		CD7E5EF12BF1FC5A008E8DED /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		CD7E5EF32BF1FC63008E8DED /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		CD7E5EF52BF2003B008E8DED /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
-		CD7E5EF82BF202D4008E8DED /* MuscleMemoryMainViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleMemoryMainViewCell.swift; sourceTree = "<group>"; };
+		CD7E5EF82BF202D4008E8DED /* MuscleMemoryMainViewCellDeprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleMemoryMainViewCellDeprecated.swift; sourceTree = "<group>"; };
 		CD7E5EFB2BF20830008E8DED /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		CD7E5EFD2BF25FED008E8DED /* MuscleMemoryCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleMemoryCreateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,12 +106,12 @@
 			children = (
 				CD7E5EFA2BF20824008E8DED /* SwiftUI */,
 				CD7E5EF72BF202B5008E8DED /* Cell */,
-				CD7E5ED32BF19371008E8DED /* MuscleMemoryMainView.swift */,
+				CD7E5ED32BF19371008E8DED /* MuscleMemoryMainViewDeprecate.swift */,
 				CD7E5EDB2BF197C4008E8DED /* ProfileView.swift */,
 				CD7E5EE72BF1E472008E8DED /* LoginView.swift */,
 				CD7E5EEF2BF1FC52008E8DED /* SignView.swift */,
 				CD7E5EFD2BF25FED008E8DED /* MuscleMemoryCreateView.swift */,
-				CD3D8AD62BF356E4004956BA /* CalendarViewController.swift */,
+				CD3D8AD62BF356E4004956BA /* MuscleMemoryHomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -150,7 +150,7 @@
 		CD7E5EF72BF202B5008E8DED /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				CD7E5EF82BF202D4008E8DED /* MuscleMemoryMainViewCell.swift */,
+				CD7E5EF82BF202D4008E8DED /* MuscleMemoryMainViewCellDeprecated.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -233,7 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD3D8AD72BF356E4004956BA /* CalendarViewController.swift in Sources */,
+				CD3D8AD72BF356E4004956BA /* MuscleMemoryHomeView.swift in Sources */,
 				CD7E5EDC2BF197C4008E8DED /* ProfileView.swift in Sources */,
 				CD7E5EF62BF2003B008E8DED /* DateExtension.swift in Sources */,
 				CD7E5EF42BF1FC63008E8DED /* LoginModel.swift in Sources */,
@@ -247,8 +247,8 @@
 				CD7E5ED62BF1945B008E8DED /* MuscleMemoryMainViewModel.swift in Sources */,
 				CD7E5EEE2BF1E9BE008E8DED /* CustomButton.swift in Sources */,
 				CD7E5EF22BF1FC5A008E8DED /* LoginViewModel.swift in Sources */,
-				CD7E5EF92BF202D4008E8DED /* MuscleMemoryMainViewCell.swift in Sources */,
-				CD7E5ED42BF19371008E8DED /* MuscleMemoryMainView.swift in Sources */,
+				CD7E5EF92BF202D4008E8DED /* MuscleMemoryMainViewCellDeprecated.swift in Sources */,
+				CD7E5ED42BF19371008E8DED /* MuscleMemoryMainViewDeprecate.swift in Sources */,
 				CD7E5EF02BF1FC52008E8DED /* SignView.swift in Sources */,
 				CD7E5EDE2BF197CD008E8DED /* ProfileViewModel.swift in Sources */,
 				CD7E5EE02BF197D4008E8DED /* ProfileModel.swift in Sources */,

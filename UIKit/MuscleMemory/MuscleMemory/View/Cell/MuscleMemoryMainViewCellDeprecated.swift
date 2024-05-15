@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MuscleMemoryMainViewCell: UICollectionViewCell {
+class MuscleMemoryMainViewCellDeprecated: UICollectionViewCell {
     var dayLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

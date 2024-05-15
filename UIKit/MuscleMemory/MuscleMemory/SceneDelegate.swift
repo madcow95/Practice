@@ -18,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
         
-        let loginView = CalendarViewController()
-        let navigationController = UINavigationController(rootViewController: loginView)
+        let homeView = MuscleMemoryHomeView()
+        let navigationController = UINavigationController(rootViewController: homeView)
         
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
