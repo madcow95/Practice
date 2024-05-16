@@ -22,7 +22,8 @@ class CustomTextField: UITextField {
     }
     
     convenience init(placeholderText: String = "",
-                     isSecure: Bool = false) {
+                     isSecure: Bool = false,
+                     height: CGFloat = 45) {
         self.init(frame: .zero)
         self.placeholder = placeholderText
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -30,7 +31,7 @@ class CustomTextField: UITextField {
         self.leftViewMode = .always
         self.layer.borderWidth = 2
         self.layer.cornerRadius = 10
-        self.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        self.heightAnchor.constraint(equalToConstant: height).isActive = true
         self.isSecureTextEntry = isSecure
     }
     

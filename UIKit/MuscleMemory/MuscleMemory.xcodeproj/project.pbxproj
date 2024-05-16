@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD1268AD2BF5C6B700E6BDC9 /* MuscleMemoryCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1268AC2BF5C6B700E6BDC9 /* MuscleMemoryCreateViewModel.swift */; };
 		CD3D8AD52BF2FF55004956BA /* CustomHLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3D8AD42BF2FF55004956BA /* CustomHLine.swift */; };
 		CD3D8AD72BF356E4004956BA /* MuscleMemoryHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3D8AD62BF356E4004956BA /* MuscleMemoryHomeView.swift */; };
 		CD7E5EBC2BF19209008E8DED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E5EBB2BF19209008E8DED /* AppDelegate.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD1268AC2BF5C6B700E6BDC9 /* MuscleMemoryCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleMemoryCreateViewModel.swift; sourceTree = "<group>"; };
 		CD3D8AD42BF2FF55004956BA /* CustomHLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHLine.swift; sourceTree = "<group>"; };
 		CD3D8AD62BF356E4004956BA /* MuscleMemoryHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleMemoryHomeView.swift; sourceTree = "<group>"; };
 		CD7E5EB82BF19209008E8DED /* MuscleMemory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuscleMemory.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +124,7 @@
 				CD7E5ED52BF1945B008E8DED /* MuscleMemoryMainViewModel.swift */,
 				CD7E5EDD2BF197CD008E8DED /* ProfileViewModel.swift */,
 				CD7E5EF12BF1FC5A008E8DED /* LoginViewModel.swift */,
+				CD1268AC2BF5C6B700E6BDC9 /* MuscleMemoryCreateViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				CD7E5EBE2BF19209008E8DED /* SceneDelegate.swift in Sources */,
 				CD7E5EE82BF1E472008E8DED /* LoginView.swift in Sources */,
 				CD7E5EEC2BF1E581008E8DED /* CustomTextField.swift in Sources */,
+				CD1268AD2BF5C6B700E6BDC9 /* MuscleMemoryCreateViewModel.swift in Sources */,
 				CD7E5ED82BF19478008E8DED /* MuscleMemoryModel.swift in Sources */,
 				CD7E5ED62BF1945B008E8DED /* MuscleMemoryMainViewModel.swift in Sources */,
 				CD7E5EEE2BF1E9BE008E8DED /* CustomButton.swift in Sources */,
