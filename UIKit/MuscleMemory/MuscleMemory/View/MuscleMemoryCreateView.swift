@@ -71,7 +71,7 @@ class MuscleMemoryCreateView: UIViewController {
         return btn
     }()
     
-    var addPartTextField = CustomTextField(placeholderText: "추가할 운동", height: 25)
+    var addPartTextField = CustomTextField(placeholderText: "추가할 운동", height: 30)
     var hLine = CustomHLine()
     var selectedWorkoutList: [UIStackView] = []
     
@@ -89,7 +89,9 @@ class MuscleMemoryCreateView: UIViewController {
         ])
     }
     
-    var tempView: [UIView] = []
+    var tempStackView: [UIStackView] = []
+    var tempLabel: [UILabel] = []
+    var prevBottomAnchor: NSLayoutYAxisAnchor!
     func setRecordField() {
         addPartButton.addTarget(self, action: #selector(addWorkout), for: .touchUpInside)
         view.addSubview(addPartButton)
@@ -109,7 +111,7 @@ class MuscleMemoryCreateView: UIViewController {
             hLine.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
         
-        var prevBottomAnchor = hLine.bottomAnchor
+        prevBottomAnchor = hLine.bottomAnchor
         
         let selectedPickerIndex = picker.selectedSegmentIndex
         guard let workoutParts = WorkoutPart(rawValue: WorkoutPart.allCases[selectedPickerIndex].rawValue) else { return }
@@ -118,7 +120,7 @@ class MuscleMemoryCreateView: UIViewController {
             let workListHStack = getWorkListHStack(part: part)
             
             view.addSubview(workListHStack)
-            tempView.append(workListHStack)
+            tempStackView.append(workListHStack)
             
             NSLayoutConstraint.activate([
                 workListHStack.topAnchor.constraint(equalTo: prevBottomAnchor, constant: 20),
@@ -137,7 +139,7 @@ class MuscleMemoryCreateView: UIViewController {
             seperator.trailingAnchor.constraint(equalTo: hLine.trailingAnchor)
         ])
         
-        
+        prevBottomAnchor = seperator.bottomAnchor
     }
     
     func getWorkListHStack(part: String) -> UIStackView {
@@ -148,18 +150,18 @@ class MuscleMemoryCreateView: UIViewController {
         
         let nameLabel = UILabel()
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.numberOfLines = 2
+        nameLabel.numberOfLines = 0
         nameLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
         nameLabel.text = part
         
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "Enter Here"
+        let textField = CustomTextField(placeholderText: "세트 입력", height: 30)
+        textField.keyboardType = .numberPad
         
         let addButton = UIButton()
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
-        addButton.addTarget(self, action: #selector(addSelectedWorkoutList), for: .touchUpInside)
+        addButton.tag = tempStackView.count
+        addButton.addTarget(self, action: #selector(addSelectedWorkoutList(_:)), for: .touchUpInside)
         
         hStack.addArrangedSubview(nameLabel)
         hStack.addArrangedSubview(textField)
@@ -168,16 +170,67 @@ class MuscleMemoryCreateView: UIViewController {
         return hStack
     }
     
-    @objc func addSelectedWorkoutList() {
+    @objc func addSelectedWorkoutList(_ sender: UIButton) {
+        let selectedWorkoutHStack: UIStackView = tempStackView[sender.tag]
+        var selectedTextField: UITextField?
+        var selectedLabel: UILabel?
+        
+        for element in selectedWorkoutHStack.arrangedSubviews {
+            if element is UITextField {
+                selectedTextField = element as? UITextField
+                continue
+            } else if element is UILabel {
+                selectedLabel = element as? UILabel
+                continue
+            }
+        }
+        
+        if let tf = selectedTextField, let label = selectedLabel, !tf.text!.isEmpty {
+            sender.isEnabled = false
+            tf.isEnabled = false
+            tf.backgroundColor = .lightGray
+            
+            let workoutLabel = UILabel()
+            workoutLabel.translatesAutoresizingMaskIntoConstraints = false
+            workoutLabel.numberOfLines = 2
+            workoutLabel.text = label.text!
+            
+            let setLabel = UILabel()
+            setLabel.translatesAutoresizingMaskIntoConstraints = false
+            setLabel.text = tf.text! + "세트"
+            
+            let minusButton = UIButton()
+            minusButton.translatesAutoresizingMaskIntoConstraints = false
+            minusButton.setImage(UIImage(systemName: "minus.circle"), for: .normal)
+            minusButton.addTarget(self, action: #selector(removeSelectedWorkout), for: .touchUpInside)
+            
+            view.addSubview(workoutLabel)
+            view.addSubview(setLabel)
+            
+            NSLayoutConstraint.activate([
+                workoutLabel.topAnchor.constraint(equalTo: prevBottomAnchor, constant: 20),
+                workoutLabel.leadingAnchor.constraint(equalTo: selectedWorkoutHStack.leadingAnchor),
+                workoutLabel.widthAnchor.constraint(equalToConstant: 120),
+                
+                setLabel.topAnchor.constraint(equalTo: workoutLabel.topAnchor),
+                setLabel.leadingAnchor.constraint(equalTo: workoutLabel.trailingAnchor, constant: 20),
+                setLabel.widthAnchor.constraint(equalToConstant: 50)
+            ])
+            tempLabel.append(workoutLabel)
+            prevBottomAnchor = workoutLabel.bottomAnchor
+        }
+    }
+    
+    @objc func removeSelectedWorkout() {
         
     }
     
     @objc func pickerSelected() {
         addPartTextField.text = ""
-        tempView.forEach{ temp in
-            temp.removeFromSuperview()
-        }
-        tempView.removeAll()
+        tempStackView.forEach{ $0.removeFromSuperview() }
+        tempLabel.forEach{ $0.removeFromSuperview() }
+        tempStackView.removeAll()
+        tempLabel.removeAll()
         setRecordField()
     }
     
@@ -186,10 +239,8 @@ class MuscleMemoryCreateView: UIViewController {
         guard var workoutParts = WorkoutPart(rawValue: WorkoutPart.allCases[selectedPickerIndex].rawValue) else { return }
         guard let newWorkout = addPartTextField.text else { return }
         workoutParts.addWorkoutList(newWorkout)
-        tempView.forEach{ temp in
-            temp.removeFromSuperview()
-        }
-        tempView.removeAll()
+        tempStackView.forEach{ $0.removeFromSuperview() }
+        tempStackView.removeAll()
         setRecordField()
     }
 }
