@@ -73,6 +73,7 @@ class MuscleMemoryCreateView: UIViewController {
     
     var addPartTextField = CustomTextField(placeholderText: "추가할 운동", height: 25)
     var hLine = CustomHLine()
+    var selectedWorkoutList: [UIStackView] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +91,6 @@ class MuscleMemoryCreateView: UIViewController {
     
     var tempView: [UIView] = []
     func setRecordField() {
-        
         addPartButton.addTarget(self, action: #selector(addWorkout), for: .touchUpInside)
         view.addSubview(addPartButton)
         view.addSubview(addPartTextField)
@@ -115,41 +115,65 @@ class MuscleMemoryCreateView: UIViewController {
         guard let workoutParts = WorkoutPart(rawValue: WorkoutPart.allCases[selectedPickerIndex].rawValue) else { return }
         
         workoutParts.workoutList.forEach{ part in
-            let hStack = UIStackView()
-            hStack.axis = .horizontal
-            hStack.distribution = .equalSpacing
-            hStack.translatesAutoresizingMaskIntoConstraints = false
+            let workListHStack = getWorkListHStack(part: part)
             
-            let nameLabel = UILabel()
-            nameLabel.translatesAutoresizingMaskIntoConstraints = false
-            nameLabel.text = part
-            
-            let textField = UITextField()
-            textField.translatesAutoresizingMaskIntoConstraints = false
-            textField.placeholder = "Enter Here"
-            
-            let addButton = UIButton()
-            addButton.translatesAutoresizingMaskIntoConstraints = false
-            addButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
-            
-            hStack.addArrangedSubview(nameLabel)
-            hStack.addArrangedSubview(textField)
-            hStack.addArrangedSubview(addButton)
-            
-            view.addSubview(hStack)
-            tempView.append(hStack)
+            view.addSubview(workListHStack)
+            tempView.append(workListHStack)
             
             NSLayoutConstraint.activate([
-                hStack.topAnchor.constraint(equalTo: prevBottomAnchor, constant: 20),
-                hStack.leadingAnchor.constraint(equalTo: picker.leadingAnchor),
-                hStack.trailingAnchor.constraint(equalTo: picker.trailingAnchor)
+                workListHStack.topAnchor.constraint(equalTo: prevBottomAnchor, constant: 20),
+                workListHStack.leadingAnchor.constraint(equalTo: picker.leadingAnchor),
+                workListHStack.trailingAnchor.constraint(equalTo: picker.trailingAnchor)
             ])
-            prevBottomAnchor = hStack.bottomAnchor
+            prevBottomAnchor = workListHStack.bottomAnchor
         }
+        
+        let seperator = CustomHLine()
+        view.addSubview(seperator)
+        
+        NSLayoutConstraint.activate([
+            seperator.topAnchor.constraint(equalTo: prevBottomAnchor, constant: 20),
+            seperator.leadingAnchor.constraint(equalTo: hLine.leadingAnchor),
+            seperator.trailingAnchor.constraint(equalTo: hLine.trailingAnchor)
+        ])
+        
+        
+    }
+    
+    func getWorkListHStack(part: String) -> UIStackView {
+        let hStack = UIStackView()
+        hStack.axis = .horizontal
+        hStack.distribution = .fill
+        hStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        let nameLabel = UILabel()
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.numberOfLines = 2
+        nameLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        nameLabel.text = part
+        
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "Enter Here"
+        
+        let addButton = UIButton()
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
+        addButton.addTarget(self, action: #selector(addSelectedWorkoutList), for: .touchUpInside)
+        
+        hStack.addArrangedSubview(nameLabel)
+        hStack.addArrangedSubview(textField)
+        hStack.addArrangedSubview(addButton)
+        
+        return hStack
+    }
+    
+    @objc func addSelectedWorkoutList() {
+        
     }
     
     @objc func pickerSelected() {
-        // TODO: 선택한 부위에 따라 저장할 운동 추가
+        addPartTextField.text = ""
         tempView.forEach{ temp in
             temp.removeFromSuperview()
         }
