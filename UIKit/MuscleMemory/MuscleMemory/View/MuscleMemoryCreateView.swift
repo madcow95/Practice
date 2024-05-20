@@ -9,11 +9,7 @@ import UIKit
 
 class MuscleMemoryCreateView: UIViewController {
     
-    private static var chestPart: [String] = ["벤치 프레스", "체스트 프레스", "케이블 프레스", "플라이"]
-    private static var shoulderPart: [String] = ["밀리터리 프레스", "숄더 프레스", "사이드 레터럴 레이즈"]
-    private static var backPart: [String] = ["랫 풀 다운", "시티드 로우", "티 바 로우"]
-    private static var legsPart: [String] = ["스쿼트", "레그 익스텐션", "레그 프레스", "런지", "백 레그 익스텐션"]
-    private static var armsPart: [String] = ["이두", "삼두"]
+    let createViewModel = MuscleMemoryCreateViewModel()
     
     enum WorkoutPart: String, CaseIterable {
         case chest = "가슴"
@@ -26,15 +22,15 @@ class MuscleMemoryCreateView: UIViewController {
             get {
                 switch self {
                 case .chest:
-                    return chestPart
+                    return MuscleMemoryCreateViewModel.chestPart
                 case .shoulder:
-                    return shoulderPart
+                    return MuscleMemoryCreateViewModel.shoulderPart
                 case .back:
-                    return backPart
+                    return MuscleMemoryCreateViewModel.backPart
                 case .legs:
-                    return legsPart
+                    return MuscleMemoryCreateViewModel.legsPart
                 case .arms:
-                    return armsPart
+                    return MuscleMemoryCreateViewModel.armsPart
                 }
             }
         }
@@ -42,15 +38,15 @@ class MuscleMemoryCreateView: UIViewController {
         mutating func addWorkoutList(_ newWorkout: String) {
             switch self {
             case .chest:
-                MuscleMemoryCreateView.chestPart.append(newWorkout)
+                MuscleMemoryCreateViewModel.chestPart.append(newWorkout)
             case .shoulder:
-                MuscleMemoryCreateView.shoulderPart.append(newWorkout)
+                MuscleMemoryCreateViewModel.shoulderPart.append(newWorkout)
             case .back:
-                MuscleMemoryCreateView.backPart.append(newWorkout)
+                MuscleMemoryCreateViewModel.backPart.append(newWorkout)
             case .legs:
-                MuscleMemoryCreateView.legsPart.append(newWorkout)
+                MuscleMemoryCreateViewModel.legsPart.append(newWorkout)
             case .arms:
-                MuscleMemoryCreateView.armsPart.append(newWorkout)
+                MuscleMemoryCreateViewModel.armsPart.append(newWorkout)
             }
         }
     }
@@ -172,10 +168,13 @@ class MuscleMemoryCreateView: UIViewController {
     
     @objc func addSelectedWorkoutList(_ sender: UIButton) {
         let selectedWorkoutHStack: UIStackView = tempStackView[sender.tag]
-        var selectedTextField: UITextField?
-        var selectedLabel: UILabel?
+        var selectedTextField: UITextField? = nil
+        var selectedLabel: UILabel? = nil
         
         for element in selectedWorkoutHStack.arrangedSubviews {
+            if selectedTextField != nil && selectedLabel != nil {
+                break
+            }
             if element is UITextField {
                 selectedTextField = element as? UITextField
                 continue
@@ -221,6 +220,7 @@ class MuscleMemoryCreateView: UIViewController {
         }
     }
     
+    // TODO: -버튼 선택했을 때 선택한 목록 삭제하고 거기에 해당하는 세트입력 TextField, Button isEnable = true로 바꾸기
     @objc func removeSelectedWorkout() {
         
     }
