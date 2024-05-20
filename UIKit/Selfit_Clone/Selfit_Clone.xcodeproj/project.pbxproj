@@ -19,6 +19,7 @@
 		CD1A29A62BFB847D00F67AAC /* DailyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A29A52BFB847D00F67AAC /* DailyViewModel.swift */; };
 		CD1A29A82BFB848F00F67AAC /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A29A72BFB848F00F67AAC /* SettingView.swift */; };
 		CD1A29AA2BFB849500F67AAC /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A29A92BFB849500F67AAC /* SettingViewModel.swift */; };
+		CD1A29AD2BFB981F00F67AAC /* CustomExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A29AC2BFB981F00F67AAC /* CustomExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		CD1A29A52BFB847D00F67AAC /* DailyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewModel.swift; sourceTree = "<group>"; };
 		CD1A29A72BFB848F00F67AAC /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		CD1A29A92BFB849500F67AAC /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		CD1A29AC2BFB981F00F67AAC /* CustomExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		CD1A29872BFB817200F67AAC /* Selfit_Clone */ = {
 			isa = PBXGroup;
 			children = (
+				CD1A29AB2BFB981600F67AAC /* Util */,
 				CD1A299D2BFB83E000F67AAC /* Model */,
 				CD1A299C2BFB83D700F67AAC /* View */,
 				CD1A299E2BFB83E400F67AAC /* ViewModel */,
@@ -107,6 +110,14 @@
 				CD1A29A92BFB849500F67AAC /* SettingViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CD1A29AB2BFB981600F67AAC /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				CD1A29AC2BFB981F00F67AAC /* CustomExtension.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +197,7 @@
 				CD1A29892BFB817200F67AAC /* AppDelegate.swift in Sources */,
 				CD1A29A22BFB83FE00F67AAC /* RecordViewModel.swift in Sources */,
 				CD1A29A82BFB848F00F67AAC /* SettingView.swift in Sources */,
+				CD1A29AD2BFB981F00F67AAC /* CustomExtension.swift in Sources */,
 				CD1A29A62BFB847D00F67AAC /* DailyViewModel.swift in Sources */,
 				CD1A29AA2BFB849500F67AAC /* SettingViewModel.swift in Sources */,
 				CD1A298B2BFB817200F67AAC /* SceneDelegate.swift in Sources */,
