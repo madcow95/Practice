@@ -9,6 +9,8 @@ import UIKit
 
 class RecordView: UIViewController {
     
+    private let recordViewModel: RecordViewModel = RecordViewModel()
+    
     let scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
@@ -19,7 +21,6 @@ class RecordView: UIViewController {
     let contentView: UIView = {
         let content = UIView()
         content.translatesAutoresizingMaskIntoConstraints = false
-        content.backgroundColor = .red
         
         return content
     }()
@@ -32,6 +33,7 @@ class RecordView: UIViewController {
         setNavigationTitle()
         setNavigationButtons()
         setScrollView()
+        // MARK: TODO. 달력 집어넣기(Custom으로 할지 기본 Calendar로 할지..)
     }
     
     func setNavigationTitle() {
