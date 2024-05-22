@@ -54,7 +54,7 @@ class RecordView: UIViewController {
     func setNavigationButtons() {
         let lockButton = UIBarButtonItem(image: UIImage(systemName: "lock"), style: .plain, target: self, action: nil)
         let listButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet.rectangle"), style: .plain, target: self, action: nil)
-        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: nil)
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(toRecordCreateView))
         
         navigationItem.rightBarButtonItems = [addButton, listButton, lockButton]
     }
@@ -75,5 +75,10 @@ class RecordView: UIViewController {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
+    }
+    
+    @objc func toRecordCreateView() {
+        let createView = RecordCreateView()
+        navigationController?.pushViewController(createView, animated: true)
     }
 }

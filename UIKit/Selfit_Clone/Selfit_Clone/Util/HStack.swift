@@ -13,21 +13,18 @@ class HStack: UIStackView {
          isSpacingEnable: Bool = false,
          titleText: String,
          contentText: String,
-         contentIsImage: Bool = false) {
+         contentIsImage: Bool = false,
+         imageWidth: CGFloat = 50,
+         imageHeight: CGFloat = 50) {
         super.init(frame: frame)
         
         self.axis = .horizontal
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        let contentLabel = UILabel()
-        contentLabel.text = contentText
-        contentLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        contentLabel.textColor = .lightGray
+        let contentLabel = CustomLabel(text: contentText, textColor: .lightGray)
         
         if isSpacingEnable {
-            let titleLabel = UILabel()
-            titleLabel.text = titleText
-            titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+            let titleLabel = CustomLabel(text: titleText)
             
             let spacer = UIView()
             spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -50,12 +47,12 @@ class HStack: UIStackView {
             self.spacing = 15
             
             let profileImage: UIImageView = UIImageView(image: UIImage(systemName: titleText))
-            profileImage.widthAnchor.constraint(equalToConstant: 50).isActive = true
-            profileImage.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            profileImage.widthAnchor.constraint(equalToConstant: imageWidth).isActive = true
+            profileImage.heightAnchor.constraint(equalToConstant: imageWidth).isActive = true
             profileImage.contentMode = .scaleAspectFit
-            profileImage.tintColor = .black
+            profileImage.tintColor = .label
             
-            contentLabel.textColor = .black
+            contentLabel.textColor = .label
             
             self.addArrangedSubview(profileImage)
             self.addArrangedSubview(contentLabel)

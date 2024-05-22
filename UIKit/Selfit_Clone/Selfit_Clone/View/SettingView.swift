@@ -149,10 +149,20 @@ class SettingView: UIViewController {
     
     func setServiceLabels() {
         // 개인정보 처리방침
-        let privateInfoStack = HStack(isSpacingEnable: true, titleText: "개인정보 처리방침", contentText: "chevron.right", contentIsImage: true)
+        let privateInfoStack = HStack(isSpacingEnable: true, 
+                                      titleText: "개인정보 처리방침",
+                                      contentText: "chevron.right",
+                                      contentIsImage: true,
+                                      imageWidth: 15,
+                                      imageHeight: 15)
         
         // 서비스 이용약관
-        let serviceInfoStack = HStack(isSpacingEnable: true, titleText: "서비스 이용약관", contentText: "chevron.right", contentIsImage: true)
+        let serviceInfoStack = HStack(isSpacingEnable: true,
+                                      titleText: "서비스 이용약관",
+                                      contentText: "chevron.right",
+                                      contentIsImage: true,
+                                      imageWidth: 15,
+                                      imageHeight: 15)
         
         // 구분선
         let hLine = HorizontalLine()
