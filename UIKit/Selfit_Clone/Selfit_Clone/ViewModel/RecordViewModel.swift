@@ -14,6 +14,7 @@ import Combine
 struct RecordViewModel {
     let db = Firestore.firestore()
     
+    // MARK: TODO. 
     func getTestWorkout() -> AnyPublisher<Workout, Error> {
         Future<Workout, Error> { promise in
             db.collection("WorkoutRecords").document("choi").getDocument { (doc, error) in

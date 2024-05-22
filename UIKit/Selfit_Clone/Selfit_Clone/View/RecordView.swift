@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class RecordView: UIViewController {
     
@@ -77,8 +78,42 @@ class RecordView: UIViewController {
         ])
     }
     
+    private var cancellables = Set<AnyCancellable>()
+    
     @objc func toRecordCreateView() {
-        let createView = RecordCreateView()
-        navigationController?.pushViewController(createView, animated: true)
+//        let createView = RecordCreateView()
+//        navigationController?.pushViewController(createView, animated: true)
+        
+//        recordViewModel.getTestWorkout().sink { completion in
+//            switch completion {
+//            case .finished:
+//                print("finished!")
+//            case .failure(let error):
+//                print("error: \(error.localizedDescription)")
+//            }
+//        } receiveValue: { workout in
+//            print("receivedValue > \(workout.key)")
+//        }
+//        .store(in: &cancellables)
+        
+        recordViewModel.getTestWorkout().subscribe(WorkoutSubscriber())
+    }
+}
+
+class WorkoutSubscriber: Subscriber {
+    typealias Input = Workout
+    typealias Failure = Error
+    
+    func receive(completion: Subscribers.Completion<Error>) {
+        print("데이터 받기 완료!")
+    }
+    
+    func receive(subscription: any Subscription) {
+        subscription.request(.unlimited)
+    }
+    
+    func receive(_ input: Workout) -> Subscribers.Demand {
+        print("receivedValue: \(input.key)")
+        return .none
     }
 }
