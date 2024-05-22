@@ -34,6 +34,8 @@ class SettingView: UIViewController {
         setHStacks()
     }
     
+    private let verticalSpacing: CGFloat = 25
+    private let horizontalSpacing: CGFloat = 15
     private var prevBottomAnchor: NSLayoutYAxisAnchor!
     
     func setNavigationTitle() {
@@ -72,124 +74,45 @@ class SettingView: UIViewController {
     func setHStacks() {
         setProfile()
         setSettingLabels()
+        setServiceLabels()
+        setAppInfoLabels()
+        setUserLabels()
     }
     
     func setProfile() {
-        let profileHStack = HStack()
-        profileHStack.spacing = 15
-        
-        let profileImage: UIImageView = UIImageView(image: UIImage(systemName: "person.crop.circle.fill"))
-        profileImage.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        profileImage.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        profileImage.contentMode = .scaleAspectFit
-        profileImage.tintColor = .black
-        
-        let profileLabel: UILabel = UILabel()
-        profileLabel.text = "사용자 이름(비공개)"
-        profileLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        
-        profileHStack.addArrangedSubview(profileImage)
-        profileHStack.addArrangedSubview(profileLabel)
+        let profileHStack = HStack(titleText: "person.crop.circle.fill", contentText: "사용자 이름(비공개)")
         
         contentView.addSubview(profileHStack)
         
         NSLayoutConstraint.activate([
             profileHStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            profileHStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            profileHStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
+            profileHStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: horizontalSpacing),
+            profileHStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -horizontalSpacing)
         ])
         
         let hLine = HorizontalLine()
         contentView.addSubview(hLine)
         
         NSLayoutConstraint.activate([
-            hLine.topAnchor.constraint(equalTo: profileHStack.bottomAnchor, constant: 20),
-            hLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            hLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15)
+            hLine.topAnchor.constraint(equalTo: profileHStack.bottomAnchor, constant: verticalSpacing),
+            hLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: horizontalSpacing),
+            hLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -horizontalSpacing)
         ])
         prevBottomAnchor = hLine.bottomAnchor
     }
     
     func setSettingLabels() {
         // 언어 설정
-        let languageStack = HStack()
-        
-        let languageLabel = UILabel()
-        languageLabel.text = "언어 (Language)"
-        languageLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        
-        let languageSpacer = UIView()
-        languageSpacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        languageSpacer.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        
-        let settingLanguage = UILabel()
-        settingLanguage.text = Setting.currentLanguage.rawValue
-        settingLanguage.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        settingLanguage.textColor = .lightGray
-        
-        languageStack.addArrangedSubview(languageLabel)
-        languageStack.addArrangedSubview(languageSpacer)
-        languageStack.addArrangedSubview(settingLanguage)
+        let languageStack = HStack(isSpacingEnable: true, titleText: "언어 (Language)", contentText: Setting.currentLanguage.rawValue)
         
         // 테마 설정
-        let themeStack = HStack()
-        
-        let themeLabel = UILabel()
-        themeLabel.text = "화면 테마"
-        themeLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        
-        let themeSpacer = UIView()
-        themeSpacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        themeSpacer.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        
-        let settingTheme = UILabel()
-        settingTheme.text = Setting.currentTheme.rawValue
-        settingTheme.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        settingTheme.textColor = .lightGray
-        
-        themeStack.addArrangedSubview(themeLabel)
-        themeStack.addArrangedSubview(themeSpacer)
-        themeStack.addArrangedSubview(settingTheme)
+        let themeStack = HStack(isSpacingEnable: true, titleText: "화면 테마", contentText: Setting.currentTheme.rawValue)
         
         // 달력 옵션 설정
-        let calendarOptionStack = HStack()
-        
-        let calendarOptionLabel = UILabel()
-        calendarOptionLabel.text = "달력 옵션"
-        calendarOptionLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        
-        let calendarOptionSpacer = UIView()
-        calendarOptionSpacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        calendarOptionSpacer.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        
-        let calendarOption = UILabel()
-        calendarOption.text = Setting.calendarOption.rawValue
-        calendarOption.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        calendarOption.textColor = .lightGray
-        
-        calendarOptionStack.addArrangedSubview(calendarOptionLabel)
-        calendarOptionStack.addArrangedSubview(calendarOptionSpacer)
-        calendarOptionStack.addArrangedSubview(calendarOption)
+        let calendarOptionStack = HStack(isSpacingEnable: true, titleText: "달력 옵션", contentText: Setting.calendarOption.rawValue)
         
         // 운동 완료 설정
-        let workoutStack = HStack()
-        
-        let workoutLabel = UILabel()
-        workoutLabel.text = "운동 완료"
-        workoutLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        
-        let workoutSpacer = UIView()
-        workoutSpacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        workoutSpacer.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        
-        let workout = UILabel()
-        workout.text = Setting.workoutComplete.rawValue
-        workout.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        workout.textColor = .lightGray
-        
-        workoutStack.addArrangedSubview(workoutLabel)
-        workoutStack.addArrangedSubview(workoutSpacer)
-        workoutStack.addArrangedSubview(workout)
+        let workoutStack = HStack(isSpacingEnable: true, titleText: "운동 완료", contentText: Setting.workoutComplete.rawValue)
         
         // 구분선
         let hLine = HorizontalLine()
@@ -201,26 +124,110 @@ class SettingView: UIViewController {
         contentView.addSubview(hLine)
         
         NSLayoutConstraint.activate([
-            languageStack.topAnchor.constraint(equalTo: prevBottomAnchor, constant: 20),
-            languageStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            languageStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+            languageStack.topAnchor.constraint(equalTo: prevBottomAnchor, constant: verticalSpacing),
+            languageStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: horizontalSpacing),
+            languageStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -horizontalSpacing),
             
-            themeStack.topAnchor.constraint(equalTo: languageStack.bottomAnchor, constant: 20),
+            themeStack.topAnchor.constraint(equalTo: languageStack.bottomAnchor, constant: verticalSpacing),
             themeStack.leadingAnchor.constraint(equalTo: languageStack.leadingAnchor),
             themeStack.trailingAnchor.constraint(equalTo: languageStack.trailingAnchor),
             
-            calendarOptionStack.topAnchor.constraint(equalTo: themeStack.bottomAnchor, constant: 20),
+            calendarOptionStack.topAnchor.constraint(equalTo: themeStack.bottomAnchor, constant: verticalSpacing),
             calendarOptionStack.leadingAnchor.constraint(equalTo: languageStack.leadingAnchor),
             calendarOptionStack.trailingAnchor.constraint(equalTo: languageStack.trailingAnchor),
             
-            workoutStack.topAnchor.constraint(equalTo: calendarOptionStack.bottomAnchor, constant: 20),
+            workoutStack.topAnchor.constraint(equalTo: calendarOptionStack.bottomAnchor, constant: verticalSpacing),
             workoutStack.leadingAnchor.constraint(equalTo: languageStack.leadingAnchor),
             workoutStack.trailingAnchor.constraint(equalTo: languageStack.trailingAnchor),
             
-            hLine.topAnchor.constraint(equalTo: workoutStack.bottomAnchor, constant: 20),
+            hLine.topAnchor.constraint(equalTo: workoutStack.bottomAnchor, constant: verticalSpacing),
             hLine.leadingAnchor.constraint(equalTo: languageStack.leadingAnchor),
             hLine.trailingAnchor.constraint(equalTo: languageStack.trailingAnchor)
         ])
         prevBottomAnchor = hLine.bottomAnchor
+    }
+    
+    func setServiceLabels() {
+        // 개인정보 처리방침
+        let privateInfoStack = HStack(isSpacingEnable: true, titleText: "개인정보 처리방침", contentText: "chevron.right", contentIsImage: true)
+        
+        // 서비스 이용약관
+        let serviceInfoStack = HStack(isSpacingEnable: true, titleText: "서비스 이용약관", contentText: "chevron.right", contentIsImage: true)
+        
+        // 구분선
+        let hLine = HorizontalLine()
+        
+        contentView.addSubview(privateInfoStack)
+        contentView.addSubview(serviceInfoStack)
+        contentView.addSubview(hLine)
+        
+        NSLayoutConstraint.activate([
+            privateInfoStack.topAnchor.constraint(equalTo: prevBottomAnchor, constant: verticalSpacing),
+            privateInfoStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: horizontalSpacing),
+            privateInfoStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -horizontalSpacing),
+            
+            serviceInfoStack.topAnchor.constraint(equalTo: privateInfoStack.bottomAnchor, constant: verticalSpacing),
+            serviceInfoStack.leadingAnchor.constraint(equalTo: privateInfoStack.leadingAnchor),
+            serviceInfoStack.trailingAnchor.constraint(equalTo: privateInfoStack.trailingAnchor),
+            
+            hLine.topAnchor.constraint(equalTo: serviceInfoStack.bottomAnchor, constant: verticalSpacing),
+            hLine.leadingAnchor.constraint(equalTo: serviceInfoStack.leadingAnchor),
+            hLine.trailingAnchor.constraint(equalTo: serviceInfoStack.trailingAnchor)
+        ])
+        
+        prevBottomAnchor = hLine.bottomAnchor
+    }
+    
+    func setAppInfoLabels() {
+        // 사용자 리뷰
+        let reviewStack = HStack(isSpacingEnable: true, titleText: "사용자 리뷰", contentText: "부탁드려요!")
+        
+        // 앱 버전
+        let versionStack = HStack(isSpacingEnable: true, titleText: "앱 버전", contentText: "3.1.11")
+        
+        // 구분선
+        let hLine = HorizontalLine()
+        
+        contentView.addSubview(reviewStack)
+        contentView.addSubview(versionStack)
+        contentView.addSubview(hLine)
+        
+        NSLayoutConstraint.activate([
+            reviewStack.topAnchor.constraint(equalTo: prevBottomAnchor, constant: verticalSpacing),
+            reviewStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: horizontalSpacing),
+            reviewStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -horizontalSpacing),
+            
+            versionStack.topAnchor.constraint(equalTo: reviewStack.bottomAnchor, constant: verticalSpacing),
+            versionStack.leadingAnchor.constraint(equalTo: reviewStack.leadingAnchor),
+            versionStack.trailingAnchor.constraint(equalTo: reviewStack.trailingAnchor),
+            
+            hLine.topAnchor.constraint(equalTo: versionStack.bottomAnchor, constant: verticalSpacing),
+            hLine.leadingAnchor.constraint(equalTo: versionStack.leadingAnchor),
+            hLine.trailingAnchor.constraint(equalTo: versionStack.trailingAnchor)
+        ])
+        
+        prevBottomAnchor = hLine.bottomAnchor
+    }
+    
+    func setUserLabels() {
+        // 로그아웃
+        let logoutStack = HStack(isSpacingEnable: true, titleText: "로그아웃", contentText: "chevron.right", contentIsImage: true)
+        
+        // 앱 버전
+        let deleteUserStack = HStack(isSpacingEnable: true, titleText: "계정 삭제", contentText: "chevron.right", contentIsImage: true)
+        
+        contentView.addSubview(logoutStack)
+        contentView.addSubview(deleteUserStack)
+        
+        NSLayoutConstraint.activate([
+            logoutStack.topAnchor.constraint(equalTo: prevBottomAnchor, constant: verticalSpacing),
+            logoutStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: horizontalSpacing),
+            logoutStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -horizontalSpacing),
+            
+            deleteUserStack.topAnchor.constraint(equalTo: logoutStack.bottomAnchor, constant: verticalSpacing),
+            deleteUserStack.leadingAnchor.constraint(equalTo: logoutStack.leadingAnchor),
+            deleteUserStack.trailingAnchor.constraint(equalTo: logoutStack.trailingAnchor),
+            deleteUserStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
     }
 }
