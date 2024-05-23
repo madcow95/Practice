@@ -98,3 +98,29 @@ class RecordView: UIViewController {
         navigationController?.pushViewController(createView, animated: true)
     }
 }
+
+/*
+    private var cancellables = Set<AnyCancellable>()
+
+    @objc func toRecordCreateView() {
+        recordViewModel.getTestWorkout().subscribe(WorkoutSubscriber())
+    }
+
+    class WorkoutSubscriber: Subscriber {
+        typealias Input = Workout
+        typealias Failure = Error
+
+        func receive(completion: Subscribers.Completion<Error>) {
+            print("데이터 받기 완료!")
+        }
+
+        func receive(subscription: any Subscription) {
+            subscription.request(.unlimited)
+        }
+
+        func receive(_ input: Workout) -> Subscribers.Demand {
+            print("receivedValue: \(input.key)")
+            return .none
+        }
+    }
+*/

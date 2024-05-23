@@ -7,19 +7,19 @@
 
 import Foundation
 
-struct Workout: Codable {
-    let date: String
-    let categories: [String: Category]
-}
-
-// MARK: - Category
-struct Category: Codable {
-    let exercises: [String: Exercise]
-}
-
-// MARK: - Exercise
-struct Exercise: Codable {
+struct Records: Codable {
     let reps: [Int]
     let sets: Int
     let weights: [Int]
+}
+
+struct Workout: Codable {
+    let category: String
+    let date: String
+    let records: Records
+    let subCategory: String
+}
+
+struct TopLevelData: Codable {
+    let workout: Workout
 }

@@ -17,23 +17,22 @@ struct RecordViewModel {
     // MARK: TODO. 
     func getAllWorkout() -> AnyPublisher<Workout, Error> {
         Future<Workout, Error> { promise in
-            db.collection("WorkoutRecords").document("choi").getDocument { (doc, error) in
+            db.collection("users").document("choi").getDocument { (doc, error) in
                 if let error = error {
                     promise(.failure(error))
                 } else {
-                    guard let document = doc else {
+                    guard let document = doc, document.exists, let data = document.data() else {
                         promise(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "doc is empty"])))
                         return
                     }
-                    if document.exists {
-                        do {
-                            let workout = try document.data(as: Workout.self)
-                            promise(.success(workout))
-                        } catch {
-                            promise(.failure(error))
-                        }
-                    } else {
-                        promise(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Document does not exist"])))
+                    
+                    do {
+                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
+                        let topLevelData = try JSONDecoder().decode(TopLevelData.self, from: jsonData)
+                        let workout = topLevelData.workout
+                        promise(.success(workout))
+                    } catch {
+                        promise(.failure(error))
                     }
                 }
             }
