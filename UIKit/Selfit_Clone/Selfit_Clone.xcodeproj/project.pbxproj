@@ -28,7 +28,7 @@
 		CD3A7DEC2BFDE87E00340CD7 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CD3A7DEB2BFDE87E00340CD7 /* FirebaseFirestoreSwift */; };
 		CD3A7DEE2BFDE87E00340CD7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CD3A7DED2BFDE87E00340CD7 /* FirebaseStorage */; };
 		CD3A7DF22BFE282300340CD7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD3A7DF12BFE282300340CD7 /* GoogleService-Info.plist */; };
-		CD3A7DF42BFE2A0300340CD7 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3A7DF32BFE2A0300340CD7 /* Workout.swift */; };
+		CD3A7DF42BFE2A0300340CD7 /* WorkoutRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3A7DF32BFE2A0300340CD7 /* WorkoutRecords.swift */; };
 		CD454E4E2BFCD1B800F7F212 /* HorizontalLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD454E4D2BFCD1B800F7F212 /* HorizontalLine.swift */; };
 		CD454E502BFCD2DF00F7F212 /* HStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD454E4F2BFCD2DF00F7F212 /* HStack.swift */; };
 		CD454E522BFCDBF600F7F212 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD454E512BFCDBF600F7F212 /* Setting.swift */; };
@@ -53,7 +53,7 @@
 		CD3A7DDE2BFDD21300340CD7 /* RecordCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateView.swift; sourceTree = "<group>"; };
 		CD3A7DE02BFDD8F300340CD7 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		CD3A7DF12BFE282300340CD7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		CD3A7DF32BFE2A0300340CD7 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		CD3A7DF32BFE2A0300340CD7 /* WorkoutRecords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutRecords.swift; sourceTree = "<group>"; };
 		CD454E4D2BFCD1B800F7F212 /* HorizontalLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLine.swift; sourceTree = "<group>"; };
 		CD454E4F2BFCD2DF00F7F212 /* HStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HStack.swift; sourceTree = "<group>"; };
 		CD454E512BFCDBF600F7F212 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 		CD1A299D2BFB83E000F67AAC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CD3A7DF32BFE2A0300340CD7 /* Workout.swift */,
+				CD3A7DF32BFE2A0300340CD7 /* WorkoutRecords.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -236,7 +236,7 @@
 				CD1A29A42BFB847600F67AAC /* DailyView.swift in Sources */,
 				CD3A7DE12BFDD8F300340CD7 /* CustomLabel.swift in Sources */,
 				CD1A298D2BFB817200F67AAC /* ViewController.swift in Sources */,
-				CD3A7DF42BFE2A0300340CD7 /* Workout.swift in Sources */,
+				CD3A7DF42BFE2A0300340CD7 /* WorkoutRecords.swift in Sources */,
 				CD454E4E2BFCD1B800F7F212 /* HorizontalLine.swift in Sources */,
 				CD3A7DDF2BFDD21300340CD7 /* RecordCreateView.swift in Sources */,
 				CD1A29A02BFB83F700F67AAC /* RecordView.swift in Sources */,

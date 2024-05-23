@@ -30,16 +30,16 @@ class RecordView: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        
         setNavigationTitle()
         setNavigationButtons()
         setScrollView()
         // MARK: TODO. 달력 집어넣기(Custom으로 할지 기본 Calendar로 할지..)
+        loadRecordList()
     }
     
     func setNavigationTitle() {
         let titleLabel = UILabel()
-        titleLabel.text = Date().currentFullDateString(date: Date())
+        titleLabel.text = Date().currentFullDateString()
         titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         titleLabel.textAlignment = .left
         titleLabel.sizeToFit()
@@ -78,42 +78,23 @@ class RecordView: UIViewController {
         ])
     }
     
-    private var cancellables = Set<AnyCancellable>()
+    var anyCancellable: AnyCancellable?
+    func loadRecordList() {
+        anyCancellable?.cancel()
+        anyCancellable = recordViewModel.getAllWorkout().sink { completion in
+            switch completion {
+            case .finished:
+                print("finished!")
+            case .failure(let error):
+                print("error: \(error.localizedDescription)")
+            }
+        } receiveValue: { workout in
+            print(workout)
+        }
+    }    
     
     @objc func toRecordCreateView() {
-//        let createView = RecordCreateView()
-//        navigationController?.pushViewController(createView, animated: true)
-        
-//        recordViewModel.getTestWorkout().sink { completion in
-//            switch completion {
-//            case .finished:
-//                print("finished!")
-//            case .failure(let error):
-//                print("error: \(error.localizedDescription)")
-//            }
-//        } receiveValue: { workout in
-//            print("receivedValue > \(workout.key)")
-//        }
-//        .store(in: &cancellables)
-        
-        recordViewModel.getTestWorkout().subscribe(WorkoutSubscriber())
-    }
-}
-
-class WorkoutSubscriber: Subscriber {
-    typealias Input = Workout
-    typealias Failure = Error
-    
-    func receive(completion: Subscribers.Completion<Error>) {
-        print("데이터 받기 완료!")
-    }
-    
-    func receive(subscription: any Subscription) {
-        subscription.request(.unlimited)
-    }
-    
-    func receive(_ input: Workout) -> Subscribers.Demand {
-        print("receivedValue: \(input.key)")
-        return .none
+        let createView = RecordCreateView()
+        navigationController?.pushViewController(createView, animated: true)
     }
 }

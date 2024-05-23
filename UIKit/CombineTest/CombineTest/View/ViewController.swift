@@ -104,21 +104,27 @@ class ViewController: UIViewController {
         present(viewController, animated: true, completion: nil)
     }
     
+    var cancellable: AnyCancellable?
     func startLoadVideos(searchText: String) {
-        loadVideos(searchText: searchText).sink { completion in
+        cancellable?.cancel()
+        cancellable = loadVideos(searchText: searchText).sink { completion in
             switch completion {
             case .finished:
                 self.page += 1
+//                self.cancellables.forEach{ $0.cancel() }
+//                self.cancellables.removeAll()
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
                 print("End!")
             case .failure(let error):
+//                self.cancellables.forEach{ $0.cancel() }
+//                self.cancellables.removeAll()
                 print("error! > \(error.localizedDescription)")
             }
         } receiveValue: { [weak self] receivedVideoInfo in
             self?.videoInfos += receivedVideoInfo
-        }.store(in: &cancellables)
+        }
     }
     
     func loadVideos(searchText: String) -> AnyPublisher<[VideoInfoModel], Error> {

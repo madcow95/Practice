@@ -75,6 +75,8 @@ class RecordCreateView: UIViewController {
         let chest2HStack = HStack(titleText: "checkmark.circle", contentText: "벤치 프레스", imageWidth: imageWidthHeight, imageHeight: imageWidthHeight)
         let chest3HStack = HStack(titleText: "checkmark.circle", contentText: "체스트 프레스", imageWidth: imageWidthHeight, imageHeight: imageWidthHeight)
         
+        chest1HStack.isUserInteractionEnabled = true
+        
         contentView.addSubview(chestLabel)
         contentView.addSubview(hLine)
         contentView.addSubview(chest1HStack)

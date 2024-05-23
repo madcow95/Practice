@@ -8,7 +8,14 @@
 import UIKit
 
 extension Date {
-    func currentFullDateString(date: Date) -> String {
+    func dateStringForSearch(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        return formatter.string(from: date)
+    }
+    
+    func currentFullDateString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy년 MM월 dd일"
         

@@ -15,11 +15,13 @@ class CustomLabel: UILabel {
     
     convenience init(
         text: String,
-        textColor: UIColor? = nil
+        textColor: UIColor? = nil,
+        fontSize: CGFloat = 15
     ) {
         self.init(frame: .zero)
         self.text = text
-        self.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        self.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
+        self.sizeToFit()
         if let color = textColor {
             self.textColor = color
         }
