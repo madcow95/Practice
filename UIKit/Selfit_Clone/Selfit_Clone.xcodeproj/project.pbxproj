@@ -20,6 +20,7 @@
 		CD1A29A82BFB848F00F67AAC /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A29A72BFB848F00F67AAC /* SettingView.swift */; };
 		CD1A29AA2BFB849500F67AAC /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A29A92BFB849500F67AAC /* SettingViewModel.swift */; };
 		CD1A29AD2BFB981F00F67AAC /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A29AC2BFB981F00F67AAC /* DateExtension.swift */; };
+		CD3174212C00724E00B0822B /* RecordVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3174202C00724E00B0822B /* RecordVIewCell.swift */; };
 		CD3A7DDF2BFDD21300340CD7 /* RecordCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3A7DDE2BFDD21300340CD7 /* RecordCreateView.swift */; };
 		CD3A7DE12BFDD8F300340CD7 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3A7DE02BFDD8F300340CD7 /* CustomLabel.swift */; };
 		CD3A7DE62BFDE87E00340CD7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CD3A7DE52BFDE87E00340CD7 /* FirebaseAuth */; };
@@ -50,6 +51,7 @@
 		CD1A29A72BFB848F00F67AAC /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		CD1A29A92BFB849500F67AAC /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		CD1A29AC2BFB981F00F67AAC /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		CD3174202C00724E00B0822B /* RecordVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVIewCell.swift; sourceTree = "<group>"; };
 		CD3A7DDE2BFDD21300340CD7 /* RecordCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateView.swift; sourceTree = "<group>"; };
 		CD3A7DE02BFDD8F300340CD7 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		CD3A7DF12BFE282300340CD7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		CD1A299C2BFB83D700F67AAC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CD31741F2C00724600B0822B /* Cell */,
 				CD1A299F2BFB83F700F67AAC /* RecordView.swift */,
 				CD1A29A32BFB847600F67AAC /* DailyView.swift */,
 				CD1A29A72BFB848F00F67AAC /* SettingView.swift */,
@@ -149,6 +152,14 @@
 				CD3A7DE02BFDD8F300340CD7 /* CustomLabel.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		CD31741F2C00724600B0822B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CD3174202C00724E00B0822B /* RecordVIewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD3174212C00724E00B0822B /* RecordVIewCell.swift in Sources */,
 				CD1A29A42BFB847600F67AAC /* DailyView.swift in Sources */,
 				CD3A7DE12BFDD8F300340CD7 /* CustomLabel.swift in Sources */,
 				CD1A298D2BFB817200F67AAC /* ViewController.swift in Sources */,

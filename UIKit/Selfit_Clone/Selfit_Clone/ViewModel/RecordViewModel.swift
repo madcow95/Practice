@@ -15,7 +15,7 @@ struct RecordViewModel {
     let db = Firestore.firestore()
     
     // MARK: TODO. 
-    func getAllWorkout() -> AnyPublisher<Workout, Error> {
+    func getAllWorkoutBy(date: String) -> AnyPublisher<Workout, Error> {
         Future<Workout, Error> { promise in
             db.collection("users").document("choi").getDocument { (doc, error) in
                 if let error = error {

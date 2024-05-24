@@ -26,6 +26,13 @@ class RecordView: UIViewController {
         return content
     }()
     
+    private lazy var tableView: UITableView = {
+        let table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        
+        return table
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,6 +42,8 @@ class RecordView: UIViewController {
         setScrollView()
         // MARK: TODO. 달력 집어넣기(Custom으로 할지 기본 Calendar로 할지..)
         loadRecordList()
+        setCalendar()
+//        setTable()
     }
     
     func setNavigationTitle() {
@@ -61,8 +70,8 @@ class RecordView: UIViewController {
     }
     
     func setScrollView() {
-        scrollView.addSubview(contentView)
         view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -78,10 +87,21 @@ class RecordView: UIViewController {
         ])
     }
     
+    func setRecords(workout: Workout) {
+        let date: String = workout.date
+        let category: String = workout.category
+        let subCategory: String = workout.subCategory
+        let sets: Int = workout.records.sets
+        let reps: [Int] = workout.records.reps
+        let weights: [Int] = workout.records.weights
+        
+        
+    }
+    
     var anyCancellable: AnyCancellable?
     func loadRecordList() {
         anyCancellable?.cancel()
-        anyCancellable = recordViewModel.getAllWorkout().sink { completion in
+        anyCancellable = recordViewModel.getAllWorkoutBy(date: Date().currentFullDateString()).sink { completion in
             switch completion {
             case .finished:
                 print("finished!")
@@ -91,11 +111,48 @@ class RecordView: UIViewController {
         } receiveValue: { workout in
             print(workout)
         }
-    }    
+    }
+    
+    func setCalendar() {
+        
+    }
+    
+    func setTable() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(RecordViewCell.self, forCellReuseIdentifier: "RecordViewCell")
+        
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
     
     @objc func toRecordCreateView() {
         let createView = RecordCreateView()
         navigationController?.pushViewController(createView, animated: true)
+    }
+}
+
+extension RecordView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecordViewCell", for: indexPath) as? RecordViewCell else {
+            return UITableViewCell()
+        }
+        
+        cell.subCategoryLabel.text = "Test Category"
+        cell.repsLabel.text = "Test Reps"
+        cell.weightLabel.text = "Test Weights"
+        
+        return cell
     }
 }
 
