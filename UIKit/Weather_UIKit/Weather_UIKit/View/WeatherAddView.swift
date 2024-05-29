@@ -97,6 +97,7 @@ class WeatherAddView: UIViewController {
         switch current.cloud {
         case 0..<25:
             imageString = "sun.max"
+            weatherImage.tintColor = .yellow
             weatherBackgroundColor = .systemBlue
         case 25..<50:
             imageString = "cloud.sun"

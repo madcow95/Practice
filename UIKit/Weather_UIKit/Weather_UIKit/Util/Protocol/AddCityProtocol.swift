@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol AddCityDelegate {
     func addNewCity(newCity: WeatherModel)

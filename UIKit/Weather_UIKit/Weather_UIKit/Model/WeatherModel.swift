@@ -8,26 +8,40 @@
 import Foundation
 import SwiftData
 
-// c50344c8ff6d4861bc405526242905
 // MARK: - Welcome
-struct WeatherModel: Codable {
+@Model
+class WeatherModel: Codable {
     let location: Location
     let current: Current
     let forecast: Forecast
+    
+    enum CodingKeys: String, CodingKey {
+        case location, current, forecast
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.location = try container.decode(Location.self, forKey: .location)
+        self.current = try container.decode(Current.self, forKey: .current)
+        self.forecast = try container.decode(Forecast.self, forKey: .forecast)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(location, forKey: .location)
+        try container.encode(current, forKey: .current)
+        try container.encode(forecast, forKey: .forecast)
+    }
 }
 
 // MARK: - Location
 struct Location: Codable {
     let name, region, country: String
     let lat, lon: Double
-    let tzID: String
-    let localtimeEpoch: Int
     let localtime: String
 
     enum CodingKeys: String, CodingKey {
         case name, region, country, lat, lon
-        case tzID = "tz_id"
-        case localtimeEpoch = "localtime_epoch"
         case localtime
     }
 }

@@ -20,13 +20,30 @@ class WeatherMainView: UIViewController, AddCityDelegate {
     }()
     
     private let weatherViewModel = WeatherMainViewModel()
-    private let cityList = WeatherMainViewModel().getCityList()
+    var cancellable = Set<AnyCancellable>()
+    var weatherDatas: [WeatherModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureNavigation()
         setTable()
+        weatherViewModel.weatherDelegate = self
+        
+        self.weatherViewModel.cities.sink { completion in
+            switch completion {
+            case .finished:
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                break
+            case .failure(let error):
+                print("error > \(error.localizedDescription)")
+            }
+        } receiveValue: { [weak self] weathers in
+            self?.weatherDatas = weathers
+        }.store(in: &cancellable)
+        weatherViewModel.loadCities()
     }
     
     func configureNavigation() {
@@ -49,6 +66,7 @@ class WeatherMainView: UIViewController, AddCityDelegate {
     
     @objc func addWeather() {
         let addView = WeatherAddView()
+        addView.weatherDelegate = self
         navigationController?.pushViewController(addView, animated: true)
     }
     
@@ -61,13 +79,16 @@ class WeatherMainView: UIViewController, AddCityDelegate {
 
 extension WeatherMainView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cityList.count
+        return self.weatherDatas.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherMainViewCell", for: indexPath) as? WeatherMainViewCell else {
             return UITableViewCell()
         }
+        
+        let targetWeather = self.weatherDatas[indexPath.row]
+        cell.configureUI(weather: targetWeather)
         
         return cell
     }

@@ -9,25 +9,26 @@ import UIKit
 
 class WeatherMainViewCell: UITableViewCell {
     
-    private let card: UIView = {
-        let uv = UIView()
-        uv.translatesAutoresizingMaskIntoConstraints = false
+    private let cityLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         
-        return uv
+        return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configureUI()
     }
     
-    func configureUI() {
-//        self.contentView.heightAnchor.constraint(equalToConstant: self.safeAreaLayoutGuide.layoutFrame.height / 6).isActive = true
-//        self.contentView.backgroundColor = .green
-    }
-    
-    func configureCell() {
+    func configureUI(weather: WeatherModel) {
+        cityLabel.text = weather.location.name
+        self.contentView.addSubview(cityLabel)
         
+        NSLayoutConstraint.activate([
+            self.cityLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            self.cityLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+        ])
     }
     
     required init?(coder: NSCoder) {
