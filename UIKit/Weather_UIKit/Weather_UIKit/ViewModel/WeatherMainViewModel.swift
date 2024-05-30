@@ -9,32 +9,39 @@ import Foundation
 import SwiftData
 import Combine
 
+enum WeatherModelError: Error {
+    case contextNilError
+    case containerNilError
+}
+
 class WeatherMainViewModel {
     
-    var cities = PassthroughSubject<[WeatherModel], Error>()
-    var weatherDelegate: AddCityDelegate?
-    var container: ModelContainer?
-    var context: ModelContext?
+    var cities = PassthroughSubject<[CityModel], Error>()
+    private var container: ModelContainer?
+    private var context: ModelContext?
     
     init() {
         do {
-            self.container = try ModelContainer(for: WeatherModel.self)
-            if let container = self.container {
-                self.context = ModelContext(container)
+            self.container = try ModelContainer(for: CityModel.self)
+            guard let container = self.container else {
+                // SwiftData에러인데 이렇게 보내는게 맞나..?
+                cities.send(completion: .failure(WeatherModelError.containerNilError))
+                return
             }
+            self.context = ModelContext(container)
         } catch {
-            print(error)
+            cities.send(completion: .failure(WeatherModelError.contextNilError))
         }
     }
     
-    func addNewCity(newCity: WeatherModel) {
+    func addNewCity(newCity: CityModel) {
         guard let context = self.context else { return }
         context.insert(newCity)
         self.loadCities()
     }
     
     func loadCities() {
-        let descriptor = FetchDescriptor<WeatherModel>()
+        let descriptor = FetchDescriptor<CityModel>(sortBy: [SortDescriptor<CityModel>(\.date)])
         guard let ctx = self.context else {
             print("context nil error")
             return
@@ -44,7 +51,7 @@ class WeatherMainViewModel {
             let data = try ctx.fetch(descriptor)
             cities.send(data)
         } catch {
-            print("load todo fetch error")
+            cities.send(completion: .failure(error))
         }
     }
 }

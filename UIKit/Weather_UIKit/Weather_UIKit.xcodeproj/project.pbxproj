@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD2730E62C08018D00A78DDC /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2730E52C08018D00A78DDC /* CityModel.swift */; };
+		CD2730E92C080B0200A78DDC /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2730E82C080B0200A78DDC /* WeatherAPI.swift */; };
 		CDF48F8F2C06AAB1003150EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF48F8E2C06AAB1003150EF /* AppDelegate.swift */; };
 		CDF48F912C06AAB1003150EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF48F902C06AAB1003150EF /* SceneDelegate.swift */; };
 		CDF48F932C06AAB1003150EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF48F922C06AAB1003150EF /* ViewController.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD2730E52C08018D00A78DDC /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
+		CD2730E82C080B0200A78DDC /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		CDF48F8B2C06AAB1003150EF /* Weather_UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather_UIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF48F8E2C06AAB1003150EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDF48F902C06AAB1003150EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD2730E72C080AF500A78DDC /* API */ = {
+			isa = PBXGroup;
+			children = (
+				CD2730E82C080B0200A78DDC /* WeatherAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		CDF48F822C06AAB1003150EF = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				CDF48FAC2C06B1D3003150EF /* WeatherModel.swift */,
+				CD2730E52C08018D00A78DDC /* CityModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -120,6 +133,7 @@
 		CDF48FB22C06FEDB003150EF /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				CD2730E72C080AF500A78DDC /* API */,
 				CDF48FB32C06FEE1003150EF /* Protocol */,
 			);
 			path = Util;
@@ -204,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF48FA62C06AB4C003150EF /* WeatherMainView.swift in Sources */,
+				CD2730E62C08018D00A78DDC /* CityModel.swift in Sources */,
 				CDF48F932C06AAB1003150EF /* ViewController.swift in Sources */,
 				CDF48FB12C06FC43003150EF /* WeatherAddViewModel.swift in Sources */,
 				CDF48F8F2C06AAB1003150EF /* AppDelegate.swift in Sources */,
@@ -211,6 +226,7 @@
 				CDF48FAD2C06B1D3003150EF /* WeatherModel.swift in Sources */,
 				CDF48F912C06AAB1003150EF /* SceneDelegate.swift in Sources */,
 				CDF48FAB2C06ADFC003150EF /* WeatherMainViewCell.swift in Sources */,
+				CD2730E92C080B0200A78DDC /* WeatherAPI.swift in Sources */,
 				CDF48FB52C06FEE8003150EF /* AddCityProtocol.swift in Sources */,
 				CDF48FA82C06AB83003150EF /* WeatherMainViewModel.swift in Sources */,
 			);
@@ -354,8 +370,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Weather_UIKit/Weather_UIKit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P3KXNQ9736;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Weather_UIKit/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -367,7 +385,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "MadCow.Weather-UIKit";
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.madcow.madWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -380,8 +398,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Weather_UIKit/Weather_UIKit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P3KXNQ9736;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Weather_UIKit/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -393,7 +413,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "MadCow.Weather-UIKit";
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.madcow.madWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

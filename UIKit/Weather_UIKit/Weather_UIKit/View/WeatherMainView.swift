@@ -9,6 +9,7 @@ import UIKit
 import Combine
 
 class WeatherMainView: UIViewController, AddCityDelegate {
+    
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -20,29 +21,15 @@ class WeatherMainView: UIViewController, AddCityDelegate {
     }()
     
     private let weatherViewModel = WeatherMainViewModel()
-    var cancellable = Set<AnyCancellable>()
-    var weatherDatas: [WeatherModel] = []
+    var cancellable: Cancellable?
+    var cityModels: [CityModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureNavigation()
         setTable()
-        weatherViewModel.weatherDelegate = self
-        
-        self.weatherViewModel.cities.sink { completion in
-            switch completion {
-            case .finished:
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                break
-            case .failure(let error):
-                print("error > \(error.localizedDescription)")
-            }
-        } receiveValue: { [weak self] weathers in
-            self?.weatherDatas = weathers
-        }.store(in: &cancellable)
+        setSubscriptor()
         weatherViewModel.loadCities()
     }
     
@@ -64,6 +51,23 @@ class WeatherMainView: UIViewController, AddCityDelegate {
         ])
     }
     
+    func setSubscriptor() {
+        cancellable?.cancel()
+        cancellable = self.weatherViewModel.cities.sink { completion in
+            switch completion {
+            case .finished:
+                break
+            case .failure(let error):
+                print("error > \(error.localizedDescription)")
+            }
+        } receiveValue: { [weak self] cities in
+            DispatchQueue.main.async {
+                self?.cityModels = cities
+                self?.tableView.reloadData()
+            }
+        }
+    }
+    
     @objc func addWeather() {
         let addView = WeatherAddView()
         addView.weatherDelegate = self
@@ -71,15 +75,14 @@ class WeatherMainView: UIViewController, AddCityDelegate {
     }
     
     // Delegate
-    func addNewCity(newCity: WeatherModel) {
+    func addNewCity(newCity: CityModel) {
         weatherViewModel.addNewCity(newCity: newCity)
-        self.tableView.reloadData()
     }
 }
 
 extension WeatherMainView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.weatherDatas.count
+        return self.cityModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,13 +90,17 @@ extension WeatherMainView: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let targetWeather = self.weatherDatas[indexPath.row]
-        cell.configureUI(weather: targetWeather)
+        let targetCity = self.cityModels[indexPath.row]
+        cell.configureUI(city: targetCity)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.frame.height / 5
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 15
     }
 }

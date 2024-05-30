@@ -6,31 +6,15 @@
 //
 
 import Foundation
-import SwiftData
 
-// MARK: - Welcome
-@Model
-class WeatherModel: Codable {
+// MARK: - WeatherModel
+struct WeatherModel: Codable {
     let location: Location
     let current: Current
     let forecast: Forecast
     
     enum CodingKeys: String, CodingKey {
         case location, current, forecast
-    }
-
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.location = try container.decode(Location.self, forKey: .location)
-        self.current = try container.decode(Current.self, forKey: .current)
-        self.forecast = try container.decode(Forecast.self, forKey: .forecast)
-    }
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(location, forKey: .location)
-        try container.encode(current, forKey: .current)
-        try container.encode(forecast, forKey: .forecast)
     }
 }
 

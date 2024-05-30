@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class WeatherAddView: UIViewController {
     private let searchController = UISearchController()
     private let weatherAddViewModel = WeatherAddViewModel()
     private var searchedCityWheather: WeatherModel?
+    private var cancellable: Cancellable?
     var weatherDelegate: AddCityDelegate?
     
     private let countryLabel: UILabel = {
@@ -59,6 +61,7 @@ class WeatherAddView: UIViewController {
         
         configureSearchBar()
         setNavigationUI()
+        setSubscriber()
     }
     
     func configureSearchBar() {
@@ -74,31 +77,34 @@ class WeatherAddView: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNewCity))
     }
     
-    func getWeatherInfo(city: String) {
-        weatherAddViewModel.getWeatherInfo(city: city) { [weak self] weather in
-            self?.searchedCityWheather = weather
-            DispatchQueue.main.async {
-                self?.setComponents(weather: weather)
+    func setSubscriber() {
+        cancellable?.cancel()
+        cancellable = weatherAddViewModel.searchedCity
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error while search city > \(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] weather in
+                self?.searchedCityWheather = weather
+                DispatchQueue.main.async {
+                    self?.setComponents(weather: weather)
+                }
             }
-        }
     }
     
     func setComponents(weather: WeatherModel) {
         let location = weather.location
         let current = weather.current
-        
-        countryLabel.text = location.country
-        nameLabel.text = location.name
-        temperatureLabel.text = "\(current.tempC)'C"
-        uvLabel.text = "\(current.uv)"
-        
         var imageString: String = ""
         var weatherBackgroundColor: UIColor = .systemBackground
         switch current.cloud {
         case 0..<25:
             imageString = "sun.max"
             weatherImage.tintColor = .yellow
-            weatherBackgroundColor = .systemBlue
+            weatherBackgroundColor = .orange
         case 25..<50:
             imageString = "cloud.sun"
             weatherBackgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 235/255.0, alpha: 1.0)
@@ -114,7 +120,11 @@ class WeatherAddView: UIViewController {
             imageString = ""
         }
         view.backgroundColor = weatherBackgroundColor
+        countryLabel.text = "Country: \(location.country)"
+        nameLabel.text = "City: \(location.name)"
         weatherImage.image = UIImage(systemName: imageString)
+        temperatureLabel.text = "Temperature: \(current.tempC)'C"
+        uvLabel.text = "UV: \(current.uv)"
         
         [countryLabel, nameLabel, weatherImage, temperatureLabel, uvLabel].forEach{ view.addSubview($0) }
         
@@ -143,14 +153,16 @@ class WeatherAddView: UIViewController {
     
     @objc func addNewCity() {
         guard let weather = searchedCityWheather else { return }
-        weatherDelegate?.addNewCity(newCity: weather)
+        let newCity = CityModel(name: weather.location.name, date: Date())
+        weatherDelegate?.addNewCity(newCity: newCity)
+        navigationController?.popViewController(animated: true)
     }
 }
 
 extension WeatherAddView: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text {
-            getWeatherInfo(city: searchText)
+            weatherAddViewModel.getWeatherInfo(city: searchText)
             searchBar.resignFirstResponder()
         }
     }
