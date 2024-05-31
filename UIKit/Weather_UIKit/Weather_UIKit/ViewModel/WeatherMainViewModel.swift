@@ -12,9 +12,10 @@ import Combine
 enum WeatherModelError: Error {
     case contextNilError
     case containerNilError
+    case apiCallError
 }
 
-class WeatherMainViewModel {
+struct WeatherMainViewModel {
     
     var cities = PassthroughSubject<[CityModel], Error>()
     private var container: ModelContainer?
@@ -49,6 +50,16 @@ class WeatherMainViewModel {
         
         do {
             let data = try ctx.fetch(descriptor)
+//            data를 불러와서 여기에서 api한 번에 호출하고 모아서 보내려면 어떻게 해야할까..
+//            let weatherDataPublisher = Publishers.MergeMany(data.map { city in
+//                WeatherAPI.getWeatherData(city: city.name)
+//                    .mapError { error in
+//                        WeatherModelError.apiCallError
+//                    }
+//                    .eraseToAnyPublisher()
+//
+//            })
+            
             cities.send(data)
         } catch {
             cities.send(completion: .failure(error))

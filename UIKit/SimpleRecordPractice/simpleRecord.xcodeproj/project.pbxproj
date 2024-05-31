@@ -29,10 +29,10 @@
 		CD934AAD2B9B264E00CDDC10 /* RecordListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD934AAC2B9B264E00CDDC10 /* RecordListViewModel.swift */; };
 		CD934AAF2B9B3C0900CDDC10 /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD934AAE2B9B3C0900CDDC10 /* RecordDetailViewController.swift */; };
 		CDA110AE2BB59753001777DB /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA110AD2BB59753001777DB /* RecordModel.swift */; };
-		CDA110B12BB598DD001777DB /* RecordModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDA110AF2BB598DD001777DB /* RecordModel.xcdatamodeld */; };
 		CDA110B32BB59D28001777DB /* CustomUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA110B22BB59D28001777DB /* CustomUIElement.swift */; };
 		CDA110B52BB5AF13001777DB /* RecordCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA110B42BB5AF13001777DB /* RecordCreateView.swift */; };
 		CDA110B72BB5AF2A001777DB /* RecordCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA110B62BB5AF2A001777DB /* RecordCreateViewModel.swift */; };
+		CDB554402C09BEF4005A4D3B /* RecordModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDB5543E2C09BEF4005A4D3B /* RecordModel.xcdatamodeld */; };
 		CDF0ADE52B8E12BF00C8690D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF0ADE42B8E12BF00C8690D /* AppDelegate.swift */; };
 		CDF0ADE72B8E12BF00C8690D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF0ADE62B8E12BF00C8690D /* SceneDelegate.swift */; };
 		CDF0ADE92B8E12BF00C8690D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF0ADE82B8E12BF00C8690D /* HomeViewController.swift */; };
@@ -65,10 +65,10 @@
 		CD934AAC2B9B264E00CDDC10 /* RecordListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListViewModel.swift; sourceTree = "<group>"; };
 		CD934AAE2B9B3C0900CDDC10 /* RecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
 		CDA110AD2BB59753001777DB /* RecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
-		CDA110B02BB598DD001777DB /* Record.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Record.xcdatamodel; sourceTree = "<group>"; };
 		CDA110B22BB59D28001777DB /* CustomUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIElement.swift; sourceTree = "<group>"; };
 		CDA110B42BB5AF13001777DB /* RecordCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateView.swift; sourceTree = "<group>"; };
 		CDA110B62BB5AF2A001777DB /* RecordCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCreateViewModel.swift; sourceTree = "<group>"; };
+		CDB5543F2C09BEF4005A4D3B /* Record.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Record.xcdatamodel; sourceTree = "<group>"; };
 		CDF0ADE12B8E12BF00C8690D /* simpleRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simpleRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF0ADE42B8E12BF00C8690D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDF0ADE62B8E12BF00C8690D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 		CD4310492BA71BCF006EA1F9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				CDA110AF2BB598DD001777DB /* RecordModel.xcdatamodeld */,
+				CDB5543E2C09BEF4005A4D3B /* RecordModel.xcdatamodeld */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -341,6 +341,7 @@
 				CDA110B52BB5AF13001777DB /* RecordCreateView.swift in Sources */,
 				CD21AFF82B99F9F6002F8396 /* RecordListViewCell.swift in Sources */,
 				CD7421A32BB852AD001CEFB0 /* RecordDetailView.swift in Sources */,
+				CDB554402C09BEF4005A4D3B /* RecordModel.xcdatamodeld in Sources */,
 				CD2B8AC22B9DB8700080A4CA /* WorkoutRecordViewController.swift in Sources */,
 				CD934AAF2B9B3C0900CDDC10 /* RecordDetailViewController.swift in Sources */,
 				CD44D5442B99F5C300545FF5 /* RecordListViewController.swift in Sources */,
@@ -348,7 +349,6 @@
 				CD41885B2BB45B48008A9751 /* RecordHomeView.swift in Sources */,
 				CD4188602BB45B8C008A9751 /* RecordHomeViewCell.swift in Sources */,
 				CD382DFD2B94BA6000771235 /* CustomUIContent.swift in Sources */,
-				CDA110B12BB598DD001777DB /* RecordModel.xcdatamodeld in Sources */,
 				CD6BFB612B90507100238B2D /* WorkOutDetail.swift in Sources */,
 				CD6BFB632B90509600238B2D /* WorkOutRecord.swift in Sources */,
 				CDA110AE2BB59753001777DB /* RecordModel.swift in Sources */,
@@ -587,13 +587,14 @@
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
-		CDA110AF2BB598DD001777DB /* RecordModel.xcdatamodeld */ = {
+		CDB5543E2C09BEF4005A4D3B /* RecordModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				CDA110B02BB598DD001777DB /* Record.xcdatamodel */,
+				CDB5543F2C09BEF4005A4D3B /* Record.xcdatamodel */,
 			);
-			currentVersion = CDA110B02BB598DD001777DB /* Record.xcdatamodel */;
-			path = RecordModel.xcdatamodeld;
+			currentVersion = CDB5543F2C09BEF4005A4D3B /* Record.xcdatamodel */;
+			name = RecordModel.xcdatamodeld;
+			path = /Users/madcow/Desktop/Practice/UIKit/SimpleRecordPractice/SimpleRecord/Data/RecordModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

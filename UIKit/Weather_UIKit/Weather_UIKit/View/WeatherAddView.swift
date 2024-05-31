@@ -15,7 +15,7 @@ class WeatherAddView: UIViewController {
     private var cancellable: Cancellable?
     var weatherDelegate: AddCityDelegate?
     
-    private let countryLabel: UILabel = {
+    private lazy var countryLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -23,7 +23,7 @@ class WeatherAddView: UIViewController {
         return label
     }()
     
-    private let nameLabel: UILabel = {
+    private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -31,7 +31,7 @@ class WeatherAddView: UIViewController {
         return label
     }()
     
-    private let weatherImage: UIImageView = {
+    private lazy var weatherImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
@@ -39,7 +39,7 @@ class WeatherAddView: UIViewController {
         return image
     }()
     
-    private let temperatureLabel: UILabel = {
+    private lazy var temperatureLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -47,7 +47,15 @@ class WeatherAddView: UIViewController {
         return label
     }()
     
-    private let uvLabel: UILabel = {
+    private lazy var currentTimeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        
+        return label
+    }()
+    
+    private lazy var uvLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -98,18 +106,24 @@ class WeatherAddView: UIViewController {
     func setComponents(weather: WeatherModel) {
         let location = weather.location
         let current = weather.current
+        let todayCast = weather.forecast.forecastday.first!
+        let sunsetStr = todayCast.astro.sunset.components(separatedBy: " ")[0].components(separatedBy: ":")[0]
+        let sunsetHour = Int(sunsetStr)! + 12
+        let currentTime = location.localtime.components(separatedBy: " ")[1].components(separatedBy: ":")[0]
+        let currentTimeHour = Int(currentTime)!
+        
         var imageString: String = ""
         var weatherBackgroundColor: UIColor = .systemBackground
         switch current.cloud {
         case 0..<25:
-            imageString = "sun.max"
+            imageString = currentTimeHour >= sunsetHour ? "moon.stars" : "sun.max"
             weatherImage.tintColor = .yellow
             weatherBackgroundColor = .orange
         case 25..<50:
-            imageString = "cloud.sun"
+            imageString = currentTimeHour >= sunsetHour ? "moon" : "cloud.sun"
             weatherBackgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 235/255.0, alpha: 1.0)
         case 50..<75:
-            imageString = "cloud.fill"
+            imageString = "cloud"
             weatherImage.tintColor = .white
             weatherBackgroundColor = .lightGray
         case 75..<100:
@@ -124,9 +138,10 @@ class WeatherAddView: UIViewController {
         nameLabel.text = "City: \(location.name)"
         weatherImage.image = UIImage(systemName: imageString)
         temperatureLabel.text = "Temperature: \(current.tempC)'C"
+        currentTimeLabel.text = "Time: \(location.localtime)"
         uvLabel.text = "UV: \(current.uv)"
         
-        [countryLabel, nameLabel, weatherImage, temperatureLabel, uvLabel].forEach{ view.addSubview($0) }
+        [countryLabel, nameLabel, weatherImage, temperatureLabel, uvLabel, currentTimeLabel].forEach{ view.addSubview($0) }
         
         NSLayoutConstraint.activate([
             countryLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
@@ -139,13 +154,18 @@ class WeatherAddView: UIViewController {
             
             weatherImage.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 15),
             weatherImage.leadingAnchor.constraint(equalTo: countryLabel.leadingAnchor),
-            weatherImage.trailingAnchor.constraint(equalTo: countryLabel.trailingAnchor),
+            weatherImage.widthAnchor.constraint(equalToConstant: 50),
+            weatherImage.heightAnchor.constraint(equalToConstant: 50),
             
             temperatureLabel.topAnchor.constraint(equalTo: weatherImage.bottomAnchor, constant: 15),
             temperatureLabel.leadingAnchor.constraint(equalTo: countryLabel.leadingAnchor),
             temperatureLabel.trailingAnchor.constraint(equalTo: countryLabel.trailingAnchor),
             
-            uvLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 15),
+            currentTimeLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 15),
+            currentTimeLabel.leadingAnchor.constraint(equalTo: countryLabel.leadingAnchor),
+            currentTimeLabel.trailingAnchor.constraint(equalTo: countryLabel.trailingAnchor),
+            
+            uvLabel.topAnchor.constraint(equalTo: currentTimeLabel.bottomAnchor, constant: 15),
             uvLabel.leadingAnchor.constraint(equalTo: countryLabel.leadingAnchor),
             uvLabel.trailingAnchor.constraint(equalTo: countryLabel.trailingAnchor)
         ])

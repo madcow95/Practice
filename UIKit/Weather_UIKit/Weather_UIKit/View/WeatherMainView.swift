@@ -29,7 +29,7 @@ class WeatherMainView: UIViewController, AddCityDelegate {
         
         configureNavigation()
         setTable()
-        setSubscriptor()
+        setSubscriber()
         weatherViewModel.loadCities()
     }
     
@@ -51,7 +51,8 @@ class WeatherMainView: UIViewController, AddCityDelegate {
         ])
     }
     
-    func setSubscriptor() {
+    // 여기다가 만드는게 맞나?
+    func setSubscriber() {
         cancellable?.cancel()
         cancellable = self.weatherViewModel.cities.sink { completion in
             switch completion {
@@ -100,7 +101,9 @@ extension WeatherMainView: UITableViewDelegate, UITableViewDataSource {
         return view.frame.height / 5
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 15
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailView = WeatherDetailView()
+        detailView.receivedCity = cityModels[indexPath.row]
+        navigationController?.pushViewController(detailView, animated: true)
     }
 }
