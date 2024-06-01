@@ -24,7 +24,7 @@ import Combine
 
 struct WeatherAPI {
     private static let firstUrlStr: String = "https://api.weatherapi.com/v1/forecast.json?key=c50344c8ff6d4861bc405526242905&q="
-    private static let secondUrlStr: String = "&days=1&aqi=no&alerts=no&lang=ko"
+    private static let secondUrlStr: String = "&days=10&aqi=no&alerts=no&lang=ko"
     
     static func getWeatherData(city: String) -> AnyPublisher<WeatherModel, Error> {
         let url: URL = URL(string: "\(firstUrlStr)\(city)\(secondUrlStr)")!

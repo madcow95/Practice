@@ -15,7 +15,7 @@ enum WeatherModelError: Error {
     case apiCallError
 }
 
-struct WeatherMainViewModel {
+class WeatherMainViewModel {
     
     var cities = PassthroughSubject<[CityModel], Error>()
     private var container: ModelContainer?
@@ -30,6 +30,11 @@ struct WeatherMainViewModel {
                 return
             }
             self.context = ModelContext(container)
+            
+            // 이 방식은 ModelContext가 초기화되는 것을 보장하고 나서 loadCities()를 실행하게 합니다. 라는데 이렇게 해도 되려나..?
+            DispatchQueue.main.async {
+                self.loadCities()
+            }
         } catch {
             cities.send(completion: .failure(WeatherModelError.contextNilError))
         }
@@ -41,7 +46,14 @@ struct WeatherMainViewModel {
         self.loadCities()
     }
     
+    func removeCity(targetCity: CityModel) {
+        guard let context = self.context else { return }
+        context.delete(targetCity)
+        self.loadCities()
+    }
+    
     func loadCities() {
+        print("start load cities")
         let descriptor = FetchDescriptor<CityModel>(sortBy: [SortDescriptor<CityModel>(\.date)])
         guard let ctx = self.context else {
             print("context nil error")
@@ -50,7 +62,7 @@ struct WeatherMainViewModel {
         
         do {
             let data = try ctx.fetch(descriptor)
-//            data를 불러와서 여기에서 api한 번에 호출하고 모아서 보내려면 어떻게 해야할까..
+//            TODO: data를 불러와서 여기에서 api한 번에 호출하고 모아서 보내보기
 //            let weatherDataPublisher = Publishers.MergeMany(data.map { city in
 //                WeatherAPI.getWeatherData(city: city.name)
 //                    .mapError { error in

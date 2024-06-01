@@ -21,6 +21,7 @@ class WeatherAddViewModel {
                 case .finished:
                     break
                 case .failure(let error):
+                    // TODO: 검색한 도시가 없을 때 alert
                     print("error while sink in getWeatherInfo > \(error.localizedDescription)")
                 }
             } receiveValue: { [weak self] weather in

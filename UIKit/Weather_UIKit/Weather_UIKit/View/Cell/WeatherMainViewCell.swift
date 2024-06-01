@@ -63,11 +63,11 @@ class WeatherMainViewCell: UITableViewCell {
                 }
             } receiveValue: { [weak self] weather in
                 let current = weather.current
-                let todayCast = weather.forecast.forecastday.first!
-                let sunsetStr = todayCast.astro.sunset.components(separatedBy: " ")[0].components(separatedBy: ":")[0]
-                let sunsetHour = Int(sunsetStr)! + 12
-                let currentTime = weather.location.localtime.components(separatedBy: " ")[1].components(separatedBy: ":")[0]
-                let currentTimeHour = Int(currentTime)!
+                let todayForeCast = weather.forecast.forecastday.first!
+                let sunsetHourStr = todayForeCast.astro.sunset.components(separatedBy: " ")[0].components(separatedBy: ":")[0]
+                let sunsetHour = Int(sunsetHourStr)! + 12
+                let currentHourStr = weather.location.localtime.components(separatedBy: " ")[1].components(separatedBy: ":")[0]
+                let currentHour = Int(currentHourStr)!
                 
                 var imageString: String = ""
                 var weatherBackgroundColor: UIColor = .systemBackground
@@ -76,11 +76,11 @@ class WeatherMainViewCell: UITableViewCell {
                     
                     switch current.cloud {
                     case 0..<25:
-                        imageString = currentTimeHour >= sunsetHour ? "moon.stars" : "sun.max"
+                        imageString = currentHour >= sunsetHour ? "moon.stars" : "sun.max"
                         self.weatherImage.tintColor = .yellow
                         weatherBackgroundColor = .orange
                     case 25..<50:
-                        imageString = currentTimeHour >= sunsetHour ? "moon" : "cloud.sun"
+                        imageString = currentHour >= sunsetHour ? "moon" : "cloud.sun"
                         self.weatherImage.tintColor = .yellow
                         weatherBackgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 235/255.0, alpha: 1.0)
                     case 50..<75:
@@ -94,7 +94,7 @@ class WeatherMainViewCell: UITableViewCell {
                     }
                     
                     self.contentView.backgroundColor = weatherBackgroundColor
-                    self.temperatureLabel.text = "\(current.tempC)'C"
+                    self.temperatureLabel.text = "\(current.tempC)°C"
                     self.currentTimeLabel.text = weather.location.localtime
                     self.weatherImage.image = UIImage(systemName: imageString)
                     

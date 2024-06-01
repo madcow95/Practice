@@ -10,19 +10,23 @@ import Combine
 
 class WeatherMainView: UIViewController, AddCityDelegate {
     
-    private lazy var tableView: UITableView = {
+    private var tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
-        table.delegate = self
-        table.dataSource = self
-        table.register(WeatherMainViewCell.self, forCellReuseIdentifier: "WeatherMainViewCell")
         
         return table
     }()
     
     private let weatherViewModel = WeatherMainViewModel()
-    var cancellable: Cancellable?
-    var cityModels: [CityModel] = []
+    private lazy var cityModels: [CityModel] = []
+    var cancellable = Set<AnyCancellable>()
+    var timer: Timer?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(reloadData), userInfo: nil, repeats: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +34,14 @@ class WeatherMainView: UIViewController, AddCityDelegate {
         configureNavigation()
         setTable()
         setSubscriber()
-        weatherViewModel.loadCities()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        print("timer finish")
+        timer?.invalidate()
+        timer = nil
     }
     
     func configureNavigation() {
@@ -41,6 +52,9 @@ class WeatherMainView: UIViewController, AddCityDelegate {
     }
     
     func setTable() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(WeatherMainViewCell.self, forCellReuseIdentifier: "WeatherMainViewCell")
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -53,8 +67,8 @@ class WeatherMainView: UIViewController, AddCityDelegate {
     
     // 여기다가 만드는게 맞나?
     func setSubscriber() {
-        cancellable?.cancel()
-        cancellable = self.weatherViewModel.cities.sink { completion in
+        
+        self.weatherViewModel.cities.sink { completion in
             switch completion {
             case .finished:
                 break
@@ -62,17 +76,21 @@ class WeatherMainView: UIViewController, AddCityDelegate {
                 print("error > \(error.localizedDescription)")
             }
         } receiveValue: { [weak self] cities in
-            DispatchQueue.main.async {
-                self?.cityModels = cities
-                self?.tableView.reloadData()
-            }
-        }
+            self?.cityModels = cities
+            self?.tableView.reloadData()
+//            DispatchQueue.main.async {
+//            }
+        }.store(in: &cancellable)
     }
     
     @objc func addWeather() {
         let addView = WeatherAddView()
         addView.weatherDelegate = self
         navigationController?.pushViewController(addView, animated: true)
+    }
+    
+    @objc func reloadData() {
+        weatherViewModel.loadCities()
     }
     
     // Delegate
@@ -105,5 +123,12 @@ extension WeatherMainView: UITableViewDelegate, UITableViewDataSource {
         let detailView = WeatherDetailView()
         detailView.receivedCity = cityModels[indexPath.row]
         navigationController?.pushViewController(detailView, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            weatherViewModel.removeCity(targetCity: self.cityModels[indexPath.row])
+            
+        }
     }
 }

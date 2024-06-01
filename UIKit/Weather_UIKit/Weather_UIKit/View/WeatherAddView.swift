@@ -137,7 +137,7 @@ class WeatherAddView: UIViewController {
         countryLabel.text = "Country: \(location.country)"
         nameLabel.text = "City: \(location.name)"
         weatherImage.image = UIImage(systemName: imageString)
-        temperatureLabel.text = "Temperature: \(current.tempC)'C"
+        temperatureLabel.text = "Temperature: \(current.tempC)°C"
         currentTimeLabel.text = "Time: \(location.localtime)"
         uvLabel.text = "UV: \(current.uv)"
         
