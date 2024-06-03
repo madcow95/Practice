@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD0E38C72C0E0F6900F9BF92 /* TouchableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0E38C62C0E0F6900F9BF92 /* TouchableStackView.swift */; };
 		CD2730E62C08018D00A78DDC /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2730E52C08018D00A78DDC /* CityModel.swift */; };
 		CD2730E92C080B0200A78DDC /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2730E82C080B0200A78DDC /* WeatherAPI.swift */; };
 		CDB554422C09FA52005A4D3B /* WeatherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB554412C09FA52005A4D3B /* WeatherDetailView.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		CD0C38902C08B7060045D355 /* Weather_UIKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Weather_UIKit.entitlements; sourceTree = "<group>"; };
+		CD0E38C62C0E0F6900F9BF92 /* TouchableStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableStackView.swift; sourceTree = "<group>"; };
 		CD2730E52C08018D00A78DDC /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
 		CD2730E82C080B0200A78DDC /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		CDB554412C09FA52005A4D3B /* WeatherDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailView.swift; sourceTree = "<group>"; };
@@ -58,6 +60,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD0E38C52C0E0F5D00F9BF92 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				CD0E38C62C0E0F6900F9BF92 /* TouchableStackView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 		CD2730E72C080AF500A78DDC /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +151,7 @@
 		CDF48FB22C06FEDB003150EF /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				CD0E38C52C0E0F5D00F9BF92 /* CustomView */,
 				CD2730E72C080AF500A78DDC /* API */,
 				CDF48FB32C06FEE1003150EF /* Protocol */,
 			);
@@ -235,6 +246,7 @@
 				CDF48FAD2C06B1D3003150EF /* WeatherModel.swift in Sources */,
 				CDF48F912C06AAB1003150EF /* SceneDelegate.swift in Sources */,
 				CDF48FAB2C06ADFC003150EF /* WeatherMainViewCell.swift in Sources */,
+				CD0E38C72C0E0F6900F9BF92 /* TouchableStackView.swift in Sources */,
 				CD2730E92C080B0200A78DDC /* WeatherAPI.swift in Sources */,
 				CDB554422C09FA52005A4D3B /* WeatherDetailView.swift in Sources */,
 				CDF48FB52C06FEE8003150EF /* AddCityProtocol.swift in Sources */,

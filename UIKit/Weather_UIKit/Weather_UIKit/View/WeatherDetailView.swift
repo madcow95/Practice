@@ -23,7 +23,7 @@ class WeatherDetailView: UIViewController {
         return label
     }()
     
-    private lazy var hScrollView: UIScrollView = {
+    private let hScrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.showsHorizontalScrollIndicator = true
@@ -32,7 +32,7 @@ class WeatherDetailView: UIViewController {
         return scroll
     }()
     
-    private lazy var contentView: UIView = {
+    private let contentView: UIView = {
         let content = UIView()
         content.translatesAutoresizingMaskIntoConstraints = false
         
@@ -67,7 +67,7 @@ class WeatherDetailView: UIViewController {
         hScrollView.addSubview(contentView)
         
         NSLayoutConstraint.activate([
-            hScrollView.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 10),
+            hScrollView.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 25),
             hScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             hScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             hScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -76,7 +76,7 @@ class WeatherDetailView: UIViewController {
             contentView.leadingAnchor.constraint(equalTo: hScrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: hScrollView.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: hScrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalToConstant: 1300)
+            contentView.widthAnchor.constraint(equalToConstant: 1500)
         ])
         
         prevLeadingAnchor = contentView.leadingAnchor
@@ -107,42 +107,38 @@ class WeatherDetailView: UIViewController {
     func configureWeather(weather: WeatherModel) {
         let forecasts = weather.forecast.forecastday
         for (idx, forecast) in forecasts.enumerated() {
-            let hStack = UIStackView(frame: CGRect(x: 0, y: 0, width: 180, height: 80))
-            hStack.translatesAutoresizingMaskIntoConstraints = false
-            hStack.axis = .vertical
-            hStack.alignment = .center
-            hStack.spacing = 5
-            hStack.layer.borderWidth = 1
-            hStack.layer.cornerRadius = 10
+            let vStack = TouchableStackView(frame: CGRect(x: 0, y: 0, width: 180, height: 80))
             
             let dateLabel = UILabel()
-            dateLabel.text = forecast.date
+            dateLabel.text = "  \(forecast.date)  "
             dateLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
             
             let minTemperatureLabel = UILabel()
             minTemperatureLabel.text = "최저: \(forecast.day["mintemp_c"]!)°C"
             minTemperatureLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+            minTemperatureLabel.textColor = .systemBlue
             
             let maxTemperatureLabel = UILabel()
             maxTemperatureLabel.text = "최고: \(forecast.day["maxtemp_c"]!)°C"
             maxTemperatureLabel.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+            maxTemperatureLabel.textColor = .systemRed
             
             let chanceOfRain = UILabel()
-            chanceOfRain.text = "비확률: \(forecast.day["daily_chance_of_rain"]!)%"
+            chanceOfRain.text = "비올확률: \(forecast.day["daily_chance_of_rain"]!)%"
             chanceOfRain.font = UIFont.systemFont(ofSize: 15, weight: .bold)
             
-            hStack.addArrangedSubview(dateLabel)
-            hStack.addArrangedSubview(minTemperatureLabel)
-            hStack.addArrangedSubview(maxTemperatureLabel)
-            hStack.addArrangedSubview(chanceOfRain)
+            vStack.addArrangedSubview(dateLabel)
+            vStack.addArrangedSubview(minTemperatureLabel)
+            vStack.addArrangedSubview(maxTemperatureLabel)
+            vStack.addArrangedSubview(chanceOfRain)
             
-            contentView.addSubview(hStack)
+            contentView.addSubview(vStack)
             
             NSLayoutConstraint.activate([
-                hStack.topAnchor.constraint(equalTo: contentView.centerYAnchor),
-                hStack.leadingAnchor.constraint(equalTo: prevLeadingAnchor, constant: idx == 0 ? 8 : 130)
+                vStack.topAnchor.constraint(equalTo: contentView.centerYAnchor),
+                vStack.leadingAnchor.constraint(equalTo: prevLeadingAnchor, constant: idx == 0 ? 8 : 150)
             ])
-            prevLeadingAnchor = hStack.leadingAnchor
+            prevLeadingAnchor = vStack.leadingAnchor
         }
     }
 }

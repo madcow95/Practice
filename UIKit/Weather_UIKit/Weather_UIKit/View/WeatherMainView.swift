@@ -25,7 +25,7 @@ class WeatherMainView: UIViewController, AddCityDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(reloadData), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 500, target: self, selector: #selector(reloadData), userInfo: nil, repeats: true)
     }
     
     override func viewDidLoad() {
