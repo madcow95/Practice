@@ -172,6 +172,7 @@ class WeatherAddView: UIViewController {
     }
     
     @objc func addNewCity() {
+        // MARK: TODO. 이미 추가된 도시는 저장 안되게
         guard let weather = searchedCityWheather else { return }
         let newCity = CityModel(name: weather.location.name, date: Date())
         weatherDelegate?.addNewCity(newCity: newCity)

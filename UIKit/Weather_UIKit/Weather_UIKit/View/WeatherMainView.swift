@@ -10,14 +10,18 @@ import Combine
 
 class WeatherMainView: UIViewController, AddCityDelegate {
     
-    private var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
+        table.delegate = self
+        table.dataSource = self
+        table.register(WeatherMainViewCell.self, forCellReuseIdentifier: "WeatherMainViewCell")
         
         return table
     }()
     
     private let weatherViewModel = WeatherMainViewModel()
+    // 요거를 ViewModel에 넣고 index를 호출하는 함수를 만들어보기
     private lazy var cityModels: [CityModel] = []
     var cancellable = Set<AnyCancellable>()
     var timer: Timer?
@@ -25,7 +29,7 @@ class WeatherMainView: UIViewController, AddCityDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        timer = Timer.scheduledTimer(timeInterval: 500, target: self, selector: #selector(reloadData), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(reloadData), userInfo: nil, repeats: true)
     }
     
     override func viewDidLoad() {
@@ -52,9 +56,6 @@ class WeatherMainView: UIViewController, AddCityDelegate {
     }
     
     func setTable() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(WeatherMainViewCell.self, forCellReuseIdentifier: "WeatherMainViewCell")
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -65,9 +66,8 @@ class WeatherMainView: UIViewController, AddCityDelegate {
         ])
     }
     
-    // 여기다가 만드는게 맞나?
+    // 여기다가 만드는게 맞나? delegate로 만들고 viewModel에서 실행시켜도 될 거 같음.
     func setSubscriber() {
-        
         self.weatherViewModel.cities.sink { completion in
             switch completion {
             case .finished:
@@ -78,8 +78,6 @@ class WeatherMainView: UIViewController, AddCityDelegate {
         } receiveValue: { [weak self] cities in
             self?.cityModels = cities
             self?.tableView.reloadData()
-//            DispatchQueue.main.async {
-//            }
         }.store(in: &cancellable)
     }
     
@@ -105,12 +103,13 @@ extension WeatherMainView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // 중요..
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherMainViewCell", for: indexPath) as? WeatherMainViewCell else {
             return UITableViewCell()
         }
         
         let targetCity = self.cityModels[indexPath.row]
-        cell.configureUI(city: targetCity)
+        cell.configureCell(city: targetCity)
         
         return cell
     }
@@ -128,7 +127,11 @@ extension WeatherMainView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             weatherViewModel.removeCity(targetCity: self.cityModels[indexPath.row])
-            
         }
+    }
+    
+    // 메..모
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
     }
 }

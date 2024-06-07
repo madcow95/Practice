@@ -48,7 +48,7 @@ class WeatherMainViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
-    func configureUI(city: CityModel) {
+    func configureCell(city: CityModel) {
         cityLabel.text = city.name
         self.contentView.addSubview(cityLabel)
         
@@ -64,6 +64,8 @@ class WeatherMainViewCell: UITableViewCell {
             } receiveValue: { [weak self] weather in
                 let current = weather.current
                 let todayForeCast = weather.forecast.forecastday.first!
+                let sunriseHourStr = todayForeCast.astro.sunrise.components(separatedBy: " ")[0].components(separatedBy: ":")[0]
+                let sunriseHour = Int(sunriseHourStr)! + 12
                 let sunsetHourStr = todayForeCast.astro.sunset.components(separatedBy: " ")[0].components(separatedBy: ":")[0]
                 let sunsetHour = Int(sunsetHourStr)! + 12
                 let currentHourStr = weather.location.localtime.components(separatedBy: " ")[1].components(separatedBy: ":")[0]
@@ -73,14 +75,13 @@ class WeatherMainViewCell: UITableViewCell {
                 var weatherBackgroundColor: UIColor = .systemBackground
                 DispatchQueue.main.async {
                     guard let self = self else { return }
-                    
                     switch current.cloud {
                     case 0..<25:
-                        imageString = currentHour >= sunsetHour ? "moon.stars" : "sun.max"
+                        imageString = currentHour >= sunsetHour || currentHour <= sunriseHour ? "moon.stars" : "sun.max"
                         self.weatherImage.tintColor = .yellow
                         weatherBackgroundColor = .orange
                     case 25..<50:
-                        imageString = currentHour >= sunsetHour ? "moon" : "cloud.sun"
+                        imageString = currentHour >= sunsetHour || currentHour <= sunriseHour ? "moon" : "cloud.sun"
                         self.weatherImage.tintColor = .yellow
                         weatherBackgroundColor = UIColor(red: 135/255.0, green: 206/255.0, blue: 235/255.0, alpha: 1.0)
                     case 50..<75:

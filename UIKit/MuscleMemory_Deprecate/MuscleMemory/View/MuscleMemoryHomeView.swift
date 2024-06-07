@@ -136,7 +136,7 @@ class MuscleMemoryHomeView: UIViewController {
     }
 }
 
-extension MuscleMemoryHomeView: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {    
+extension MuscleMemoryHomeView: UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
         if dummyData.filter({ $0.year == dateComponents.year && $0.month == dateComponents.month && $0.day == dateComponents.day }).count > 0 {
             return .customView {

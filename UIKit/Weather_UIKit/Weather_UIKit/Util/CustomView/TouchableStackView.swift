@@ -13,15 +13,20 @@ class TouchableStackView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        setComponents()
+        setTouchEvent()
+    }
+    
+    func setComponents() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.axis = .vertical
         self.alignment = .center
         self.spacing = 5
         self.layer.borderWidth = 1
         self.layer.cornerRadius = 10
-        setTouchEvent()
     }
     
+    // 왜 안되지..
     func setTouchEvent() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.addGestureRecognizer(tapGesture)

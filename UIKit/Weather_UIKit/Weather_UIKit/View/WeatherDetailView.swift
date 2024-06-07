@@ -23,6 +23,14 @@ class WeatherDetailView: UIViewController {
         return label
     }()
     
+    private let countryLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        
+        return label
+    }()
+    
     private let hScrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
@@ -55,10 +63,14 @@ class WeatherDetailView: UIViewController {
         cityNameLabel.text = "도시: \(city.name)"
         
         view.addSubview(cityNameLabel)
+        view.addSubview(countryLabel)
         
         NSLayoutConstraint.activate([
             cityNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             cityNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            countryLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 10),
+            countryLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
     
@@ -67,7 +79,7 @@ class WeatherDetailView: UIViewController {
         hScrollView.addSubview(contentView)
         
         NSLayoutConstraint.activate([
-            hScrollView.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 25),
+            hScrollView.topAnchor.constraint(equalTo: countryLabel.bottomAnchor, constant: 25),
             hScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             hScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             hScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -105,6 +117,8 @@ class WeatherDetailView: UIViewController {
     }
     
     func configureWeather(weather: WeatherModel) {
+        countryLabel.text = "국가: \(weather.location.country)"
+        
         let forecasts = weather.forecast.forecastday
         for (idx, forecast) in forecasts.enumerated() {
             let vStack = TouchableStackView(frame: CGRect(x: 0, y: 0, width: 180, height: 80))

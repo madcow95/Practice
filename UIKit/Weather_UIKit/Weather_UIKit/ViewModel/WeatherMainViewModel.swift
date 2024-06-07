@@ -9,12 +9,13 @@ import Foundation
 import SwiftData
 import Combine
 
+/*
 enum WeatherModelError: Error {
     case contextNilError
     case containerNilError
     case apiCallError
 }
-
+*/
 class WeatherMainViewModel {
     
     var cities = PassthroughSubject<[CityModel], Error>()
@@ -25,8 +26,7 @@ class WeatherMainViewModel {
         do {
             self.container = try ModelContainer(for: CityModel.self)
             guard let container = self.container else {
-                // SwiftData에러인데 이렇게 보내는게 맞나..?
-                cities.send(completion: .failure(WeatherModelError.containerNilError))
+                print("WeatherMainViewModel container nil error")
                 return
             }
             self.context = ModelContext(container)
@@ -36,7 +36,7 @@ class WeatherMainViewModel {
                 self.loadCities()
             }
         } catch {
-            cities.send(completion: .failure(WeatherModelError.contextNilError))
+            print("WeatherMainViewModel container load error > \(error.localizedDescription)")
         }
     }
     
@@ -53,7 +53,6 @@ class WeatherMainViewModel {
     }
     
     func loadCities() {
-        print("start load cities")
         let descriptor = FetchDescriptor<CityModel>(sortBy: [SortDescriptor<CityModel>(\.date)])
         guard let ctx = self.context else {
             print("context nil error")
