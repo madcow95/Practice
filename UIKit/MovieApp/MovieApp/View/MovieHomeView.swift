@@ -96,6 +96,13 @@ extension MovieHomeView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedMovie = homeViewModel.searchedMovies[indexPath.row]
+        let detailView = MovieDetailView()
+        detailView.selectedMovie = selectedMovie
+        navigationController?.pushViewController(detailView, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }

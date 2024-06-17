@@ -26,6 +26,7 @@ struct MovieInfo: Codable {
     let summary: String?
     let poster: String?
     let originalLanguage: String
+    var bookmarked: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case id

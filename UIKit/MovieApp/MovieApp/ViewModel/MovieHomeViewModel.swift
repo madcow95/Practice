@@ -34,8 +34,10 @@ class MovieHomeViewModel {
         }
         switch httpResponse.statusCode {
         case 400..<500:
+            searchedMovies = []
             throw MovieSearchError.searchValueInvalidError
         case 500..<600:
+            searchedMovies = []
             throw MovieSearchError.serviceNotExistError
         default:
             break
@@ -44,7 +46,9 @@ class MovieHomeViewModel {
         do {
             let decoder = JSONDecoder()
             let response = try decoder.decode(Movie.self, from: searchResult)
+            
             guard response.result.count != 0 else {
+                searchedMovies = []
                 throw MovieSearchError.noResultError
             }
             

@@ -10,7 +10,7 @@ import Combine
 
 class MovieTableViewCell: UITableViewCell {
     
-    private var cancellable = Set<AnyCancellable>()
+    private var cancellable: Cancellable?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -29,6 +29,14 @@ class MovieTableViewCell: UITableViewCell {
         return image
     }()
     
+    private let bookmarkButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        
+        return btn
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
@@ -45,7 +53,8 @@ class MovieTableViewCell: UITableViewCell {
             self.addSubview(thumbnailImage)
             
             if let url = URL(string: "https://image.tmdb.org/t/p/w500/\(poster)") {
-                URLSession.shared.dataTaskPublisher(for: url)
+                cancellable?.cancel()
+                cancellable = URLSession.shared.dataTaskPublisher(for: url)
                     .sink { completion in
                         switch completion {
                         case .finished:
@@ -60,7 +69,6 @@ class MovieTableViewCell: UITableViewCell {
                             self.thumbnailImage.image = posterImage
                         }
                     }
-                    .store(in: &cancellable)
             }
             
             NSLayoutConstraint.activate([
@@ -70,12 +78,24 @@ class MovieTableViewCell: UITableViewCell {
                 thumbnailImage.heightAnchor.constraint(equalToConstant: 90)
             ])
         }
+        
         self.addSubview(titleLabel)
+        self.addSubview(bookmarkButton)
+        
+        bookmarkButton.setImage(UIImage(systemName: movie.bookmarked ? "bookmark.fill" : "bookmark"), for: .normal)
+        bookmarkButton.addAction(UIAction{ [weak self] _ in
+            guard let self = self else { return }
+            // TODO: 선택한 영화 SwiftData에 저장
+            print("tapped!")
+        }, for: .touchUpInside)
         
         NSLayoutConstraint.activate([
+            bookmarkButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            bookmarkButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            
             titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 110),
-            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            titleLabel.trailingAnchor.constraint(equalTo: bookmarkButton.leadingAnchor, constant: -10),
         ])
     }
 }
