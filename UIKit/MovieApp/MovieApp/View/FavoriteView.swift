@@ -13,16 +13,5 @@ class FavoriteView: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        
-        setNavigationComponents()
-        setUI()
-    }
-    
-    func setNavigationComponents() {
-        
-    }
-    
-    func setUI() {
-        
     }
 }

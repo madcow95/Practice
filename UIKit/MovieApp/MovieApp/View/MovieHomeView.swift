@@ -14,46 +14,28 @@ class MovieHomeView: UIViewController {
     private let homeViewModel = MovieHomeViewModel()
     private var cancelleable = Set<AnyCancellable>()
     
-    private let scrollView: UIScrollView = {
-        let scroll = UIScrollView()
-        scroll.translatesAutoresizingMaskIntoConstraints = false
+    private let movieTableView: UITableView = {
+        let table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
         
-        return scroll
+        return table
     }()
-    
-    private let contentView: UIView = {
-        let uv = UIView()
-        uv.translatesAutoresizingMaskIntoConstraints = false
-        
-        return uv
-    }()
-    
-    private let recentOpenLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
-        
-        return label
-    }()
-    
-    // TODO: 좌우로 스크롤 가능한 UISCrollView + UIStackView
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
         
-        setSubscriber()
         setSearchBar()
         configureUI()
     }
     
-    func setSubscriber() {
-        homeViewModel.$searchedMovies.sink { [weak self] movies in
-            
-        }.store(in: &cancelleable)
-    }
+//    func setSubscription() {
+//        homeViewModel.$searchedMovies
+//            .receive(on: RunLoop.main)
+//            .assign(to: \.searchedMovies, on: homeViewModel)
+//            .store(in: &cancelleable)
+//    }
     
     func setSearchBar() {
         searchController.searchBar.delegate = self
@@ -65,35 +47,21 @@ class MovieHomeView: UIViewController {
     }
     
     func configureUI() {
-        setScrollView()
-        setRecentlyOpenMovieUI()
+        setTableView()
     }
     
-    func setScrollView() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
+    func setTableView() {
+        homeViewModel.movieTableReloadDelegate = self
+        movieTableView.delegate = self
+        movieTableView.dataSource = self
+        movieTableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "MovieTableViewCell")
+        view.addSubview(movieTableView)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
-        ])
-    }
-    
-    func setRecentlyOpenMovieUI() {
-        contentView.addSubview(recentOpenLabel)
-        
-        NSLayoutConstraint.activate([
-            recentOpenLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
-            recentOpenLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            
+            movieTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            movieTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            movieTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            movieTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
@@ -105,9 +73,36 @@ extension MovieHomeView: UISearchBarDelegate {
                 do {
                     try await homeViewModel.searchMovieBy(name: searchText)
                 } catch {
-                    print(error)
+                    print(error.localizedDescription)
                 }
             }
         }
+    }
+}
+
+extension MovieHomeView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return homeViewModel.searchedMovies.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell", for: indexPath) as? MovieTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        let movie = homeViewModel.searchedMovies[indexPath.row]
+        cell.configureCell(movie: movie)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+}
+
+extension MovieHomeView: ReloadMovieTableDelegate {
+    func reloadTableView() {
+        self.movieTableView.reloadData()
     }
 }

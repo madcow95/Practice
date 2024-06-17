@@ -19,6 +19,10 @@
 		CD03D70C2C1C29E800E46228 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD03D70B2C1C29E800E46228 /* UIExtension.swift */; };
 		CD194E942C1C6FAA004F5946 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD194E932C1C6FA9004F5946 /* FavoriteView.swift */; };
 		CD4FDFA72C1D9DA20008CD52 /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4FDFA62C1D9DA20008CD52 /* ErrorExtension.swift */; };
+		CD900BDD2C2027F900FDC454 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BDC2C2027F900FDC454 /* MovieTableViewCell.swift */; };
+		CD900BDF2C20291500FDC454 /* MovieProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BDE2C20291500FDC454 /* MovieProtocol.swift */; };
+		CD900BE12C20390900FDC454 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BE02C20390900FDC454 /* MovieDetailView.swift */; };
+		CD900BE32C20391100FDC454 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BE22C20391100FDC454 /* MovieDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		CD03D70B2C1C29E800E46228 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = "<group>"; };
 		CD194E932C1C6FA9004F5946 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		CD4FDFA62C1D9DA20008CD52 /* ErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
+		CD900BDC2C2027F900FDC454 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
+		CD900BDE2C20291500FDC454 /* MovieProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieProtocol.swift; sourceTree = "<group>"; };
+		CD900BE02C20390900FDC454 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
+		CD900BE22C20391100FDC454 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +102,10 @@
 		CD03D7012C1C28E000E46228 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CD900BDB2C2027EF00FDC454 /* Cell */,
 				CD03D7042C1C28F700E46228 /* MovieHomeView.swift */,
 				CD194E932C1C6FA9004F5946 /* FavoriteView.swift */,
+				CD900BE02C20390900FDC454 /* MovieDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -112,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				CD03D7082C1C29A400E46228 /* MovieHomeViewModel.swift */,
+				CD900BE22C20391100FDC454 /* MovieDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -121,8 +132,17 @@
 			children = (
 				CD03D70B2C1C29E800E46228 /* UIExtension.swift */,
 				CD4FDFA62C1D9DA20008CD52 /* ErrorExtension.swift */,
+				CD900BDE2C20291500FDC454 /* MovieProtocol.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		CD900BDB2C2027EF00FDC454 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CD900BDC2C2027F900FDC454 /* MovieTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,8 +222,12 @@
 				CD194E942C1C6FAA004F5946 /* FavoriteView.swift in Sources */,
 				CD03D6EA2C1C288000E46228 /* AppDelegate.swift in Sources */,
 				CD4FDFA72C1D9DA20008CD52 /* ErrorExtension.swift in Sources */,
+				CD900BE12C20390900FDC454 /* MovieDetailView.swift in Sources */,
 				CD03D6F42C1C288000E46228 /* MovieApp.xcdatamodeld in Sources */,
+				CD900BDF2C20291500FDC454 /* MovieProtocol.swift in Sources */,
 				CD03D6EC2C1C288000E46228 /* SceneDelegate.swift in Sources */,
+				CD900BDD2C2027F900FDC454 /* MovieTableViewCell.swift in Sources */,
+				CD900BE32C20391100FDC454 /* MovieDetailViewModel.swift in Sources */,
 				CD03D70C2C1C29E800E46228 /* UIExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
