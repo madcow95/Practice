@@ -7,10 +7,10 @@
 
 import Foundation
 import Combine
-import SwiftData
 
 class MovieHomeViewModel {
     @Published var searchedMovies: [MovieInfo] = []
+    private let storageManager = MovieStorageManager()
     private let movieKey: String = "74632d0636eed1fd804303a83e5e942f"
     private var cancelleable: Cancellable?
     var movieTableReloadDelegate: ReloadMovieTableDelegate?
@@ -59,5 +59,13 @@ class MovieHomeViewModel {
         } catch let error {
             throw error
         }
+    }
+    
+    func saveMovie(movie: MovieInfoStorage) {
+        storageManager.saveMovie(movie: movie)
+    }
+    
+    func deleteMovie(movie: MovieInfoStorage) {
+        storageManager.deleteMovieBy(id: movie.id)
     }
 }

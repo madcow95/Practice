@@ -54,9 +54,11 @@ class MovieDetailView: UIViewController {
         return image
     }()
     
-    private let summaryTextView: UITextView = {
-        let tv = UITextView()
+    private let summaryTextView: UILabel = {
+        let tv = UILabel()
         tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        tv.numberOfLines = 0
         
         return tv
     }()
@@ -87,7 +89,9 @@ class MovieDetailView: UIViewController {
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor)
         ])
     }
     
@@ -101,7 +105,6 @@ class MovieDetailView: UIViewController {
         }
         if let poster = selectedMovie.poster, let url = URL(string: "https://image.tmdb.org/t/p/w500/\(poster)") {
             // TODO: ViewModel에서 처리?
-            self.posterImage.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 150)
             cancellable?.cancel()
             cancellable = URLSession.shared.dataTaskPublisher(for: url)
                 .sink(receiveCompletion: { completion in
@@ -119,7 +122,7 @@ class MovieDetailView: UIViewController {
                 })
         }
         if let summary = selectedMovie.summary {
-            summaryTextView.text = summary
+            summaryTextView.text = "내용:\n\(summary)"
         }
         
         [titleLabel, openDateLabel, rateLabel, posterImage, summaryTextView].forEach{ contentView.addSubview($0) }
@@ -137,14 +140,15 @@ class MovieDetailView: UIViewController {
             rateLabel.leadingAnchor.constraint(equalTo: openDateLabel.leadingAnchor),
             rateLabel.trailingAnchor.constraint(equalTo: openDateLabel.trailingAnchor),
             
-            posterImage.topAnchor.constraint(equalTo: rateLabel.bottomAnchor),
+            posterImage.topAnchor.constraint(equalTo: rateLabel.bottomAnchor, constant: 20),
             posterImage.leadingAnchor.constraint(equalTo: rateLabel.leadingAnchor),
             posterImage.trailingAnchor.constraint(equalTo: rateLabel.trailingAnchor),
+            posterImage.heightAnchor.constraint(equalToConstant: 500),
             
             summaryTextView.topAnchor.constraint(equalTo: posterImage.bottomAnchor, constant: 20),
             summaryTextView.leadingAnchor.constraint(equalTo: posterImage.leadingAnchor),
             summaryTextView.trailingAnchor.constraint(equalTo: posterImage.trailingAnchor),
-            summaryTextView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor),
+            summaryTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
 }

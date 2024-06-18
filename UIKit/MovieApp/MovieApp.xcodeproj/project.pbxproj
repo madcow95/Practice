@@ -21,9 +21,9 @@
 		CD900BDF2C20291500FDC454 /* MovieProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BDE2C20291500FDC454 /* MovieProtocol.swift */; };
 		CD900BE12C20390900FDC454 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BE02C20390900FDC454 /* MovieDetailView.swift */; };
 		CD900BE32C20391100FDC454 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BE22C20391100FDC454 /* MovieDetailViewModel.swift */; };
+		CDB3FDC32C21E4200073F941 /* MovieStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB3FDC22C21E4200073F941 /* MovieStorageManager.swift */; };
 		CDE4FA722C210BDD009F7D83 /* BookmarkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE4FA712C210BDD009F7D83 /* BookmarkTableViewCell.swift */; };
 		CDE4FA742C210DA3009F7D83 /* BookmarkMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE4FA732C210DA3009F7D83 /* BookmarkMovieViewModel.swift */; };
-		CDE4FA762C214452009F7D83 /* MovieStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE4FA752C214452009F7D83 /* MovieStorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,9 +43,9 @@
 		CD900BDE2C20291500FDC454 /* MovieProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieProtocol.swift; sourceTree = "<group>"; };
 		CD900BE02C20390900FDC454 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		CD900BE22C20391100FDC454 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
+		CDB3FDC22C21E4200073F941 /* MovieStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieStorageManager.swift; path = ../../../../../../.Trash/MovieStorageManager.swift; sourceTree = "<group>"; };
 		CDE4FA712C210BDD009F7D83 /* BookmarkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkTableViewCell.swift; sourceTree = "<group>"; };
 		CDE4FA732C210DA3009F7D83 /* BookmarkMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkMovieViewModel.swift; sourceTree = "<group>"; };
-		CDE4FA752C214452009F7D83 /* MovieStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +95,7 @@
 		CD03D7002C1C28D900E46228 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				CDE4FA752C214452009F7D83 /* MovieStorageManager.swift */,
+				CDB3FDC22C21E4200073F941 /* MovieStorageManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -226,7 +226,7 @@
 				CD4FDFA72C1D9DA20008CD52 /* ErrorExtension.swift in Sources */,
 				CD900BE12C20390900FDC454 /* MovieDetailView.swift in Sources */,
 				CD900BDF2C20291500FDC454 /* MovieProtocol.swift in Sources */,
-				CDE4FA762C214452009F7D83 /* MovieStorageManager.swift in Sources */,
+				CDB3FDC32C21E4200073F941 /* MovieStorageManager.swift in Sources */,
 				CD03D6EC2C1C288000E46228 /* SceneDelegate.swift in Sources */,
 				CD900BDD2C2027F900FDC454 /* MovieTableViewCell.swift in Sources */,
 				CDE4FA722C210BDD009F7D83 /* BookmarkTableViewCell.swift in Sources */,

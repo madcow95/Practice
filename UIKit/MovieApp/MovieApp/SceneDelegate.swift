@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [homeNavigation, favoriteNavigation]
         
-        self.window?.rootViewController = tabBarController
+        self.window?.rootViewController = homeNavigation
         self.window?.makeKeyAndVisible()
     }
 

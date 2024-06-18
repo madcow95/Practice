@@ -10,7 +10,7 @@ import SwiftData
 
 class BookmarkMovieView: UIViewController {
     
-    private let storageManager = MovieStorageManager()
+    private let bookmarkViewModel = BookmarkMovieViewModel()
     
     private lazy var tableView: UITableView = {
         let table = UITableView()
@@ -25,10 +25,10 @@ class BookmarkMovieView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bookmarkViewModel.tableReloadDelegate = self
+        
         view.backgroundColor = .systemBackground
-        
         view.addSubview(tableView)
-        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -40,7 +40,7 @@ class BookmarkMovieView: UIViewController {
 
 extension BookmarkMovieView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return storageManager.storageMovieInfo.count
+        return bookmarkViewModel.storeManager.storageMovieInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,19 +48,25 @@ extension BookmarkMovieView: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let movie = storageManager.storageMovieInfo[indexPath.row]
+        let movie = bookmarkViewModel.storeManager.storageMovieInfo[indexPath.row]
+        cell.bookmarkButton.addAction(UIAction{ [weak self] _ in
+            guard let self = self else { return }
+            movie.bookmarked.toggle()
+            cell.bookmarkButton.setImage(UIImage(systemName: movie.bookmarked == true ? "bookmark.fill" : "bookmark"), for: .normal)
+            self.bookmarkViewModel.deleteMovie(movie: movie)
+        }, for: .touchUpInside)
         cell.configureCell(movie: movie)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        150
+        return 150
     }
 }
 
-extension BookmarkMovieView: ReloadMovieTableDelegate {
-    func reloadTableView() {
+extension BookmarkMovieView: ReloadBookmarkTableDelegate {
+    func reloadBookmarkTable() {
         self.tableView.reloadData()
     }
 }

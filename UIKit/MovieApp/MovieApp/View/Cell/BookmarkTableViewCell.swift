@@ -35,11 +35,6 @@ class BookmarkTableViewCell: UITableViewCell {
         titleLabel.text = movie.title
         
         bookmarkButton.setImage(UIImage(systemName: movie.bookmarked == true ? "bookmark.fill" : "bookmark"), for: .normal)
-        bookmarkButton.addAction(UIAction{ [weak self] _ in
-            guard let self = self else { return }
-            movie.bookmarked.toggle()
-            self.bookmarkButton.setImage(UIImage(systemName: movie.bookmarked == true ? "bookmark.fill" : "bookmark"), for: .normal)
-        }, for: .touchUpInside)
         
         self.addSubview(titleLabel)
         self.addSubview(bookmarkButton)

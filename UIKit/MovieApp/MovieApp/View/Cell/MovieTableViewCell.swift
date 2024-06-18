@@ -11,8 +11,7 @@ import Combine
 class MovieTableViewCell: UITableViewCell {
     
     private var cancellable: Cancellable?
-    private let bookmarkViewModel = BookmarkMovieViewModel()
-    private let storageManager = MovieStorageManager()
+    var homeViewModel = MovieHomeViewModel()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -47,11 +46,10 @@ class MovieTableViewCell: UITableViewCell {
     }
     
     func configureCell(movie: MovieInfo) {
-        var copiedMovie = movie
-        let title = copiedMovie.title
+        let title = movie.title
         titleLabel.text = title
         
-        if let poster = copiedMovie.poster, let url = URL(string: "https://image.tmdb.org/t/p/w500/\(poster)") {
+        if let poster = movie.poster, let url = URL(string: "https://image.tmdb.org/t/p/w500/\(poster)") {
             self.addSubview(thumbnailImage)
             
             // TODO: ViewModel에서 처리?
@@ -79,27 +77,32 @@ class MovieTableViewCell: UITableViewCell {
                 thumbnailImage.heightAnchor.constraint(equalToConstant: 90)
             ])
         }
-        
-        self.addSubview(titleLabel)
-        self.addSubview(bookmarkButton)
-        
-        bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        /*
         bookmarkButton.addAction(UIAction{ [weak self] _ in
             guard let self = self else { return }
-            copiedMovie.bookmarked.toggle()
-            self.bookmarkButton.setImage(UIImage(systemName: copiedMovie.bookmarked ? "bookmark.fill" : "bookmark"), for: .normal)
-            
-            let saveMovie = MovieInfoStorage(id: movie.id, title: movie.title, releaseDate: movie.releaseDate, rating: movie.rating, rateCount: movie.rateCount, summary: movie.summary, poster: movie.poster, originalLanguage: movie.originalLanguage, bookmarked: true)
-            storageManager.saveMovie(movie: saveMovie)
+            let newMovie = MovieInfoStorage(id: movie.id,
+                                            title: movie.title,
+                                            releaseDate: movie.releaseDate,
+                                            rating: movie.rating,
+                                            summary: movie.summary,
+                                            poster: movie.poster, bookmarked: true)
+            homeViewModel.saveMovie(movie: newMovie)
         }, for: .touchUpInside)
+        */
+        
+        self.addSubview(titleLabel)
+        
+//        self.addSubview(bookmarkButton)
+//        bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
         
         NSLayoutConstraint.activate([
-            bookmarkButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            bookmarkButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            
             titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 110),
-            titleLabel.trailingAnchor.constraint(equalTo: bookmarkButton.leadingAnchor, constant: -10),
+            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            /*
+            bookmarkButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            bookmarkButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            */
         ])
     }
 }

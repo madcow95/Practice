@@ -29,16 +29,13 @@ class MovieHomeView: UIViewController {
         
         view.backgroundColor = .systemBackground
         
-        setSearchBar()
         configureUI()
     }
     
-//    func setSubscription() {
-//        homeViewModel.$searchedMovies
-//            .receive(on: RunLoop.main)
-//            .assign(to: \.searchedMovies, on: homeViewModel)
-//            .store(in: &cancelleable)
-//    }
+    func configureUI() {
+        setSearchBar()
+        setTableView()
+    }
     
     func setSearchBar() {
         searchController.searchBar.delegate = self
@@ -47,10 +44,6 @@ class MovieHomeView: UIViewController {
         searchController.searchBar.sizeToFit()
         navigationItem.searchController = searchController
         definesPresentationContext = true
-    }
-    
-    func configureUI() {
-        setTableView()
     }
     
     func setTableView() {
@@ -67,15 +60,16 @@ class MovieHomeView: UIViewController {
 }
 
 extension MovieHomeView: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let searchText = searchBar.text {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.count > 0 {
             Task {
                 do {
                     try await homeViewModel.searchMovieBy(name: searchText)
-                } catch {
-                    print(error.localizedDescription)
-                }
+                } catch { }
             }
+        } else {
+            homeViewModel.searchedMovies = []
         }
     }
 }
