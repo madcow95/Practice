@@ -11,6 +11,8 @@ import Combine
 class MovieTableViewCell: UITableViewCell {
     
     private var cancellable: Cancellable?
+    private let bookmarkViewModel = BookmarkMovieViewModel()
+    private let storageManager = MovieStorageManager()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -32,7 +34,6 @@ class MovieTableViewCell: UITableViewCell {
     private let bookmarkButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         
         return btn
     }()
@@ -46,30 +47,30 @@ class MovieTableViewCell: UITableViewCell {
     }
     
     func configureCell(movie: MovieInfo) {
-        let title = movie.title
+        var copiedMovie = movie
+        let title = copiedMovie.title
         titleLabel.text = title
         
-        if let poster = movie.poster {
+        if let poster = copiedMovie.poster, let url = URL(string: "https://image.tmdb.org/t/p/w500/\(poster)") {
             self.addSubview(thumbnailImage)
             
-            if let url = URL(string: "https://image.tmdb.org/t/p/w500/\(poster)") {
-                cancellable?.cancel()
-                cancellable = URLSession.shared.dataTaskPublisher(for: url)
-                    .sink { completion in
-                        switch completion {
-                        case .finished:
-                            break
-                        case .failure(let error):
-                            print("error in image load > \(error)")
-                        }
-                    } receiveValue: { [weak self] (data, _) in
-                        guard let self = self else { return }
-                        let posterImage = UIImage(data: data)
-                        DispatchQueue.main.async {
-                            self.thumbnailImage.image = posterImage
-                        }
+            // TODO: ViewModel에서 처리?
+            cancellable?.cancel()
+            cancellable = URLSession.shared.dataTaskPublisher(for: url)
+                .sink { completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        print("error in image load > \(error)")
                     }
-            }
+                } receiveValue: { [weak self] (data, _) in
+                    guard let self = self else { return }
+                    let posterImage = UIImage(data: data)
+                    DispatchQueue.main.async {
+                        self.thumbnailImage.image = posterImage
+                    }
+                }
             
             NSLayoutConstraint.activate([
                 thumbnailImage.centerYAnchor.constraint(equalTo: self.centerYAnchor),
@@ -82,11 +83,14 @@ class MovieTableViewCell: UITableViewCell {
         self.addSubview(titleLabel)
         self.addSubview(bookmarkButton)
         
-        bookmarkButton.setImage(UIImage(systemName: movie.bookmarked ? "bookmark.fill" : "bookmark"), for: .normal)
+        bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
         bookmarkButton.addAction(UIAction{ [weak self] _ in
             guard let self = self else { return }
-            // TODO: 선택한 영화 SwiftData에 저장
-            print("tapped!")
+            copiedMovie.bookmarked.toggle()
+            self.bookmarkButton.setImage(UIImage(systemName: copiedMovie.bookmarked ? "bookmark.fill" : "bookmark"), for: .normal)
+            
+            let saveMovie = MovieInfoStorage(id: movie.id, title: movie.title, releaseDate: movie.releaseDate, rating: movie.rating, rateCount: movie.rateCount, summary: movie.summary, poster: movie.poster, originalLanguage: movie.originalLanguage, bookmarked: true)
+            storageManager.saveMovie(movie: saveMovie)
         }, for: .touchUpInside)
         
         NSLayoutConstraint.activate([

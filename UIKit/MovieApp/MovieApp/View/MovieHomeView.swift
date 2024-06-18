@@ -14,9 +14,12 @@ class MovieHomeView: UIViewController {
     private let homeViewModel = MovieHomeViewModel()
     private var cancelleable = Set<AnyCancellable>()
     
-    private let movieTableView: UITableView = {
+    private lazy var movieTableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
+        table.delegate = self
+        table.dataSource = self
+        table.register(MovieTableViewCell.self, forCellReuseIdentifier: "MovieTableViewCell")
         
         return table
     }()
@@ -52,9 +55,6 @@ class MovieHomeView: UIViewController {
     
     func setTableView() {
         homeViewModel.movieTableReloadDelegate = self
-        movieTableView.delegate = self
-        movieTableView.dataSource = self
-        movieTableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "MovieTableViewCell")
         view.addSubview(movieTableView)
         
         NSLayoutConstraint.activate([

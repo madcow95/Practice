@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftData
 
 class MovieHomeViewModel {
     @Published var searchedMovies: [MovieInfo] = []
@@ -15,8 +16,9 @@ class MovieHomeViewModel {
     var movieTableReloadDelegate: ReloadMovieTableDelegate?
     
     init() {
+        // MARK: - @Published빼고.. searchedMovies의 didSet에 넣어줘도 같은거 아닌가..? reloadData를 하지 않고도 UI를 다시 그릴 수 있는 방법이 있나?
         cancelleable?.cancel()
-        cancelleable = self.$searchedMovies.sink { [weak self] movie in
+        cancelleable = self.$searchedMovies.sink { [weak self] _ in
             DispatchQueue.main.async {
                 self?.movieTableReloadDelegate?.reloadTableView()
             }
@@ -24,6 +26,7 @@ class MovieHomeViewModel {
     }
     
     func searchMovieBy(name: String) async throws {
+        // MARK: 띄어쓰기 틀리면 검색이 안됨..
         let searchMovieUrlStr: String = "https://api.themoviedb.org/3/search/movie?query=\(name)&api_key=\(movieKey)&language=ko_KR"
         
         guard let url = URL(string: searchMovieUrlStr) else { return }

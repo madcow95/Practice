@@ -21,13 +21,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         homeView.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house"), selectedImage: nil)
         let homeNavigation = UINavigationController(rootViewController: homeView)
         
-        let favoriteView = FavoriteView()
+        let favoriteView = BookmarkMovieView()
         favoriteView.tabBarItem = UITabBarItem(title: "즐겨찾기", image: UIImage(systemName: "list.bullet.clipboard"), selectedImage: nil)
         let favoriteNavigation = UINavigationController(rootViewController: favoriteView)
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [homeNavigation, favoriteNavigation]
-//        tabBarController.tabBar.tintColor = .primary100
         
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
