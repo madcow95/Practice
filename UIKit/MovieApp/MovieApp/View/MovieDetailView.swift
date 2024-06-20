@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 
+// TODO: 주석 한 번 작성해보기
 class MovieDetailView: UIViewController {
     
     private let scrollView: UIScrollView = {
