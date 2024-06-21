@@ -16,6 +16,7 @@ class MovieHomeViewModel {
     var movieTableReloadDelegate: ReloadMovieTableDelegate?
     
     init() {
+        // self.$searchedMovies.map()
         // MARK: - @Published빼고.. searchedMovies의 didSet에 넣어줘도 같은거 아닌가..? reloadData를 하지 않고도 UI를 다시 그릴 수 있는 방법이 있나?
         cancelleable?.cancel()
         cancelleable = self.$searchedMovies.sink { [weak self] _ in
