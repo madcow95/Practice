@@ -12,7 +12,6 @@ class MovieHomeView: UIViewController {
     
     private let searchController = UISearchController()
     private let homeViewModel = MovieHomeViewModel()
-    private var cancelleable = Set<AnyCancellable>()
     
     private lazy var movieTableView: UITableView = {
         let table = UITableView()

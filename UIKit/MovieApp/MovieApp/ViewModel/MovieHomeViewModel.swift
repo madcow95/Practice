@@ -5,7 +5,7 @@
 //  Created by MadCow on 2024/6/14.
 //
 
-import Foundation
+import UIKit
 import Combine
 
 class MovieHomeViewModel {
@@ -62,11 +62,13 @@ class MovieHomeViewModel {
         }
     }
     
-    func saveMovie(movie: MovieInfoStorage) {
-        storageManager.saveMovie(movie: movie)
-    }
-    
-    func deleteMovie(movie: MovieInfoStorage) {
-        storageManager.deleteMovieBy(id: movie.id)
+    func getThumbnailImage(url: String) {
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(url)") else { return }
+        URLSession.shared.dataTaskPublisher(for: url)
+            .map{ (data, _) in
+                return data
+            }
+            .removeDuplicates()
+            .eraseToAnyPublisher()
     }
 }

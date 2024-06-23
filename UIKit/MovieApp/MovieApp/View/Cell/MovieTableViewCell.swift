@@ -11,7 +11,7 @@ import Combine
 class MovieTableViewCell: UITableViewCell {
     
     private var cancellable: Cancellable?
-    var homeViewModel = MovieHomeViewModel()
+    private let homeViewModel = MovieHomeViewModel()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -21,11 +21,12 @@ class MovieTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let thumbnailImage: UIImageView = {
+    private lazy var thumbnailImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+//        image.image = homeViewModel.thumbnailImage
         
         return image
     }()
@@ -51,7 +52,7 @@ class MovieTableViewCell: UITableViewCell {
         
         if let poster = movie.poster, let url = URL(string: "https://image.tmdb.org/t/p/w500/\(poster)") {
             self.addSubview(thumbnailImage)
-            
+//            thumbnailImage.image = homeViewModel.thumbnailImage
             // TODO: ViewModel에서 처리?
             cancellable?.cancel()
             cancellable = URLSession.shared.dataTaskPublisher(for: url)
@@ -77,32 +78,13 @@ class MovieTableViewCell: UITableViewCell {
                 thumbnailImage.heightAnchor.constraint(equalToConstant: 90)
             ])
         }
-        /*
-        bookmarkButton.addAction(UIAction{ [weak self] _ in
-            guard let self = self else { return }
-            let newMovie = MovieInfoStorage(id: movie.id,
-                                            title: movie.title,
-                                            releaseDate: movie.releaseDate,
-                                            rating: movie.rating,
-                                            summary: movie.summary,
-                                            poster: movie.poster, bookmarked: true)
-            homeViewModel.saveMovie(movie: newMovie)
-        }, for: .touchUpInside)
-        */
         
         self.addSubview(titleLabel)
-        
-//        self.addSubview(bookmarkButton)
-//        bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
         
         NSLayoutConstraint.activate([
             titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 110),
-            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            /*
-            bookmarkButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            bookmarkButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            */
+            titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
         ])
     }
 }
