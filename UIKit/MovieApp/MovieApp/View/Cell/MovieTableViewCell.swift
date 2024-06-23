@@ -11,7 +11,6 @@ import Combine
 class MovieTableViewCell: UITableViewCell {
     
     private var cancellable: Cancellable?
-    private let homeViewModel = MovieHomeViewModel()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -26,16 +25,8 @@ class MovieTableViewCell: UITableViewCell {
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-//        image.image = homeViewModel.thumbnailImage
         
         return image
-    }()
-    
-    private let bookmarkButton: UIButton = {
-        let btn = UIButton()
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        
-        return btn
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -50,25 +41,16 @@ class MovieTableViewCell: UITableViewCell {
         let title = movie.title
         titleLabel.text = title
         
-        if let poster = movie.poster, let url = URL(string: "https://image.tmdb.org/t/p/w500/\(poster)") {
+        if let poster = movie.poster {
             self.addSubview(thumbnailImage)
-//            thumbnailImage.image = homeViewModel.thumbnailImage
-            // TODO: ViewModel에서 처리?
+            let homeViewModel = MovieHomeViewModel()
+            homeViewModel.getThumbnailImage(posterUrl: poster)
             cancellable?.cancel()
-            cancellable = URLSession.shared.dataTaskPublisher(for: url)
-                .sink { completion in
-                    switch completion {
-                    case .finished:
-                        break
-                    case .failure(let error):
-                        print("error in image load > \(error)")
-                    }
-                } receiveValue: { [weak self] (data, _) in
+            cancellable = homeViewModel.$thumbnailImage
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] image in
                     guard let self = self else { return }
-                    let posterImage = UIImage(data: data)
-                    DispatchQueue.main.async {
-                        self.thumbnailImage.image = posterImage
-                    }
+                    thumbnailImage.image = image
                 }
             
             NSLayoutConstraint.activate([
@@ -86,5 +68,11 @@ class MovieTableViewCell: UITableViewCell {
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 110),
             titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
         ])
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cancellable?.cancel()
+        thumbnailImage.image = nil
     }
 }

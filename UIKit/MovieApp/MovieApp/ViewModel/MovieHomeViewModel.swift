@@ -10,6 +10,7 @@ import Combine
 
 class MovieHomeViewModel {
     @Published var searchedMovies: [MovieInfo] = []
+    @Published var thumbnailImage: UIImage = UIImage(systemName: "circle.dotted")!
     private let storageManager = MovieStorageManager()
     private let movieKey: String = "74632d0636eed1fd804303a83e5e942f"
     private var cancelleable: Cancellable?
@@ -62,13 +63,12 @@ class MovieHomeViewModel {
         }
     }
     
-    func getThumbnailImage(url: String) {
-        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(url)") else { return }
+    func getThumbnailImage(posterUrl: String) {
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterUrl)") else { return }
         URLSession.shared.dataTaskPublisher(for: url)
-            .map{ (data, _) in
-                return data
-            }
-            .removeDuplicates()
-            .eraseToAnyPublisher()
+            .map { data, _ in UIImage(data: data)! }
+            .replaceError(with: UIImage(systemName: "exclamationmark.triangle")!) // 에러 발생 시 기본 이미지 설정
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$thumbnailImage)
     }
 }
