@@ -12,4 +12,5 @@ enum MovieSearchError: Error {
     case searchValueInvalidError
     case serviceNotExistError
     case noResultError
+    case decodingError
 }

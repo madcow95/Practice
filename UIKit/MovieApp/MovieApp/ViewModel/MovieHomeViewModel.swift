@@ -14,6 +14,7 @@ class MovieHomeViewModel {
     @Published var isLoading: Bool = true
     
     private var cancellables = Set<AnyCancellable>()
+    // MARK: TODO - config 파일로 관리
     private let movieKey: String = "74632d0636eed1fd804303a83e5e942f"
     private var cancelleable: Cancellable?
     var movieTableReloadDelegate: ReloadMovieTableDelegate?
@@ -27,7 +28,6 @@ class MovieHomeViewModel {
     }()
     
     init() {
-        // self.$searchedMovies.map()
         // MARK: - @Published빼고.. searchedMovies의 didSet에 넣어줘도 같은거 아닌가..? reloadData를 하지 않고도 UI를 다시 그릴 수 있는 방법이 있나?
         cancelleable?.cancel()
         cancelleable = self.$searchedMovies.sink { [weak self] _ in
@@ -71,18 +71,26 @@ class MovieHomeViewModel {
                 throw MovieSearchError.noResultError
             }
             
-            self.searchedMovies = response.result
+            // 빈 데이터 filter
+            self.searchedMovies = response.result.filter{ movie in
+                if movie.poster != nil && movie.rating != nil && !movie.releaseDate.isEmpty &&
+                    movie.summary != nil {
+                    return true
+                }
+                return false
+            }
         } catch let error {
-            throw error
+            throw MovieSearchError.decodingError
         }
     }
     
     func getThumbnailImage(posterUrl: String) {
         guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterUrl)") else { return }
         
+        // MARK: 여기도 .receive(on: DispatchQueue.main)?
         URLSession.shared.dataTaskPublisher(for: url)
             .map { data, _ in UIImage(data: data)! }
-            .replaceError(with: UIImage(systemName: "exclamationmark.triangle")!) // 에러 발생 시 기본 이미지 설정
+            .replaceError(with: UIImage(systemName: "exclamationmark.triangle")!)
             .receive(on: DispatchQueue.main)
             .assign(to: &$thumbnailImage)
     }

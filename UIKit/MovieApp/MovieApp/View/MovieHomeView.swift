@@ -65,7 +65,9 @@ extension MovieHomeView: UISearchBarDelegate {
             Task {
                 do {
                     try await homeViewModel.searchMovieBy(name: searchText)
-                } catch { }
+                } catch {
+                    // MARK: TODO - MovieSearchError의 case 별로 alert 띄우기
+                }
             }
         } else {
             homeViewModel.searchedMovies = []
@@ -84,7 +86,7 @@ extension MovieHomeView: UITableViewDelegate, UITableViewDataSource {
         }
         
         let movie = homeViewModel.searchedMovies[indexPath.row]
-        cell.configureCell(viewModel: self.homeViewModel ,movie: movie)
+        cell.configureCell(movie: movie)
         
         return cell
     }
@@ -99,6 +101,8 @@ extension MovieHomeView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    
+    // MARK: TODO - 검색결과가 많을경우 무한 스크롤
 }
 
 extension MovieHomeView: ReloadMovieTableDelegate {

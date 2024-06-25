@@ -8,7 +8,6 @@
 import UIKit
 import Combine
 
-// TODO: 주석 한 번 작성해보기
 class MovieDetailView: UIViewController {
     
     private let scrollView: UIScrollView = {
@@ -105,7 +104,7 @@ class MovieDetailView: UIViewController {
             rateLabel.text = "평점: \(rating)점"
         }
         if let poster = selectedMovie.poster, let url = URL(string: "https://image.tmdb.org/t/p/w500/\(poster)") {
-            // TODO: ViewModel에서 처리?
+            // MARK: TODO - ViewModel에 posterImage를 Combine변수로 만들어 놓고, assign으로 실시간 수정하도록 수정
             cancellable?.cancel()
             cancellable = URLSession.shared.dataTaskPublisher(for: url)
                 .sink(receiveCompletion: { completion in

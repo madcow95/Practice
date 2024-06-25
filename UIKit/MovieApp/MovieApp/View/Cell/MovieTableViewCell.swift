@@ -44,7 +44,7 @@ class MovieTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(viewModel: MovieHomeViewModel, movie: MovieInfo) {
+    func configureCell(movie: MovieInfo) {
         
         let title = movie.title
         titleLabel.text = title
@@ -65,6 +65,8 @@ class MovieTableViewCell: UITableViewCell {
                 activityIndicator.heightAnchor.constraint(equalToConstant: 90)
             ])
             
+            // MARK: 질문해야할 부분 - MovieHomeView에서 파라미터로 받아오면 거기에서 생성된 viewModel만 바라봐서 그런지 모든 cell에서 같은 이미지만 보임
+            // cell이 실행될 때 마다 ViewModel을 생성하는게 좀.. cell에서 Combine변수로 가져와도 괜찮은지
             let viewModel = MovieHomeViewModel()
             viewModel.$isLoading
                 .receive(on: DispatchQueue.main)
@@ -108,6 +110,9 @@ class MovieTableViewCell: UITableViewCell {
         ])
     }
     
+    // 셀이 재사용되기 전에 호출되어 셀의 상태를 초기화하는 역할
+    // 초기화 할 때 기존에 작업들을 취소해야할거 같아서 removeAll() 추가
+    // 이전에 설정된 셀의 이미지를 초기화
     override func prepareForReuse() {
         super.prepareForReuse()
         cancellable.removeAll()
