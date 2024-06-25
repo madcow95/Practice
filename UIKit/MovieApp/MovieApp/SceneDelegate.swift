@@ -18,15 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(windowScene: windowScene)
         
         let homeView = MovieHomeView()
-        homeView.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house"), selectedImage: nil)
+//        homeView.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house"), selectedImage: nil)
         let homeNavigation = UINavigationController(rootViewController: homeView)
-        
-        let favoriteView = BookmarkMovieView()
-        favoriteView.tabBarItem = UITabBarItem(title: "즐겨찾기", image: UIImage(systemName: "list.bullet.clipboard"), selectedImage: nil)
-        let favoriteNavigation = UINavigationController(rootViewController: favoriteView)
-        
-        let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [homeNavigation, favoriteNavigation]
         
         self.window?.rootViewController = homeNavigation
         self.window?.makeKeyAndVisible()

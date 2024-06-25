@@ -84,7 +84,7 @@ extension MovieHomeView: UITableViewDelegate, UITableViewDataSource {
         }
         
         let movie = homeViewModel.searchedMovies[indexPath.row]
-        cell.configureCell(movie: movie)
+        cell.configureCell(viewModel: self.homeViewModel ,movie: movie)
         
         return cell
     }

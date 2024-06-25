@@ -15,15 +15,11 @@
 		CD03D7072C1C299800E46228 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD03D7062C1C299800E46228 /* MovieModel.swift */; };
 		CD03D7092C1C29A400E46228 /* MovieHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD03D7082C1C29A400E46228 /* MovieHomeViewModel.swift */; };
 		CD03D70C2C1C29E800E46228 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD03D70B2C1C29E800E46228 /* UIExtension.swift */; };
-		CD194E942C1C6FAA004F5946 /* BookmarkMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD194E932C1C6FA9004F5946 /* BookmarkMovieView.swift */; };
 		CD4FDFA72C1D9DA20008CD52 /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4FDFA62C1D9DA20008CD52 /* ErrorExtension.swift */; };
 		CD900BDD2C2027F900FDC454 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BDC2C2027F900FDC454 /* MovieTableViewCell.swift */; };
 		CD900BDF2C20291500FDC454 /* MovieProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BDE2C20291500FDC454 /* MovieProtocol.swift */; };
 		CD900BE12C20390900FDC454 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BE02C20390900FDC454 /* MovieDetailView.swift */; };
 		CD900BE32C20391100FDC454 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BE22C20391100FDC454 /* MovieDetailViewModel.swift */; };
-		CDB3FDC32C21E4200073F941 /* MovieStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB3FDC22C21E4200073F941 /* MovieStorageManager.swift */; };
-		CDE4FA722C210BDD009F7D83 /* BookmarkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE4FA712C210BDD009F7D83 /* BookmarkTableViewCell.swift */; };
-		CDE4FA742C210DA3009F7D83 /* BookmarkMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE4FA732C210DA3009F7D83 /* BookmarkMovieViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,15 +33,11 @@
 		CD03D7062C1C299800E46228 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		CD03D7082C1C29A400E46228 /* MovieHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieHomeViewModel.swift; sourceTree = "<group>"; };
 		CD03D70B2C1C29E800E46228 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = "<group>"; };
-		CD194E932C1C6FA9004F5946 /* BookmarkMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkMovieView.swift; sourceTree = "<group>"; };
 		CD4FDFA62C1D9DA20008CD52 /* ErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
 		CD900BDC2C2027F900FDC454 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		CD900BDE2C20291500FDC454 /* MovieProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieProtocol.swift; sourceTree = "<group>"; };
 		CD900BE02C20390900FDC454 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		CD900BE22C20391100FDC454 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
-		CDB3FDC22C21E4200073F941 /* MovieStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieStorageManager.swift; path = ../../../../../../.Trash/MovieStorageManager.swift; sourceTree = "<group>"; };
-		CDE4FA712C210BDD009F7D83 /* BookmarkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkTableViewCell.swift; sourceTree = "<group>"; };
-		CDE4FA732C210DA3009F7D83 /* BookmarkMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkMovieViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +87,6 @@
 		CD03D7002C1C28D900E46228 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				CDB3FDC22C21E4200073F941 /* MovieStorageManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -105,7 +96,6 @@
 			children = (
 				CD900BDB2C2027EF00FDC454 /* Cell */,
 				CD03D7042C1C28F700E46228 /* MovieHomeView.swift */,
-				CD194E932C1C6FA9004F5946 /* BookmarkMovieView.swift */,
 				CD900BE02C20390900FDC454 /* MovieDetailView.swift */,
 			);
 			path = View;
@@ -124,7 +114,6 @@
 			children = (
 				CD03D7082C1C29A400E46228 /* MovieHomeViewModel.swift */,
 				CD900BE22C20391100FDC454 /* MovieDetailViewModel.swift */,
-				CDE4FA732C210DA3009F7D83 /* BookmarkMovieViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -143,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				CD900BDC2C2027F900FDC454 /* MovieTableViewCell.swift */,
-				CDE4FA712C210BDD009F7D83 /* BookmarkTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -221,16 +209,12 @@
 				CD03D7072C1C299800E46228 /* MovieModel.swift in Sources */,
 				CD03D7052C1C28F700E46228 /* MovieHomeView.swift in Sources */,
 				CD03D7092C1C29A400E46228 /* MovieHomeViewModel.swift in Sources */,
-				CD194E942C1C6FAA004F5946 /* BookmarkMovieView.swift in Sources */,
 				CD03D6EA2C1C288000E46228 /* AppDelegate.swift in Sources */,
 				CD4FDFA72C1D9DA20008CD52 /* ErrorExtension.swift in Sources */,
 				CD900BE12C20390900FDC454 /* MovieDetailView.swift in Sources */,
 				CD900BDF2C20291500FDC454 /* MovieProtocol.swift in Sources */,
-				CDB3FDC32C21E4200073F941 /* MovieStorageManager.swift in Sources */,
 				CD03D6EC2C1C288000E46228 /* SceneDelegate.swift in Sources */,
 				CD900BDD2C2027F900FDC454 /* MovieTableViewCell.swift in Sources */,
-				CDE4FA722C210BDD009F7D83 /* BookmarkTableViewCell.swift in Sources */,
-				CDE4FA742C210DA3009F7D83 /* BookmarkMovieViewModel.swift in Sources */,
 				CD900BE32C20391100FDC454 /* MovieDetailViewModel.swift in Sources */,
 				CD03D70C2C1C29E800E46228 /* UIExtension.swift in Sources */,
 			);

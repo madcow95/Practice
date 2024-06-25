@@ -10,11 +10,21 @@ import Combine
 
 class MovieHomeViewModel {
     @Published var searchedMovies: [MovieInfo] = []
-    @Published var thumbnailImage: UIImage = UIImage(systemName: "circle.dotted")!
-    private let storageManager = MovieStorageManager()
+    @Published var thumbnailImage: UIImage? = nil
+    @Published var isLoading: Bool = true
+    
+    private var cancellables = Set<AnyCancellable>()
     private let movieKey: String = "74632d0636eed1fd804303a83e5e942f"
     private var cancelleable: Cancellable?
     var movieTableReloadDelegate: ReloadMovieTableDelegate?
+    
+    private lazy var isLoadingPublisher: AnyPublisher<Bool, Never> = {
+        $thumbnailImage
+            .removeDuplicates()
+            .map{ $0 == nil }
+            .share()
+            .eraseToAnyPublisher()
+    }()
     
     init() {
         // self.$searchedMovies.map()
@@ -25,6 +35,10 @@ class MovieHomeViewModel {
                 self?.movieTableReloadDelegate?.reloadTableView()
             }
         }
+        
+        isLoadingPublisher
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$isLoading)
     }
     
     func searchMovieBy(name: String) async throws {
@@ -65,6 +79,7 @@ class MovieHomeViewModel {
     
     func getThumbnailImage(posterUrl: String) {
         guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterUrl)") else { return }
+        
         URLSession.shared.dataTaskPublisher(for: url)
             .map { data, _ in UIImage(data: data)! }
             .replaceError(with: UIImage(systemName: "exclamationmark.triangle")!) // 에러 발생 시 기본 이미지 설정
