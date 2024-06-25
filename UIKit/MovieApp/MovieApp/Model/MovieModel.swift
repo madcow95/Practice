@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 import SwiftData
 
 struct Movie: Codable {
