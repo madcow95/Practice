@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftData
 
 struct Movie: Codable {
     let page: Int?

@@ -64,7 +64,8 @@ class MovieDetailView: UIViewController {
     }()
     
     var selectedMovie: MovieInfo?
-    private var cancellable: Cancellable?
+    private var cancellable = Set<AnyCancellable>()
+    private let detailViewModel = MovieDetailViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,29 +101,21 @@ class MovieDetailView: UIViewController {
         
         titleLabel.text = "제목: \(selectedMovie.title)"
         openDateLabel.text = "개봉일: \(selectedMovie.releaseDate)"
-        if let rating = selectedMovie.rating {
+        if let rating = selectedMovie.rating,
+           let poster = selectedMovie.poster,
+           let summary = selectedMovie.summary {
+            
             rateLabel.text = "평점: \(rating)점"
-        }
-        if let poster = selectedMovie.poster, let url = URL(string: "https://image.tmdb.org/t/p/w500/\(poster)") {
-            // MARK: TODO - ViewModel에 posterImage를 Combine변수로 만들어 놓고, assign으로 실시간 수정하도록 수정
-            cancellable?.cancel()
-            cancellable = URLSession.shared.dataTaskPublisher(for: url)
-                .sink(receiveCompletion: { completion in
-                    switch completion {
-                    case .finished:
-                        break
-                    case .failure(let error):
-                        print("error while load poster image > \(error.localizedDescription)")
-                    }
-                }, receiveValue: { (imageData, _) in
-                    let poster = UIImage(data: imageData)
-                    DispatchQueue.main.async {
-                        self.posterImage.image = poster
-                    }
-                })
-        }
-        if let summary = selectedMovie.summary {
-            summaryTextView.text = "내용:\n\(summary)"
+            
+            detailViewModel.$posterImage
+                .receive(on: DispatchQueue.main)
+                .assign(to: \.image, on: posterImage)
+                .store(in: &cancellable)
+            detailViewModel.fetchPosterImage(poster: poster)
+            
+            if !summary.isEmpty {
+                summaryTextView.text = "내용:\n\(summary)"
+            }
         }
         
         [titleLabel, openDateLabel, rateLabel, posterImage, summaryTextView].forEach{ contentView.addSubview($0) }

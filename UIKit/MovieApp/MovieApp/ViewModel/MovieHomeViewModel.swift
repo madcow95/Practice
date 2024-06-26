@@ -14,8 +14,6 @@ class MovieHomeViewModel {
     @Published var isLoading: Bool = true
     
     private var cancellables = Set<AnyCancellable>()
-    // MARK: TODO - config 파일로 관리
-    private let movieKey: String = "74632d0636eed1fd804303a83e5e942f"
     private var cancelleable: Cancellable?
     var movieTableReloadDelegate: ReloadMovieTableDelegate?
     
@@ -43,7 +41,10 @@ class MovieHomeViewModel {
     
     func searchMovieBy(name: String) async throws {
         // MARK: 띄어쓰기 틀리면 검색이 안됨..
-        let searchMovieUrlStr: String = "https://api.themoviedb.org/3/search/movie?query=\(name)&api_key=\(movieKey)&language=ko_KR"
+        guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else {
+            throw MovieSearchError.apiKeyError
+        }
+        let searchMovieUrlStr: String = "https://api.themoviedb.org/3/search/movie?query=\(name)&api_key=\(apiKey)&language=ko_KR"
         
         guard let url = URL(string: searchMovieUrlStr) else { return }
         
@@ -79,8 +80,8 @@ class MovieHomeViewModel {
                 }
                 return false
             }
-        } catch let error {
-            throw MovieSearchError.decodingError
+        } catch {
+//            throw error
         }
     }
     

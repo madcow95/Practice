@@ -10,7 +10,3 @@ import Foundation
 protocol ReloadMovieTableDelegate {
     func reloadTableView()
 }
-
-protocol ReloadBookmarkTableDelegate {
-    func reloadBookmarkTable()
-}

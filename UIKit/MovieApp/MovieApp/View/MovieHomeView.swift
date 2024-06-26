@@ -56,17 +56,28 @@ class MovieHomeView: UIViewController {
             movieTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    
+    func showAlert(msg: String) {
+        let alertController = UIAlertController(title: "오류!", message: msg, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 extension MovieHomeView: UISearchBarDelegate {
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.count > 0 {
             Task {
                 do {
                     try await homeViewModel.searchMovieBy(name: searchText)
                 } catch {
-                    // MARK: TODO - MovieSearchError의 case 별로 alert 띄우기
+                    if let movieError = error as? MovieSearchError {
+                        showAlert(msg: movieError.errorMessage)
+                    } else {
+                        showAlert(msg: error.localizedDescription)
+                    }
                 }
             }
         } else {

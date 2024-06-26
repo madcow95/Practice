@@ -33,6 +33,7 @@
 		CD03D7062C1C299800E46228 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		CD03D7082C1C29A400E46228 /* MovieHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieHomeViewModel.swift; sourceTree = "<group>"; };
 		CD03D70B2C1C29E800E46228 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = "<group>"; };
+		CD40EC5D2C2BB03C0054D687 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		CD4FDFA62C1D9DA20008CD52 /* ErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
 		CD900BDC2C2027F900FDC454 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		CD900BDE2C20291500FDC454 /* MovieProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieProtocol.swift; sourceTree = "<group>"; };
@@ -80,6 +81,7 @@
 				CD03D6F52C1C288100E46228 /* Assets.xcassets */,
 				CD03D6F72C1C288100E46228 /* LaunchScreen.storyboard */,
 				CD03D6FA2C1C288100E46228 /* Info.plist */,
+				CD40EC5D2C2BB03C0054D687 /* Config.xcconfig */,
 			);
 			path = MovieApp;
 			sourceTree = "<group>";
@@ -355,6 +357,7 @@
 		};
 		CD03D6FE2C1C288100E46228 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD40EC5D2C2BB03C0054D687 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -381,6 +384,7 @@
 		};
 		CD03D6FF2C1C288100E46228 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD40EC5D2C2BB03C0054D687 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

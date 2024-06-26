@@ -11,6 +11,7 @@ import Combine
 class MovieTableViewCell: UITableViewCell {
     
     private var cancellable = Set<AnyCancellable>()
+    private let viewModel = MovieHomeViewModel()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -24,7 +25,6 @@ class MovieTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
-        image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         
         return image
     }()
@@ -49,7 +49,7 @@ class MovieTableViewCell: UITableViewCell {
         let title = movie.title
         titleLabel.text = title
         
-        if let poster = movie.poster {
+        if let poster = movie.poster, !poster.isEmpty {
             contentView.addSubview(thumbnailImage)
             contentView.addSubview(activityIndicator)
             
@@ -65,9 +65,6 @@ class MovieTableViewCell: UITableViewCell {
                 activityIndicator.heightAnchor.constraint(equalToConstant: 90)
             ])
             
-            // MARK: 질문해야할 부분 - MovieHomeView에서 파라미터로 받아오면 거기에서 생성된 viewModel만 바라봐서 그런지 모든 cell에서 같은 이미지만 보임
-            // cell이 실행될 때 마다 ViewModel을 생성하는게 좀.. cell에서 Combine변수로 가져와도 괜찮은지
-            let viewModel = MovieHomeViewModel()
             viewModel.$isLoading
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] isLoading in
@@ -83,14 +80,12 @@ class MovieTableViewCell: UITableViewCell {
             
             viewModel.$thumbnailImage
                 .receive(on: DispatchQueue.main)
-                .sink { [weak self] image in
-                    guard let self = self else { return }
-                    self.thumbnailImage.image = image
-                }
+                .assign(to: \.image, on: thumbnailImage)
                 .store(in: &cancellable)
             
             viewModel.getThumbnailImage(posterUrl: poster)
         } else {
+            // poster가 없을 때 ProgressView -> 영화 데이터를 불러올 때 데이터들이 없으면 filter를 했지만 혹시 몰라서 남겨둠
             contentView.addSubview(activityIndicator)
             
             NSLayoutConstraint.activate([
