@@ -15,6 +15,7 @@ class MovieDetailViewModel {
     func fetchPosterImage(poster: String) {
         guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(poster)") else { return }
         
+        // MARK: TODO - response등 error alert처리
         URLSession.shared.dataTaskPublisher(for: url)
             .map{ (data, _) in
                 return UIImage(data: data)

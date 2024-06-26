@@ -14,6 +14,7 @@ enum MovieSearchError: Error {
     case serviceNotExistError
     case noResultError
     case decodingError
+    case posterLoadError
     
     var errorMessage: String {
         get {
@@ -30,6 +31,8 @@ enum MovieSearchError: Error {
                 return "검색 결과가 없습니다."
             case .decodingError:
                 return "디코딩 중 에러가 발생했습니다."
+            case .posterLoadError:
+                return "이미지를 불러오는 중 에러가 발생했습니다."
             }
         }
     }

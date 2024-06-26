@@ -10,102 +10,58 @@ import Combine
 
 class MovieDetailView: UIViewController {
     
-    private let scrollView: UIScrollView = {
-        let scroll = UIScrollView()
-        scroll.translatesAutoresizingMaskIntoConstraints = false
+    // UI Components
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+    private let titleLabel = UILabel()
+    private let openDateLabel = UILabel()
+    private let rateLabel = UILabel()
+    private let posterImage = UIImageView()
+    private lazy var trailerButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("예고편 보기", for: .normal)
+        btn.setTitleColor(.blue, for: .normal)
+        btn.addAction(UIAction{ [weak self] _ in
+            guard let self = self else { return }
+            present(MovieTrailerView(), animated: true)
+        }, for: .touchUpInside)
         
-        return scroll
+        return btn
     }()
+    private let summaryLabel = UILabel()
     
-    private let contentView: UIView = {
-        let content = UIView()
-        content.translatesAutoresizingMaskIntoConstraints = false
-        
-        return content
-    }()
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        
-        return label
-    }()
-    
-    private let openDateLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
-    
-    private let rateLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
-    
-    private let posterImage: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleAspectFit
-        
-        return image
-    }()
-    
-    private let summaryTextView: UILabel = {
-        let tv = UILabel()
-        tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        tv.numberOfLines = 0
-        
-        return tv
-    }()
-    
-    var selectedMovie: MovieInfo?
     private var cancellable = Set<AnyCancellable>()
     private let detailViewModel = MovieDetailViewModel()
+    var selectedMovie: MovieInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        
-        setScrollView()
         configureUI()
     }
     
-    func setScrollView() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            
-            contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor)
-        ])
-    }
-    
     func configureUI() {
+        [scrollView, contentView, titleLabel, openDateLabel, rateLabel,
+         posterImage, summaryLabel].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+        titleLabel.numberOfLines = 0
+        posterImage.contentMode = .scaleAspectFit
+        summaryLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        summaryLabel.numberOfLines = 0
+        
+        // scroll view 세팅
+        setScrollView()
         guard let selectedMovie = selectedMovie else { return }
         
         titleLabel.text = "제목: \(selectedMovie.title)"
         openDateLabel.text = "개봉일: \(selectedMovie.releaseDate)"
         if let rating = selectedMovie.rating,
+           let rateCount = selectedMovie.rateCount,
            let poster = selectedMovie.poster,
            let summary = selectedMovie.summary {
             
-            rateLabel.text = "평점: \(rating)점"
+            rateLabel.text = "평점: \(rating)점 (\(rateCount))"
             
             detailViewModel.$posterImage
                 .receive(on: DispatchQueue.main)
@@ -114,11 +70,11 @@ class MovieDetailView: UIViewController {
             detailViewModel.fetchPosterImage(poster: poster)
             
             if !summary.isEmpty {
-                summaryTextView.text = "내용:\n\(summary)"
+                summaryLabel.text = "내용:\n\(summary)"
             }
         }
         
-        [titleLabel, openDateLabel, rateLabel, posterImage, summaryTextView].forEach{ contentView.addSubview($0) }
+        [titleLabel, openDateLabel, rateLabel, posterImage, trailerButton, summaryLabel].forEach{ contentView.addSubview($0) }
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -138,10 +94,33 @@ class MovieDetailView: UIViewController {
             posterImage.trailingAnchor.constraint(equalTo: rateLabel.trailingAnchor),
             posterImage.heightAnchor.constraint(equalToConstant: 500),
             
-            summaryTextView.topAnchor.constraint(equalTo: posterImage.bottomAnchor, constant: 20),
-            summaryTextView.leadingAnchor.constraint(equalTo: posterImage.leadingAnchor),
-            summaryTextView.trailingAnchor.constraint(equalTo: posterImage.trailingAnchor),
-            summaryTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            trailerButton.topAnchor.constraint(equalTo: posterImage.bottomAnchor, constant: 10),
+            trailerButton.leadingAnchor.constraint(equalTo: posterImage.leadingAnchor),
+            trailerButton.trailingAnchor.constraint(equalTo: posterImage.trailingAnchor),
+            
+            summaryLabel.topAnchor.constraint(equalTo: trailerButton.bottomAnchor, constant: 10),
+            summaryLabel.leadingAnchor.constraint(equalTo: posterImage.leadingAnchor),
+            summaryLabel.trailingAnchor.constraint(equalTo: posterImage.trailingAnchor),
+            summaryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        ])
+    }
+    
+    func setScrollView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor)
         ])
     }
 }

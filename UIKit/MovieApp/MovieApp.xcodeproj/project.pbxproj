@@ -15,7 +15,10 @@
 		CD03D7072C1C299800E46228 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD03D7062C1C299800E46228 /* MovieModel.swift */; };
 		CD03D7092C1C29A400E46228 /* MovieHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD03D7082C1C29A400E46228 /* MovieHomeViewModel.swift */; };
 		CD03D70C2C1C29E800E46228 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD03D70B2C1C29E800E46228 /* UIExtension.swift */; };
+		CD40EC612C2BEDBB0054D687 /* MovieTrailerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD40EC602C2BEDBB0054D687 /* MovieTrailerView.swift */; };
+		CD40EC632C2BEDD50054D687 /* MovieTrailerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD40EC622C2BEDD50054D687 /* MovieTrailerViewModel.swift */; };
 		CD4FDFA72C1D9DA20008CD52 /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4FDFA62C1D9DA20008CD52 /* ErrorExtension.swift */; };
+		CD89AE682C2C4B2800A691CF /* TrailerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD89AE672C2C4B2800A691CF /* TrailerModel.swift */; };
 		CD900BDD2C2027F900FDC454 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BDC2C2027F900FDC454 /* MovieTableViewCell.swift */; };
 		CD900BDF2C20291500FDC454 /* MovieProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BDE2C20291500FDC454 /* MovieProtocol.swift */; };
 		CD900BE12C20390900FDC454 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BE02C20390900FDC454 /* MovieDetailView.swift */; };
@@ -34,7 +37,10 @@
 		CD03D7082C1C29A400E46228 /* MovieHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieHomeViewModel.swift; sourceTree = "<group>"; };
 		CD03D70B2C1C29E800E46228 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = "<group>"; };
 		CD40EC5D2C2BB03C0054D687 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		CD40EC602C2BEDBB0054D687 /* MovieTrailerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailerView.swift; sourceTree = "<group>"; };
+		CD40EC622C2BEDD50054D687 /* MovieTrailerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailerViewModel.swift; sourceTree = "<group>"; };
 		CD4FDFA62C1D9DA20008CD52 /* ErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
+		CD89AE672C2C4B2800A691CF /* TrailerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerModel.swift; sourceTree = "<group>"; };
 		CD900BDC2C2027F900FDC454 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		CD900BDE2C20291500FDC454 /* MovieProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieProtocol.swift; sourceTree = "<group>"; };
 		CD900BE02C20390900FDC454 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
@@ -99,6 +105,7 @@
 				CD900BDB2C2027EF00FDC454 /* Cell */,
 				CD03D7042C1C28F700E46228 /* MovieHomeView.swift */,
 				CD900BE02C20390900FDC454 /* MovieDetailView.swift */,
+				CD40EC602C2BEDBB0054D687 /* MovieTrailerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -107,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				CD03D7062C1C299800E46228 /* MovieModel.swift */,
+				CD89AE672C2C4B2800A691CF /* TrailerModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -116,6 +124,7 @@
 			children = (
 				CD03D7082C1C29A400E46228 /* MovieHomeViewModel.swift */,
 				CD900BE22C20391100FDC454 /* MovieDetailViewModel.swift */,
+				CD40EC622C2BEDD50054D687 /* MovieTrailerViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -210,12 +219,15 @@
 			files = (
 				CD03D7072C1C299800E46228 /* MovieModel.swift in Sources */,
 				CD03D7052C1C28F700E46228 /* MovieHomeView.swift in Sources */,
+				CD40EC612C2BEDBB0054D687 /* MovieTrailerView.swift in Sources */,
 				CD03D7092C1C29A400E46228 /* MovieHomeViewModel.swift in Sources */,
 				CD03D6EA2C1C288000E46228 /* AppDelegate.swift in Sources */,
+				CD89AE682C2C4B2800A691CF /* TrailerModel.swift in Sources */,
 				CD4FDFA72C1D9DA20008CD52 /* ErrorExtension.swift in Sources */,
 				CD900BE12C20390900FDC454 /* MovieDetailView.swift in Sources */,
 				CD900BDF2C20291500FDC454 /* MovieProtocol.swift in Sources */,
 				CD03D6EC2C1C288000E46228 /* SceneDelegate.swift in Sources */,
+				CD40EC632C2BEDD50054D687 /* MovieTrailerViewModel.swift in Sources */,
 				CD900BDD2C2027F900FDC454 /* MovieTableViewCell.swift in Sources */,
 				CD900BE32C20391100FDC454 /* MovieDetailViewModel.swift in Sources */,
 				CD03D70C2C1C29E800E46228 /* UIExtension.swift in Sources */,
@@ -369,12 +381,13 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MadCow.MovieApp;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.madcow.trailerMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -396,12 +409,13 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MadCow.MovieApp;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.madcow.trailerMovie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

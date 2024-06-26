@@ -10,9 +10,10 @@ import Combine
 
 class MovieHomeView: UIViewController {
     
-    private let searchController = UISearchController()
     private let homeViewModel = MovieHomeViewModel()
     
+    // UI Components
+    private let searchController = UISearchController()
     private lazy var movieTableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -26,12 +27,11 @@ class MovieHomeView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
-        
         configureUI()
     }
     
     func configureUI() {
+        view.backgroundColor = .systemBackground
         setSearchBar()
         setTableView()
     }

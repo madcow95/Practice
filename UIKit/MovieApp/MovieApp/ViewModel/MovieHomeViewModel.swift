@@ -17,25 +17,22 @@ class MovieHomeViewModel {
     private var cancelleable: Cancellable?
     var movieTableReloadDelegate: ReloadMovieTableDelegate?
     
-    private lazy var isLoadingPublisher: AnyPublisher<Bool, Never> = {
-        $thumbnailImage
-            .removeDuplicates()
-            .map{ $0 == nil }
-            .share()
-            .eraseToAnyPublisher()
-    }()
-    
     init() {
         // MARK: - @Published빼고.. searchedMovies의 didSet에 넣어줘도 같은거 아닌가..? reloadData를 하지 않고도 UI를 다시 그릴 수 있는 방법이 있나?
         cancelleable?.cancel()
         cancelleable = self.$searchedMovies.sink { [weak self] _ in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                self?.movieTableReloadDelegate?.reloadTableView()
+                self.movieTableReloadDelegate?.reloadTableView()
             }
         }
         
-        isLoadingPublisher
+        $thumbnailImage
+            .removeDuplicates()
             .receive(on: DispatchQueue.main)
+            .map{ $0 == nil }
+            .share()
+            .eraseToAnyPublisher()
             .assign(to: &$isLoading)
     }
     
@@ -92,7 +89,6 @@ class MovieHomeViewModel {
         URLSession.shared.dataTaskPublisher(for: url)
             .map { data, _ in UIImage(data: data)! }
             .replaceError(with: UIImage(systemName: "exclamationmark.triangle")!)
-            .receive(on: DispatchQueue.main)
             .assign(to: &$thumbnailImage)
     }
 }
