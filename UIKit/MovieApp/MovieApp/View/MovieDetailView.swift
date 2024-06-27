@@ -24,7 +24,9 @@ class MovieDetailView: UIViewController {
         btn.setTitleColor(.blue, for: .normal)
         btn.addAction(UIAction{ [weak self] _ in
             guard let self = self else { return }
-            present(MovieTrailerView(), animated: true)
+            let trailerView = MovieTrailerView()
+            trailerView.movieTitle = self.titleLabel.text
+            present(trailerView, animated: true)
         }, for: .touchUpInside)
         
         return btn

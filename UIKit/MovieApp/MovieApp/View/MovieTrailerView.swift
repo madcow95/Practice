@@ -6,18 +6,41 @@
 //
 
 import UIKit
-import AVKit
+import Combine
+import WebKit
 
-class MovieTrailerView: UIViewController {
+class MovieTrailerView: UIViewController, WKNavigationDelegate {
+    
+    var cancellable = Set<AnyCancellable>()
+    
+    var webView: WKWebView!
     
     private let trailerViewModel = MovieTrailerViewModel()
+    var movieTitle: String?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        webView = WKWebView(frame: view.bounds)
+        view.addSubview(webView)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
+        view.backgroundColor = .systemBackground
         
-        Task {
-            await trailerViewModel.configureUI()
-        }
+        trailerViewModel.$videos
+            .sink { [weak self] video in
+                guard let self = self else { return }
+                guard let videoInfo = video.first else { return }
+                let url = videoInfo.id.videoID
+                
+                let videoURL = URL(string: "https://www.youtube.com/watch?v=\(url)")!
+                let request = URLRequest(url: videoURL)
+                self.webView.load(request)
+            }
+            .store(in: &cancellable)
+        
+        trailerViewModel.fetchVideo(title: movieTitle)
     }
 }

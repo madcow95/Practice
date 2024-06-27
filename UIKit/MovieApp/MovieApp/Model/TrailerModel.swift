@@ -7,52 +7,25 @@
 
 import Foundation
 
-// MARK: - Welcome
-struct TrailerModel: Codable {
-    let nextPageToken, regionCode: String
-    let items: [Item]
-}
-
 // MARK: - Item
 struct Item: Codable {
-    let kind, etag: String
     let id: ID
     let snippet: Snippet
 }
 
 // MARK: - ID
 struct ID: Codable {
-    let kind, videoId: String
-
-    enum CodingKeys: String, CodingKey {
-        case kind
-        case videoId
-    }
+    let videoID: String
 }
 
 // MARK: - Snippet
 struct Snippet: Codable {
-    let publishedAt: Date
-    let channelId, title, description: String
     let thumbnails: Thumbnails
-    let channelTitle, liveBroadcastContent: String
-    let publishTime: Date
-
-    enum CodingKeys: String, CodingKey {
-        case publishedAt
-        case channelId
-        case title, description, thumbnails, channelTitle, liveBroadcastContent, publishTime
-    }
 }
 
 // MARK: - Thumbnails
 struct Thumbnails: Codable {
-    let thumbnailsDefault, medium, high: Default
-
-    enum CodingKeys: String, CodingKey {
-        case thumbnailsDefault = "default"
-        case medium, high
-    }
+    let thumbnailsDefault: Default
 }
 
 // MARK: - Default
