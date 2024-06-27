@@ -44,6 +44,7 @@ class MovieDetailView: UIViewController {
         configureUI()
     }
     
+    
     func configureUI() {
         [scrollView, contentView, titleLabel, openDateLabel, rateLabel,
          posterImage, summaryLabel].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
@@ -63,14 +64,9 @@ class MovieDetailView: UIViewController {
            let poster = selectedMovie.poster,
            let summary = selectedMovie.summary {
             
+            setSubscriber(poster: poster)
+            
             rateLabel.text = "평점: \(rating)점 (\(rateCount))"
-            
-            detailViewModel.$posterImage
-                .receive(on: DispatchQueue.main)
-                .assign(to: \.image, on: posterImage)
-                .store(in: &cancellable)
-            detailViewModel.fetchPosterImage(poster: poster)
-            
             if !summary.isEmpty {
                 summaryLabel.text = "내용:\n\(summary)"
             }
@@ -106,7 +102,6 @@ class MovieDetailView: UIViewController {
             summaryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
-    
     func setScrollView() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -124,5 +119,14 @@ class MovieDetailView: UIViewController {
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor)
         ])
+    }
+    
+    func setSubscriber(poster: String) {
+        detailViewModel.$posterImage
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.image, on: posterImage)
+            .store(in: &cancellable)
+        
+        detailViewModel.fetchPosterImage(poster: poster)
     }
 }

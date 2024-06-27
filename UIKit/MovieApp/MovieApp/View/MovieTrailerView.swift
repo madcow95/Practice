@@ -29,6 +29,10 @@ class MovieTrailerView: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
+        setSubscriber()
+    }
+    
+    func setSubscriber() {
         trailerViewModel.$videos
             .sink { [weak self] video in
                 guard let self = self else { return }

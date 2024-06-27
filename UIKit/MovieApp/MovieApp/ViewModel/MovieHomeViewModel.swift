@@ -10,22 +10,20 @@ import Combine
 
 class MovieHomeViewModel {
     @Published var searchedMovies: [MovieInfo] = []
+    @Published var fetchMovieComplete: Bool = false
     @Published var thumbnailImage: UIImage? = nil
     @Published var isLoading: Bool = true
     
     private var cancellables = Set<AnyCancellable>()
     private var cancelleable: Cancellable?
-    var movieTableReloadDelegate: ReloadMovieTableDelegate?
     
     init() {
-        // MARK: - @Published빼고.. searchedMovies의 didSet에 넣어줘도 같은거 아닌가..? reloadData를 하지 않고도 UI를 다시 그릴 수 있는 방법이 있나?
-        cancelleable?.cancel()
-        cancelleable = self.$searchedMovies.sink { [weak self] _ in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.movieTableReloadDelegate?.reloadTableView()
-            }
-        }
+        $searchedMovies
+            .map{ $0.count > 0 }
+            .removeDuplicates()
+            .share()
+            .eraseToAnyPublisher()
+            .assign(to: &$fetchMovieComplete)
         
         $thumbnailImage
             .removeDuplicates()

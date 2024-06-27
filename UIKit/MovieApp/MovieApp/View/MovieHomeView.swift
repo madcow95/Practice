@@ -11,6 +11,7 @@ import Combine
 class MovieHomeView: UIViewController {
     
     private let homeViewModel = MovieHomeViewModel()
+    private var cancellable = Set<AnyCancellable>()
     
     // UI Components
     private let searchController = UISearchController()
@@ -27,7 +28,18 @@ class MovieHomeView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setSubscriber()
         configureUI()
+    }
+    
+    func setSubscriber() {
+        homeViewModel.$fetchMovieComplete
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                self.movieTableView.reloadData()
+            }
+            .store(in: &cancellable)
     }
     
     func configureUI() {
@@ -46,7 +58,6 @@ class MovieHomeView: UIViewController {
     }
     
     func setTableView() {
-        homeViewModel.movieTableReloadDelegate = self
         view.addSubview(movieTableView)
         
         NSLayoutConstraint.activate([
@@ -114,10 +125,4 @@ extension MovieHomeView: UITableViewDelegate, UITableViewDataSource {
     }
     
     // MARK: TODO - 검색결과가 많을경우 무한 스크롤
-}
-
-extension MovieHomeView: ReloadMovieTableDelegate {
-    func reloadTableView() {
-        self.movieTableView.reloadData()
-    }
 }

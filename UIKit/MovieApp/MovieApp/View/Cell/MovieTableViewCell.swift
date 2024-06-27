@@ -46,10 +46,12 @@ class MovieTableViewCell: UITableViewCell {
     
     func configureCell(movie: MovieInfo) {
         
+        
         let title = movie.title
         titleLabel.text = title
         
         if let poster = movie.poster, !poster.isEmpty {
+            setSubscriber(poster: poster)
             contentView.addSubview(thumbnailImage)
             contentView.addSubview(activityIndicator)
             
@@ -64,26 +66,6 @@ class MovieTableViewCell: UITableViewCell {
                 activityIndicator.widthAnchor.constraint(equalToConstant: 90),
                 activityIndicator.heightAnchor.constraint(equalToConstant: 90)
             ])
-            
-            viewModel.$isLoading
-                .receive(on: DispatchQueue.main)
-                .sink { [weak self] isLoading in
-                    guard let self = self else { return }
-                    self.activityIndicator.isHidden = !isLoading
-                    if isLoading {
-                        self.activityIndicator.startAnimating()
-                    } else {
-                        self.activityIndicator.stopAnimating()
-                    }
-                }
-                .store(in: &cancellable)
-            
-            viewModel.$thumbnailImage
-                .receive(on: DispatchQueue.main)
-                .assign(to: \.image, on: thumbnailImage)
-                .store(in: &cancellable)
-            
-            viewModel.getThumbnailImage(posterUrl: poster)
         } else {
             // poster가 없을 때 ProgressView -> 영화 데이터를 불러올 때 데이터들이 없으면 filter를 했지만 혹시 몰라서 남겨둠
             contentView.addSubview(activityIndicator)
@@ -103,6 +85,28 @@ class MovieTableViewCell: UITableViewCell {
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 110),
             titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
         ])
+    }
+    
+    func setSubscriber(poster: String) {
+        viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                guard let self = self else { return }
+                self.activityIndicator.isHidden = !isLoading
+                if isLoading {
+                    self.activityIndicator.startAnimating()
+                } else {
+                    self.activityIndicator.stopAnimating()
+                }
+            }
+            .store(in: &cancellable)
+        
+        viewModel.$thumbnailImage
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.image, on: thumbnailImage)
+            .store(in: &cancellable)
+        
+        viewModel.getThumbnailImage(posterUrl: poster)
     }
     
     // 셀이 재사용되기 전에 호출되어 셀의 상태를 초기화하는 역할
