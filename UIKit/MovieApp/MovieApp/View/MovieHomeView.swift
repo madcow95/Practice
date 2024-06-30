@@ -49,6 +49,7 @@ class MovieHomeView: UIViewController {
     }
     
     func setSearchBar() {
+        navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"

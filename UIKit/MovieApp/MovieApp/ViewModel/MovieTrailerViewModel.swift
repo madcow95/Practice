@@ -10,7 +10,7 @@ import Combine
 
 class MovieTrailerViewModel {
     
-    @Published var videos: [Item] = []
+    @Published var trailerVideo: Trailer? = nil
     private var cancellables = Set<AnyCancellable>()
     
     func fetchVideo(title: String?) {
@@ -30,11 +30,10 @@ class MovieTrailerViewModel {
             .receive(on: DispatchQueue.main)
             .tryMap{ (data, _) in
                 guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                    print("JSONSerialization fail")
-                    fatalError("JSONSerialization fail")
+                    throw MovieSearchError.noResultError
                 }
                 // JSONDecoder로 decode가 잘 안되서 이렇게 진행
-                var movieItems: [Item] = []
+                var movieItems: [Trailer] = []
                 if let items = json["items"] as? [[String: Any]] {
                     for item in items {
                         if let snippet = item["snippet"] as? [String: Any],
@@ -46,13 +45,8 @@ class MovieTrailerViewModel {
                            let id = item["id"] as? [String: Any],
                            let videoId = id["videoId"] as? String
                         {
-                            
-                            movieItems.append(Item(id: ID(videoID: videoId),
-                                                   snippet: Snippet(thumbnails:
-                                                                        Thumbnails(thumbnailsDefault:
-                                                                                    Default(url: thumbnailURLString,
-                                                                                            width: thumbnailHeight,
-                                                                                            height: thumbnailWidth)))))
+                            movieItems.append(Trailer(videoID: videoId, url: thumbnailURLString, width: thumbnailWidth, height: thumbnailHeight))
+                            break
                         }
                     }
                 }
@@ -66,12 +60,27 @@ class MovieTrailerViewModel {
                 case .finished:
                     break
                 case .failure(let error):
-                    print(error)
+                    print("error > \(error.localizedDescription)")
                 }
-            } receiveValue: { [weak self] items in
+            } receiveValue: { [weak self] trailers in
                 guard let self = self else { return }
-                self.videos = items
+                if trailers.count > 0, let trailer = trailers.first {
+                    self.trailerVideo = trailer
+                }
             }
             .store(in: &cancellables)
     }
 }
+
+// Search
+//private func setupSearchController() {
+//    searchController.searchResultsUpdater = self
+//    searchController.obscuresBackgroundDuringPresentation = false
+//    searchController.searchBar.placeholder = "코인이름을 검색해주세요."
+//    searchController.hidesNavigationBarDuringPresentation = false
+//    
+//    navigationItem.hidesSearchBarWhenScrolling = false
+//    
+//    navigationItem.searchController = searchController
+//    definesPresentationContext = true
+//}

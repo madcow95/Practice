@@ -7,29 +7,7 @@
 
 import Foundation
 
-// MARK: - Item
-struct Item: Codable {
-    let id: ID
-    let snippet: Snippet
-}
-
-// MARK: - ID
-struct ID: Codable {
-    let videoID: String
-}
-
-// MARK: - Snippet
-struct Snippet: Codable {
-    let thumbnails: Thumbnails
-}
-
-// MARK: - Thumbnails
-struct Thumbnails: Codable {
-    let thumbnailsDefault: Default
-}
-
-// MARK: - Default
-struct Default: Codable {
-    let url: String
+struct Trailer: Decodable {
+    let videoID, url: String
     let width, height: Int
 }

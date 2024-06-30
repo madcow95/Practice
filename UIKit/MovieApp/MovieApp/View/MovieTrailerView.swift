@@ -11,11 +11,9 @@ import WebKit
 
 class MovieTrailerView: UIViewController, WKNavigationDelegate {
     
-    var cancellable = Set<AnyCancellable>()
-    
-    var webView: WKWebView!
-    
+    private var cancellable = Set<AnyCancellable>()
     private let trailerViewModel = MovieTrailerViewModel()
+    private var webView: WKWebView!
     var movieTitle: String?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,11 +31,11 @@ class MovieTrailerView: UIViewController, WKNavigationDelegate {
     }
     
     func setSubscriber() {
-        trailerViewModel.$videos
+        trailerViewModel.$trailerVideo
             .sink { [weak self] video in
                 guard let self = self else { return }
-                guard let videoInfo = video.first else { return }
-                let url = videoInfo.id.videoID
+                guard let videoInfo = trailerViewModel.trailerVideo else { return }
+                let url = videoInfo.videoID
                 
                 let videoURL = URL(string: "https://www.youtube.com/watch?v=\(url)")!
                 let request = URLRequest(url: videoURL)

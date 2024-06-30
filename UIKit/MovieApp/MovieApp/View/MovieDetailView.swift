@@ -41,6 +41,7 @@ class MovieDetailView: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
+        setSubscriber()
         configureUI()
     }
     
@@ -64,7 +65,7 @@ class MovieDetailView: UIViewController {
            let poster = selectedMovie.poster,
            let summary = selectedMovie.summary {
             
-            setSubscriber(poster: poster)
+            detailViewModel.fetchPosterImage(poster: poster)
             
             rateLabel.text = "평점: \(rating)점 (\(rateCount))"
             if !summary.isEmpty {
@@ -121,12 +122,10 @@ class MovieDetailView: UIViewController {
         ])
     }
     
-    func setSubscriber(poster: String) {
+    func setSubscriber() {
         detailViewModel.$posterImage
             .receive(on: DispatchQueue.main)
             .assign(to: \.image, on: posterImage)
             .store(in: &cancellable)
-        
-        detailViewModel.fetchPosterImage(poster: poster)
     }
 }
