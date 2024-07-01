@@ -40,16 +40,27 @@ class MovieHomeView: UIViewController {
                 self.movieTableView.reloadData()
             }
             .store(in: &cancellable)
+        
+        homeViewModel.$errorMessage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] errMsg in
+                guard let self = self else { return }
+                guard let errMsg = errMsg else { return }
+                self.showAlert(msg: errMsg)
+            }
+            .store(in: &cancellable)
     }
     
     func configureUI() {
         view.backgroundColor = .systemBackground
+        
         setSearchBar()
         setTableView()
+        // MARK: TODO - 최근 개봉 영화, 인기 많은 영화 Horizontal ScrollView로 만들어보기 넷플릭스 처럼
     }
     
     func setSearchBar() {
-        navigationItem.hidesSearchBarWhenScrolling = false
+//        navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
@@ -79,19 +90,15 @@ class MovieHomeView: UIViewController {
 }
 
 extension MovieHomeView: UISearchBarDelegate {
+    // MARK: TODO - 키보드에서 입력할 때마다 debounce로 api호출로 수정
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text, searchText.count > 0 {
             Task {
-                do {
-                    try await homeViewModel.searchMovieBy(title: searchText)
-                } catch {
-                    if let movieError = error as? MovieSearchError {
-                        showAlert(msg: movieError.errorMessage)
-                    } else {
-                        showAlert(msg: error.localizedDescription)
-                    }
-                }
+                await homeViewModel.searchMovieBy(title: searchText)
             }
+        } else {
+            // Text Field에 입력된 값이 없으면 Table List 초기화
+            homeViewModel.searchedMovies = []
         }
     }
 }

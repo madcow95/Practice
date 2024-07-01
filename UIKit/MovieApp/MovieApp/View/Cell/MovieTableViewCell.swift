@@ -45,13 +45,13 @@ class MovieTableViewCell: UITableViewCell {
     }
     
     func configureCell(movie: MovieInfo) {
-        
-        
         let title = movie.title
         titleLabel.text = title
+        setSubscriber()
         
         if let poster = movie.poster, !poster.isEmpty {
-            setSubscriber(poster: poster)
+            
+            viewModel.getThumbnailImage(posterURL: poster)
             contentView.addSubview(thumbnailImage)
             contentView.addSubview(activityIndicator)
             
@@ -87,8 +87,8 @@ class MovieTableViewCell: UITableViewCell {
         ])
     }
     
-    func setSubscriber(poster: String) {
-        viewModel.$isLoading
+    func setSubscriber() {
+        viewModel.$thumbnailIsLoading
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isLoading in
                 guard let self = self else { return }
@@ -105,8 +105,6 @@ class MovieTableViewCell: UITableViewCell {
             .receive(on: DispatchQueue.main)
             .assign(to: \.image, on: thumbnailImage)
             .store(in: &cancellable)
-        
-        viewModel.getThumbnailImage(posterURL: poster)
     }
     
     // 셀이 재사용되기 전에 호출되어 셀의 상태를 초기화하는 역할

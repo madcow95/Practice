@@ -12,15 +12,29 @@ class MovieHomeViewModel {
     @Published var searchedMovies: [MovieInfo] = []
     @Published var fetchMovieComplete: Bool = false
     @Published var thumbnailImage: UIImage? = nil
-    @Published var isLoading: Bool = true
+    @Published var thumbnailIsLoading: Bool = true
+    // MARK: Error들 MovieService에 정의?
+    @Published var errorType: MovieSearchError?
+    @Published var errorMessage: String?
+//    @Published var searchText: String?
     
     private let movieService = MovieService()
     private var cancellables = Set<AnyCancellable>()
     private var cancelleable: Cancellable?
     
+//    private lazy var searchTextPublisher: AnyPublisher<[MovieInfo], Error> = {
+//        $searchText
+//            .debounce(for: 0.8, scheduler: RunLoop.main)
+//            .removeDuplicates()
+//            .compactMap{ $0 }
+//            .tryMap{ self.searchMovi }
+//            .share()
+//            .eraseToAnyPublisher()
+//    }()
+    
     init() {
         $searchedMovies
-            .map{ $0.count > 0 }
+            .compactMap{ $0.count > 0 }
             .removeDuplicates()
             .share()
             .eraseToAnyPublisher()
@@ -28,11 +42,18 @@ class MovieHomeViewModel {
         
         $thumbnailImage
             .removeDuplicates()
-            .receive(on: DispatchQueue.main)
             .map{ $0 == nil }
             .share()
             .eraseToAnyPublisher()
-            .assign(to: &$isLoading)
+            .assign(to: &$thumbnailIsLoading)
+        
+        $errorType
+            .removeDuplicates()
+            .compactMap{ $0 }
+            .map{ $0!.errorMessage }
+            .share()
+            .eraseToAnyPublisher()
+            .assign(to: &$errorMessage)
     }
     
     func searchMovieBy(title: String) async {
@@ -41,9 +62,14 @@ class MovieHomeViewModel {
                 .sink { completion in
                     switch completion {
                     case .finished:
+                        self.fetchMovieComplete = true
                         break
                     case .failure(let error):
-                        print("error in sink >> \(error)")
+                        if let movieError = error as? MovieSearchError {
+                            self.errorType = movieError
+                        } else {
+                            self.errorMessage = error.localizedDescription
+                        }
                     }
                 } receiveValue: { [weak self] movies in
                     guard let self = self else { return }
@@ -51,7 +77,11 @@ class MovieHomeViewModel {
                 }
                 .store(in: &cancellables)
         } catch {
-            print(error)
+            if let movieError = error as? MovieSearchError {
+                self.errorType = movieError
+            } else {
+                self.errorMessage = error.localizedDescription
+            }
         }
     }
     
@@ -64,7 +94,11 @@ class MovieHomeViewModel {
                     case .finished:
                         break
                     case .failure(let error):
-                        print(error.localizedDescription)
+                        if let movieError = error as? MovieSearchError {
+                            self.errorType = movieError
+                        } else {
+                            self.errorMessage = error.localizedDescription
+                        }
                     }
                 } receiveValue: { [weak self] poster in
                     guard let self = self else { return }
@@ -73,7 +107,11 @@ class MovieHomeViewModel {
                 .store(in: &cancellables)
 
         } catch {
-            print(error)
+            if let movieError = error as? MovieSearchError {
+                self.errorType = movieError
+            } else {
+                self.errorMessage = error.localizedDescription
+            }
         }
     }
 }
