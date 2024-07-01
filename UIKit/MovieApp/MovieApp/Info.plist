@@ -21,5 +21,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>YOUTUBE_KEY</key>
+	<string>$(YOUTUBE_KEY)</string>
 </dict>
 </plist>

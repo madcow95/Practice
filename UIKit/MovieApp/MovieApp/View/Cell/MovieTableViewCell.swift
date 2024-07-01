@@ -106,7 +106,7 @@ class MovieTableViewCell: UITableViewCell {
             .assign(to: \.image, on: thumbnailImage)
             .store(in: &cancellable)
         
-        viewModel.getThumbnailImage(posterUrl: poster)
+        viewModel.getThumbnailImage(posterURL: poster)
     }
     
     // 셀이 재사용되기 전에 호출되어 셀의 상태를 초기화하는 역할

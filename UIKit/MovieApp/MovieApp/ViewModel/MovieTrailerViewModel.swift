@@ -11,16 +11,16 @@ import Combine
 class MovieTrailerViewModel {
     
     @Published var trailerVideo: Trailer? = nil
+    private let movieService = MovieService()
     private var cancellables = Set<AnyCancellable>()
     
     func fetchVideo(title: String?) {
+        guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "YOUTUBE_KEY") as? String else { return }
         guard let title = title else { return }
         let movieTitle = title.components(separatedBy: "제목: ")[1]
-        print(movieTitle)
-        let apiKey = "AIzaSyBlxKZcn0NogbYdXGU3YN9na9c4k33Viqs"
         let query = "\(movieTitle)trailer"
         
-        let urlStr = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=viewCount&q=\(query)&key=\(apiKey)"
+        let urlStr = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=\(query)&key=\(apiKey)"
         guard let videoURL = URL(string: urlStr) else {
             print("video url no exist")
             return

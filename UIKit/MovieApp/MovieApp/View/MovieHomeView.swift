@@ -79,11 +79,11 @@ class MovieHomeView: UIViewController {
 }
 
 extension MovieHomeView: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.count > 0 {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchText = searchBar.text, searchText.count > 0 {
             Task {
                 do {
-                    try await homeViewModel.searchMovieBy(name: searchText)
+                    try await homeViewModel.searchMovieBy(title: searchText)
                 } catch {
                     if let movieError = error as? MovieSearchError {
                         showAlert(msg: movieError.errorMessage)
@@ -92,8 +92,6 @@ extension MovieHomeView: UISearchBarDelegate {
                     }
                 }
             }
-        } else {
-            homeViewModel.searchedMovies = []
         }
     }
 }

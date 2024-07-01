@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Trailer: Decodable {
+struct Trailer: Codable {
     let videoID, url: String
     let width, height: Int
 }

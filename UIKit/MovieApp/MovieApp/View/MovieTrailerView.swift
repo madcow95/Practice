@@ -26,16 +26,15 @@ class MovieTrailerView: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        
         setSubscriber()
     }
     
     func setSubscriber() {
         trailerViewModel.$trailerVideo
-            .sink { [weak self] video in
+            .sink { [weak self] trailer in
                 guard let self = self else { return }
-                guard let videoInfo = trailerViewModel.trailerVideo else { return }
-                let url = videoInfo.videoID
+                guard let trailer = trailer else { return }
+                let url = trailer.videoID
                 
                 let videoURL = URL(string: "https://www.youtube.com/watch?v=\(url)")!
                 let request = URLRequest(url: videoURL)

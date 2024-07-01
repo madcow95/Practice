@@ -11,29 +11,25 @@ import Combine
 class MovieDetailViewModel {
     @Published var posterImage: UIImage? = nil
     private var cancellable = Set<AnyCancellable>()
+    private let movieService = MovieService()
     
     func fetchPosterImage(poster: String) {
-        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(poster)") else { return }
-        
-        // MARK: TODO - response등 error alert처리
-        URLSession.shared.dataTaskPublisher(for: url)
-            .map{ (data, _) in
-                return UIImage(data: data)
-            }
-            .share()
-            .eraseToAnyPublisher()
-            .removeDuplicates()
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    print("error while load poster image > \(error.localizedDescription)")
+        do {
+            try movieService.getPosterImage(posterURL: poster)
+                .sink { completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        print("error in fetchPosterImage > \(error.localizedDescription)")
+                    }
+                } receiveValue: { [weak self] poster in
+                    guard let self = self else { return }
+                    self.posterImage = poster
                 }
-            } receiveValue: { [weak self] image in
-                guard let self = self else { return }
-                self.posterImage = image
-            }
-            .store(in: &cancellable)
+                .store(in: &cancellable)
+        } catch {
+            print("error in fetchPosterImage catch >> \(error.localizedDescription)")
+        }
     }
 }
