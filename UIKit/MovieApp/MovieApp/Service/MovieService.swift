@@ -12,6 +12,7 @@ class MovieService {
     
     private var movieKey: String? = nil
     private var youtubeKey: String? = nil
+    private var cancellables = Set<AnyCancellable>()
     
     init() {
         guard let movieAPIKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String,
@@ -22,7 +23,7 @@ class MovieService {
         self.youtubeKey = youtubeAPIKey
     }
     
-    func searchMovieBy(title: String) async throws -> AnyPublisher<[MovieInfo], Error> {
+    func searchMovieBy(title: String) throws -> AnyPublisher<[MovieInfo], Error> {
         let searchMovieUrlStr: String = "https://api.themoviedb.org/3/search/movie?query=\(title)&api_key=\(movieKey!)&language=ko_KR"
         guard let url = URL(string: searchMovieUrlStr) else {
             throw MovieSearchError.urlError
@@ -73,6 +74,50 @@ class MovieService {
             }
             .removeDuplicates()
             .share()
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchVideo(title: String?) throws -> AnyPublisher<[Trailer], Error> {
+        guard let title = title else {
+            throw MovieSearchError.noTitleError
+        }
+        let movieTitle = title.components(separatedBy: "제목: ")[1]
+        let query = "\(movieTitle)trailer"
+        
+        let urlStr = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=\(query)&key=\(youtubeKey!)"
+        guard let videoURL = URL(string: urlStr) else {
+            throw MovieSearchError.noResultError
+        }
+        
+        return URLSession.shared.dataTaskPublisher(for: videoURL)
+            .receive(on: DispatchQueue.global())
+            .tryMap{ (data, _) in
+                guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                    throw MovieSearchError.noResultError
+                }
+                // JSONDecoder로 decode가 잘 안되서 이렇게 진행
+                var movieItems: [Trailer] = []
+                if let items = json["items"] as? [[String: Any]] {
+                    for item in items {
+                        if let snippet = item["snippet"] as? [String: Any],
+                           let thumbnails = snippet["thumbnails"] as? [String: Any],
+                           let defaultThumbnail = thumbnails["default"] as? [String: Any],
+                           let thumbnailURLString = defaultThumbnail["url"] as? String,
+                           let thumbnailHeight = defaultThumbnail["height"] as? Int,
+                           let thumbnailWidth = defaultThumbnail["width"] as? Int,
+                           let id = item["id"] as? [String: Any],
+                           let videoId = id["videoId"] as? String
+                        {
+                            movieItems.append(Trailer(videoID: videoId, url: thumbnailURLString, width: thumbnailWidth, height: thumbnailHeight))
+                            break
+                        }
+                    }
+                }
+                if movieItems.count == 0 {
+                    throw MovieSearchError.noResultError
+                }
+                return movieItems
+            }
             .eraseToAnyPublisher()
     }
 }

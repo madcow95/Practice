@@ -61,7 +61,7 @@ class MovieHomeView: UIViewController {
     }
     
     func setSearchBar() {
-//        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
@@ -86,9 +86,7 @@ extension MovieHomeView: UISearchBarDelegate {
     // MARK: TODO - 키보드에서 입력할 때마다 debounce로 api호출로 수정
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchText = searchBar.text, searchText.count > 0 {
-            Task {
-                await homeViewModel.searchMovieBy(title: searchText)
-            }
+            homeViewModel.searchMovieBy(title: searchText)
         } else {
             // Text Field에 입력된 값이 없으면 Table List 초기화
             homeViewModel.searchedMovies = []
@@ -133,14 +131,4 @@ extension MovieHomeView: UITableViewDelegate, UITableViewDataSource {
 //
 //        }
 //    }
-}
-
-extension UIViewController {
-    func showAlert(msg: String) {
-        let alertController = UIAlertController(title: "오류!", message: msg, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default)
-        alertController.addAction(okAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
 }

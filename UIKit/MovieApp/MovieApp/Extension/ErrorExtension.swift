@@ -8,6 +8,7 @@
 import UIKit
 
 enum MovieSearchError: Error {
+    case noTitleError
     case apiKeyError
     case urlError
     case searchValueInvalidError
@@ -19,6 +20,8 @@ enum MovieSearchError: Error {
     var errorMessage: String {
         get {
             switch self {
+            case .noTitleError:
+                return "제목을 입력해주세요."
             case .apiKeyError:
                 return "잘못된 API Key입니다."
             case .urlError:

@@ -56,9 +56,9 @@ class MovieHomeViewModel {
             .assign(to: &$errorMessage)
     }
     
-    func searchMovieBy(title: String) async {
+    func searchMovieBy(title: String) {
         do {
-            try await movieService.searchMovieBy(title: title)
+            try movieService.searchMovieBy(title: title)
                 .sink { completion in
                     switch completion {
                     case .finished:
