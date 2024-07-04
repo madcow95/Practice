@@ -5,9 +5,9 @@
 //  Created by MadCow on 2024/6/14.
 //
 
-import Foundation
+import UIKit
 
-struct Movie: Codable {
+struct Movie: Decodable {
     let page: Int?
     let result: [MovieInfo]
     
@@ -17,7 +17,7 @@ struct Movie: Codable {
     }
 }
 
-struct MovieInfo: Codable {
+struct MovieInfo: Decodable {
     let id: Int
     let title: String
     let genreId: [Int]
@@ -26,7 +26,7 @@ struct MovieInfo: Codable {
     let rateCount: Int?
     let summary: String?
     let poster: String?
-    var bookmarked: Bool = false
+    var posterImage: UIImage?
     
     enum CodingKeys: String, CodingKey {
         case id

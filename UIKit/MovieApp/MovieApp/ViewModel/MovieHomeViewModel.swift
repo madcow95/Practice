@@ -73,6 +73,7 @@ class MovieHomeViewModel {
                     }
                 } receiveValue: { [weak self] movies in
                     guard let self = self else { return }
+                    
                     self.searchedMovies = movies
                 }
                 .store(in: &cancellables)

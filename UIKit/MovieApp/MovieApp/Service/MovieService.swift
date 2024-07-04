@@ -48,6 +48,7 @@ class MovieService {
                 guard response.result.count != 0 else {
                     throw MovieSearchError.noResultError
                 }
+                // 포스터나 영화에 대한 정보가 없으면 return
                 return response.result.filter{ movie in
                     if movie.poster != nil && movie.rating != nil && !movie.releaseDate.isEmpty &&
                         movie.summary != nil {

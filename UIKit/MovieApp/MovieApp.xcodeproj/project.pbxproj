@@ -80,7 +80,6 @@
 				CD03D7022C1C28E500E46228 /* Model */,
 				CD03D7032C1C28E900E46228 /* ViewModel */,
 				CD03D7012C1C28E000E46228 /* View */,
-				CD03D7002C1C28D900E46228 /* Data */,
 				CD03D6E92C1C288000E46228 /* AppDelegate.swift */,
 				CD03D6EB2C1C288000E46228 /* SceneDelegate.swift */,
 				CD03D6F52C1C288100E46228 /* Assets.xcassets */,
@@ -89,13 +88,6 @@
 				CD40EC5D2C2BB03C0054D687 /* Config.xcconfig */,
 			);
 			path = MovieApp;
-			sourceTree = "<group>";
-		};
-		CD03D7002C1C28D900E46228 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		CD03D7012C1C28E000E46228 /* View */ = {

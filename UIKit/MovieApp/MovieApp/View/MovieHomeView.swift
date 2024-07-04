@@ -57,6 +57,7 @@ class MovieHomeView: UIViewController {
         setSearchBar()
         setTableView()
         // MARK: TODO - 최근 개봉 영화, 인기 많은 영화 Horizontal ScrollView로 만들어보기 넷플릭스 처럼
+//        setPopularMovies()
     }
     
     func setSearchBar() {
@@ -78,14 +79,6 @@ class MovieHomeView: UIViewController {
             movieTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             movieTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-    }
-    
-    func showAlert(msg: String) {
-        let alertController = UIAlertController(title: "오류!", message: msg, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default)
-        alertController.addAction(okAction)
-        
-        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -131,4 +124,23 @@ extension MovieHomeView: UITableViewDelegate, UITableViewDataSource {
     }
     
     // MARK: TODO - 검색결과가 많을경우 무한 스크롤
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let offsetY = scrollView.contentOffset.y
+//        let contentHeight = scrollView.contentSize.height
+//        
+//        if offsetY > contentHeight - scrollView.frame.height, homeViewModel.searchedMovies.count > 8 {
+//            guard let searchText = self.searchController.searchBar.text else { return }
+//
+//        }
+//    }
+}
+
+extension UIViewController {
+    func showAlert(msg: String) {
+        let alertController = UIAlertController(title: "오류!", message: msg, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
 }
