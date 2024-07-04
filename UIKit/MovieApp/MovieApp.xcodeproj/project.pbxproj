@@ -21,6 +21,7 @@
 		CD900BDD2C2027F900FDC454 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BDC2C2027F900FDC454 /* MovieTableViewCell.swift */; };
 		CD900BE12C20390900FDC454 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BE02C20390900FDC454 /* MovieDetailView.swift */; };
 		CD900BE32C20391100FDC454 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900BE22C20391100FDC454 /* MovieDetailViewModel.swift */; };
+		CDBBDFD82C36BA0B00617F6D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBBDFD72C36BA0B00617F6D /* Util.swift */; };
 		CDEC973A2C2DB1380084B3A0 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEC97392C2DB1380084B3A0 /* MovieService.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		CD900BDC2C2027F900FDC454 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		CD900BE02C20390900FDC454 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		CD900BE22C20391100FDC454 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
+		CDBBDFD72C36BA0B00617F6D /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		CDEC97392C2DB1380084B3A0 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				CD4FDFA62C1D9DA20008CD52 /* ErrorExtension.swift */,
+				CDBBDFD72C36BA0B00617F6D /* Util.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				CDEC973A2C2DB1380084B3A0 /* MovieService.swift in Sources */,
 				CD03D6EC2C1C288000E46228 /* SceneDelegate.swift in Sources */,
 				CD40EC632C2BEDD50054D687 /* MovieTrailerViewModel.swift in Sources */,
+				CDBBDFD82C36BA0B00617F6D /* Util.swift in Sources */,
 				CD900BDD2C2027F900FDC454 /* MovieTableViewCell.swift in Sources */,
 				CD900BE32C20391100FDC454 /* MovieDetailViewModel.swift in Sources */,
 			);
