@@ -1,0 +1,12 @@
+//
+//  Config.xcconfig
+//  MovieApp
+//
+//  Created by MadCow on 2024/6/26.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+API_KEY = 74632d0636eed1fd804303a83e5e942f
+TOKEN_KEY = eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NDYzMmQwNjM2ZWVkMWZkODA0MzAzYTgzZTVlOTQyZiIsIm5iZiI6MTcxOTkyNTQ2MS45NzkyNTEsInN1YiI6IjY2NGM2YzVjZTdlYjg0NjI5MzE5OGE1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RhVI30FDOKgZqRKmJ6LnSfrGsx3az4buh32_xOtwkWs
+YOUTUBE_KEY = AIzaSyBlxKZcn0NogbYdXGU3YN9na9c4k33Viqs
