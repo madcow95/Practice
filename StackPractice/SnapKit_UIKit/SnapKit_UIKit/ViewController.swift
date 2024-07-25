@@ -39,6 +39,16 @@ class ViewController: UIViewController {
         self.view.addSubview(testButton1)
         self.view.addSubview(testButton2)
         
+        // NSLayoutConstraint
+        NSLayoutConstraint.activate([
+            testButton1.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 200),
+            testButton1.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            
+            testButton2.topAnchor.constraint(equalTo: self.testButton1.bottomAnchor, constant: 20),
+            testButton2.centerXAnchor.constraint(equalTo: self.testButton1.centerXAnchor)
+        ])
+        
+        // Snapkit
         testButton1.snp.makeConstraints {
             $0.top.equalTo(self.view.snp.top).offset(200)
             $0.centerX.equalTo(self.view.snp.centerX)
