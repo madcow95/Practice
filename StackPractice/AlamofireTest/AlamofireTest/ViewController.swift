@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 
 class ViewController: UIViewController {
-    let key = "Movie_API_KEY"
+    let key = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NDYzMmQwNjM2ZWVkMWZkODA0MzAzYTgzZTVlOTQyZiIsIm5iZiI6MTcxOTkyNTQ2MS45NzkyNTEsInN1YiI6IjY2NGM2YzVjZTdlYjg0NjI5MzE5OGE1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RhVI30FDOKgZqRKmJ6LnSfrGsx3az4buh32_xOtwkWs"
     private lazy var taskButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
