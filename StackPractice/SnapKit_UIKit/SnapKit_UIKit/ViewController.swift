@@ -36,13 +36,17 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(testButton1)
+        self.view.addSubview(testButton2)
         
-        let btnArr = [testButton1, testButton2]
-        btnArr.forEach{
-            self.view.addSubview($0)
-            $0.snp.makeConstraints { make in
-                make.top.equalTo(self.view.snp.top)
-            }
+        testButton1.snp.makeConstraints {
+            $0.top.equalTo(self.view.snp.top).offset(200)
+            $0.centerX.equalTo(self.view.snp.centerX)
+        }
+        
+        testButton2.snp.makeConstraints {
+            $0.top.equalTo(self.testButton1.snp.bottom).offset(20)
+            $0.centerX.equalTo(self.testButton1)
         }
     }
 }
