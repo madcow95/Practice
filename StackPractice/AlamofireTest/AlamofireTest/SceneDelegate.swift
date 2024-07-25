@@ -10,7 +10,11 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
+    // 축구 K리그 API
+    // 이미지 저장 -> AR로 보이기
+    // 술게임 앱
+    // 술 관련, 안주 조합 추천(편의점 ver)
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
