@@ -184,7 +184,7 @@ public class BluetoothManager: NSObject {
             return
         }
         
-        let revDiff = (newCrankEventTime &- lastCrankEventTime) & 0xFFFF // (UInt32(newCrankRevolutions) - UInt32(lastCrankRevolutions)) & 0xFFFF
+        let revDiff = (newCrankRevolutions &- lastCrankRevolutions) & 0xFFFF // (UInt32(newCrankRevolutions) - UInt32(lastCrankRevolutions)) & 0xFFFF
         let timeDiff = (UInt32(newCrankEventTime) &- UInt32(lastCrankEventTime)) & 0xFFFF
         
         if timeDiff > 0 {
