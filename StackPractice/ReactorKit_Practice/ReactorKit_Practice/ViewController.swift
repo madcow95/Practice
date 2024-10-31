@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     let decreaseButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.red, for: .normal)
         button.setTitle("-", for: .normal)
         return button
     }()
