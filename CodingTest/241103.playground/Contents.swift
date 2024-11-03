@@ -108,8 +108,67 @@ func solution(_ arr:[Int]) -> Int {
 print(solution([1, 2, 3, 100, 99, 98]))
 */
 
+/*
+ MARK: 리스트 자르기
+ https://school.programmers.co.kr/learn/courses/30/lessons/181897
 func solution(_ n:Int, _ slicer:[Int], _ num_list:[Int]) -> [Int] {
-    return []
+    switch n {
+    case 1:
+        return Array(num_list[0...slicer[1]])
+    case 2:
+        return Array(num_list[slicer[0]...num_list.count - 1])
+    case 3:
+        return Array(num_list[slicer[0]...slicer[1]])
+    case 4:
+        var result: [Int] = []
+        Array(num_list[slicer[0]...slicer[1]]).enumerated().forEach { (idx, num) in
+            if idx % slicer[2] == 0 {
+                result.append(num)
+            }
+        }
+        return result
+    default:
+        return []
+    }
 }
 
-print(solution(3, [1, 5, 2], [1, 2, 3, 4, 5, 6, 7, 8, 9]))
+print(solution(4, [1, 5, 2], [1, 2, 3, 4, 5, 6, 7, 8, 9]))
+*/
+
+/*
+ MARK: qr code
+ https://school.programmers.co.kr/learn/courses/30/lessons/181903
+func solution(_ q:Int, _ r:Int, _ code:String) -> String {
+    var answer: String = ""
+    for (idx, str) in code.enumerated() {
+        if idx % q == r {
+            answer += String(str)
+        }
+    }
+    return answer
+}
+
+print(solution(3, 1, "qjnwezgrpirldywt"))
+*/
+
+/*
+ MARK: 수열과 구간 쿼리 4
+ https://school.programmers.co.kr/learn/courses/30/lessons/181922
+func solution(_ arr:[Int], _ queries:[[Int]]) -> [Int] {
+    var copiedArr = arr
+    
+    for query in queries {
+        for n in query[0]...query[1] {
+            if n % query[2] == 0 {
+                copiedArr[n] += 1
+            }
+        }
+    }
+    
+    return copiedArr
+}
+
+print(solution([0, 1, 2, 4, 3], [[0, 4, 1],[0, 3, 2],[0, 3, 3]]))
+*/
+
+
