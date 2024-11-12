@@ -7,8 +7,11 @@
 
 import SnapKit
 import UIKit
+import ReactorKit
+import RxSwift
 
 class AddTodoView: UIViewController {
+    var disposeBag = DisposeBag()
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -85,7 +88,7 @@ class AddTodoView: UIViewController {
         tf.leftViewMode = .always
         tf.isEnabled = false
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 mm월 dd일"
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
         tf.text = dateFormatter.string(from: Date())
         
         return tf
@@ -108,7 +111,7 @@ class AddTodoView: UIViewController {
         
         return label
     }()
-    private let todoTextView: UITextView = {
+    private let contentTextView: UITextView = {
         let tv = UITextView()
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.font = .systemFont(ofSize: 16)
@@ -126,7 +129,13 @@ class AddTodoView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureReactor()
         configureUI()
+        configureAction()
+    }
+    
+    func configureReactor() {
+        self.reactor = AddTodoReactor()
     }
     
     func configureUI() {
@@ -182,12 +191,34 @@ class AddTodoView: UIViewController {
             $0.left.equalTo(dateStackView.snp.left)
         }
         
-        contentView.addSubview(todoTextView)
+        contentView.addSubview(contentTextView)
         
-        todoTextView.snp.makeConstraints {
+        contentTextView.snp.makeConstraints {
             $0.top.equalTo(contentLabel.snp.bottom).offset(10)
             $0.left.right.equalTo(dateStackView)
             $0.bottom.equalTo(saveButton.snp.top).offset(-10)
         }
+    }
+    
+    func configureAction() {
+        saveButton.rx.tap
+            .map { Reactor.Action.saveTodoAction(Todo(title: self.titleTextField.text!, content: self.contentTextView.text, imagePaths: [], date: Date(), viewCount: 0, todoReply: [])) }
+            .bind(to: reactor!.action)
+            .disposed(by: disposeBag)
+    }
+}
+
+extension AddTodoView: View {
+    func bind(reactor: AddTodoReactor) {
+        bindAction(reactor)
+        bindState(reactor)
+    }
+    
+    private func bindAction(_ reactor: AddTodoReactor) {
+        
+    }
+    
+    private func bindState(_ reactor: AddTodoReactor) {
+        
     }
 }
