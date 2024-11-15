@@ -16,7 +16,6 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(title: 'MadCow',
       theme: ThemeData(
           colorScheme: ColorScheme.dark(
-            brightness: Brightness.dark,
             secondary: Colors.white
           ),
       ),
@@ -27,10 +26,26 @@ class _MyAppState extends State<MyApp> {
             body: TabBarView(
               physics: NeverScrollableScrollPhysics(),
               children: [
-                Container(),
-                Container(),
-                Container(),
-                Container()
+                Container(
+                  child: Center(
+                    child: Text('home'),
+                  ),
+                ),
+                Container(
+                  child: Center(
+                    child: Text('search'),
+                  ),
+                ),
+                Container(
+                  child: Center(
+                    child: Text('save'),
+                  ),
+                ),
+                Container(
+                  child: Center(
+                    child: Text('list'),
+                  ),
+                ),
               ],
             ),
             bottomNavigationBar: Bottom(),
