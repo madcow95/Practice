@@ -11,7 +11,7 @@ class TodoManagerService {
     static let shared = TodoManagerService()
     
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Todo")
+        let container = NSPersistentContainer(name: "TodoModel")
         container.loadPersistentStores { description, error in
             if let error = error {
                 fatalError("Unable to load persistent stores: \(error)")
@@ -25,22 +25,22 @@ class TodoManagerService {
     }
     
     // Todo 저장 메서드
-    func saveTodo(_ todo: Todo) {
-        let todoEntity = Todo(context: context)
+    func saveTodo(_ todo: TodoModel) {
+        let todoEntity = TodoModelEntity(context: context)
         todoEntity.title = todo.title
         todoEntity.content = todo.content
         todoEntity.imagePaths = todo.imagePaths
         todoEntity.date = todo.date
-        todoEntity.viewCount = Int32(todo.viewCount)
+//        todoEntity.viewCount = Int32(todo.viewCount)
         
         // Reply 저장
-        for reply in todo.todoReply {
-            let replyEntity = Todo(context: context)
-            replyEntity.title = reply.title
-            replyEntity.date = reply.date
-            replyEntity.writer = reply.writer
-            replyEntity.todo = todoEntity
-        }
+//        for reply in todo.todoReply {
+//            let replyEntity = TodoModel(context: context)
+//            replyEntity.title = reply.title
+//            replyEntity.date = reply.date
+//            replyEntity.writer = reply.writer
+//            replyEntity.todo = todoEntity
+//        }
         
         do {
             try context.save()
@@ -50,8 +50,8 @@ class TodoManagerService {
     }
     
     // Todo 조회 메서드
-    func fetchTodos() -> [Todo] {
-        let request: NSFetchRequest<Todo> = Todo.fetchRequest()
+    func fetchTodos() -> [TodoModel] {
+        let request: NSFetchRequest<TodoModelEntity> = TodoModelEntity.fetchRequest()
         
         do {
             return try context.fetch(request)

@@ -8,25 +8,25 @@
 import Foundation
 import CoreData
 
-struct Todo: Decodable {
+struct TodoModel: Decodable {
     let title: String
     let content: String
-    let imagePaths: [String]?
+    let imagePaths: String
     let date: Date
-    let viewCount: Int
-    let todoReply: [TodoReply]
+    // let viewCount: Int
+    // let todoReply: [TodoReply]
     
     enum CodingKeys: String, CodingKey {
-        case title, content, imagePaths, date, viewCount, todoReply
+        case title, content, imagePaths, date//, viewCount, todoReply
     }
 }
-
-struct TodoReply: Decodable {
-    let title: String
-    let date: Date
-    let writer: String
-    
-    enum CodingKeys: String, CodingKey {
-        case title, date, writer
-    }
-}
+//
+//struct TodoReply: Decodable {
+//    let title: String
+//    let date: Date
+//    let writer: String
+//    
+//    enum CodingKeys: String, CodingKey {
+//        case title, date, writer
+//    }
+//}

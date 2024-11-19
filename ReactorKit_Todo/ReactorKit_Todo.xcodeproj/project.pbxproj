@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD9CEB992CEB8D5800E61238 /* TodoModelEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9CEB972CEB8D5800E61238 /* TodoModelEntity+CoreDataClass.swift */; };
+		CD9CEB9A2CEB8D5800E61238 /* TodoModelEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9CEB982CEB8D5800E61238 /* TodoModelEntity+CoreDataProperties.swift */; };
 		CDFB7A4C2CD3635B00343A52 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CDFB7A4B2CD3635B00343A52 /* RxCocoa */; };
 		CDFB7A4E2CD3635B00343A52 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CDFB7A4D2CD3635B00343A52 /* RxSwift */; };
 		CDFB7A512CD3636700343A52 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CDFB7A502CD3636700343A52 /* SnapKit */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD9CEB972CEB8D5800E61238 /* TodoModelEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TodoModelEntity+CoreDataClass.swift"; path = "ReactorKit_Todo/Model/DataModel/TodoModelEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CD9CEB982CEB8D5800E61238 /* TodoModelEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "TodoModelEntity+CoreDataProperties.swift"; path = "ReactorKit_Todo/Model/DataModel/TodoModelEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CDFB7A2C2CD362B700343A52 /* ReactorKit_Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactorKit_Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDFB7A642CD364A500343A52 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,6 +72,8 @@
 		CDFB7A232CD362B700343A52 = {
 			isa = PBXGroup;
 			children = (
+				CD9CEB972CEB8D5800E61238 /* TodoModelEntity+CoreDataClass.swift */,
+				CD9CEB982CEB8D5800E61238 /* TodoModelEntity+CoreDataProperties.swift */,
 				CDFB7A642CD364A500343A52 /* GoogleService-Info.plist */,
 				CDFB7A2E2CD362B700343A52 /* ReactorKit_Todo */,
 				CDFB7A2D2CD362B700343A52 /* Products */,
@@ -174,6 +180,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD9CEB992CEB8D5800E61238 /* TodoModelEntity+CoreDataClass.swift in Sources */,
+				CD9CEB9A2CEB8D5800E61238 /* TodoModelEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
