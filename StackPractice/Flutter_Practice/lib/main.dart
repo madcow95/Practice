@@ -28,20 +28,14 @@ class _MyAppState extends State<MyApp> {
               physics: NeverScrollableScrollPhysics(),
               children: [
                 HomeScreen(),
-                Container(
-                  child: Center(
-                    child: Text('search'),
-                  ),
+                Center(
+                  child: Text('search'),
                 ),
-                Container(
-                  child: Center(
-                    child: Text('save'),
-                  ),
+                Center(
+                  child: Text('save'),
                 ),
-                Container(
-                  child: Center(
-                    child: Text('list'),
-                  ),
+                Center(
+                  child: Text('list'),
                 ),
               ],
             ),

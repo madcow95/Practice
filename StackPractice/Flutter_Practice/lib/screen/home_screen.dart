@@ -1,5 +1,7 @@
 import 'package:contact/model/movie_model.dart';
+import 'package:contact/widget/box_slider.dart';
 import 'package:contact/widget/carousel_slider.dart';
+import 'package:contact/widget/circle_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/top_bar.dart';
@@ -22,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
         {
           'title': '사랑의 불시착',
           'keyword': '사랑/로맨스/판타지',
-          'poster': 'test_movie_1.png',
+          'poster': 'choi.jpg',
           'like': false
         }
     ),
@@ -30,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
         {
           'title': '사랑의 불시착',
           'keyword': '사랑/로맨스/판타지',
-          'poster': 'test_movie_1.png',
+          'poster': 'ckw.jpg',
           'like': false
         }
     ),
@@ -53,7 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView(
       children: [
         TopBar(),
-        CarouselImage(movies: movies)
+        CarouselImage(movies: movies),
+        CircleSlider(movies: movies),
+        BoxSlider(movies: movies)
       ],
     );
   }
