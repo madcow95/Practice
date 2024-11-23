@@ -75,11 +75,9 @@ class _CarouselImageState extends State<CarouselImage> {
               child: TextButton(
                 onPressed: () {},
                 style: TextButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero
-                  )
-                ),
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero)),
                 child: Row(
                   children: const [
                     Icon(
@@ -99,10 +97,7 @@ class _CarouselImageState extends State<CarouselImage> {
               padding: EdgeInsets.only(right: 10),
               child: Column(
                 children: [
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.info)
-                  ),
+                  IconButton(onPressed: () {}, icon: Icon(Icons.info)),
                   Text(
                     '정보',
                     style: TextStyle(fontSize: 11),
@@ -124,21 +119,18 @@ class _CarouselImageState extends State<CarouselImage> {
 List<Widget> makeIndicator(List list, int currentPage) {
   List<Widget> results = [];
 
-  for ( var i = 0; i < list.length; i++ ) {
-    results.add(
-      Container(
-        width: 8,
-        height: 8,
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-        decoration: BoxDecoration(
+  for (var i = 0; i < list.length; i++) {
+    results.add(Container(
+      width: 8,
+      height: 8,
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+      decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: currentPage == i
-            ? Color.fromRGBO(255, 255, 255, 0.9)
-            : Color.fromRGBO(255, 255, 255, 0.4)
-        ),
-      )
-    );
+              ? Color.fromRGBO(255, 255, 255, 0.9)
+              : Color.fromRGBO(255, 255, 255, 0.4)),
+    ));
   }
-  
+
   return results;
 }

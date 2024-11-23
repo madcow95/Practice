@@ -12,13 +12,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late TabController controller;
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'MadCow',
+    return MaterialApp(
+      title: 'MadCow',
       theme: ThemeData(
-          colorScheme: ColorScheme.dark(
-            secondary: Colors.white
-          ),
+        colorScheme: ColorScheme.dark(secondary: Colors.white),
       ),
       // NeverScrollableScrollPhysics: 손가락 움직임으로 탭을 변경하지 않는다
       home: DefaultTabController(
@@ -40,8 +40,7 @@ class _MyAppState extends State<MyApp> {
               ],
             ),
             bottomNavigationBar: Bottom(),
-          )
-      ),
+          )),
     );
   }
 }
