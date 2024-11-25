@@ -3,6 +3,7 @@ import 'dart:core';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:contact/model/movie_model.dart';
+import 'package:contact/screen/detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class CarouselImage extends StatefulWidget {
@@ -97,7 +98,15 @@ class _CarouselImageState extends State<CarouselImage> {
               padding: EdgeInsets.only(right: 10),
               child: Column(
                 children: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.info)),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute<Null>(
+                            fullscreenDialog: true,
+                            builder: (BuildContext context) {
+                              return DetailScreen(movie: movies[_currentPage]);
+                            }));
+                      },
+                      icon: Icon(Icons.info)),
                   Text(
                     '정보',
                     style: TextStyle(fontSize: 11),
