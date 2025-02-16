@@ -8,29 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var viewModel = BTViewModel()
+    @StateObject var hkManager = HealthKitManager()
     @State var isPresented: Bool = false
     
     var body: some View {
-        VStack(spacing: 20) {
-            Button {
-                isPresented = true
-            } label: {
-                Text("기기 찾기")
-            }
+        NavigationStack {
             
-            Text("연결된 기기: \(viewModel.connectedDeviceName)")
-            
-            NavigationLink {
-                HeartBeatView(viewModel: viewModel)
-            } label: {
-                Text("\(viewModel.connectedDeviceName) 연결 화면 이동")
+            VStack {
+                Text("심박수: \(hkManager.heartRate) BPM")
+                    .font(.largeTitle)
+                    .bold()
             }
-
-        }
-        .sheet(isPresented: $isPresented) {
-            DeviceListView(viewModel: viewModel) { name in
-                viewModel.connectedDeviceName = name
+            .onAppear {
+                hkManager.requestAuthorization()
             }
         }
     }

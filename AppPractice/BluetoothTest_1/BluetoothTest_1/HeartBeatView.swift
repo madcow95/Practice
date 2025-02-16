@@ -14,7 +14,7 @@ struct HeartBeatView: View {
         VStack {
             Text(viewModel.connectedDeviceName)
             
-            Text("\(viewModel.beatRate) bpm")
+            Text("\(viewModel.beatRate)")
         }
     }
 }

@@ -16,6 +16,7 @@ struct DeviceListView: View {
         List(viewModel.deviceNames, id: \.self) { device in
             Button {
                 completion(device)
+                viewModel.connectToDevice(name: device)
                 dismiss()
             } label: {
                 Text(device)

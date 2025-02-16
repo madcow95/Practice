@@ -28,12 +28,16 @@ class BTViewModel: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Obs
         self.disConnect()
     }
     
-    func connect() {
+    func connectDevice() {
         centralManager.scanForPeripherals(withServices: nil, options: nil)
     }
     
     func disConnect() {
-        
+        if let peripheral = connectedPeripheral {
+            centralManager.cancelPeripheralConnection(peripheral)
+            connectedPeripheral = nil
+            connectedDeviceName = ""
+        }
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -58,7 +62,7 @@ class BTViewModel: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Obs
     
     func startDeviceSearch() {
         if centralManager.state == .poweredOn {
-            centralManager.scanForPeripherals(withServices: [heartRateServiceUUID], options: nil)
+            centralManager.scanForPeripherals(withServices: [], options: nil)
         }
     }
     
@@ -70,26 +74,59 @@ class BTViewModel: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, Obs
         }
     }
     
-    func connect(to peripheral: CBPeripheral) {
-        centralManager.stopScan()
-        connectedPeripheral = peripheral
-        connectedPeripheral?.delegate = self
-        centralManager.connect(peripheral, options: nil)
+    func connectToDevice(name: String) {
+        if let peripheral = centralManager.retrieveConnectedPeripherals(withServices: [heartRateServiceUUID]).first(where: { $0.name == name }) {
+            centralManager.connect(peripheral, options: nil)
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        print("\(peripheral.name ?? "Unknown Device") connected!")
+        connectedPeripheral = peripheral
+        connectedDeviceName = peripheral.name ?? "Unknown"
+        
+        peripheral.delegate = self
         peripheral.discoverServices([heartRateServiceUUID])
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard let services = peripheral.services else { return }
         
-        for service in services {
-            if service.uuid == heartRateServiceUUID {
-                
-//                peripheral.discoverCharacteristics([cadenceCharacteristicUUID], for: service)
-                break
-            }
+        for service in services where service.uuid == heartRateServiceUUID {
+            peripheral.discoverCharacteristics([heartRateMeasurementUUID], for: service)
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        guard let characteristics = service.characteristics else { return }
+        
+        for characteristic in characteristics where characteristic.uuid == heartRateMeasurementUUID {
+            peripheral.setNotifyValue(true, for: characteristic)
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        guard characteristic.uuid == heartRateMeasurementUUID, let data = characteristic.value else { return }
+        
+        let heartRate = parseHeartRate(from: data)
+        DispatchQueue.main.async {
+            self.beatRate = "\(heartRate)"
+        }
+    }
+    
+    private func parseHeartRate(from data: Data) -> Int {
+        let byteArray = [UInt8](data)
+        if byteArray.isEmpty {
+            return 0
+        }
+        
+        let flag = byteArray[0]
+        let format = flag & 0x01
+        
+        if format == 0 {
+            return Int(byteArray[1])
+        } else {
+            return Int(UInt16(byteArray[1]) | (UInt16(byteArray[2]) << 8))
         }
     }
 }
