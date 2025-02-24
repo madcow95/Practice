@@ -3,16 +3,19 @@ import Charts
 
 struct BarChartView: View {
     @State var tempDatas: [TempData] = []
+    @State var selectedDateStr: String = ""
     
     var body: some View {
         VStack {
+            Text("선택된 날짜: \(selectedDateStr)")
+                .font(.headline)
             Chart {
                 ForEach(tempDatas, id: \.date) { data in
                     BarMark(
                         x: .value("Date", data.dateStr),
                         y: .value("Weight", data.weight)
                     )
-                    .foregroundStyle(Color.green)
+                    .foregroundStyle(data.dateStr == self.selectedDateStr ? Color.green.opacity(0.5) : Color.green)
                     .annotation(position: .overlay) {
                         VStack(alignment: .center) {
                             Text("\(data.weight, specifier: "%.1f")kg")
@@ -22,6 +25,23 @@ struct BarChartView: View {
                         }
                     }
                 }
+            }
+            .chartOverlay { chartProxy in
+                Rectangle()
+                    .fill(Color.clear)
+                    .contentShape(Rectangle())
+                    .gesture(
+                        DragGesture()
+                            .onChanged { value in
+                                let location = value.location
+                                if let selectedDateStr: String = chartProxy.value(atX: location.x) {
+                                    self.selectedDateStr = selectedDateStr
+                                }
+                            }
+                            .onEnded { _ in
+                                self.selectedDateStr = ""
+                            }
+                    )
             }
         }
         .padding()
