@@ -2,7 +2,8 @@ import SwiftUI
 import Charts
 
 struct BarChartView: View {
-    @State var tempDatas: [TempData] = []
+    @State var weightDatas: [WeightData] = []
+    @State var heightDatas: [HeightData] = []
     @State var selectedDateStr: String = ""
     
     var body: some View {
@@ -10,7 +11,7 @@ struct BarChartView: View {
             Text("선택된 날짜: \(selectedDateStr)")
                 .font(.headline)
             Chart {
-                ForEach(tempDatas, id: \.date) { data in
+                ForEach(weightDatas, id: \.date) { data in
                     BarMark(
                         x: .value("Date", data.dateStr),
                         y: .value("Weight", data.weight)
@@ -23,6 +24,24 @@ struct BarChartView: View {
                                 .bold()
                                 .foregroundStyle(Color.white)
                         }
+                    }
+                }
+                
+                ForEach(heightDatas, id: \.date) { data in
+                    LineMark(
+                        x: .value("Date", data.dateStr),
+                        y: .value("Height", data.height)
+                    )
+                    .foregroundStyle(data.dateStr == self.selectedDateStr ? Color.yellow.opacity(0.5) : Color.yellow)
+                    .annotation(position: .top) {
+                        VStack(alignment: .center) {
+                            Text("\(data.height, specifier: "%.1f")cm")
+                                .font(.caption2)
+                                .bold()
+                                .foregroundStyle(Color.black)
+                        }
+                        .padding()
+                        .background(Color.black)
                     }
                 }
             }
@@ -48,10 +67,17 @@ struct BarChartView: View {
         .onAppear {
             let today = Date()
             let calendar = Calendar.current
-            tempDatas = (0..<7).compactMap {
+            weightDatas = (0..<7).compactMap {
                 if let date = calendar.date(byAdding: .day, value: -6 + $0, to: today) {
-                    return TempData(date: date,
+                    return WeightData(date: date,
                              weight: Double.random(in: 60...80))
+                }
+                return nil
+            }
+            heightDatas = (0..<7).compactMap {
+                if let date = calendar.date(byAdding: .day, value: -6 + $0, to: today) {
+                    return HeightData(date: date,
+                             height: Double.random(in: 100...150))
                 }
                 return nil
             }
@@ -59,7 +85,12 @@ struct BarChartView: View {
     }
 }
 
-struct TempData {
+protocol DateInfo {
+    var date: Date { get }
+    var dateStr: String { get }
+}
+
+struct WeightData: DateInfo {
     let date: Date
     var dateStr: String {
         get {
@@ -72,6 +103,18 @@ struct TempData {
     let weight: Double
 }
 
+struct HeightData: DateInfo {
+    let date: Date
+    var dateStr: String {
+        get {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM-dd"
+            
+            return dateFormatter.string(from: self.date)
+        }
+    }
+    let height: Double
+}
 
 #Preview {
     BarChartView()
